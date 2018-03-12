@@ -20,7 +20,7 @@
 @implementation TextsTableViewCell
 
 -(void)addContentView:(TextModel *)t withIndex:(int)n{
-    _textName.text = [NSString stringWithFormat:@"测验标题：%@",t.title];
+    _textName.text = [NSString stringWithFormat:@"测试标题：%@",t.title];
     _score.text = [NSString stringWithFormat:@"总分：%@",t.score];
     _textState.text = [NSString stringWithFormat:@"%@",t.statusName];
     _moreBtn.tag = n;

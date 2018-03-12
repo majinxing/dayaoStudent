@@ -105,14 +105,6 @@
     [_mySettingData synchronize];
     
 }
--(void)saveImage:(NSString *)str{
-    [_mySettingData setValue:str forKey:@"back_image"];
-    [_mySettingData synchronize];
-}
--(NSString *)getImage{
-    NSString * str1 = [_mySettingData objectForKey:@"back_image"];
-    return str1;
-}
 -(void)insertedIntoNoticeTable:(NSString *)noticeTime{
     
     _db = [FMDBTool createDBWithName:SQLITE_NAME];

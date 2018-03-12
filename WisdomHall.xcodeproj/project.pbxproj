@@ -99,6 +99,7 @@
 		8B0AF75E1F511AA2003858A4 /* VoteResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0AF75C1F511AA2003858A4 /* VoteResultTableViewCell.m */; };
 		8B0AF75F1F511AA2003858A4 /* VoteResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B0AF75D1F511AA2003858A4 /* VoteResultTableViewCell.xib */; };
 		8B0AF7621F5179F2003858A4 /* FileDowan.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0AF7611F5179F2003858A4 /* FileDowan.m */; };
+		8B0D30F120565E4C0022610A /* SGWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0D30F020565E4C0022610A /* SGWebView.m */; };
 		8B0D960B1F1893A2006796E3 /* CreateCouresTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0D96091F1893A2006796E3 /* CreateCouresTableViewCell.m */; };
 		8B0D960C1F1893A2006796E3 /* CreateCouresTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B0D960A1F1893A2006796E3 /* CreateCouresTableViewCell.xib */; };
 		8B0DB1331ED5188C0042DF0D /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0DB1321ED5188C0042DF0D /* ContactModel.m */; };
@@ -246,7 +247,6 @@
 		8BB221DB1FA7088E00EC6478 /* SGQRCodeHelperTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB221D21FA7088E00EC6478 /* SGQRCodeHelperTool.m */; };
 		8BB221DC1FA7088E00EC6478 /* SGQRCodeScanManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB221D41FA7088E00EC6478 /* SGQRCodeScanManager.m */; };
 		8BB221DD1FA7088E00EC6478 /* SGQRCodeScanningView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB221D61FA7088E00EC6478 /* SGQRCodeScanningView.m */; };
-		8BB221E11FA7089A00EC6478 /* SGWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB221E01FA7089A00EC6478 /* SGWebView.m */; };
 		8BB221E91FA708A300EC6478 /* QRCodeGenerateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB221E41FA708A300EC6478 /* QRCodeGenerateVC.m */; };
 		8BB221EA1FA708A300EC6478 /* ScanSuccessJumpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB221E61FA708A300EC6478 /* ScanSuccessJumpVC.m */; };
 		8BB221EB1FA708A300EC6478 /* SGQRCodeScanningVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB221E81FA708A300EC6478 /* SGQRCodeScanningVC.m */; };
@@ -720,6 +720,8 @@
 		8B0AF75D1F511AA2003858A4 /* VoteResultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VoteResultTableViewCell.xib; sourceTree = "<group>"; };
 		8B0AF7601F5179F2003858A4 /* FileDowan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileDowan.h; sourceTree = "<group>"; };
 		8B0AF7611F5179F2003858A4 /* FileDowan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileDowan.m; sourceTree = "<group>"; };
+		8B0D30EF20565E4C0022610A /* SGWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGWebView.h; sourceTree = "<group>"; };
+		8B0D30F020565E4C0022610A /* SGWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGWebView.m; sourceTree = "<group>"; };
 		8B0D96081F1893A2006796E3 /* CreateCouresTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateCouresTableViewCell.h; sourceTree = "<group>"; };
 		8B0D96091F1893A2006796E3 /* CreateCouresTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateCouresTableViewCell.m; sourceTree = "<group>"; };
 		8B0D960A1F1893A2006796E3 /* CreateCouresTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateCouresTableViewCell.xib; sourceTree = "<group>"; };
@@ -947,8 +949,6 @@
 		8BB221D41FA7088E00EC6478 /* SGQRCodeScanManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanManager.m; sourceTree = "<group>"; };
 		8BB221D51FA7088E00EC6478 /* SGQRCodeScanningView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanningView.h; sourceTree = "<group>"; };
 		8BB221D61FA7088E00EC6478 /* SGQRCodeScanningView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanningView.m; sourceTree = "<group>"; };
-		8BB221DF1FA7089A00EC6478 /* SGWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGWebView.h; sourceTree = "<group>"; };
-		8BB221E01FA7089A00EC6478 /* SGWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGWebView.m; sourceTree = "<group>"; };
 		8BB221E31FA708A300EC6478 /* QRCodeGenerateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeGenerateVC.h; sourceTree = "<group>"; };
 		8BB221E41FA708A300EC6478 /* QRCodeGenerateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeGenerateVC.m; sourceTree = "<group>"; };
 		8BB221E51FA708A300EC6478 /* ScanSuccessJumpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanSuccessJumpVC.h; sourceTree = "<group>"; };
@@ -1443,6 +1443,15 @@
 			name = delect;
 			sourceTree = "<group>";
 		};
+		8B0D30EE20565E4C0022610A /* SGQRView */ = {
+			isa = PBXGroup;
+			children = (
+				8B0D30EF20565E4C0022610A /* SGWebView.h */,
+				8B0D30F020565E4C0022610A /* SGWebView.m */,
+			);
+			path = SGQRView;
+			sourceTree = "<group>";
+		};
 		8B0D96071F189373006796E3 /* CreateCourserCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1855,7 +1864,7 @@
 			isa = PBXGroup;
 			children = (
 				8BB221E21FA708A300EC6478 /* SGQRController */,
-				8BB221DE1FA7089A00EC6478 /* SGQRView */,
+				8B0D30EE20565E4C0022610A /* SGQRView */,
 				8BB221C71FA7088E00EC6478 /* SGQRCode */,
 				8B45D3821F7CF6A700A00677 /* JsmsSDK */,
 				8B63EFF31F58F3F500888425 /* Bugly.framework */,
@@ -2023,16 +2032,6 @@
 				8BB221CA1FA7088E00EC6478 /* UIImage+ImageSize.m */,
 			);
 			path = Category;
-			sourceTree = "<group>";
-		};
-		8BB221DE1FA7089A00EC6478 /* SGQRView */ = {
-			isa = PBXGroup;
-			children = (
-				8BB221DF1FA7089A00EC6478 /* SGWebView.h */,
-				8BB221E01FA7089A00EC6478 /* SGWebView.m */,
-			);
-			name = SGQRView;
-			path = "../../../../工程文件/erweima/erweima/SGQRView";
 			sourceTree = "<group>";
 		};
 		8BB221E21FA708A300EC6478 /* SGQRController */ = {
@@ -2675,7 +2674,6 @@
 				8B2E16DA1EBAB968008B7C57 /* ClassManagementViewController.m in Sources */,
 				8BF864C31ECAD97300B7EED4 /* SDWebImageManager.m in Sources */,
 				8B045B9B1F3458E40021699B /* ZFIndicatorView.m in Sources */,
-				8BB221E11FA7089A00EC6478 /* SGWebView.m in Sources */,
 				8BB56D871EB2E2820023DAFF /* RedefineThePasswordViewController.m in Sources */,
 				8B081DFF1F06524000493B81 /* PinyinHelper.m in Sources */,
 				8B081DFA1F06524000493B81 /* ChineseToPinyinResource.m in Sources */,
@@ -2780,6 +2778,7 @@
 				8BF82D811EE001D600D33473 /* VoteTableViewCell.m in Sources */,
 				8BB221D71FA7088E00EC6478 /* UIImage+ImageSize.m in Sources */,
 				8BF8646E1ECACAE800B7EED4 /* FMDatabase.m in Sources */,
+				8B0D30F120565E4C0022610A /* SGWebView.m in Sources */,
 				8BA224A21EADFFE500627A1B /* InteractiveViewController.m in Sources */,
 				8B081E1A1F0E0FA400493B81 /* SignPeople.m in Sources */,
 				8BF864701ECACAE800B7EED4 /* FMDatabasePool.m in Sources */,

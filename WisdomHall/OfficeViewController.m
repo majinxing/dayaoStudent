@@ -15,7 +15,6 @@
 //#import "StatisticalViewController.h"
 #import "WisdomHall-Swift.h"
 #import "JPUSHService.h"
-#import "UIImageView+WebCache.h"
 
 @interface OfficeViewController ()<UITableViewDelegate,UITableViewDataSource,OfficeTableViewCellDelegate>
 @property (nonatomic,strong)UITableView * tableView;
@@ -34,7 +33,7 @@
     _bImage.frame = CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT-44);
     
     [self.view addSubview:_bImage];
-    
+
     [self addTableView];
 //    [self setNavigationTitle];
     UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
@@ -45,34 +44,7 @@
             NSLog(@"%d-------------%@,-------------%@",iResCode,iTags,iAlias);
         }];
     });
-//    [self setimage];
     // Do any additional setup after loading the view from its nib.
-}
--(void)setimage{
-    
-    NSDictionary * d = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"function", nil];
-    
-    [[NetworkRequest sharedInstance] GET:QueryAdvertising dict:d succeed:^(id data) {
-        NSArray * ary = [data objectForKey:@"body"];
-        if (ary.count>0) {
-            NSString * str = [NSString stringWithFormat:@"%@",[ary[0] objectForKey:@"id"]];
-            [[Appsetting sharedInstance] saveImage:str];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [_bImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@?resourceId=%@",BaseURL,FileDownload,str]] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-            });
-        }else{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                NSString * str = [[Appsetting sharedInstance] getImage];
-                [_bImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@?resourceId=%@",BaseURL,FileDownload,str]] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-            });
-        }
-    } failure:^(NSError *error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSString * str = [[Appsetting sharedInstance] getImage];
-            [_bImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@?resourceId=%@",BaseURL,FileDownload,str]] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-        });
-    }];
 }
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden = YES; //设置隐藏

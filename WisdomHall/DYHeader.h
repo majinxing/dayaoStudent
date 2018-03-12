@@ -111,9 +111,8 @@
 #define SecondHand                  @"二手市场"
 #define CampusLife                  @"校园生活"
 #define SchoolCommunity             @"校圈"
-#define AroundSchool                @"校园生活"
+#define AroundSchool                @"学校周边"
 #define Community                   @"社团"
-#define SchoolRun                   @"校办"
 
 //数据库的名字
 #define SQLITE_NAME            @"Dayao"

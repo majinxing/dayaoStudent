@@ -44,8 +44,6 @@
     
     [self addChildViewControllerWithClassname:[PersonalCenterViewController description] imagename:@"我的(1)" title:@"我的" withSelectImageName:@"我的"];
     
-   // self.selectedIndex = 1;预选跳转
-    
     [self selectApp];
     // Do any additional setup after loading the view from its nib.
 }

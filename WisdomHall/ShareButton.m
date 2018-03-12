@@ -128,10 +128,7 @@
         [self setImage:[UIImage imageNamed:@"ic_social_activity"] forState:UIControlStateNormal];
     }
     if ([type isEqualToString:AroundSchool]) {
-        [self setImage:[UIImage imageNamed:@"生活"] forState:UIControlStateNormal];
-    }
-    if ([type isEqualToString:SchoolRun]) {
-        [self setImage:[UIImage imageNamed:@"校办"] forState:UIControlStateNormal];
+        [self setImage:[UIImage imageNamed:@"ic_school_around"] forState:UIControlStateNormal];
     }
     [self setTitle:type forState:UIControlStateNormal];
 }

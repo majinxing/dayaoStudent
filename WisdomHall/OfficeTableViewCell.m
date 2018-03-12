@@ -89,8 +89,7 @@
                         //Lotus,
                         SchoolCommunity,
                         AroundSchool,
-                        Community,
-                        SchoolRun
+                        Community
                         ];
     NSArray * lineAry = @[_fLineView,_sLineView,_tLineView];
     //水平间距

@@ -44,7 +44,7 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{
                                                                       NSFontAttributeName:[UIFont systemFontOfSize:17],
                                                                       NSForegroundColorAttributeName:[UIColor blackColor]}];
-    self.title = @"测验";
+    self.title = @"测试";
     
     UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(theImportQuestionBank)];
     self.navigationItem.rightBarButtonItem = myButton;
@@ -82,7 +82,7 @@
     _scrollView.showsVerticalScrollIndicator = NO;
     // _scrollView.backgroundColor = [UIColor redColor]
     self.automaticallyAdjustsScrollViewInsets=NO;
-    NSArray *title=[NSArray arrayWithObjects:@"全部测验",@"未开始",@"进行中",@"已结束",nil];
+    NSArray *title=[NSArray arrayWithObjects:@"全部测试",@"未开始",@"进行中",@"已结束",nil];
     //添加点击按钮
     for (int i = 0; i<title.count; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
