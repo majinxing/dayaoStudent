@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OfficeTableViewCellFirst" rowHeight="155" id="KGk-i7-Jjw" customClass="OfficeTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="335" height="155"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="335" height="155"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qWi-Xx-ewX">
+                        <rect key="frame" x="127.5" y="28" width="80" height="80"/>
+                        <color key="backgroundColor" red="1" green="0.99998784065246582" blue="0.9999920129776001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="65b-Mh-vBh"/>
+                            <constraint firstAttribute="height" constant="80" id="u0E-ha-1ri"/>
+                        </constraints>
+                        <state key="normal" title="签到"/>
+                        <connections>
+                            <action selector="signPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Vun-bS-VTN"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请在9:00之前和下午5：00之后签到" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fk0-xf-myL">
+                        <rect key="frame" x="17.5" y="124.5" width="300" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="0AH-6v-WuA"/>
+                            <constraint firstAttribute="width" constant="300" id="SHS-nE-NZe"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PmV-kn-ytO">
+                        <rect key="frame" x="10" y="35" width="100" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="gzv-qL-vbE"/>
+                            <constraint firstAttribute="width" constant="100" id="z6R-fv-DKB"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S78-2d-0dS">
+                        <rect key="frame" x="10" y="71" width="100" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Nu9-z1-cFf"/>
+                            <constraint firstAttribute="width" constant="100" id="utH-4Y-nxx"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="qWi-Xx-ewX" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="4rz-6N-sfT"/>
+                    <constraint firstItem="S78-2d-0dS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="5Qy-yS-eWZ"/>
+                    <constraint firstItem="Fk0-xf-myL" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Oh6-Tk-ixS"/>
+                    <constraint firstAttribute="bottom" secondItem="Fk0-xf-myL" secondAttribute="bottom" constant="10" id="VIJ-iL-4ga"/>
+                    <constraint firstItem="S78-2d-0dS" firstAttribute="top" secondItem="PmV-kn-ytO" secondAttribute="bottom" constant="15" id="cVQ-El-1K0"/>
+                    <constraint firstItem="qWi-Xx-ewX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="20" id="eEs-LW-8TF"/>
+                    <constraint firstItem="PmV-kn-ytO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="exE-fM-6iP"/>
+                    <constraint firstItem="PmV-kn-ytO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="35" id="wfc-NO-CmQ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="signBack" destination="S78-2d-0dS" id="Hhg-7u-UG4"/>
+                <outlet property="signBtn" destination="qWi-Xx-ewX" id="nqk-Na-UPs"/>
+                <outlet property="signIN" destination="PmV-kn-ytO" id="zWx-Yz-Rhw"/>
+            </connections>
+            <point key="canvasLocation" x="41.5" y="109.5"/>
+        </tableViewCell>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OfficeTableViewCellSecond" rowHeight="188" id="Xh6-Uk-2Qz" customClass="OfficeTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="335" height="188"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xh6-Uk-2Qz" id="9Ce-3s-2ZV">
+                <rect key="frame" x="0.0" y="0.0" width="335" height="187.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="41.5" y="354"/>
+        </tableViewCell>
+    </objects>
+</document>
