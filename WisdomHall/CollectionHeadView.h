@@ -7,7 +7,12 @@
 //collect 的头部视图
 
 #import <UIKit/UIKit.h>
+#import "NoticeModel.h"
 
+@protocol CollectionHeadViewDelegate <NSObject>
+-(void)noticeBtnPressedDelegate:(NoticeModel *)notice;
+@end
 @interface CollectionHeadView : UIView
-
+@property (nonatomic,weak)id<CollectionHeadViewDelegate>delegate;
++(CollectionHeadView *)sharedInstance;
 @end

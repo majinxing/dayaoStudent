@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NoticeModel.h"
 
 @protocol OfficeTableViewCellDelegate <NSObject>
 -(void)shareButtonClickedDelegate:(NSString *)str;
 -(void)signBtnPressedDelegate:(UIButton *)btn;
+-(void)noticeBtnPressedDelegateOfficeCellDelegate:(NoticeModel *)notice;
 
 @end
 @interface OfficeTableViewCell : UITableViewCell

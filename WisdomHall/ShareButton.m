@@ -103,7 +103,7 @@
         [self setImage:[UIImage imageNamed:@"会议"] forState:UIControlStateNormal];
     }
     if ([type isEqualToString:Announcement]) {
-        [self setImage:[UIImage imageNamed:@"公告"] forState:UIControlStateNormal];
+        [self setImage:[UIImage imageNamed:@"通知"] forState:UIControlStateNormal];
     }
     if ([type isEqualToString:Leave]) {
         [self setImage:[UIImage imageNamed:@"请假"] forState:UIControlStateNormal];

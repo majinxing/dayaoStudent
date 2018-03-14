@@ -24,6 +24,8 @@
 #define TabbarHeight Is_Iphone_X ? 83 : 49
 #define BottomHeight Is_Iphone_X ? 34 : 0
 
+#define ScrollViewW [[UIScreen mainScreen] bounds].size.width - 20
+#define ScrollViewH 70
 //屏幕
 #define APPLICATION_WIDTH [UIScreen mainScreen].bounds.size.width
 
@@ -100,7 +102,7 @@
 #define Test_Scores_Query           @"查询成绩"
 
 #define Meeting                     @"会议"
-#define Announcement                @"公告"
+#define Announcement                @"通知"
 #define Leave                       @"请假"
 #define Business                    @"出差"
 #define Lotus                       @"审批"

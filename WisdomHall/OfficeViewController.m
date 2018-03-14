@@ -15,6 +15,8 @@
 //#import "StatisticalViewController.h"
 #import "WisdomHall-Swift.h"
 #import "JPUSHService.h"
+#import "CollectionHeadView.h"
+#import "NoticeDetailsViewController.h"
 
 @interface OfficeViewController ()<UITableViewDelegate,UITableViewDataSource,OfficeTableViewCellDelegate>
 @property (nonatomic,strong)UITableView * tableView;
@@ -31,6 +33,7 @@
     _bImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timg"]];
     
     _bImage.frame = CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT-44);
+
     
     [self.view addSubview:_bImage];
 
@@ -107,9 +110,20 @@
         [UIUtils showInfoMessage:@"正在加紧步伐开发中，敬请期待"];
     }
 }
+
 -(void)signBtnPressedDelegate:(UIButton *)btn{
     [UIUtils dailyCheck];
     [_tableView reloadData];
+}
+-(void)noticeBtnPressedDelegateOfficeCellDelegate:(NoticeModel *)notice{
+    NoticeDetailsViewController * notice1 = [[NoticeDetailsViewController alloc] initWithActionBlock:^(NSString *str) {
+        
+    }];
+    notice1.notice = notice;
+    self.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:notice1 animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
+    
 }
 #pragma mark UITableViewdelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
