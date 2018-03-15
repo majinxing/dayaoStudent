@@ -71,7 +71,7 @@
 #import "NetworkRequest.h"
 #import "Appsetting.h"
 #import "UserModel.h"
-
+#import "ThemeTool.h"
 
 #define Collection_height 120
 #define CodeEffectiveTime 6
@@ -115,6 +115,8 @@
 #define SchoolCommunity             @"校圈"
 #define AroundSchool                @"学校周边"
 #define Community                   @"社团"
+
+#define ThemeColorChangeNotification @"ThemeColorChangeNotification"//更改主题的通知
 
 //数据库的名字
 #define SQLITE_NAME            @"Dayao"

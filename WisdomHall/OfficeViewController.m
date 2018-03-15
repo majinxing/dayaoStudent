@@ -38,16 +38,27 @@
     [self.view addSubview:_bImage];
 
     [self addTableView];
-//    [self setNavigationTitle];
-    UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
-#pragma mark - 推送别名设置
+
+
+    [self setAlias];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [JPUSHService setTags:nil alias:[NSString stringWithFormat:@"%@%@",user.school,user.studentId] fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
-            NSLog(@"%d-------------%@,-------------%@",iResCode,iTags,iAlias);
-        }];
-    });
+    
     // Do any additional setup after loading the view from its nib.
+}
+
+-(void)setAlias{
+#pragma mark - 推送别名设置
+    UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [JPUSHService setAlias:[NSString stringWithFormat:@"%@%@",user.school,user.studentId] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+            
+        } seq:1];
+        //        [JPUSHService setTags:nil alias:[NSString stringWithFormat:@"%@%@",user.school,user.studentId] fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
+        //            NSLog(@"%d-------------%@,-------------%@",iResCode,iTags,iAlias);
+        //        }];
+    });
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden = YES; //设置隐藏
@@ -60,10 +71,7 @@
  **/
 -(void)setNavigationTitle{
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    //[self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{
-                                                                      NSFontAttributeName:[UIFont systemFontOfSize:17],
-                                                                      NSForegroundColorAttributeName:[UIColor blackColor]}];
+ 
     self.title = @"办公";
 }
 -(void)addTableView{

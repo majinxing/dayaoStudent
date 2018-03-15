@@ -122,10 +122,7 @@
  **/
 -(void)setNavigationTitle{
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    //[self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{
-                                                                      NSFontAttributeName:[UIFont systemFontOfSize:17],
-                                                                      NSForegroundColorAttributeName:[UIColor blackColor]}];
+    
     self.title = @"投票";
     if ([[NSString stringWithFormat:@"%@",_meetModel.meetingHostId] isEqualToString:[NSString stringWithFormat:@"%@",_user.peopleId]]) {
         UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"新建投票" style:UIBarButtonItemStylePlain target:self action:@selector(createVote)];

@@ -78,10 +78,7 @@
  **/
 -(void)setNavigationTitle{
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    //[self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{
-                                                                      NSFontAttributeName:[UIFont systemFontOfSize:17],
-                                                                      NSForegroundColorAttributeName:[UIColor blackColor]}];
+    
     self.title = @"聊天室";
 //    UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(createAcourse)];
 //    self.navigationItem.rightBarButtonItem = myButton;

@@ -168,6 +168,10 @@
 		8B32FEAC1F4C045900D9BF23 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B32FEAB1F4C045900D9BF23 /* libresolv.tbd */; };
 		8B3CAEC81F75091000BDE092 /* OfficeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3CAEC61F75091000BDE092 /* OfficeViewController.m */; };
 		8B3CAEC91F75091000BDE092 /* OfficeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B3CAEC71F75091000BDE092 /* OfficeViewController.xib */; };
+		8B3EBBCE205A1A4D009974B1 /* NavBarNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3EBBCC205A1A4D009974B1 /* NavBarNavigationController.m */; };
+		8B3EBBD1205A1A68009974B1 /* ThemeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3EBBCF205A1A68009974B1 /* ThemeTool.m */; };
+		8B3EBBD5205A1BF0009974B1 /* ChangeThemeInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B3EBBD2205A1BF0009974B1 /* ChangeThemeInfoViewController.xib */; };
+		8B3EBBD6205A1BF0009974B1 /* ChangeThemeInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3EBBD4205A1BF0009974B1 /* ChangeThemeInfoViewController.m */; };
 		8B429C001FA8149000084A99 /* QrCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B429BFE1FA8149000084A99 /* QrCodeViewController.m */; };
 		8B429C011FA8149000084A99 /* QrCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B429BFF1FA8149000084A99 /* QrCodeViewController.xib */; };
 		8B45D3871F7CF6A700A00677 /* libsms-lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B45D3861F7CF6A700A00677 /* libsms-lib.a */; };
@@ -821,6 +825,13 @@
 		8B3CAEC51F75091000BDE092 /* OfficeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfficeViewController.h; sourceTree = "<group>"; };
 		8B3CAEC61F75091000BDE092 /* OfficeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfficeViewController.m; sourceTree = "<group>"; };
 		8B3CAEC71F75091000BDE092 /* OfficeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OfficeViewController.xib; sourceTree = "<group>"; };
+		8B3EBBCC205A1A4D009974B1 /* NavBarNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavBarNavigationController.m; sourceTree = "<group>"; };
+		8B3EBBCD205A1A4D009974B1 /* NavBarNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavBarNavigationController.h; sourceTree = "<group>"; };
+		8B3EBBCF205A1A68009974B1 /* ThemeTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeTool.m; sourceTree = "<group>"; };
+		8B3EBBD0205A1A68009974B1 /* ThemeTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeTool.h; sourceTree = "<group>"; };
+		8B3EBBD2205A1BF0009974B1 /* ChangeThemeInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangeThemeInfoViewController.xib; sourceTree = "<group>"; };
+		8B3EBBD3205A1BF0009974B1 /* ChangeThemeInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeThemeInfoViewController.h; sourceTree = "<group>"; };
+		8B3EBBD4205A1BF0009974B1 /* ChangeThemeInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeThemeInfoViewController.m; sourceTree = "<group>"; };
 		8B429BFD1FA8149000084A99 /* QrCodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QrCodeViewController.h; sourceTree = "<group>"; };
 		8B429BFE1FA8149000084A99 /* QrCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QrCodeViewController.m; sourceTree = "<group>"; };
 		8B429BFF1FA8149000084A99 /* QrCodeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QrCodeViewController.xib; sourceTree = "<group>"; };
@@ -1809,6 +1820,9 @@
 				8B7725051F3029CE00D1B521 /* FeedbackViewController.xib */,
 				8B0207131F8DA4DB00CE3B8C /* NoticeSwiftViewController.swift */,
 				8B0207141F8DA4DB00CE3B8C /* NoticeSwiftViewController.xib */,
+				8B3EBBD3205A1BF0009974B1 /* ChangeThemeInfoViewController.h */,
+				8B3EBBD4205A1BF0009974B1 /* ChangeThemeInfoViewController.m */,
+				8B3EBBD2205A1BF0009974B1 /* ChangeThemeInfoViewController.xib */,
 				8B05CB721EC06FD60063EC20 /* Cell */,
 				8B0207121F8DA4DA00CE3B8C /* WisdomHall-Bridging-Header.h */,
 			);
@@ -1887,6 +1901,8 @@
 				8BA224B41EAED43900627A1B /* DYHeader.h */,
 				8B081E011F078B8C00493B81 /* Appsetting.h */,
 				8B081E021F078B8C00493B81 /* Appsetting.m */,
+				8B3EBBCD205A1A4D009974B1 /* NavBarNavigationController.h */,
+				8B3EBBCC205A1A4D009974B1 /* NavBarNavigationController.m */,
 			);
 			name = BaseClass;
 			sourceTree = "<group>";
@@ -1956,6 +1972,8 @@
 				8BCE7CBC1F04E0EA00FE261B /* NetworkRequest.m */,
 				8B0AF7601F5179F2003858A4 /* FileDowan.h */,
 				8B0AF7611F5179F2003858A4 /* FileDowan.m */,
+				8B3EBBD0205A1A68009974B1 /* ThemeTool.h */,
+				8B3EBBCF205A1A68009974B1 /* ThemeTool.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -2537,6 +2555,7 @@
 				8BF7D3661F3D7D700087D35D /* CreateMeetingViewController.xib in Resources */,
 				8B2E16D61EB9C1EA008B7C57 /* CourseDetailsViewController.xib in Resources */,
 				8B0333F41F8C50950021D495 /* GroupListTableViewCell.xib in Resources */,
+				8B3EBBD5205A1BF0009974B1 /* ChangeThemeInfoViewController.xib in Resources */,
 				8BFB94621EE6A381004BB963 /* JoinVoteViewController.xib in Resources */,
 				8B9CCB891F1468D6001833FD /* Hyphenate.podspec in Resources */,
 				8B081DDD1F06013300493B81 /* collegedata.json in Resources */,
@@ -2719,6 +2738,7 @@
 				8B045B721F3458820021699B /* MJProperty.m in Sources */,
 				8BA224BC1EAEE36800627A1B /* SignPromptView.m in Sources */,
 				8BF864C91ECAD97300B7EED4 /* UIImageView+WebCache.m in Sources */,
+				8B3EBBCE205A1A4D009974B1 /* NavBarNavigationController.m in Sources */,
 				8BA224B81EAED53D00627A1B /* UIColor+HexString.m in Sources */,
 				8B1509821F4E7A6F000127AF /* TFFileUploadManager.m in Sources */,
 				8B05CB6B1EC0056B0063EC20 /* TextsTableViewCell.m in Sources */,
@@ -2774,6 +2794,7 @@
 				8B087E441FEA573700649094 /* ZFSeatsView.m in Sources */,
 				8BF8648A1ECAD21200B7EED4 /* MJRefreshFooterView.m in Sources */,
 				8BE24D641F8B528600621055 /* GroupModel.m in Sources */,
+				8B3EBBD6205A1BF0009974B1 /* ChangeThemeInfoViewController.m in Sources */,
 				8BE24D601F8B488E00621055 /* GroupListViewController.m in Sources */,
 				8BF82D811EE001D600D33473 /* VoteTableViewCell.m in Sources */,
 				8BB221D71FA7088E00EC6478 /* UIImage+ImageSize.m in Sources */,
@@ -2823,6 +2844,7 @@
 				8BE9139D1EEFB7C500000282 /* UIViewController+HUD.m in Sources */,
 				8B1737491EC58BE400BE3C8F /* TestQuestionsViewController.m in Sources */,
 				8BF864BC1ECAD97300B7EED4 /* README.md in Sources */,
+				8B3EBBD1205A1A68009974B1 /* ThemeTool.m in Sources */,
 				8B081DE71F063AE900493B81 /* SelectSchoolViewController.m in Sources */,
 				8B045B9C1F3458E40021699B /* ZFRowIndexView.m in Sources */,
 				8B0F8E851F59460400993B0B /* QuestionBank.m in Sources */,

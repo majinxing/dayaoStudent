@@ -15,6 +15,7 @@
 #import "FeedbackViewController.h"
 #import "GroupListViewController.h"
 #import "DYHeader.h"
+#import "ChangeThemeInfoViewController.h"
 
 @interface PersonalCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView * tableview;
@@ -31,6 +32,9 @@
     _tableview.dataSource = self;
     _tableview.separatorStyle = NO;
     [self.view addSubview:_tableview];
+    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+
     // Do any additional setup after loading the view from its nib.
 }
 /**
@@ -38,10 +42,7 @@
  **/
 -(void)setNavigationTitle{
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    //[self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{
-                                                                      NSFontAttributeName:[UIFont systemFontOfSize:17],
-                                                                      NSForegroundColorAttributeName:[UIColor blackColor]}];
+   
     self.title = @"我的";
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -81,14 +82,16 @@
             self.hidesBottomBarWhenPushed = NO;
         }
         else if (indexPath.row == 1){
-//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"暂无通知" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-//            [alertView show];
-            NoticeViewController * noticeVC = [[NoticeViewController alloc] init];
+            GroupListViewController * g = [[GroupListViewController alloc] init];
             self.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:noticeVC animated:YES];
+            [self.navigationController pushViewController:g animated:YES];
             self.hidesBottomBarWhenPushed = NO;
-        }
-        else if (indexPath.row == 3) {
+        }else if (indexPath.row == 2){
+            ChangeThemeInfoViewController * vc = [[ChangeThemeInfoViewController alloc] init];
+            self.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            self.hidesBottomBarWhenPushed = NO;
+        }else if (indexPath.row == 3) {
             SystemSettingsViewController * systemVC = [[SystemSettingsViewController alloc] init];
             self.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:systemVC animated:YES];
@@ -97,11 +100,6 @@
             CompanyProfileViewController *cVC = [[CompanyProfileViewController alloc] init];
             self.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:cVC animated:YES];
-            self.hidesBottomBarWhenPushed = NO;
-        }else if (indexPath.row == 2){
-            GroupListViewController * g = [[GroupListViewController alloc] init];
-            self.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:g animated:YES];
             self.hidesBottomBarWhenPushed = NO;
         }else if (indexPath.row == 5){
             FeedbackViewController * f = [[FeedbackViewController alloc] init];

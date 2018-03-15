@@ -43,6 +43,9 @@
     [self setNavigationTitle];
     
     [self addTableView];
+    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+
     // Do any additional setup after loading the view from its nib.
 }
 /**
@@ -50,10 +53,7 @@
  **/
 -(void)setNavigationTitle{
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    //[self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{
-                                                                      NSFontAttributeName:[UIFont systemFontOfSize:17],
-                                                                      NSForegroundColorAttributeName:[UIColor blackColor]}];
+    
     self.title = @"消息";
 }
 -(void)addTableView{

@@ -52,10 +52,7 @@
  **/
 -(void)setNavigationTitle{
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    // [self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{
-                                                                      NSFontAttributeName:[UIFont systemFontOfSize:17],
-                                                                      NSForegroundColorAttributeName:[UIColor blackColor]}];
+    
     if ([_type isEqualToString:@"bindPhone"]) {
         self.title = @"绑定手机号";
         [self.nextBtn setTitle:@"绑定" forState:UIControlStateNormal];

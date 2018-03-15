@@ -17,6 +17,7 @@
 #import "NoticeViewController.h"
 #import "FMDBTool.h"
 #import "WorkingLoginViewController.h"
+#import "CollectionHeadView.h"
 
 #import <Bugly/Bugly.h>
 #import "JSMSSDK.h"
@@ -102,7 +103,16 @@
             advertisingIdentifier:advertisingId];
     
     [JSMSSDK registerWithAppKey:@"c8372310b33f2ddd74fcaead"];//极光短信注册
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(reloadView)
+     name:ThemeColorChangeNotification object:nil];
     return YES;
+}
+-(void)reloadView{
+    DYTabBarViewController * tab = [[DYTabBarViewController alloc] init];
+    self.window.rootViewController = tab;
 }
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     /// Required - 注册 DeviceToken
@@ -144,6 +154,7 @@
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     [[EMClient sharedClient] applicationDidEnterBackground:application];
     _chat.outOrIn = @"out";
+    [[CollectionHeadView sharedInstance] onceSetNil];
 }
 
 
@@ -151,6 +162,10 @@
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     [[EMClient sharedClient] applicationWillEnterForeground:application];
     _chat.outOrIn = @"In";
+    CollectionHeadView *view = [CollectionHeadView sharedInstance];
+    if (view) {
+        
+    }
 }
 
 

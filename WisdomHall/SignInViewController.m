@@ -59,12 +59,13 @@ static NSString *cellIdentifier = @"cellIdentifier";
     [super viewDidLoad];
     self.page = 0;
     self.temp = 0;
-    self.view.backgroundColor = RGBA_COLOR(231, 231, 231, 1);
-    UIImageView * i = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT)];
+    self.view.backgroundColor = [UIColor whiteColor];//RGBA_COLOR(231, 231, 231, 1);
     
-    i.image = [UIImage imageNamed:@"bg3"];
-    
-    [self.view addSubview:i];
+//    UIImageView * i = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT)];
+//
+//    i.image = [UIImage imageNamed:@"timg"];
+//
+//    [self.view addSubview:i];
     
     _classAry = [NSMutableArray arrayWithCapacity:10];
     
@@ -87,6 +88,8 @@ static NSString *cellIdentifier = @"cellIdentifier";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UpdateTheClassPage) name:@"UpdateTheClassPage" object:nil];
     
     [UIUtils getInternetDate];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+
     // Do any additional setup after loading the view from its nib.
 }
 -(void)UpdateTheClassPage{
@@ -293,10 +296,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
  **/
 -(void)setNavigationTitle{
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    //[self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{
-                                                                      NSFontAttributeName:[UIFont systemFontOfSize:17],
-                                                                      NSForegroundColorAttributeName:[UIColor blackColor]}];
+ 
     self.title = @"本周课程";
 //    if ([[NSString stringWithFormat:@"%@",_userModel.identity] isEqualToString:@"1"]) {
 //        UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"创建课程" style:UIBarButtonItemStylePlain target:self action:@selector(createAcourse)];
@@ -445,7 +445,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView * view = [[UIView alloc] init];
-    view.backgroundColor = RGBA_COLOR(201, 242, 253, 1);
+    view.backgroundColor = [UIColor whiteColor];//RGBA_COLOR(201, 242, 253, 1);
     NSString * month = [UIUtils getMonth];
     NSMutableArray * day = [UIUtils getWeekAllTimeWithType:nil];
     NSMutableArray * ary = [NSMutableArray arrayWithCapacity:1];;

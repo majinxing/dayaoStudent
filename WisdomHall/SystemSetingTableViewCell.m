@@ -24,7 +24,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     if (!_textAry) {
-      _textAry = [NSArray arrayWithObjects:@"个人资料", @"学校通知",@"群组",@"系统设置",@"关于我们",@"意见反馈",nil];
+      _textAry = [NSArray arrayWithObjects:@"个人资料",@"群组",@"主题",@"系统设置",@"关于我们",@"意见反馈",nil];
     }
     _user = [[Appsetting sharedInstance] getUsetInfo];
     _headImage.layer.masksToBounds = YES;
@@ -56,6 +56,7 @@
     }else if (indexPath.section == 0){
         cell.userName.text = cell.user.userName;
         cell.workNo.text = cell.user.studentId;
+        cell.workNo.textColor = [UIColor blackColor];
         UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
         if (![UIUtils isBlankString:[NSString stringWithFormat:@"%@",user.userHeadImageId]]) {
             [cell.headImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@?resourceId=%@",BaseURL,FileDownload,user.userHeadImageId]] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
