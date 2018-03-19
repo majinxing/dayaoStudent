@@ -13,6 +13,8 @@
             <connections>
                 <outlet property="blueColorBtn" destination="C6I-LI-h1W" id="k1A-ZU-eAj"/>
                 <outlet property="blueImage" destination="MPb-55-uRK" id="PUW-1k-db1"/>
+                <outlet property="greenColorBtn" destination="SR3-Kx-BNh" id="l3W-5Z-b0H"/>
+                <outlet property="greenImage" destination="Du5-WL-CgT" id="CyB-et-lrA"/>
                 <outlet property="redColorBtn" destination="lFx-3s-zhU" id="dl7-1E-O9Q"/>
                 <outlet property="redImage" destination="RvB-il-7wb" id="KUz-R2-VNG"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -61,6 +63,25 @@
                     <rect key="frame" x="112" y="212" width="23" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SR3-Kx-BNh">
+                    <rect key="frame" x="65" y="340" width="70" height="110"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.10588235294117647" green="0.80784313725490198" blue="0.047058823529411764" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="changeTheme:" destination="-1" eventType="touchUpInside" id="Vmc-ew-O7O"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Du5-WL-CgT">
+                    <rect key="frame" x="112" y="425" width="23" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="活力绿" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3e-Zq-des">
+                    <rect key="frame" x="75" y="481" width="43" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <point key="canvasLocation" x="33.5" y="54.5"/>

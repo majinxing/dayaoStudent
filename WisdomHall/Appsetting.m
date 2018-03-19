@@ -99,7 +99,7 @@
         UIColor *color = [self toUIColorByStr:[_mySettingData objectForKey:@"theme_color"]];
         return color;
     }
-    return [UIColor colorWithHexString:@"#29a7e1"];
+    return RGBA_COLOR(217, 0, 21, 1);
 }
 // 颜色 转字符串（16进制）
 -(NSString*)toStrByUIColor:(UIColor*)color{

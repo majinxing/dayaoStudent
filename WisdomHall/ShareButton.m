@@ -9,7 +9,7 @@
 #import "ShareButton.h"
 #import "DYHeader.h"
 
-#define IMAGE_WH 40
+#define IMAGE_WH 25
 
 @implementation ShareButton
 - (instancetype)initWithFrame:(CGRect)frame andType:(NSString *)type

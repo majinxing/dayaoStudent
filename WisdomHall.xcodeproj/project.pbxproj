@@ -300,6 +300,13 @@
 		8BEE94481F2C780500488651 /* CompanyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BEE94461F2C780500488651 /* CompanyProfileViewController.m */; };
 		8BEE94491F2C780500488651 /* CompanyProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BEE94471F2C780500488651 /* CompanyProfileViewController.xib */; };
 		8BF3ADAD1F569B26002BD6DA /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BF3ADAC1F569B26002BD6DA /* libstdc++.tbd */; };
+		8BF79F52205F41F60033CCC3 /* HKClipperHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF79F4A205F41F60033CCC3 /* HKClipperHelper.m */; };
+		8BF79F53205F41F60033CCC3 /* HKImageClipperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF79F4C205F41F60033CCC3 /* HKImageClipperViewController.m */; };
+		8BF79F54205F41F60033CCC3 /* HKClipperVeiw.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF79F4F205F41F60033CCC3 /* HKClipperVeiw.m */; };
+		8BF79F55205F41F60033CCC3 /* UIImage+ClipperExtends.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF79F51205F41F60033CCC3 /* UIImage+ClipperExtends.m */; };
+		8BF79F60205F421E0033CCC3 /* HKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF79F5A205F421D0033CCC3 /* HKViewController.m */; };
+		8BF79F61205F421E0033CCC3 /* UIBarButtonItem+Extends.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF79F5D205F421D0033CCC3 /* UIBarButtonItem+Extends.m */; };
+		8BF79F62205F421E0033CCC3 /* UIImage+Extends.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF79F5F205F421D0033CCC3 /* UIImage+Extends.m */; };
 		8BF7D3651F3D7D700087D35D /* CreateMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF7D3631F3D7D700087D35D /* CreateMeetingViewController.m */; };
 		8BF7D3661F3D7D700087D35D /* CreateMeetingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BF7D3641F3D7D700087D35D /* CreateMeetingViewController.xib */; };
 		8BF7D36A1F3DA6BF0087D35D /* QueryMeetingRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF7D3681F3DA6BF0087D35D /* QueryMeetingRoomViewController.m */; };
@@ -1045,6 +1052,20 @@
 		8BEE94461F2C780500488651 /* CompanyProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyProfileViewController.m; sourceTree = "<group>"; };
 		8BEE94471F2C780500488651 /* CompanyProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompanyProfileViewController.xib; sourceTree = "<group>"; };
 		8BF3ADAC1F569B26002BD6DA /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		8BF79F49205F41F60033CCC3 /* HKClipperHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKClipperHelper.h; sourceTree = "<group>"; };
+		8BF79F4A205F41F60033CCC3 /* HKClipperHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKClipperHelper.m; sourceTree = "<group>"; };
+		8BF79F4B205F41F60033CCC3 /* HKImageClipperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKImageClipperViewController.h; sourceTree = "<group>"; };
+		8BF79F4C205F41F60033CCC3 /* HKImageClipperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKImageClipperViewController.m; sourceTree = "<group>"; };
+		8BF79F4E205F41F60033CCC3 /* HKClipperVeiw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKClipperVeiw.h; sourceTree = "<group>"; };
+		8BF79F4F205F41F60033CCC3 /* HKClipperVeiw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKClipperVeiw.m; sourceTree = "<group>"; };
+		8BF79F50205F41F60033CCC3 /* UIImage+ClipperExtends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ClipperExtends.h"; sourceTree = "<group>"; };
+		8BF79F51205F41F60033CCC3 /* UIImage+ClipperExtends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ClipperExtends.m"; sourceTree = "<group>"; };
+		8BF79F59205F421D0033CCC3 /* HKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKViewController.h; sourceTree = "<group>"; };
+		8BF79F5A205F421D0033CCC3 /* HKViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKViewController.m; sourceTree = "<group>"; };
+		8BF79F5C205F421D0033CCC3 /* UIBarButtonItem+Extends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Extends.h"; sourceTree = "<group>"; };
+		8BF79F5D205F421D0033CCC3 /* UIBarButtonItem+Extends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Extends.m"; sourceTree = "<group>"; };
+		8BF79F5E205F421D0033CCC3 /* UIImage+Extends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extends.h"; sourceTree = "<group>"; };
+		8BF79F5F205F421D0033CCC3 /* UIImage+Extends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extends.m"; sourceTree = "<group>"; };
 		8BF7D3621F3D7D700087D35D /* CreateMeetingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateMeetingViewController.h; sourceTree = "<group>"; };
 		8BF7D3631F3D7D700087D35D /* CreateMeetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateMeetingViewController.m; sourceTree = "<group>"; };
 		8BF7D3641F3D7D700087D35D /* CreateMeetingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateMeetingViewController.xib; sourceTree = "<group>"; };
@@ -1877,6 +1898,7 @@
 		8BA224961EADFF2700627A1B /* FrameWork */ = {
 			isa = PBXGroup;
 			children = (
+				8BF79F47205F41F60033CCC3 /* HKClipper */,
 				8BB221E21FA708A300EC6478 /* SGQRController */,
 				8B0D30EE20565E4C0022610A /* SGQRView */,
 				8BB221C71FA7088E00EC6478 /* SGQRCode */,
@@ -2199,6 +2221,75 @@
 			name = delectVC;
 			sourceTree = "<group>";
 		};
+		8BF79F47205F41F60033CCC3 /* HKClipper */ = {
+			isa = PBXGroup;
+			children = (
+				8BF79F56205F421D0033CCC3 /* General */,
+				8BF79F48205F41F60033CCC3 /* HKClipperHelper */,
+				8BF79F4D205F41F60033CCC3 /* HKClipperView */,
+			);
+			path = HKClipper;
+			sourceTree = "<group>";
+		};
+		8BF79F48205F41F60033CCC3 /* HKClipperHelper */ = {
+			isa = PBXGroup;
+			children = (
+				8BF79F49205F41F60033CCC3 /* HKClipperHelper.h */,
+				8BF79F4A205F41F60033CCC3 /* HKClipperHelper.m */,
+				8BF79F4B205F41F60033CCC3 /* HKImageClipperViewController.h */,
+				8BF79F4C205F41F60033CCC3 /* HKImageClipperViewController.m */,
+			);
+			path = HKClipperHelper;
+			sourceTree = "<group>";
+		};
+		8BF79F4D205F41F60033CCC3 /* HKClipperView */ = {
+			isa = PBXGroup;
+			children = (
+				8BF79F4E205F41F60033CCC3 /* HKClipperVeiw.h */,
+				8BF79F4F205F41F60033CCC3 /* HKClipperVeiw.m */,
+				8BF79F50205F41F60033CCC3 /* UIImage+ClipperExtends.h */,
+				8BF79F51205F41F60033CCC3 /* UIImage+ClipperExtends.m */,
+			);
+			path = HKClipperView;
+			sourceTree = "<group>";
+		};
+		8BF79F56205F421D0033CCC3 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				8BF79F57205F421D0033CCC3 /* CommonBase */,
+				8BF79F5B205F421D0033CCC3 /* Extends */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+		8BF79F57205F421D0033CCC3 /* CommonBase */ = {
+			isa = PBXGroup;
+			children = (
+				8BF79F58205F421D0033CCC3 /* HKViewController */,
+			);
+			path = CommonBase;
+			sourceTree = "<group>";
+		};
+		8BF79F58205F421D0033CCC3 /* HKViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8BF79F59205F421D0033CCC3 /* HKViewController.h */,
+				8BF79F5A205F421D0033CCC3 /* HKViewController.m */,
+			);
+			path = HKViewController;
+			sourceTree = "<group>";
+		};
+		8BF79F5B205F421D0033CCC3 /* Extends */ = {
+			isa = PBXGroup;
+			children = (
+				8BF79F5C205F421D0033CCC3 /* UIBarButtonItem+Extends.h */,
+				8BF79F5D205F421D0033CCC3 /* UIBarButtonItem+Extends.m */,
+				8BF79F5E205F421D0033CCC3 /* UIImage+Extends.h */,
+				8BF79F5F205F421D0033CCC3 /* UIImage+Extends.m */,
+			);
+			path = Extends;
+			sourceTree = "<group>";
+		};
 		8BF7D3601F3D7D320087D35D /* SelecteMeeting */ = {
 			isa = PBXGroup;
 			children = (
@@ -2457,7 +2548,7 @@
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = AM9UTP2CL3;
 						LastSwiftMigration = 0830;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2703,6 +2794,7 @@
 				8B081DFD1F06524000493B81 /* PinyinFormatter.m in Sources */,
 				8BA224CF1EAF258B00627A1B /* ForgotPasswordViewController.m in Sources */,
 				8BF82D7B1EDFFC6200D33473 /* VoteViewController.m in Sources */,
+				8BF79F60205F421E0033CCC3 /* HKViewController.m in Sources */,
 				8B081E081F0A4AEC00493B81 /* ClassModel.m in Sources */,
 				8B2E16E21EBACAD7008B7C57 /* PersonalCollectionViewCell.m in Sources */,
 				8B087E4D1FEA661D00649094 /* NoticeViewController.m in Sources */,
@@ -2710,6 +2802,7 @@
 				8B0AF75E1F511AA2003858A4 /* VoteResultTableViewCell.m in Sources */,
 				8B2E16DE1EBABBC0008B7C57 /* InteractiveView.m in Sources */,
 				8BB221DB1FA7088E00EC6478 /* SGQRCodeHelperTool.m in Sources */,
+				8BF79F52205F41F60033CCC3 /* HKClipperHelper.m in Sources */,
 				8BF864C71ECAD97300B7EED4 /* UIImage+MultiFormat.m in Sources */,
 				8B64EB5B1F1A2BA900BF7D0F /* SelectClassViewController.m in Sources */,
 				8B7725061F3029CE00D1B521 /* FeedbackViewController.m in Sources */,
@@ -2719,9 +2812,11 @@
 				8B087E421FEA573700649094 /* ZFSeatSelectionView.m in Sources */,
 				8B05CB7B1EC2ABFD0063EC20 /* PersonalInfoViewController.m in Sources */,
 				8B045B821F3458CC0021699B /* ZFSeatModel.m in Sources */,
+				8BF79F62205F421E0033CCC3 /* UIImage+Extends.m in Sources */,
 				8B045B761F3458820021699B /* NSObject+MJCoding.m in Sources */,
 				8B045B9D1F3458E40021699B /* ZFSeatButton.m in Sources */,
 				8BE877851EBC2E0C00866A34 /* EndTheTestViewController.m in Sources */,
+				8BF79F55205F41F60033CCC3 /* UIImage+ClipperExtends.m in Sources */,
 				8B2E16F71EBADA5D008B7C57 /* TheMeetingEndedViewController.m in Sources */,
 				8BA2249D1EADFFA400627A1B /* SignInViewController.m in Sources */,
 				8B045B831F3458CC0021699B /* ZFSeatsModel.m in Sources */,
@@ -2810,6 +2905,7 @@
 				8B51AAA31F3EE71900AE034E /* MeetingChooseSeatViewController.m in Sources */,
 				8BA2245E1EADF68500627A1B /* main.m in Sources */,
 				8B9CCC921F17204B001833FD /* SelectPeopleToClassViewController.m in Sources */,
+				8BF79F61205F421E0033CCC3 /* UIBarButtonItem+Extends.m in Sources */,
 				8BE877701EBC1CA800866A34 /* TextViewController.m in Sources */,
 				8B2F145A1F5E9D7200438374 /* StudentScoreViewController.m in Sources */,
 				8BA224AD1EAE00B000627A1B /* DYTabBarViewController.m in Sources */,
@@ -2879,10 +2975,12 @@
 				8BB221DD1FA7088E00EC6478 /* SGQRCodeScanningView.m in Sources */,
 				8BB221E91FA708A300EC6478 /* QRCodeGenerateVC.m in Sources */,
 				8B8C3D141ECD300C00E9FB56 /* ChatHelper.m in Sources */,
+				8BF79F53205F41F60033CCC3 /* HKImageClipperViewController.m in Sources */,
 				8B081E031F078B8C00493B81 /* Appsetting.m in Sources */,
 				8B0207151F8DA4DB00CE3B8C /* NoticeSwiftViewController.swift in Sources */,
 				8BF864891ECAD21200B7EED4 /* MJRefreshConst.m in Sources */,
 				8B0333F81F8C70190021D495 /* JoinMessageGroupViewController.m in Sources */,
+				8BF79F54205F41F60033CCC3 /* HKClipperVeiw.m in Sources */,
 				8B9171C71ED3D9D8009686FD /* contactTool.m in Sources */,
 				8B0DB1331ED5188C0042DF0D /* ContactModel.m in Sources */,
 				8B081DE11F06238E00493B81 /* DefinitionPersonalTableViewCell.m in Sources */,
@@ -3106,10 +3204,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = WisdomHall/WisdomHall.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: yao zhiqiang (AM9UTP2CL3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: yao zhiqiang (AM9UTP2CL3)";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = AM9UTP2CL3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3140,8 +3238,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dayaokeji.rhythmStudent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "ee1786df-2220-4a64-a0e1-c2f2d11f42bb";
+				PROVISIONING_PROFILE_SPECIFIER = rhythmStudentOnline;
 				SWIFT_OBJC_BRIDGING_HEADER = "WisdomHall/WisdomHall-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3311,10 +3409,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = WisdomHall/WisdomHall.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: yao zhiqiang (AM9UTP2CL3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: yao zhiqiang (AM9UTP2CL3)";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = AM9UTP2CL3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3345,8 +3443,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dayaokeji.rhythmStudent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "ee1786df-2220-4a64-a0e1-c2f2d11f42bb";
+				PROVISIONING_PROFILE_SPECIFIER = rhythmStudentOnline;
 				SWIFT_OBJC_BRIDGING_HEADER = "WisdomHall/WisdomHall-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -3363,10 +3461,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = WisdomHall/WisdomHall.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: yao zhiqiang (AM9UTP2CL3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: yao zhiqiang (AM9UTP2CL3)";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = AM9UTP2CL3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3397,8 +3495,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dayaokeji.rhythmStudent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "ee1786df-2220-4a64-a0e1-c2f2d11f42bb";
+				PROVISIONING_PROFILE_SPECIFIER = rhythmStudentOnline;
 				SWIFT_OBJC_BRIDGING_HEADER = "WisdomHall/WisdomHall-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
