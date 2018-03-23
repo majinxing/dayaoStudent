@@ -31,6 +31,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *workNumber;
 @property (strong, nonatomic) IBOutlet UITextField *password;
 @property (strong, nonatomic) IBOutlet UIButton *selectSchoolBtn;
+@property (strong, nonatomic) IBOutlet UIImageView *selectImage;
 
 @property (nonatomic,strong)BindPhone * bindPhone;
 @property (nonatomic,copy)NSString * phone;
@@ -57,7 +58,7 @@
     
     _titleAry = [NSMutableArray arrayWithCapacity:1];
     
-    _selectSchoolBtn.backgroundColor = [UIColor clearColor];
+//    _selectSchoolBtn.backgroundColor = [UIColor clearColor];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
@@ -78,7 +79,7 @@
 -(void)setTableView{
 //    _titleAry = [[NSArray alloc] initWithObjects:@"无",@"湘潭大学", nil];
     _listView = [[UIView alloc] init];
-    _listView.frame = CGRectMake(VIEW_X(self.selectSchoolBtn), CGRectGetMaxY(self.selectSchoolBtn.frame), 150, 0);
+    _listView.frame = CGRectMake(VIEW_X(self.selectSchoolBtn), CGRectGetMaxY(self.selectSchoolBtn.frame), VIEW_WIDTH(self.selectSchoolBtn), 0);
     _listView.clipsToBounds = YES;
     _listView.layer.masksToBounds = NO;
     _listView.layer.borderColor = [UIColor lightTextColor].CGColor;
@@ -206,8 +207,8 @@
     
     [UIView animateWithDuration:AnimateTime animations:^{
         
-       // _arrowMark.transform = CGAffineTransformMakeRotation(M_PI);
-        _listView.frame  = CGRectMake(VIEW_X(_listView), VIEW_Y(_listView), 150, 150);
+        _selectImage.transform = CGAffineTransformMakeRotation(M_PI);
+        _listView.frame  = CGRectMake(VIEW_X(_listView), VIEW_Y(_listView), VIEW_WIDTH(self.selectSchoolBtn), 150);
         _tableView.frame = CGRectMake(0, 0, VIEW_WIDTH(_listView), VIEW_HEIGHT(_listView));
         
     }completion:^(BOOL finished) {
@@ -224,7 +225,7 @@
     
     [UIView animateWithDuration:AnimateTime animations:^{
         
-       // _arrowMark.transform = CGAffineTransformIdentity;
+        _selectImage.transform = CGAffineTransformIdentity;
         _listView.frame  = CGRectMake(VIEW_X(_listView), VIEW_Y(_listView), VIEW_WIDTH(_listView), 0);
         _tableView.frame = CGRectMake(0, 0, VIEW_WIDTH(_listView), VIEW_HEIGHT(_listView));
         
@@ -266,6 +267,10 @@
     cell.textLabel.text = s.schoolName;
     
     cell.textLabel.font = [UIFont systemFontOfSize:15];
+    
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    
+    cell.alpha = 0.9;
     
     return cell;
 }

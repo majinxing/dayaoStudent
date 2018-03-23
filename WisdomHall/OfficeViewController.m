@@ -17,6 +17,7 @@
 #import "JPUSHService.h"
 #import "CollectionHeadView.h"
 #import "NoticeDetailsViewController.h"
+#import "StatisticalSelfUIViewController.h"
 
 @interface OfficeViewController ()<UITableViewDelegate,UITableViewDataSource,OfficeTableViewCellDelegate>
 @property (nonatomic,strong)UITableView * tableView;
@@ -99,21 +100,16 @@
         self.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:noticeVC animated:YES];
         self.hidesBottomBarWhenPushed = NO;
-        //        NoticeSwiftViewController * a = [[NoticeSwiftViewController alloc] init];
-        //        self.hidesBottomBarWhenPushed = YES;
-        //        [self.navigationController pushViewController:a animated:YES];
-        //        self.hidesBottomBarWhenPushed = NO;
-        
     }else if ([str isEqualToString:Group]){
         GroupListViewController * g = [[GroupListViewController alloc] init];
         self.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:g animated:YES];
         self.hidesBottomBarWhenPushed = NO;
     }else if ([str isEqualToString:Statistical]){
-//        StatisticalViewController * vc = [[StatisticalViewController alloc] init];
-//        self.hidesBottomBarWhenPushed = YES;
-//        [self.navigationController pushViewController:vc animated:YES];
-//        self.hidesBottomBarWhenPushed = NO;
+        StatisticalSelfUIViewController * vc = [[StatisticalSelfUIViewController alloc] init];
+        self.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        self.hidesBottomBarWhenPushed = NO;
     }else{
         [UIUtils showInfoMessage:@"正在加紧步伐开发中，敬请期待"];
     }

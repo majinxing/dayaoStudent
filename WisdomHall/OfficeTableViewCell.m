@@ -89,9 +89,7 @@
     NSArray * array = @[
                         Meeting,
                         Announcement,
-                        //Leave,
-                        //Business,
-                        //Lotus,
+                        Statistical,
                         SchoolCommunity,
                         AroundSchool,
                         Community

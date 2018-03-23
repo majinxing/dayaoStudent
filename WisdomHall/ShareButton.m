@@ -153,6 +153,10 @@
         
         [self setImage:[UIImage imageNamed:@"ic_school_around"] forState:UIControlStateNormal];
     }
+    if ([type isEqualToString:Statistical]) {
+        UIImage * i = [[Appsetting sharedInstance] grayscale:[UIImage imageNamed:@"统计"]];
+        [self setImage:i forState:UIControlStateNormal];
+    }
     [self setTitle:type forState:UIControlStateNormal];
 }
 

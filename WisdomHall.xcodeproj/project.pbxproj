@@ -83,6 +83,8 @@
 		8B081E141F0C980200493B81 /* SelectClassRoomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B081E121F0C980200493B81 /* SelectClassRoomViewController.xib */; };
 		8B081E171F0CBA8900493B81 /* ClassRoomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B081E161F0CBA8900493B81 /* ClassRoomModel.m */; };
 		8B081E1A1F0E0FA400493B81 /* SignPeople.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B081E191F0E0FA400493B81 /* SignPeople.m */; };
+		8B084DB82064A680004B9C7C /* StatisticalSelfUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B084DB62064A680004B9C7C /* StatisticalSelfUIViewController.m */; };
+		8B084DB92064A680004B9C7C /* StatisticalSelfUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B084DB72064A680004B9C7C /* StatisticalSelfUIViewController.xib */; };
 		8B0857971F7E3A30009D5AC9 /* WorkingLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0857951F7E3A30009D5AC9 /* WorkingLoginViewController.m */; };
 		8B0857981F7E3A30009D5AC9 /* WorkingLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B0857961F7E3A30009D5AC9 /* WorkingLoginViewController.xib */; };
 		8B087E3B1FEA56AE00649094 /* ZFSeatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B087E3A1FEA56AE00649094 /* ZFSeatViewController.m */; };
@@ -705,6 +707,9 @@
 		8B081E161F0CBA8900493B81 /* ClassRoomModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassRoomModel.m; sourceTree = "<group>"; };
 		8B081E181F0E0FA400493B81 /* SignPeople.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignPeople.h; sourceTree = "<group>"; };
 		8B081E191F0E0FA400493B81 /* SignPeople.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignPeople.m; sourceTree = "<group>"; };
+		8B084DB52064A680004B9C7C /* StatisticalSelfUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StatisticalSelfUIViewController.h; sourceTree = "<group>"; };
+		8B084DB62064A680004B9C7C /* StatisticalSelfUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StatisticalSelfUIViewController.m; sourceTree = "<group>"; };
+		8B084DB72064A680004B9C7C /* StatisticalSelfUIViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatisticalSelfUIViewController.xib; sourceTree = "<group>"; };
 		8B0857941F7E3A30009D5AC9 /* WorkingLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkingLoginViewController.h; sourceTree = "<group>"; };
 		8B0857951F7E3A30009D5AC9 /* WorkingLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkingLoginViewController.m; sourceTree = "<group>"; };
 		8B0857961F7E3A30009D5AC9 /* WorkingLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkingLoginViewController.xib; sourceTree = "<group>"; };
@@ -1581,6 +1586,9 @@
 				8B3CAEC51F75091000BDE092 /* OfficeViewController.h */,
 				8B3CAEC61F75091000BDE092 /* OfficeViewController.m */,
 				8B3CAEC71F75091000BDE092 /* OfficeViewController.xib */,
+				8B084DB52064A680004B9C7C /* StatisticalSelfUIViewController.h */,
+				8B084DB62064A680004B9C7C /* StatisticalSelfUIViewController.m */,
+				8B084DB72064A680004B9C7C /* StatisticalSelfUIViewController.xib */,
 			);
 			name = Office;
 			sourceTree = "<group>";
@@ -2635,6 +2643,7 @@
 				8B0AF75A1F4FAF53003858A4 /* UploadFileViewController.xib in Resources */,
 				8B081DE21F06238E00493B81 /* DefinitionPersonalTableViewCell.xib in Resources */,
 				8B027A251EFA5FF200600E18 /* DataDownloadViewController.xib in Resources */,
+				8B084DB92064A680004B9C7C /* StatisticalSelfUIViewController.xib in Resources */,
 				8BB56D881EB2E2820023DAFF /* RedefineThePasswordViewController.xib in Resources */,
 				8B07DB7F1F78E7E500DC371C /* CreateChatViewController.xib in Resources */,
 				8B0502FD2021A8BA0030CF75 /* PersonalUploadDataViewController.xib in Resources */,
@@ -2895,6 +2904,7 @@
 				8BE24D641F8B528600621055 /* GroupModel.m in Sources */,
 				8B3EBBD6205A1BF0009974B1 /* ChangeThemeInfoViewController.m in Sources */,
 				8BE24D601F8B488E00621055 /* GroupListViewController.m in Sources */,
+				8B084DB82064A680004B9C7C /* StatisticalSelfUIViewController.m in Sources */,
 				8BF82D811EE001D600D33473 /* VoteTableViewCell.m in Sources */,
 				8BB221D71FA7088E00EC6478 /* UIImage+ImageSize.m in Sources */,
 				8BF8646E1ECACAE800B7EED4 /* FMDatabase.m in Sources */,
