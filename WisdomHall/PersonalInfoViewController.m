@@ -111,7 +111,7 @@
                 [[Appsetting sharedInstance].mySettingData setValue:ary[0] forKey:@"user_pictureId"];
             }
         } failure:^(NSError *error) {
-            
+            NSLog(@"%@",error);
         }];
     }
 }

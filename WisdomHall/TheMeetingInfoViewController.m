@@ -508,7 +508,6 @@
         [self hideHud];
         return;
     }else{
-//        signStatus
         if ([[NSString stringWithFormat:@"%@",_meetingModel.signStatus] isEqualToString:@"2"]) {
             [self hideHud];
             [self signPictureUpdate];

@@ -10,6 +10,8 @@
 
 @implementation SchoolModel
 -(void)setInfoWithDict:(NSDictionary *)dict{
-
+    _schoolName = [dict objectForKey:@"name"];
+    _schoolId = [dict objectForKey:@"id"];
+    _schoolHost = [dict objectForKey:@"host"];
 }
 @end

@@ -87,6 +87,7 @@
     userInfo.sign = [_mySettingData objectForKey:@"user_sign"];
     userInfo.token = [_mySettingData objectForKey:@"user_token"];
     userInfo.userHeadImageId = [_mySettingData objectForKey:@"user_pictureId"];
+    userInfo.host = [_mySettingData objectForKey:@"user_universityHost"];
     return userInfo;
 }
 -(void)setThemeColor:(UIColor *)color{
@@ -147,6 +148,22 @@
 -(NSString *)getUserPhone{
     NSString * phone = [_mySettingData objectForKey:@"user_phone"];
     return phone;
+}
+-(void)saveUserSchool:(SchoolModel *)school{
+    [_mySettingData setValue:school.schoolId forKey:@"user_universityCode"];
+    [_mySettingData setValue:school.schoolName forKey:@"user_universityName"];
+    [_mySettingData setValue:school.schoolHost forKey:@"user_universityHost"];
+    [_mySettingData synchronize];
+}
+-(SchoolModel *)getUserSchool{
+    NSString * schoolName = [_mySettingData objectForKey:@"user_universityName"];
+    NSString * schoolId = [_mySettingData objectForKey:@"user_universityCode"];
+    NSString * host = [_mySettingData objectForKey:@"user_universityHost"];
+    SchoolModel * s = [[SchoolModel alloc] init];
+    s.schoolName = schoolName;
+    s.schoolId = schoolId;
+    s.schoolHost = host;
+    return s;
 }
 -(void)getOut{
     [_mySettingData setValue:@"0" forKey:@"is_Login"];

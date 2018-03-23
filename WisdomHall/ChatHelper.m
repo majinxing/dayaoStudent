@@ -110,7 +110,7 @@ static dispatch_once_t onceToken;
 
         } seq:0];
         
-        if (error==nil) {
+         if (error==nil) {
             NSLog(@"注册成功");
         }
         

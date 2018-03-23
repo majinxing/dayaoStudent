@@ -25,4 +25,5 @@
  *  @param failure   失败后执行failure block
  */
 - (void)POSTImage:(NSString *)URLString filePath:(NSString *)filePath dict:(id)dict succeed:(void (^)(id data))succeed failure:(void (^)(NSError *error))failure;
+- (void)GETSchool:(NSString *)URLString dict:(id)dict succeed:(void (^)(id data))succeed failure:(void (^)(NSError *error))failure;
 @end

@@ -38,8 +38,11 @@
 }
 
 -(void)afnetwroingPostWithUrl:(NSString *)url withDict:(NSDictionary *)dict{
+    UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
     
-    NSString * str = [NSString stringWithFormat:@"%@%@",BaseURL,url];
+    NSString * baseUrl = user.host;
+    
+    NSString * str = [NSString stringWithFormat:@"%@/%@",baseUrl,url];
     
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
     
@@ -77,8 +80,10 @@
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",user.token] forHTTPHeaderField:@"token"];
 
 //    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+    
+    NSString * baseUrl = user.host;
     //发送网络请求(请求方式为POST)
-    URLString = [NSString stringWithFormat:@"%@%@",BaseURL,URLString];
+    URLString = [NSString stringWithFormat:@"%@/%@",baseUrl,URLString];
     
     [manager POST:URLString parameters:dict progress:^(NSProgress * _Nonnull uploadProgress) {
         
@@ -119,8 +124,9 @@
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",user.token] forHTTPHeaderField:@"token"];
     
 //    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+    NSString * baseUrl = user.host;
     //发送网络请求(请求方式为GET)
-    URLString = [NSString stringWithFormat:@"%@%@",BaseURL,URLString];
+    URLString = [NSString stringWithFormat:@"%@/%@",baseUrl,URLString];
 
     [manager GET:URLString parameters:dict progress:^(NSProgress * _Nonnull downloadProgress) {
         
@@ -155,9 +161,9 @@
     UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
     
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",user.token] forHTTPHeaderField:@"token"];
-    
+    NSString * baseUrl = user.host;
     //发送网络请求(请求方式为POST)
-    URLString = [NSString stringWithFormat:@"%@%@",BaseURL,URLString];
+    URLString = [NSString stringWithFormat:@"%@/%@",baseUrl,URLString];
     
     [manager POST:URLString parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         
@@ -203,9 +209,9 @@
     UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
     
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",user.token] forHTTPHeaderField:@"token"];
-    
+    NSString * baseUrl = user.host;
     //发送网络请求(请求方式为POST)
-    URLString = [NSString stringWithFormat:@"%@%@",BaseURL,URLString];
+    URLString = [NSString stringWithFormat:@"%@/%@",baseUrl,URLString];
     
     [manager POST:URLString parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         //        NSData *fileData = [NSData dataWithContentsOfFile:filePath];
@@ -229,5 +235,46 @@
         
     }];
     
+}
+/**
+ *  封装AFN的GET请求
+ *
+ *  @param URLString 网络请求地址
+ *  @param dict      参数(可以是字典或者nil)
+ *  @param succeed   成功后执行success block
+ *  @param failure   失败后执行failure block
+ */
+- (void)GETSchool:(NSString *)URLString dict:(id)dict succeed:(void (^)(id data))succeed failure:(void (^)(NSError *error))failure
+{
+    //创建网络请求管理对象
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    //    //申明返回的结果是json类型
+    //    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    //    //申明请求的数据是json类型
+    //    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    //如果报接受类型不一致请替换一致text/html或别的
+    //    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",nil];
+    [ manager.requestSerializer setValue:@"application/json"forHTTPHeaderField:@"Content-Type"];
+    //调出请求头
+    
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    
+    //将token封装入请求头
+    
+    UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
+    
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",user.token] forHTTPHeaderField:@"token"];
+    
+    //    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+    //发送网络请求(请求方式为GET)
+    URLString = [NSString stringWithFormat:@"%@",URLString];
+    
+    [manager GET:URLString parameters:dict progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        succeed(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure(error);
+    }];
 }
 @end

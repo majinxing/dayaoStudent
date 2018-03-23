@@ -55,6 +55,7 @@
 		8B05CB771EC070060063EC20 /* SystemSetingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B05CB751EC070060063EC20 /* SystemSetingTableViewCell.xib */; };
 		8B05CB7B1EC2ABFD0063EC20 /* PersonalInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B05CB791EC2ABFD0063EC20 /* PersonalInfoViewController.m */; };
 		8B05CB7C1EC2ABFD0063EC20 /* PersonalInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B05CB7A1EC2ABFD0063EC20 /* PersonalInfoViewController.xib */; };
+		8B06176520634CA7000D95E9 /* SchoolList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B06176420634CA7000D95E9 /* SchoolList.plist */; };
 		8B064E541F00D8D80004C3D4 /* MJXChatCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B064E521F00D8D80004C3D4 /* MJXChatCellTableViewCell.m */; };
 		8B064E551F00D8D80004C3D4 /* MJXChatCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B064E531F00D8D80004C3D4 /* MJXChatCellTableViewCell.xib */; };
 		8B064E581F00F53F0004C3D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B064E571F00F53F0004C3D4 /* Assets.xcassets */; };
@@ -659,6 +660,7 @@
 		8B05CB781EC2ABFD0063EC20 /* PersonalInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalInfoViewController.h; sourceTree = "<group>"; };
 		8B05CB791EC2ABFD0063EC20 /* PersonalInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalInfoViewController.m; sourceTree = "<group>"; };
 		8B05CB7A1EC2ABFD0063EC20 /* PersonalInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalInfoViewController.xib; sourceTree = "<group>"; };
+		8B06176420634CA7000D95E9 /* SchoolList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = SchoolList.plist; sourceTree = "<group>"; };
 		8B064E511F00D8D80004C3D4 /* MJXChatCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJXChatCellTableViewCell.h; sourceTree = "<group>"; };
 		8B064E521F00D8D80004C3D4 /* MJXChatCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJXChatCellTableViewCell.m; sourceTree = "<group>"; };
 		8B064E531F00D8D80004C3D4 /* MJXChatCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MJXChatCellTableViewCell.xib; sourceTree = "<group>"; };
@@ -1695,6 +1697,7 @@
 				8BA2246A1EADF68500627A1B /* LaunchScreen.storyboard */,
 				8B064E571F00F53F0004C3D4 /* Assets.xcassets */,
 				8BA2246D1EADF68500627A1B /* Info.plist */,
+				8B06176420634CA7000D95E9 /* SchoolList.plist */,
 				8BA2245C1EADF68500627A1B /* Supporting Files */,
 			);
 			path = WisdomHall;
@@ -2548,7 +2551,7 @@
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = AM9UTP2CL3;
 						LastSwiftMigration = 0830;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2673,6 +2676,7 @@
 				8B081DE81F063AE900493B81 /* SelectSchoolViewController.xib in Resources */,
 				8B064E551F00D8D80004C3D4 /* MJXChatCellTableViewCell.xib in Resources */,
 				8B4D91151EBDAB1000A4BE34 /* SignListViewController.xib in Resources */,
+				8B06176520634CA7000D95E9 /* SchoolList.plist in Resources */,
 				8B0502FB2021A8BA0030CF75 /* AllOrPersonalDataViewController.xib in Resources */,
 				8BA224A81EAE000000627A1B /* PersonalCenterViewController.xib in Resources */,
 				8B2E16DB1EBAB968008B7C57 /* ClassManagementViewController.xib in Resources */,
@@ -3204,10 +3208,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = WisdomHall/WisdomHall.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: yao zhiqiang (AM9UTP2CL3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: yao zhiqiang (AM9UTP2CL3)";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = AM9UTP2CL3;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3238,8 +3242,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dayaokeji.rhythmStudent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ee1786df-2220-4a64-a0e1-c2f2d11f42bb";
-				PROVISIONING_PROFILE_SPECIFIER = rhythmStudentOnline;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WisdomHall/WisdomHall-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3409,10 +3413,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = WisdomHall/WisdomHall.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: yao zhiqiang (AM9UTP2CL3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: yao zhiqiang (AM9UTP2CL3)";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = AM9UTP2CL3;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3443,8 +3447,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dayaokeji.rhythmStudent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ee1786df-2220-4a64-a0e1-c2f2d11f42bb";
-				PROVISIONING_PROFILE_SPECIFIER = rhythmStudentOnline;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WisdomHall/WisdomHall-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -3461,10 +3465,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = WisdomHall/WisdomHall.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: yao zhiqiang (AM9UTP2CL3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: yao zhiqiang (AM9UTP2CL3)";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = AM9UTP2CL3;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3495,8 +3499,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dayaokeji.rhythmStudent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ee1786df-2220-4a64-a0e1-c2f2d11f42bb";
-				PROVISIONING_PROFILE_SPECIFIER = rhythmStudentOnline;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WisdomHall/WisdomHall-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

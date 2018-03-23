@@ -44,42 +44,42 @@
     _collectionHeadView = [CollectionHeadView sharedInstance];
     
     _collectionHeadView.delegate = self;
-    [self signState];
+//    [self signState];
     self.backgroundColor = [UIColor clearColor];
     //    [self addSecondContentView];
     // Initialization code
 }
 -(void)signState{
-    FMDatabase * db = [FMDBTool createDBWithName:SQLITE_NAME];
-    if ([db open]) {
-        NSString * sql = [NSString stringWithFormat:@"select * from %@",DAILYCHECK_TABLE_NAME];
-        FMResultSet * rs = [FMDBTool queryWithDB:db withSqlStr:sql];
-        int n = 0;
-        while (rs.next) {
-            NSString * date = [rs stringForColumn:@"date"];
-            NSString * today = [UIUtils getTime];
-            if ([today isEqualToString:date]) {
-                n = 1;
-                NSString * signIn = [rs stringForColumn:@"signIn"];
-                NSString * sInS = [rs stringForColumn:@"signInState"];
-                if ([UIUtils isBlankString:signIn]) {
-                    _signIN.text = @"签到状态:未签到";
-                }else{
-                    _signIN.text = [NSString stringWithFormat:@"签到状态:%@",sInS];
-                }
-                
-                NSString * signBack = [rs stringForColumn:@"signBack"];
-                NSString * sBS = [rs stringForColumn:@"signBackState"];
-                if ([UIUtils isBlankString:signBack]) {
-                    _signBack.text = @"签退状态:未签退";
-                }else{
-                    _signBack.text = [NSString stringWithFormat:@"签退状态:%@",sBS];
-                }
-                break;
-            }
-        }
-    }
-    [db close];
+//    FMDatabase * db = [FMDBTool createDBWithName:SQLITE_NAME];
+//    if ([db open]) {
+//        NSString * sql = [NSString stringWithFormat:@"select * from %@",DAILYCHECK_TABLE_NAME];
+//        FMResultSet * rs = [FMDBTool queryWithDB:db withSqlStr:sql];
+//        int n = 0;
+//        while (rs.next) {
+//            NSString * date = [rs stringForColumn:@"date"];
+//            NSString * today = [UIUtils getTime];
+//            if ([today isEqualToString:date]) {
+//                n = 1;
+//                NSString * signIn = [rs stringForColumn:@"signIn"];
+//                NSString * sInS = [rs stringForColumn:@"signInState"];
+//                if ([UIUtils isBlankString:signIn]) {
+//                    _signIN.text = @"签到状态:未签到";
+//                }else{
+//                    _signIN.text = [NSString stringWithFormat:@"签到状态:%@",sInS];
+//                }
+//
+//                NSString * signBack = [rs stringForColumn:@"signBack"];
+//                NSString * sBS = [rs stringForColumn:@"signBackState"];
+//                if ([UIUtils isBlankString:signBack]) {
+//                    _signBack.text = @"签退状态:未签退";
+//                }else{
+//                    _signBack.text = [NSString stringWithFormat:@"签退状态:%@",sBS];
+//                }
+//                break;
+//            }
+//        }
+//    }
+//    [db close];
     
 }
 //choolCommunity             @"校圈"

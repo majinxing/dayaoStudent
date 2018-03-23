@@ -715,7 +715,7 @@
             [UIUtils showInfoMessage:@"课程开始之后一定时间范围内才可以签到"];
         }
         [self hideHud];
-//        return;
+        return;
     }else{
         if ([[NSString stringWithFormat:@"%@",_c.signStatus] isEqualToString:@"2"]) {
             [self hideHud];

@@ -30,5 +30,6 @@
 @property (nonatomic,copy) NSString * region;
 @property (nonatomic,copy) NSString * sign;//个性签名
 @property (nonatomic,copy) NSString * token;
+@property (nonatomic,copy) NSString * host;//学校服务器地址
 
 @end

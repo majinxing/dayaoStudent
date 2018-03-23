@@ -89,7 +89,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
     [UIUtils getInternetDate];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-
+    //NSString *homeDir = NSHomeDirectory();沙盒路径
     // Do any additional setup after loading the view from its nib.
 }
 -(void)UpdateTheClassPage{
@@ -381,11 +381,15 @@ static NSString *cellIdentifier = @"cellIdentifier";
             NSString * str = [[data objectForKey:@"header"] objectForKey:@"code"];
             if ([[NSString stringWithFormat:@"%@",str] isEqualToString:@"6680"]) {
                 [UIUtils showInfoMessage:@"该用户已经添加,不能重复添加"];
-            }else{
+            }else if ([[NSString stringWithFormat:@"%@",str] isEqualToString:@"6676"]){
+                [UIUtils showInfoMessage:@"数据异常"];
+            }else if([[NSString stringWithFormat:@"%@",str] isEqualToString:@"0000"]){
                 [UIUtils showInfoMessage:@"加入成功"];
                 [self headerRereshing];
                 [_join removeFromSuperview];
                 _join = nil;
+            }else{
+                [UIUtils showInfoMessage:@"加入失败"];
             }
             [self hideHud];
 

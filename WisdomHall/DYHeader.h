@@ -133,10 +133,12 @@
 
 #define DAILYCHECK_TABLE_NAME  @"dailyCheck"                        //日常签到统计表
 
-//接口 192.168.1.81:8080 api.dayaokeji.com
+//接口 192.168.1.81:8080 api.dayaokeji.com xtu.api.dayaokeji.com
 #define BaseURL                 @"http://api.dayaokeji.com/"
 
 #define Login                   @"course/user/login"                //登录
+
+#define SchoolList              @"http://www.dayaokeji.com/ldxy_serverlist.html" //   获取学校数据
 
 #define Register                @"course/user/register"             //注册
 
