@@ -35,11 +35,16 @@
 // 如果需要使用idfa功能所需要引入的头文件（可选）
 #import <AdSupport/AdSupport.h>
 
+#import <CoreLocation/CoreLocation.h>
 
 @interface AppDelegate ()<EMCallManagerDelegate,EMChatManagerDelegate,EMChatroomManagerDelegate,JPUSHRegisterDelegate>
 @property(nonatomic,strong)ChatHelper * chat;
 @property (nonatomic,strong)FMDatabase * db;
 
+@property (nonatomic,assign)UIBackgroundTaskIdentifier backgroundTaskIdentifier;
+@property (nonatomic,strong) NSTimer *  myTimer;
+
+@property(nonatomic,strong)CLLocationManager * locationManager;
 @end
 
 @implementation AppDelegate
@@ -106,10 +111,16 @@
     
     [[NSNotificationCenter defaultCenter]
      addObserver:self
-     selector:@selector(reloadView)
+     selector:@selector(setColor)
      name:ThemeColorChangeNotification object:nil];
+    
     return YES;
 }
+-(void)setColor{
+    DYTabBarViewController * tab = [[DYTabBarViewController alloc] init];
+    self.window.rootViewController = tab;
+}
+
 -(void)reloadView{
     DYTabBarViewController * tab = [[DYTabBarViewController alloc] init];
     self.window.rootViewController = tab;
@@ -155,6 +166,92 @@
     [[EMClient sharedClient] applicationDidEnterBackground:application];
     _chat.outOrIn = @"out";
     [[CollectionHeadView sharedInstance] onceSetNil];
+    
+    if ([UIUtils didUserPressLockButton]) {
+        //目的是为了停止inApp的时钟
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"stopTime" object:nil];
+        
+        
+        NSLog(@"Lock screen.");
+        // 标记一个长时间运行的后台任务将开始
+        // 通过调试，发现，iOS给了我们额外的10分钟（600s）来执行这个任务。
+        self.backgroundTaskIdentifier =[application beginBackgroundTaskWithExpirationHandler:^(void) {
+            
+            // 当应用程序留给后台的时间快要到结束时（应用程序留给后台执行的时间是有限的）， 这个Block块将被执行
+            // 我们需要在次Block块中执行一些清理工作。
+            // 如果清理工作失败了，那么将导致程序挂掉
+            
+            // 清理工作需要在主线程中用同步的方式来进行
+            
+            
+            [self endBackgroundTask];
+        }];
+        // 模拟一个Long-Running Task
+        self.myTimer =[NSTimer scheduledTimerWithTimeInterval:10
+                                                       target:self
+                                                     selector:@selector(timerMethod:)     userInfo:nil
+                                                      repeats:YES];
+        [_myTimer fire];
+    }
+    else {
+        NSLog(@"Home.");
+        [[NSNotificationCenter defaultCenter] postNotificationName:OutApp object:nil];
+    };
+}
+- (void)endBackgroundTask{
+    dispatch_queue_t mainQueue = dispatch_get_main_queue();
+    AppDelegate *weakSelf = self;
+    dispatch_async(mainQueue, ^(void) {
+        
+        AppDelegate *strongSelf = weakSelf;
+        if (strongSelf != nil){
+            [strongSelf.myTimer invalidate];// 停止定时器
+            
+            // 每个对 beginBackgroundTaskWithExpirationHandler:方法的调用,必须要相应的调用 endBackgroundTask:方法。这样，来告诉应用程序你已经执行完成了。
+            // 也就是说,我们向 iOS 要更多时间来完成一个任务,那么我们必须告诉 iOS 你什么时候能完成那个任务。
+            // 也就是要告诉应用程序：“好借好还”嘛。
+            // 标记指定的后台任务完成
+            
+            [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTaskIdentifier];
+            
+            //销毁后台任务标识符
+            strongSelf.backgroundTaskIdentifier = UIBackgroundTaskInvalid;
+            
+        }
+    });
+}
+// 模拟的一个 Long-Running Task 方法
+- (void) timerMethod:(NSTimer *)paramSender{
+    //     backgroundTimeRemaining 属性包含了程序留给的我们的时间
+    NSTimeInterval backgroundTimeRemaining =[[UIApplication sharedApplication] backgroundTimeRemaining];
+    UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
+    if (user.peopleId) {
+        
+        if (backgroundTimeRemaining<=30) {
+            NSDictionary * dict = @{@"appState":@"2",@"id":[NSString stringWithFormat:@"%@",user.peopleId]};
+            [[NetworkRequest sharedInstance] POST:ChangeAppState dict:dict succeed:^(id data) {
+                
+            } failure:^(NSError *error) {
+                
+            }];
+        }else{
+            NSDictionary * dict = @{@"appState":@"1",@"id":[NSString stringWithFormat:@"%@",user.peopleId]};
+            [[NetworkRequest sharedInstance] POST:ChangeAppState dict:dict succeed:^(id data) {
+                
+            } failure:^(NSError *error) {
+                
+            }];
+        }
+    }
+    if ([UIUtils didUserPressLockButton]) {
+        NSLog(@"%s",__func__);
+    }
+    //        if (backgroundTimeRemaining == DBL_MAX){
+    //            NSLog(@"Background Time Remaining = Undetermined");
+    //        } else {
+    //            NSLog(@"Background Time Remaining = %.02f Seconds", backgroundTimeRemaining);
+    //        }
+    
 }
 
 
@@ -163,6 +260,7 @@
     [[EMClient sharedClient] applicationWillEnterForeground:application];
     _chat.outOrIn = @"In";
     CollectionHeadView *view = [CollectionHeadView sharedInstance];
+    [[NSNotificationCenter defaultCenter] postNotificationName:InApp object:nil];
     if (view) {
         
     }
@@ -217,7 +315,7 @@
     UNNotificationRequest *request = response.notification.request; // 收到推送的请求
     UNNotificationContent *content = request.content; // 收到推送的消息内容
     
-    NSNumber *badge = @1;  // 推送消息的角标
+//    NSNumber *badge = @1;  // 推送消息的角标
     NSString *body = content.body;    // 推送消息体
     UNNotificationSound *sound = content.sound;  // 推送消息的声音
     NSString *subtitle = content.subtitle;  // 推送消息的副标题
@@ -231,7 +329,7 @@
     }
     else {
         // 判断为本地通知
-        NSLog(@"iOS10 收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
+//        NSLog(@"iOS10 收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
     }
     
     completionHandler();  // 系统要求执行这个方法
@@ -248,7 +346,7 @@ fetchCompletionHandler:
     
     NSString * time = [UIUtils getTime];
     
-    [self insertedIntoNoticeTable:time noticeContent:strUrl];
+    
     
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:strUrl message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
     
@@ -283,41 +381,5 @@ fetchCompletionHandler:
                                      errorDescription:NULL];
     return str;
 }
-#pragma mark FMDB
--(void)insertedIntoNoticeTable:(NSString *)noticeTime noticeContent:(NSString *)content{
-    
-    _db = [FMDBTool createDBWithName:SQLITE_NAME];
-    
-    [self creatTextTable:NOTICE_TABLE_NAME];
-    
-    if ([_db open]) {
-        NSString * sql = [NSString stringWithFormat:@"insert into %@ (noticeTime, noticeContent) values ('%@', '%@')",NOTICE_TABLE_NAME,noticeTime,content];
-        
-        BOOL rs = [FMDBTool insertWithDB:_db tableName:NOTICE_TABLE_NAME withSqlStr:sql];
-        
-        if (!rs) {
-            NSLog(@"失败");
-        }
-        
-    }
-    [_db close];
-}
--(void)creatTextTable:(NSString *)tableName{
-    if ([_db open]) {
-        BOOL result = [FMDBTool createTableWithDB:_db tableName:tableName
-                                       parameters:@{
-                                                    @"noticeTime" : @"text",
-                                                    @"noticeContent" : @"text",
-                                                    }];
-        if (result)
-        {
-            NSLog(@"建表成功");
-        }
-        else
-        {
-            NSLog(@"建表失败");
-        }
-    }
-    [_db close];
-}
+
 @end

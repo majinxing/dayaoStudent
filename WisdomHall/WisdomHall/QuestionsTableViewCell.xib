@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="QuestionsTableViewCellFirst" rowHeight="189" id="KGk-i7-Jjw" customClass="QuestionsTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="452" height="189"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="452" height="188.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rPC-wg-lly">
+                        <rect key="frame" x="5" y="3" width="442" height="182.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        <connections>
+                            <outlet property="delegate" destination="KGk-i7-Jjw" id="heQ-Lu-GSO"/>
+                        </connections>
+                    </textView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="rPC-wg-lly" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="3RG-om-6dw"/>
+                    <constraint firstItem="rPC-wg-lly" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="F0m-Md-Q0q"/>
+                    <constraint firstAttribute="bottom" secondItem="rPC-wg-lly" secondAttribute="bottom" constant="3" id="W21-En-LWJ"/>
+                    <constraint firstAttribute="trailing" secondItem="rPC-wg-lly" secondAttribute="trailing" constant="5" id="wq0-7K-I78"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="titleTextView" destination="rPC-wg-lly" id="Db4-ek-jS5"/>
+            </connections>
+            <point key="canvasLocation" x="99" y="127"/>
+        </tableViewCell>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="QuestionsTableViewCellSecond" rowHeight="191" id="fBC-sJ-ueR" customClass="QuestionsTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="461" height="191"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fBC-sJ-ueR" id="RUY-TG-8Zu">
+                <rect key="frame" x="0.0" y="0.0" width="461" height="190.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="答案：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7xs-1T-Vfq">
+                        <rect key="frame" x="18" y="18" width="50" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="rPI-Xk-jL2"/>
+                            <constraint firstAttribute="height" constant="21" id="rhr-Jl-48W"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pjX-DR-W2s">
+                        <rect key="frame" x="68" y="8" width="385" height="175"/>
+                        <color key="backgroundColor" red="0.95471129441624369" green="0.95471129441624369" blue="0.95471129441624369" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        <connections>
+                            <outlet property="delegate" destination="fBC-sJ-ueR" id="5ji-05-FPQ"/>
+                        </connections>
+                    </textView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="pjX-DR-W2s" firstAttribute="leading" secondItem="7xs-1T-Vfq" secondAttribute="trailing" id="BDW-ym-SYk"/>
+                    <constraint firstAttribute="bottom" secondItem="pjX-DR-W2s" secondAttribute="bottom" constant="8" id="KZN-AS-WsO"/>
+                    <constraint firstItem="7xs-1T-Vfq" firstAttribute="top" secondItem="RUY-TG-8Zu" secondAttribute="topMargin" constant="10" id="Oiq-G5-K17"/>
+                    <constraint firstItem="pjX-DR-W2s" firstAttribute="top" secondItem="RUY-TG-8Zu" secondAttribute="top" constant="8" id="nVu-5o-RN0"/>
+                    <constraint firstItem="7xs-1T-Vfq" firstAttribute="leading" secondItem="RUY-TG-8Zu" secondAttribute="leadingMargin" constant="10" id="qIf-dZ-TEb"/>
+                    <constraint firstAttribute="trailing" secondItem="pjX-DR-W2s" secondAttribute="trailing" constant="8" id="vTe-o9-dDR"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="answerText" destination="pjX-DR-W2s" id="Ko1-Si-a19"/>
+            </connections>
+            <point key="canvasLocation" x="103.5" y="401.5"/>
+        </tableViewCell>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="QuestionsTableViewCellThird" rowHeight="60" id="X80-eu-T6i" customClass="QuestionsTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="452" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X80-eu-T6i" id="ogz-vQ-7Y5">
+                <rect key="frame" x="0.0" y="0.0" width="452" height="59.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="上一题" translatesAutoresizingMaskIntoConstraints="NO" id="3wi-Yr-79C">
+                        <rect key="frame" x="10" y="5" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="2Jy-cc-wde"/>
+                            <constraint firstAttribute="height" constant="40" id="F9K-WI-SfE"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="下一题" translatesAutoresizingMaskIntoConstraints="NO" id="gVV-Bi-ait">
+                        <rect key="frame" x="402" y="5" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="5He-49-cNX"/>
+                            <constraint firstAttribute="height" constant="40" id="oIh-A6-pt7"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.65000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="左右屏幕滑动切换试题" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="55E-S8-cZN">
+                        <rect key="frame" x="126" y="8" width="200" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="gQK-2x-pUc"/>
+                            <constraint firstAttribute="width" constant="200" id="nu7-gW-5kT"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="55E-S8-cZN" firstAttribute="top" secondItem="ogz-vQ-7Y5" secondAttribute="topMargin" id="35i-sY-bvp"/>
+                    <constraint firstItem="3wi-Yr-79C" firstAttribute="leading" secondItem="ogz-vQ-7Y5" secondAttribute="leading" constant="10" id="6U4-ul-Q9Q"/>
+                    <constraint firstItem="3wi-Yr-79C" firstAttribute="top" secondItem="ogz-vQ-7Y5" secondAttribute="top" constant="5" id="QB4-7M-b4P"/>
+                    <constraint firstAttribute="trailing" secondItem="gVV-Bi-ait" secondAttribute="trailing" constant="10" id="d67-4b-MMx"/>
+                    <constraint firstItem="55E-S8-cZN" firstAttribute="centerX" secondItem="ogz-vQ-7Y5" secondAttribute="centerX" id="gek-EE-hYv"/>
+                    <constraint firstItem="gVV-Bi-ait" firstAttribute="top" secondItem="ogz-vQ-7Y5" secondAttribute="top" constant="5" id="mmu-9K-uCc"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="99" y="595"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="上一题" width="200" height="200"/>
+        <image name="下一题" width="200" height="200"/>
+    </resources>
+</document>

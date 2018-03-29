@@ -85,6 +85,7 @@
                 
                 continue;
             }else if ([seatModel.st isEqualToString:@"ss"]){
+                
                 [seatBtn setImage:[UIImage imageNamed:@"ss"] forState:UIControlStateNormal];
                 seatBtn.userInteractionEnabled = NO;
             }else{

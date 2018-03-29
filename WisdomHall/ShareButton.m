@@ -157,6 +157,10 @@
         UIImage * i = [[Appsetting sharedInstance] grayscale:[UIImage imageNamed:@"统计"]];
         [self setImage:i forState:UIControlStateNormal];
     }
+    if ([type isEqualToString:InteractionType_Homework]) {
+        UIImage * i = [[Appsetting sharedInstance] grayscale:[UIImage imageNamed:@"作业"]];
+        [self setImage:i forState:UIControlStateNormal];
+    }
     [self setTitle:type forState:UIControlStateNormal];
 }
 

@@ -49,6 +49,8 @@ static dispatch_once_t predicate;
     
     [self addChildViewControllerWithClassname:[PersonalCenterViewController description] imagename:@"我的(1)" title:@"我的" withSelectImageName:@"我的"];
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:InApp object:nil];
+
     [self selectApp];
     
 

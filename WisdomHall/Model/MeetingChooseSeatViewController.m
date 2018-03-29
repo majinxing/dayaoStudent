@@ -32,31 +32,25 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UILabel *maoyanLabel = [[UILabel alloc]init];
+    [self setNavigationTitle];
     
-    maoyanLabel.text = @"座次表";
-    [maoyanLabel sizeToFit];
-    maoyanLabel.font = [UIFont systemFontOfSize:20];
-    maoyanLabel.textColor = [UIColor blackColor];
+    [self addSeatView];
     
-    self.navigationItem.titleView = maoyanLabel;
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.extendedLayoutIncludesOpaqueBars = NO;
-    self.modalPresentationCapturesStatusBarAppearance = NO;
+//    self.edgesForExtendedLayout = UIRectEdgeNone;
+//    self.extendedLayoutIncludesOpaqueBars = NO;
+//    self.modalPresentationCapturesStatusBarAppearance = NO;
+  
     
-    //    MBProgressHUD *HUD = [[MBProgressHUD alloc]initWithView:self.view];
-    //
-    //    HUD.tintColor = [UIColor blackColor];
-    //    [self.view addSubview:HUD];
-    //    [HUD showAnimated:YES];
     
+    
+}
+-(void)addSeatView{
     __weak typeof(self) weakSelf = self;
+    
     
     //模拟延迟加载
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        
-        NSString *path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"seats %zd.plist",arc4random_uniform(5)] ofType:nil];
         
         //模拟网络加载数据
         
@@ -87,19 +81,7 @@
                     NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"0%d",j+1],@"columnId",[NSString stringWithFormat:@"%d,%d",j,i],@"seatNo",@"N",@"st",nil];
                     [aa addObject:dict];
                     
-                    //                    if ([[NSString stringWithFormat:@"%d",j+1] isEqualToString:seatM]&&[[NSString stringWithFormat:@"%d",_temp] isEqualToString:seatN]) {
-                    //                        _temp = _temp + 1;
-                    //                        NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"0%d",j+1],@"columnId",[NSString stringWithFormat:@"%d,%d",j,i],@"seatNo",@"LK",@"st",nil];
-                    //                        /**座位状态 N/表示可以购票 LK／座位已售出 E/表示过道 */
-                    //
-                    //                        [aa addObject:dict];
-                    //                    }else{
-                    //                        if ([[NSString stringWithFormat:@"%d",j+1] isEqualToString:seatM]) {
-                    //                            _temp = _temp + 1;
-                    //                        }
-                    //                        NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"0%d",j+1],@"columnId",[NSString stringWithFormat:@"%d,%d",j,i],@"seatNo",@"N",@"st",nil];
-                    //                        [aa addObject:dict];
-                    //                    }
+                    
                 }else if ([temp isEqualToString:@"E"]){
                     NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"0%d",j+1],@"columnId",[NSString stringWithFormat:@"%d,%d",j,i],@"seatNo",@"LK",@"st",nil];
                     [aa addObject:dict];
@@ -127,7 +109,18 @@
         
         [weakSelf setupSureBtn];
     });
+}
+/**
+ *  显示navigation的标题
+ **/
+-(void)setNavigationTitle{
+//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
+    self.title = @"座次表";
+    
+    UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"确定选座" style:UIBarButtonItemStylePlain target:self action:@selector(sureBtnAction)];
+    
+    self.navigationItem.rightBarButtonItem = myButton;
 }
 //创建选座模块
 -(void)initSelectionView:(NSMutableArray *)seatsModelArray{
@@ -166,6 +159,7 @@
     sureBtn.layer.cornerRadius = 5;
     sureBtn.layer.masksToBounds = YES;
     sureBtn.frame = CGRectMake(200, 550, 100, 50);
+    
     //[self.view addSubview:sureBtn];mjx
 }
 

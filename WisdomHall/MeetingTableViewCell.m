@@ -121,7 +121,8 @@
                               InteractionType_Test,
                               InteractionType_Discuss,
                               InteractionType_Picture,
-                              InteractionType_Sit
+                              InteractionType_Sit,
+                              InteractionType_Homework
                               ];
     
     //水平间距

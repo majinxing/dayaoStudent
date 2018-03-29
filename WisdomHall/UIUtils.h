@@ -121,5 +121,8 @@
  * 加文字随意@param logoImage 需要加文字的图片@param watemarkText 文字描述@returns 加好文字的图片
  */
 + (UIImage *)addWatemarkTextAfteriOS7_WithLogoImage:(UIImage *)logoImage watemarkText:(NSString *)watemarkText;
+//修改屏幕亮度
+
++(BOOL)didUserPressLockButton;
 @end
 

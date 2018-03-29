@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B014832206665290037A107 /* StatisticalResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B014831206665290037A107 /* StatisticalResultModel.m */; };
+		8B01483620666A220037A107 /* StatisticalResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B01483420666A220037A107 /* StatisticalResultTableViewCell.m */; };
+		8B01483720666A220037A107 /* StatisticalResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B01483520666A220037A107 /* StatisticalResultTableViewCell.xib */; };
+		8B01483A20666E470037A107 /* SynchronousCourseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B01483820666E460037A107 /* SynchronousCourseView.m */; };
+		8B014E40206670700037A107 /* HomeworkListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B014E382066706E0037A107 /* HomeworkListTableViewCell.xib */; };
+		8B014E41206670700037A107 /* HomeworkCreateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B014E3B2066706F0037A107 /* HomeworkCreateTableViewCell.m */; };
+		8B014E42206670700037A107 /* imageBigView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B014E3C206670700037A107 /* imageBigView.m */; };
+		8B014E43206670700037A107 /* HomeworkCreateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B014E3D206670700037A107 /* HomeworkCreateTableViewCell.xib */; };
+		8B014E44206670700037A107 /* HomeworkListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B014E3F206670700037A107 /* HomeworkListTableViewCell.m */; };
+		8B014E4C206670900037A107 /* CreateHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B014E462066708F0037A107 /* CreateHomeworkViewController.m */; };
+		8B014E4D206670900037A107 /* CreateHomeworkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B014E472066708F0037A107 /* CreateHomeworkViewController.xib */; };
+		8B014E4E206670900037A107 /* HomeWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B014E492066708F0037A107 /* HomeWorkViewController.m */; };
+		8B014E4F206670900037A107 /* HomeWorkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B014E4B206670900037A107 /* HomeWorkViewController.xib */; };
+		8B014E52206671100037A107 /* Homework.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B014E50206671100037A107 /* Homework.m */; };
 		8B0207151F8DA4DB00CE3B8C /* NoticeSwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0207131F8DA4DB00CE3B8C /* NoticeSwiftViewController.swift */; };
 		8B0207161F8DA4DB00CE3B8C /* NoticeSwiftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B0207141F8DA4DB00CE3B8C /* NoticeSwiftViewController.xib */; };
 		8B027A141EF8F30100600E18 /* TheMeetingInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B027A121EF8F30100600E18 /* TheMeetingInfoViewController.m */; };
@@ -576,6 +590,29 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8B014830206665290037A107 /* StatisticalResultModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StatisticalResultModel.h; sourceTree = "<group>"; };
+		8B014831206665290037A107 /* StatisticalResultModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StatisticalResultModel.m; sourceTree = "<group>"; };
+		8B01483320666A210037A107 /* StatisticalResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticalResultTableViewCell.h; sourceTree = "<group>"; };
+		8B01483420666A220037A107 /* StatisticalResultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticalResultTableViewCell.m; sourceTree = "<group>"; };
+		8B01483520666A220037A107 /* StatisticalResultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatisticalResultTableViewCell.xib; sourceTree = "<group>"; };
+		8B01483820666E460037A107 /* SynchronousCourseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynchronousCourseView.m; sourceTree = "<group>"; };
+		8B01483920666E470037A107 /* SynchronousCourseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynchronousCourseView.h; sourceTree = "<group>"; };
+		8B014E382066706E0037A107 /* HomeworkListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeworkListTableViewCell.xib; sourceTree = "<group>"; };
+		8B014E392066706E0037A107 /* HomeworkListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeworkListTableViewCell.h; sourceTree = "<group>"; };
+		8B014E3A2066706E0037A107 /* HomeworkCreateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeworkCreateTableViewCell.h; sourceTree = "<group>"; };
+		8B014E3B2066706F0037A107 /* HomeworkCreateTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeworkCreateTableViewCell.m; sourceTree = "<group>"; };
+		8B014E3C206670700037A107 /* imageBigView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = imageBigView.m; sourceTree = "<group>"; };
+		8B014E3D206670700037A107 /* HomeworkCreateTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeworkCreateTableViewCell.xib; sourceTree = "<group>"; };
+		8B014E3E206670700037A107 /* imageBigView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageBigView.h; sourceTree = "<group>"; };
+		8B014E3F206670700037A107 /* HomeworkListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeworkListTableViewCell.m; sourceTree = "<group>"; };
+		8B014E462066708F0037A107 /* CreateHomeworkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateHomeworkViewController.m; sourceTree = "<group>"; };
+		8B014E472066708F0037A107 /* CreateHomeworkViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateHomeworkViewController.xib; sourceTree = "<group>"; };
+		8B014E482066708F0037A107 /* HomeWorkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeWorkViewController.h; sourceTree = "<group>"; };
+		8B014E492066708F0037A107 /* HomeWorkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeWorkViewController.m; sourceTree = "<group>"; };
+		8B014E4A2066708F0037A107 /* CreateHomeworkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateHomeworkViewController.h; sourceTree = "<group>"; };
+		8B014E4B206670900037A107 /* HomeWorkViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeWorkViewController.xib; sourceTree = "<group>"; };
+		8B014E50206671100037A107 /* Homework.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Homework.m; sourceTree = "<group>"; };
+		8B014E51206671100037A107 /* Homework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Homework.h; sourceTree = "<group>"; };
 		8B0207121F8DA4DA00CE3B8C /* WisdomHall-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WisdomHall-Bridging-Header.h"; sourceTree = "<group>"; };
 		8B0207131F8DA4DB00CE3B8C /* NoticeSwiftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeSwiftViewController.swift; sourceTree = "<group>"; };
 		8B0207141F8DA4DB00CE3B8C /* NoticeSwiftViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoticeSwiftViewController.xib; sourceTree = "<group>"; };
@@ -717,7 +754,6 @@
 		8B087E3A1FEA56AE00649094 /* ZFSeatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFSeatViewController.m; sourceTree = "<group>"; };
 		8B087E3C1FEA572900649094 /* ZFSeatSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFSeatSelectionView.m; sourceTree = "<group>"; };
 		8B087E3D1FEA572D00649094 /* ZFSeatSelectionTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFSeatSelectionTool.m; sourceTree = "<group>"; };
-		8B087E3E1FEA572D00649094 /* ZFSeatsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZFSeatsView.h; path = "../../../../../../Downloads/dayao--master 3/dayao/WisdomHall/View/ZFSeatsView.h"; sourceTree = "<group>"; };
 		8B087E3F1FEA573000649094 /* ZFSeatSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFSeatSelectionView.h; sourceTree = "<group>"; };
 		8B087E401FEA573400649094 /* ZFSeatsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFSeatsView.m; sourceTree = "<group>"; };
 		8B087E411FEA573700649094 /* ZFSeatSelectionTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFSeatSelectionTool.h; sourceTree = "<group>"; };
@@ -960,6 +996,7 @@
 		8BA41B731F9F0D6B00B9886E /* MeetingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetingTableViewCell.h; sourceTree = "<group>"; };
 		8BA41B741F9F0D6B00B9886E /* MeetingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetingTableViewCell.m; sourceTree = "<group>"; };
 		8BA41B751F9F0D6B00B9886E /* MeetingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeetingTableViewCell.xib; sourceTree = "<group>"; };
+		8BAFFC4B206C8EA40087439D /* ZFSeatsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZFSeatsView.h; path = ../../../../../../../Desktop/ZFSeatsView.h; sourceTree = "<group>"; };
 		8BB221C91FA7088E00EC6478 /* UIImage+ImageSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageSize.h"; sourceTree = "<group>"; };
 		8BB221CA1FA7088E00EC6478 /* UIImage+ImageSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageSize.m"; sourceTree = "<group>"; };
 		8BB221CB1FA7088E00EC6478 /* SGQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SGQRCode.bundle; sourceTree = "<group>"; };
@@ -1277,6 +1314,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B01483B2066702F0037A107 /* Homework */ = {
+			isa = PBXGroup;
+			children = (
+				8B014E45206670760037A107 /* HomeworkVIew */,
+				8B014E4A2066708F0037A107 /* CreateHomeworkViewController.h */,
+				8B014E462066708F0037A107 /* CreateHomeworkViewController.m */,
+				8B014E472066708F0037A107 /* CreateHomeworkViewController.xib */,
+				8B014E482066708F0037A107 /* HomeWorkViewController.h */,
+				8B014E492066708F0037A107 /* HomeWorkViewController.m */,
+				8B014E4B206670900037A107 /* HomeWorkViewController.xib */,
+			);
+			name = Homework;
+			sourceTree = "<group>";
+		};
+		8B014E45206670760037A107 /* HomeworkVIew */ = {
+			isa = PBXGroup;
+			children = (
+				8B014E3A2066706E0037A107 /* HomeworkCreateTableViewCell.h */,
+				8B014E3B2066706F0037A107 /* HomeworkCreateTableViewCell.m */,
+				8B014E3D206670700037A107 /* HomeworkCreateTableViewCell.xib */,
+				8B014E392066706E0037A107 /* HomeworkListTableViewCell.h */,
+				8B014E3F206670700037A107 /* HomeworkListTableViewCell.m */,
+				8B014E382066706E0037A107 /* HomeworkListTableViewCell.xib */,
+				8B014E3E206670700037A107 /* imageBigView.h */,
+				8B014E3C206670700037A107 /* imageBigView.m */,
+			);
+			name = HomeworkVIew;
+			sourceTree = "<group>";
+		};
 		8B027A201EFA5FB600600E18 /* DataDownload */ = {
 			isa = PBXGroup;
 			children = (
@@ -1395,7 +1461,7 @@
 				8B087E3D1FEA572D00649094 /* ZFSeatSelectionTool.m */,
 				8B087E3F1FEA573000649094 /* ZFSeatSelectionView.h */,
 				8B087E3C1FEA572900649094 /* ZFSeatSelectionView.m */,
-				8B087E3E1FEA572D00649094 /* ZFSeatsView.h */,
+				8BAFFC4B206C8EA40087439D /* ZFSeatsView.h */,
 				8B087E401FEA573400649094 /* ZFSeatsView.m */,
 			);
 			path = View;
@@ -1542,6 +1608,9 @@
 				8B0333F01F8C50950021D495 /* GroupListTableViewCell.h */,
 				8B0333F11F8C50950021D495 /* GroupListTableViewCell.m */,
 				8B0333F21F8C50950021D495 /* GroupListTableViewCell.xib */,
+				8B01483320666A210037A107 /* StatisticalResultTableViewCell.h */,
+				8B01483420666A220037A107 /* StatisticalResultTableViewCell.m */,
+				8B01483520666A220037A107 /* StatisticalResultTableViewCell.xib */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -1781,6 +1850,7 @@
 		8BA224921EADFE9500627A1B /* Course */ = {
 			isa = PBXGroup;
 			children = (
+				8B01483B2066702F0037A107 /* Homework */,
 				8B9CCC8E1F16FEAB001833FD /* CreateCourse */,
 				8B0F412C1EF51EF9001AF4DF /* Chat */,
 				8BF82D741EDFA04A00D33473 /* Vote */,
@@ -1902,6 +1972,10 @@
 				8B2F14501F5E93BF00438374 /* StudentSorce.m */,
 				8BE24D621F8B528600621055 /* GroupModel.h */,
 				8BE24D631F8B528600621055 /* GroupModel.m */,
+				8B014830206665290037A107 /* StatisticalResultModel.h */,
+				8B014831206665290037A107 /* StatisticalResultModel.m */,
+				8B014E51206671100037A107 /* Homework.h */,
+				8B014E50206671100037A107 /* Homework.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2014,6 +2088,8 @@
 		8BA224B91EAEE2E400627A1B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8B01483920666E470037A107 /* SynchronousCourseView.h */,
+				8B01483820666E460037A107 /* SynchronousCourseView.m */,
 				8BA224BA1EAEE36800627A1B /* SignPromptView.h */,
 				8BA224BB1EAEE36800627A1B /* SignPromptView.m */,
 				8B2E16DC1EBABBC0008B7C57 /* InteractiveView.h */,
@@ -2628,10 +2704,12 @@
 				8B17370A1EC2BE2B00BE3C8F /* PersonalDataTableViewCell.xib in Resources */,
 				8BE877811EBC2DE000866A34 /* InTheTestViewController.xib in Resources */,
 				8B2E16F81EBADA5D008B7C57 /* TheMeetingEndedViewController.xib in Resources */,
+				8B014E40206670700037A107 /* HomeworkListTableViewCell.xib in Resources */,
 				8B64EB571F1A162F00BF7D0F /* CreateTemporaryCourseViewController.xib in Resources */,
 				8BF7D36B1F3DA6BF0087D35D /* QueryMeetingRoomViewController.xib in Resources */,
 				8BE877771EBC2D6B00866A34 /* AllTestViewController.xib in Resources */,
 				8BA224AE1EAE00B000627A1B /* DYTabBarViewController.xib in Resources */,
+				8B01483720666A220037A107 /* StatisticalResultTableViewCell.xib in Resources */,
 				8B0DB13C1ED6CA4E0042DF0D /* ImportTextViewController.xib in Resources */,
 				8BA224D51EAF25DC00627A1B /* RegisterViewController.xib in Resources */,
 				8BA2249E1EADFFA400627A1B /* SignInViewController.xib in Resources */,
@@ -2650,6 +2728,7 @@
 				8B51AAA41F3EE71900AE034E /* MeetingChooseSeatViewController.xib in Resources */,
 				8B9CCC931F17204B001833FD /* SelectPeopleToClassViewController.xib in Resources */,
 				8BFB94671EE79745004BB963 /* JoinVoteTableViewCell.xib in Resources */,
+				8B014E43206670700037A107 /* HomeworkCreateTableViewCell.xib in Resources */,
 				8B2F145B1F5E9D7200438374 /* StudentScoreViewController.xib in Resources */,
 				8B77250C1F302E6200D1B521 /* FeedBackTableViewCell.xib in Resources */,
 				8B087E4F1FEA661D00649094 /* NoticeViewController.xib in Resources */,
@@ -2685,6 +2764,7 @@
 				8B081DE81F063AE900493B81 /* SelectSchoolViewController.xib in Resources */,
 				8B064E551F00D8D80004C3D4 /* MJXChatCellTableViewCell.xib in Resources */,
 				8B4D91151EBDAB1000A4BE34 /* SignListViewController.xib in Resources */,
+				8B014E4F206670900037A107 /* HomeWorkViewController.xib in Resources */,
 				8B06176520634CA7000D95E9 /* SchoolList.plist in Resources */,
 				8B0502FB2021A8BA0030CF75 /* AllOrPersonalDataViewController.xib in Resources */,
 				8BA224A81EAE000000627A1B /* PersonalCenterViewController.xib in Resources */,
@@ -2708,6 +2788,7 @@
 				8B1A50331F75F85C00A11CB2 /* OfficeTableViewCell.xib in Resources */,
 				8B081E0F1F0B766D00493B81 /* SelectMeetingOrClassViewController.xib in Resources */,
 				8B05CB6C1EC0056B0063EC20 /* TextsTableViewCell.xib in Resources */,
+				8B014E4D206670900037A107 /* CreateHomeworkViewController.xib in Resources */,
 				8BFB946C1EE7F7F1004BB963 /* ResultsOfVoteViewController.xib in Resources */,
 				8B081E001F06524000493B81 /* unicode_to_hanyu_pinyin.txt in Resources */,
 				8B17370F1EC2EDE400BE3C8F /* MeetingViewController.xib in Resources */,
@@ -2808,6 +2889,7 @@
 				8BA224CF1EAF258B00627A1B /* ForgotPasswordViewController.m in Sources */,
 				8BF82D7B1EDFFC6200D33473 /* VoteViewController.m in Sources */,
 				8BF79F60205F421E0033CCC3 /* HKViewController.m in Sources */,
+				8B01483620666A220037A107 /* StatisticalResultTableViewCell.m in Sources */,
 				8B081E081F0A4AEC00493B81 /* ClassModel.m in Sources */,
 				8B2E16E21EBACAD7008B7C57 /* PersonalCollectionViewCell.m in Sources */,
 				8B087E4D1FEA661D00649094 /* NoticeViewController.m in Sources */,
@@ -2819,6 +2901,7 @@
 				8BF864C71ECAD97300B7EED4 /* UIImage+MultiFormat.m in Sources */,
 				8B64EB5B1F1A2BA900BF7D0F /* SelectClassViewController.m in Sources */,
 				8B7725061F3029CE00D1B521 /* FeedbackViewController.m in Sources */,
+				8B014E4E206670900037A107 /* HomeWorkViewController.m in Sources */,
 				8B045B701F3458820021699B /* MJExtensionConst.m in Sources */,
 				8B2E16D51EB9C1EA008B7C57 /* CourseDetailsViewController.m in Sources */,
 				8B027A181EF8F48800600E18 /* MeetingModel.m in Sources */,
@@ -2864,6 +2947,7 @@
 				8B0AF7591F4FAF53003858A4 /* UploadFileViewController.m in Sources */,
 				8B9171CB1ED41BC7009686FD /* QuestionsTableViewCell.m in Sources */,
 				8B087E4E1FEA661D00649094 /* NoticeDetailsViewController.m in Sources */,
+				8B014832206665290037A107 /* StatisticalResultModel.m in Sources */,
 				8B17374E1EC5AC3600BE3C8F /* CreateTextTableViewCell.m in Sources */,
 				8B087E3B1FEA56AE00649094 /* ZFSeatViewController.m in Sources */,
 				8BCE7CCE1F04F07600FE261B /* AFSecurityPolicy.m in Sources */,
@@ -2933,8 +3017,10 @@
 				8B045B711F3458820021699B /* MJFoundation.m in Sources */,
 				8BB221DA1FA7088E00EC6478 /* SGQRCodeGenerateManager.m in Sources */,
 				8BF864BD1ECAD97300B7EED4 /* NSData+ImageContentType.m in Sources */,
+				8B01483A20666E470037A107 /* SynchronousCourseView.m in Sources */,
 				8B045B771F3458820021699B /* NSObject+MJKeyValue.m in Sources */,
 				8BF82D771EDFB32500D33473 /* CollectionHeadView.m in Sources */,
+				8B014E44206670700037A107 /* HomeworkListTableViewCell.m in Sources */,
 				8BB56D641EAF38CA0023DAFF /* AppSetingPersongInfo.m in Sources */,
 				8B05CB701EC015DB0063EC20 /* PersonalInfoTableViewCell.m in Sources */,
 				8B0502FE2021A8BA0030CF75 /* AllOrPersonalDataViewController.m in Sources */,
@@ -2942,6 +3028,7 @@
 				8B081E171F0CBA8900493B81 /* ClassRoomModel.m in Sources */,
 				8BF7D36A1F3DA6BF0087D35D /* QueryMeetingRoomViewController.m in Sources */,
 				8B9CCC8D1F14D3B7001833FD /* PlayerButton.m in Sources */,
+				8B014E4C206670900037A107 /* CreateHomeworkViewController.m in Sources */,
 				8BF82D861EE1573200D33473 /* CreateVoteViewController.m in Sources */,
 				8B081E131F0C980200493B81 /* SelectClassRoomViewController.m in Sources */,
 				8B045B991F3458E40021699B /* ZFCenterLineView.m in Sources */,
@@ -2979,6 +3066,7 @@
 				8BF864C11ECAD97300B7EED4 /* SDWebImageDownloader.m in Sources */,
 				8B0DB1361ED561B80042DF0D /* AnswerModel.m in Sources */,
 				8BF864751ECACBEC00B7EED4 /* FMDBTool.m in Sources */,
+				8B014E52206671100037A107 /* Homework.m in Sources */,
 				8BF864721ECACAE800B7EED4 /* FMResultSet.m in Sources */,
 				8B04643F1F5FE44F005EEE36 /* QuestionListViewController.m in Sources */,
 				8BE913A31EEFB80000000282 /* MBProgressHUD+Add.m in Sources */,
@@ -3012,7 +3100,9 @@
 				8BB221DC1FA7088E00EC6478 /* SGQRCodeScanManager.m in Sources */,
 				8B8C3D111ECC336500E9FB56 /* ConversationVC.m in Sources */,
 				8B0857971F7E3A30009D5AC9 /* WorkingLoginViewController.m in Sources */,
+				8B014E41206670700037A107 /* HomeworkCreateTableViewCell.m in Sources */,
 				8B6E61CB1EE292B10040FDC1 /* CreateVoteTableViewCell.m in Sources */,
+				8B014E42206670700037A107 /* imageBigView.m in Sources */,
 				8B081DFE1F06524000493B81 /* PinYinForObjc.m in Sources */,
 				8BCE7CD01F04F07600FE261B /* AFURLResponseSerialization.m in Sources */,
 			);
@@ -3221,7 +3311,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = AM9UTP2CL3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3234,6 +3324,9 @@
 					"$(PROJECT_DIR)/WisdomHall",
 					"$(PROJECT_DIR)/SDK/Required",
 					"$(PROJECT_DIR)/SDK/SMSSDK",
+					"$(PROJECT_DIR)/WisdomHall/WisdomHall",
+					"$(PROJECT_DIR)/WisdomHall/WisdomHall/HyphenateSDK",
+					"$(PROJECT_DIR)/WisdomHall/WisdomHall/XinSuiFang/Rong_Cloud_iOS_IMLib_SDK_v2_7_3_stable",
 				);
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/WisdomHall/Bugly.framework";
@@ -3248,6 +3341,8 @@
 					"$(PROJECT_DIR)/WisdomHall/lupai/wechatSDK",
 					"$(SRCROOT)/Lib",
 					"$(PROJECT_DIR)/WisdomHall/JsmsSDK",
+					"$(PROJECT_DIR)/WisdomHall/WisdomHall/JsmsSDK",
+					"$(PROJECT_DIR)/WisdomHall/WisdomHall/XinSuiFang/Rong_Cloud_iOS_IMLib_SDK_v2_7_3_stable",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dayaokeji.rhythmStudent;
@@ -3426,7 +3521,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = AM9UTP2CL3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3439,6 +3534,9 @@
 					"$(PROJECT_DIR)/WisdomHall",
 					"$(PROJECT_DIR)/SDK/Required",
 					"$(PROJECT_DIR)/SDK/SMSSDK",
+					"$(PROJECT_DIR)/WisdomHall/WisdomHall",
+					"$(PROJECT_DIR)/WisdomHall/WisdomHall/HyphenateSDK",
+					"$(PROJECT_DIR)/WisdomHall/WisdomHall/XinSuiFang/Rong_Cloud_iOS_IMLib_SDK_v2_7_3_stable",
 				);
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/WisdomHall/Bugly.framework";
@@ -3453,6 +3551,8 @@
 					"$(PROJECT_DIR)/WisdomHall/lupai/wechatSDK",
 					"$(SRCROOT)/Lib",
 					"$(PROJECT_DIR)/WisdomHall/JsmsSDK",
+					"$(PROJECT_DIR)/WisdomHall/WisdomHall/JsmsSDK",
+					"$(PROJECT_DIR)/WisdomHall/WisdomHall/XinSuiFang/Rong_Cloud_iOS_IMLib_SDK_v2_7_3_stable",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dayaokeji.rhythmStudent;
@@ -3478,7 +3578,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = AM9UTP2CL3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3491,6 +3591,9 @@
 					"$(PROJECT_DIR)/WisdomHall",
 					"$(PROJECT_DIR)/SDK/Required",
 					"$(PROJECT_DIR)/SDK/SMSSDK",
+					"$(PROJECT_DIR)/WisdomHall/WisdomHall",
+					"$(PROJECT_DIR)/WisdomHall/WisdomHall/HyphenateSDK",
+					"$(PROJECT_DIR)/WisdomHall/WisdomHall/XinSuiFang/Rong_Cloud_iOS_IMLib_SDK_v2_7_3_stable",
 				);
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/WisdomHall/Bugly.framework";
@@ -3505,6 +3608,8 @@
 					"$(PROJECT_DIR)/WisdomHall/lupai/wechatSDK",
 					"$(SRCROOT)/Lib",
 					"$(PROJECT_DIR)/WisdomHall/JsmsSDK",
+					"$(PROJECT_DIR)/WisdomHall/WisdomHall/JsmsSDK",
+					"$(PROJECT_DIR)/WisdomHall/WisdomHall/XinSuiFang/Rong_Cloud_iOS_IMLib_SDK_v2_7_3_stable",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dayaokeji.rhythmStudent;

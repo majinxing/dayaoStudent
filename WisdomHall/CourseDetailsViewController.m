@@ -34,7 +34,7 @@
 #import "AlterView.h"
 #import "AllOrPersonalDataViewController.h"
 #import "PersonalUploadDataViewController.h"
-
+#import "HomeWorkViewController.h"
 
 @interface CourseDetailsViewController ()<UIActionSheetDelegate,ShareViewDelegate,UIAlertViewDelegate,UITableViewDelegate,UITableViewDataSource,MeetingTableViewCellDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIDocumentInteractionControllerDelegate,AlterViewDelegate>
 
@@ -267,10 +267,7 @@
     //设置选取的照片是否可编辑
     pickerController.allowsEditing = YES;
     //设置相册呈现的样式
-                      
-    //    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:nil preferredStyle:  UIAlertControllerStyleActionSheet];
-    //    //分别按顺序放入每个按钮；
-    //    [alert addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    
     pickerController.sourceType =  UIImagePickerControllerSourceTypeCamera;//图片分组列表样式
     pickerController.cameraDevice = UIImagePickerControllerCameraDeviceFront;
 
@@ -280,31 +277,7 @@
     [self.navigationController presentViewController:pickerController animated:YES completion:^{
                           
     }];
-                      //    }]];
-                      
-                      //    [alert addAction:[UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                      //
-                      //        pickerController.sourceType =  UIImagePickerControllerSourceTypeSavedPhotosAlbum;//图片分组列表样式
-                      //        //照片的选取样式还有以下两种
-                      //        //UIImagePickerControllerSourceTypePhotoLibrary,直接全部呈现系统相册UIImagePickerControllerSourceTypeSavedPhotosAlbum
-                      //        //UIImagePickerControllerSourceTypeCamera//调取摄像头
-                      //
-                      //        //选择完成图片或者点击取消按钮都是通过代理来操作我们所需要的逻辑过程
-                      //        pickerController.delegate = self;
-                      //        //使用模态呈现相册
-                      //        [self.navigationController presentViewController:pickerController animated:YES completion:^{
-                      //
-                      //        }];
-                      //
-                      //    }]];
-                      //
-                      //
-                      //    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                      //        //点击按钮的响应事件；
-                      //    }]];
-                      //
-                      //    //弹出提示框；
-                      //    [self presentViewController:alert animated:true completion:nil];
+    
     
 }
 //选择照片完成之后的代理方法
@@ -601,7 +574,13 @@
         [self.navigationController pushViewController: d animated:YES];
     }else if ([platform isEqualToString:InteractionType_Sit]){
         [self getCourseRoomSeat];
-    }else if ([platform isEqualToString:InteractionType_Add]){
+    }else if ([platform isEqualToString:InteractionType_Homework]){
+        HomeWorkViewController * vc = [[HomeWorkViewController alloc] init];
+        self.hidesBottomBarWhenPushed = YES;
+        vc.c = _c;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else if ([platform isEqualToString:InteractionType_Add]){
         NSLog(@"更多");
     }
 }

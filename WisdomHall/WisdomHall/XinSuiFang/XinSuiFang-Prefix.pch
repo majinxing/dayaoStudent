@@ -1,0 +1,27 @@
+//
+//  XinSuiFang-Prefix.pch
+//  XinSuiFang
+//
+//  Created by majinxing on 16/8/9.
+//  Copyright © 2016年 majinxing. All rights reserved.
+//
+
+#ifndef XinSuiFang_Prefix_pch
+#define XinSuiFang_Prefix_pch
+
+#define __aa "aaa"
+
+
+#ifdef __OBJC__
+   @import UIKit;
+   @import Foundation;
+#endif
+
+#endif /* XinSuiFang_Prefix_pch */
+#import "UIColor+HexString.h"
+#import "Utils.h"
+#import "MJXUIUtils.h"
+#import "MJXClient.h"
+#import "MJXAppsettings.h"
+#import "UIViewAdditions.h"
+

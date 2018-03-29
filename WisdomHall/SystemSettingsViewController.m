@@ -27,17 +27,21 @@
     // Do any additional setup after loading the view from its nib.
 }
 - (IBAction)logoutButtonPressed:(id)sender {
-    [[Appsetting sharedInstance] getOut];
     
-    DYTabBarViewController *rootVC = [DYTabBarViewController sharedInstance];
-    rootVC = nil;
-    ChatHelper * c =[ChatHelper shareHelper];
-    [c getOut];
-    
-    WorkingLoginViewController * userLogin = [[WorkingLoginViewController alloc] init];
-//    TheLoginViewController * userLogin = [[TheLoginViewController alloc] init];
-
-    [UIApplication sharedApplication].keyWindow.rootViewController =[[UINavigationController alloc] initWithRootViewController:userLogin];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[Appsetting sharedInstance] getOut];
+        
+        DYTabBarViewController *rootVC = [DYTabBarViewController sharedInstance];
+        rootVC = nil;
+        ChatHelper * c =[ChatHelper shareHelper];
+        [c getOut];
+        
+        WorkingLoginViewController * userLogin = [[WorkingLoginViewController alloc] init];
+        //    TheLoginViewController * userLogin = [[TheLoginViewController alloc] init];
+        
+        [UIApplication sharedApplication].keyWindow.rootViewController =[[UINavigationController alloc] initWithRootViewController:userLogin];
+    });
+   
 }
 
 - (void)didReceiveMemoryWarning {

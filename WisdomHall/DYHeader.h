@@ -93,6 +93,7 @@
 #define InteractionType_Add         @"更多"
 #define InteractionType_Sit         @"座次"
 #define InteractionType_Picture     @"问答"
+#define InteractionType_Homework    @"作业"
 
 #define Vote_delecate               @"删除"
 #define Vote_Modify                 @"修改"
@@ -118,6 +119,9 @@
 
 #define ThemeColorChangeNotification @"ThemeColorChangeNotification"//更改主题的通知
 
+#define InApp                  @"InApp"                            //app是否在前台通知
+
+#define OutApp                 @"OutApp"                           //app是否在前台通知
 //数据库的名字
 #define SQLITE_NAME            @"Dayao"
 
@@ -134,7 +138,7 @@
 #define DAILYCHECK_TABLE_NAME  @"dailyCheck"                        //日常签到统计表
 
 //接口 192.168.1.81:8080 api.dayaokeji.com xtu.api.dayaokeji.com
-#define BaseURL                 @"http://api.dayaokeji.com/"
+#define BaseURL                 @"http://192.168.1.103:8080/"
 
 #define Login                   @"course/user/login"                //登录
 
@@ -276,8 +280,17 @@
 
 #define QuertyClass             @"course/course/statisticsByCourse" //按照课程查询
 
+#define StatisticsSelf          @"course/course/statistics/by/user" //查询学生自己信息
 
+#define SyncCourse              @"course/sync/course"               //同步课程信息
 
+#define CourseWorkList          @"course/classwork/list"            //作业列表
+
+#define CreateHomework          @"course/classwork/create"          //创建作业
+
+#define DeleteHomework          @"course/classwork/delete"          //删除作业
+
+#define ChangeAppState          @"course/user/changeAppState"       //app状态改变
 
 
 

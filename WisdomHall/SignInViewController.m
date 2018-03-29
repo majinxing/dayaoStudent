@@ -30,11 +30,11 @@
 #import "JoinCours.h"
 #import "WorkingLoginViewController.h"
 #import "ClassTableViewCell.h"
-
+#import "SynchronousCourseView.h"
 
 static NSString *cellIdentifier = @"cellIdentifier";
 
-@interface SignInViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,AlterViewDelegate,JoinCoursDelegate,UITableViewDelegate,UITableViewDataSource,ClassTableViewCellDelegate>
+@interface SignInViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,AlterViewDelegate,JoinCoursDelegate,UITableViewDelegate,UITableViewDataSource,ClassTableViewCellDelegate,SynchronousCourseViewDelegate>
 @property (nonatomic,strong) UICollectionView * collection;
 @property (nonatomic,strong) UserModel * userModel;
 @property (nonatomic,strong) NSMutableArray * classAry;
@@ -51,6 +51,8 @@ static NSString *cellIdentifier = @"cellIdentifier";
 
 @property (nonatomic,strong)NSMutableDictionary * dict;
 @property (nonatomic,strong)NSDictionary * dictDay;
+@property (nonatomic,strong)SynchronousCourseView * synCourseView;
+
 @end
 
 @implementation SignInViewController
@@ -61,11 +63,9 @@ static NSString *cellIdentifier = @"cellIdentifier";
     self.temp = 0;
     self.view.backgroundColor = [UIColor whiteColor];//RGBA_COLOR(231, 231, 231, 1);
     
-//    UIImageView * i = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT)];
-//
-//    i.image = [UIImage imageNamed:@"timg"];
-//
-//    [self.view addSubview:i];
+    _synCourseView = [[SynchronousCourseView alloc] initWithFrame: CGRectMake(0, 0, APPLICATION_WIDTH, 0)];
+    
+    _synCourseView.delegate = self;
     
     _classAry = [NSMutableArray arrayWithCapacity:10];
     
@@ -114,9 +114,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
         [weakSelf headerRereshing];
         
     }];
-//    [_tableView addFooterWithCallback:^{
-//        [weakSelf footerRereshing];
-//    }];
+    
     [self.view addSubview:_tableView];
     
 }
@@ -191,7 +189,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
         }
     } failure:^(NSError *error) {
         [self hideHud];
-        NSLog(@"%@",error);
+        [UIUtils showInfoMessage:@"获取课表失败，请稍后再试"];
     }];
 }
 -(void)getSelfJoinClass:(NSInteger)page{
@@ -210,7 +208,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
         [self getSelfCreateClassType:page];
     } failure:^(NSError *error) {
         [self hideHud];
-        NSLog(@"%@",error);
+        [UIUtils showInfoMessage:@"获取课表失败，请稍后再试"];
     }];
 }
 //临时
@@ -231,7 +229,8 @@ static NSString *cellIdentifier = @"cellIdentifier";
         [self getSelfJoinClassType:page];
     } failure:^(NSError *error) {
         [self hideHud];
-        NSLog(@"%@",error);
+        [UIUtils showInfoMessage:@"获取课表失败，请稍后再试"];
+        
     }];
 }
 //临时
@@ -273,7 +272,8 @@ static NSString *cellIdentifier = @"cellIdentifier";
         
     } failure:^(NSError *error) {
         [self hideHud];
-        NSLog(@"%@",error);
+        [UIUtils showInfoMessage:@"获取课表失败，请稍后再试"];
+        
     }];
     
 }
@@ -296,15 +296,12 @@ static NSString *cellIdentifier = @"cellIdentifier";
  **/
 -(void)setNavigationTitle{
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
- 
+    
     self.title = @"本周课程";
-//    if ([[NSString stringWithFormat:@"%@",_userModel.identity] isEqualToString:@"1"]) {
-//        UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"创建课程" style:UIBarButtonItemStylePlain target:self action:@selector(createAcourse)];
-//        self.navigationItem.rightBarButtonItem = myButton;
-//    }else if ([[NSString stringWithFormat:@"%@",_userModel.identity] isEqualToString:@"2"]){
-        UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"加入课程" style:UIBarButtonItemStylePlain target:self action:@selector(joinCourse)];
-        self.navigationItem.rightBarButtonItem = myButton;
-//    }
+    
+    UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"加入课程" style:UIBarButtonItemStylePlain target:self action:@selector(joinCourse)];
+    self.navigationItem.rightBarButtonItem = myButton;
+    
     
     UIBarButtonItem * selection = [[UIBarButtonItem alloc] initWithTitle:@"搜索" style:UIBarButtonItemStylePlain target:self action:@selector(selectionBtnPressed)];
     self.navigationItem.leftBarButtonItem = selection;
@@ -318,7 +315,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
     self.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:s animated:YES];
     self.hidesBottomBarWhenPushed = NO;
-
+    
     UIBarButtonItem * selection = [[UIBarButtonItem alloc] initWithTitle:@"搜索" style:UIBarButtonItemStylePlain target:self action:@selector(selectionBtnPressed)];
     self.navigationItem.leftBarButtonItem = selection;
 }
@@ -332,7 +329,31 @@ static NSString *cellIdentifier = @"cellIdentifier";
         _join.frame = CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);
         [self.view addSubview:_join];
     }
-    
+    //    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:nil preferredStyle:  UIAlertControllerStyleActionSheet];
+    //
+    //    //分别按顺序放入每个按钮；
+    //    [alert addAction:[UIAlertAction actionWithTitle:@"同步课程" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    //        //点击按钮的响应事件；
+    //        [UIView animateWithDuration:2.5 animations:^{
+    //
+    //            _synCourseView.frame = CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);
+    //            [self.view addSubview:_synCourseView];
+    //        }completion:^(BOOL finished) {
+    //
+    //
+    //        }];
+    //    }]];
+    //    //分别按顺序放入每个按钮；
+    //    [alert addAction:[UIAlertAction actionWithTitle:@"加入课程" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    //
+    //    }]];
+    //    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    //
+    //
+    //        //点击按钮的响应事件；
+    //    }]];
+    //    //弹出提示框；
+    //    [self presentViewController:alert animated:true completion:nil];
     
 }
 /**
@@ -392,13 +413,39 @@ static NSString *cellIdentifier = @"cellIdentifier";
                 [UIUtils showInfoMessage:@"加入失败"];
             }
             [self hideHud];
-
+            
         } failure:^(NSError *error) {
             [UIUtils showInfoMessage:@"加入失败"];
             [self hideHud];
-
+            
         }];
     }
+}
+#pragma mark SynchronousCourseViewDelegate
+-(void)submitDelegateWithAccount:(NSString *)count withPassword:(NSString *)password{
+    
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:count,@"loginStr",password,@"password",[NSString stringWithFormat:@"%@",_userModel.school],@"universityId", nil];
+    
+    [self showHudInView:self.view hint:NSLocalizedString(@"正在加载数据", @"Load data...")];
+    [[NetworkRequest sharedInstance] POST:SyncCourse dict:dict succeed:^(id data) {
+        NSString * code  = [[data objectForKey:@"header"] objectForKey:@"code"];
+        if (![UIUtils isBlankString:code]) {
+            if ([code isEqualToString:@"0000"]) {
+                [self headerRereshing];
+                [_synCourseView removeFromSuperview];
+            }
+        }else{
+            [UIUtils showInfoMessage:@"同步课程失败，请稍后再试"];
+        }
+        [self hideHud];
+    } failure:^(NSError *error) {
+        [UIUtils showInfoMessage:@"同步课程失败，请稍后再试"];
+        [_synCourseView removeFromSuperview];
+        [self hideHud];
+    }];
+}
+-(void)outViewDelegate{
+    [_synCourseView removeFromSuperview];
 }
 #pragma mark AlterViewDelegate
 -(void)alterViewDeleageRemove{
@@ -459,10 +506,10 @@ static NSString *cellIdentifier = @"cellIdentifier";
             if (i == 0) {
                 [ary addObject:month];
             }else
-            [ary addObject: [NSString stringWithFormat:@"%@", [NSString stringWithFormat:@"%@\n%@",day[i-1],a[i]]]];
+                [ary addObject: [NSString stringWithFormat:@"%@", [NSString stringWithFormat:@"%@\n%@",day[i-1],a[i]]]];
         }
     }else{
-       ary = [[NSMutableArray alloc] initWithArray:@[month,@"周一",@"周二",@"周三",@"周四",@"周五",@"周六",@"周日"]];
+        ary = [[NSMutableArray alloc] initWithArray:@[month,@"周一",@"周二",@"周三",@"周四",@"周五",@"周六",@"周日"]];
     }
     for (int i =0; i<8; i++) {
         UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(i*APPLICATION_WIDTH/8, 0, APPLICATION_WIDTH/8, 50)];
@@ -508,7 +555,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
                 [self.navigationController pushViewController:cdetailVC animated:YES];
                 self.hidesBottomBarWhenPushed=NO;
             }]];
-
+            
         }
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
             //点击按钮的响应事件；
