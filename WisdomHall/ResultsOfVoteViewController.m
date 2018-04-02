@@ -71,7 +71,7 @@
             [_tableView reloadData];
         }
     } failure:^(NSError *error) {
-        
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
     }];
 }
 

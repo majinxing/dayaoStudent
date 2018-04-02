@@ -42,8 +42,11 @@
     _workNo.text = [NSString stringWithFormat:@"学号：%@",s.workNo];
     _workNo.font = [UIFont systemFontOfSize:11];
     _workNo.textAlignment = NSTextAlignmentLeft;
+    UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
+    NSString * baseURL = user.host;
     if (![UIUtils isBlankString:[NSString stringWithFormat:@"%@",sign.pictureId]]) {
-        [_headImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@?resourceId=%@",BaseURL,FileDownload,sign.pictureId]] placeholderImage:[UIImage imageNamed:@"sign.png"]];
+        
+        [_headImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",baseURL,FileDownload,sign.pictureId]] placeholderImage:[UIImage imageNamed:@"sign.png"]];
     }
 }
 @end

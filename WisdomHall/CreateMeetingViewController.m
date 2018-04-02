@@ -122,7 +122,7 @@
     
     [dict setObject:ary forKey:@"userSeatList"];
     
-    NSDictionary * sendDict = [[NSDictionary alloc] initWithObjectsAndKeys:[d objectForKey:@"seatPeople"],@"seatPeople",_textFileAry[0],@"name",_seat.seatTableNamel,@"address",_textFileAry[1],@"time",nil];
+    //NSDictionary * sendDict = [[NSDictionary alloc] initWithObjectsAndKeys:[d objectForKey:@"seatPeople"],@"seatPeople",_textFileAry[0],@"name",_seat.seatTableNamel,@"address",_textFileAry[1],@"time",nil];
     [self showHudInView:self.view hint:NSLocalizedString(@"正在提交数据", @"Load data...")];
     
     [[NetworkRequest sharedInstance] POST:CreateMeeting dict:dict succeed:^(id data) {
@@ -146,6 +146,8 @@
             [UIUtils showInfoMessage:@"系统错误"];
         }
     } failure:^(NSError *error) {
+        [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
+
         [self hideHud];
         
     }];

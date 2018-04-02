@@ -29,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //时间间隔
-    NSTimeInterval timeInterval = 3 ;
+    NSTimeInterval timeInterval = 5 ;
     _nowSencond = 4;
     //定时器
     _showTimer = [NSTimer scheduledTimerWithTimeInterval:timeInterval
@@ -38,7 +38,7 @@
                                                 userInfo:nil
                                                  repeats:YES];
     [_showTimer fire];
-    _textLabel.text = [NSString stringWithFormat:@"注意：二维码将每3秒钟重新生成，请即时提供给同学签到"];
+    _textLabel.text = [NSString stringWithFormat:@"注意：二维码将每5秒钟重新生成，请即时提供给同学签到"];
     // Do any additional setup after loading the view from its nib.
 }
 -(void)handleMaxShowTimer:(NSTimer *)theTimer{

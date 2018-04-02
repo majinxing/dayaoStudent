@@ -26,13 +26,17 @@
 @property (weak, nonatomic) IBOutlet UIButton *signBtn;
 @property (weak, nonatomic) IBOutlet UIButton *code;
 @property (strong, nonatomic) IBOutlet UIImageView *teacherPicture;
-
+@property (strong,nonatomic) UIImageView * signCode;
 
 @end
 @implementation MeetingTableViewCell
 
 - (void)awakeFromNib {
+    
     [super awakeFromNib];
+    
+    _signCode = [[UIImageView alloc] init];
+    
     // Initialization code
 }
 -(void)addFirstContentView:(MeetingModel *)meetModel{
@@ -60,9 +64,20 @@
     _meetHost.text = [NSString stringWithFormat:@"老师：%@",classModel.teacherName];
     _meetCode.text = [NSString stringWithFormat:@"邀请码：%@",classModel.sclassId];
     if (![UIUtils isBlankString:classModel.teacherPictureId]) {
-        [_teacherPicture sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@?resourceId=%@",BaseURL,FileDownload,classModel.teacherPictureId]] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+        UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
+        
+        NSString * baseURL = user.host;
+        
+        [_teacherPicture sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",baseURL,FileDownload,classModel.teacherPictureId]] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     }else{
         _teacherPicture.image = [UIImage imageNamed:@"course"];
+    }
+    if (![UIUtils isBlankString:[NSString stringWithFormat:@"%@",classModel.signStatus]]) {
+        if ([[NSString stringWithFormat:@"%@",classModel.signStatus] isEqualToString:@"2"]) {
+            _signCode.frame = CGRectMake(APPLICATION_WIDTH/2+30, 40, 50, 50);
+            _signCode.image = [UIImage imageNamed:@"ic_sgin_success"];
+            [self.contentView addSubview:_signCode];
+        }
     }
     
 

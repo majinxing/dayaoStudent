@@ -51,10 +51,14 @@
         _user = [[Appsetting sharedInstance] getUsetInfo];
         _textAry =  [UIUtils returnAry:_user];
         UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
-        _headImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@?resourceId=%@",BaseURL,FileDownload,user.userHeadImageId]]]];
+        
+        NSString * baseURL = user.host;
+        
+        _headImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",baseURL,FileDownload,user.userHeadImageId]]]];
         [_tableView reloadData];
     } failure:^(NSError *error) {
-        
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+
     }];
 }
 -(void)addTableView{
@@ -111,7 +115,9 @@
                 [[Appsetting sharedInstance].mySettingData setValue:ary[0] forKey:@"user_pictureId"];
             }
         } failure:^(NSError *error) {
-            NSLog(@"%@",error);
+            
+            [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
+
         }];
     }
 }

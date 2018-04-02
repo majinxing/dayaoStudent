@@ -61,7 +61,7 @@
         
     } failure:^(NSError *error) {
         [self hideHud];
-        [UIUtils showInfoMessage:@"请求失败请"];
+        [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
     }];
 }
 /**
@@ -195,7 +195,7 @@
                 [UIUtils showInfoMessage:@"删除失败"];
             }
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"删除失败"];
+            [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
         }];
     }
 }

@@ -34,6 +34,10 @@
     
     [self setNavigationTitle];
     
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.modalPresentationCapturesStatusBarAppearance = NO;
+    
     [self addSeatView];
     
 //    self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -118,9 +122,9 @@
     
     self.title = @"座次表";
     
-    UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"确定选座" style:UIBarButtonItemStylePlain target:self action:@selector(sureBtnAction)];
-    
-    self.navigationItem.rightBarButtonItem = myButton;
+//    UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"确定选座" style:UIBarButtonItemStylePlain target:self action:@selector(sureBtnAction)];
+//    
+//    self.navigationItem.rightBarButtonItem = myButton;
 }
 //创建选座模块
 -(void)initSelectionView:(NSMutableArray *)seatsModelArray{

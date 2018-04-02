@@ -74,7 +74,7 @@
 #import "ThemeTool.h"
 
 #define Collection_height 120
-#define CodeEffectiveTime 6
+#define CodeEffectiveTime 10
 
 #define ShareType_Weixin_Friend     @"微信好友"
 #define ShareType_Weixin_Circle     @"朋友圈"
@@ -138,7 +138,7 @@
 #define DAILYCHECK_TABLE_NAME  @"dailyCheck"                        //日常签到统计表
 
 //接口 192.168.1.81:8080 api.dayaokeji.com xtu.api.dayaokeji.com
-#define BaseURL                 @"http://192.168.1.103:8080/"
+//#define BaseURL                 @"http://192.168.1.103:8080/"
 
 #define Login                   @"course/user/login"                //登录
 

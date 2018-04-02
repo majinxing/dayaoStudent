@@ -79,8 +79,8 @@
             
         } failure:^(NSError *error) {
             
-            [UIUtils showInfoMessage:@"暂无数据"];
-            
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+
             [self hideHud];
         }];
     }else if ([_type isEqualToString:@"classModel"]){
@@ -114,6 +114,8 @@
             }
             
         } failure:^(NSError *error) {
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+
             [self hideHud];
         }];
     }
@@ -229,7 +231,7 @@
             [UIUtils showInfoMessage:@"上传失败"];
         }
     } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"上传失败"];
+        [UIUtils showInfoMessage:@"上传失败，请检查网络"];
     }];
     //使用模态返回到软件界面
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
@@ -400,8 +402,11 @@
     
     [self showHudInView:self.view hint:NSLocalizedString(@"正在下载数据", @"Load data...")];
     
+    UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
     
-    NSString *urlString = [NSString stringWithFormat:@"%@%@?",BaseURL,FileDownload];
+    NSString * baseURL = user.host;
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@?",baseURL,FileDownload];
     
     urlString = [urlString stringByAppendingString:[NSString stringWithFormat:@"resourceId=%@",f.fileId]];
     
@@ -448,8 +453,11 @@
     
     if (![fileManager fileExistsAtPath:filePath]) {
         if (![UIUtils isBlankString:f.fileName]) {
+            UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
             
-            NSString *urlString = [NSString stringWithFormat:@"%@%@?",BaseURL,FileDownload];
+            NSString * baseUrl = user.host;
+            
+            NSString *urlString = [NSString stringWithFormat:@"%@/%@?",baseUrl,FileDownload];
             
             urlString = [urlString stringByAppendingString:[NSString stringWithFormat:@"resourceId=%@",f.fileId]];
             

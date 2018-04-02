@@ -69,7 +69,8 @@
             [self hideHud];
             [_tableview reloadData];
         } failure:^(NSError *error) {
-            NSLog(@"%@",error);
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+
             [self hideHud];
         }];
         
@@ -92,7 +93,8 @@
             [self hideHud];
             [_tableview reloadData];
         } failure:^(NSError *error) {
-            NSLog(@"%@",error);
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+
             [self hideHud];
         }];
     }
@@ -178,7 +180,7 @@
             [self getData];
             [_vote hide];
         } failure:^(NSError *error) {
-            
+            [UIUtils showInfoMessage:@"删除数据失败，请检查网络"];
         }];
         
     }else if ([platform isEqualToString:Vote_Stop]){
@@ -188,7 +190,8 @@
             [self getData];
             [_vote hide];
         } failure:^(NSError *error) {
-            
+            [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
+
         }];
     
     }else if ([platform isEqualToString:Vote_Stare]){

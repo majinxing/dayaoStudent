@@ -209,7 +209,8 @@ static NSString * cellIdentifier = @"cellIdentifier";
         }
         
     } failure:^(NSError *error) {
-        NSLog(@"error %@",error);
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+
         [self hideHud];
 
     }];
@@ -273,7 +274,8 @@ static NSString * cellIdentifier = @"cellIdentifier";
         }
         [_collection reloadData];
     } failure:^(NSError *error) {
-        NSLog(@"失败%@",error);
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+
         [self hideHud];
 
     }];

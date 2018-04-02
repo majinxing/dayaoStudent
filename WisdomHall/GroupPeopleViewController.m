@@ -35,9 +35,11 @@
                 SignPeople * s = [[SignPeople alloc] init];
                 [s setInfoWithDict:ary[i]];
             }
+        }else{
+            [UIUtils showInfoMessage:@"获取数据失败"];
         }
     } failure:^(NSError *error) {
-        
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
     }];
 }
 - (void)didReceiveMemoryWarning {

@@ -111,7 +111,7 @@
 -(void)quertyNumberClass{
     NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_userModel.school,@"universityId", nil];
     [[NetworkRequest sharedInstance] GET:QuertyClassNumber dict:dict succeed:^(id data) {
-        NSLog(@"%@",data);
+
     } failure:^(NSError *error) {
         
     }];
@@ -163,9 +163,9 @@
         }
         [self hideHud];
     } failure:^(NSError *error) {
-        NSLog(@"%@",error);
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"创建失败，请填写完整课堂信息并且按照提示的格式" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        [alertView show];
+        
+        [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
+
         [self hideHud];
     }];
     

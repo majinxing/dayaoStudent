@@ -78,8 +78,8 @@
         }
         [self hideHud];
     } failure:^(NSError *error) {
-        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:nil message:@"暂时没有会议室" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alter show];
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+
         [self hideHud];
 
     }];

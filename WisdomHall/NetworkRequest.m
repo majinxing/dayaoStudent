@@ -18,9 +18,11 @@
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
         
+        NSString * baseURL1 = user.host;
         // baseURL 的目的，就是让后续的网络访问直接使用 相对路径即可，baseURL 的路径一定要有 / 结尾
-        NSURL *baseURL = [NSURL URLWithString:BaseURL];
+        NSURL *baseURL = [NSURL URLWithString:baseURL1];
         
         NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
         

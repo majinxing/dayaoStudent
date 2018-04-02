@@ -107,10 +107,10 @@
         [_tableView reloadData];
         [self hideHud];
     } failure:^(NSError *error) {
-        NSLog(@"%@",error);
+        
         [self hideHud];
         
-        [UIUtils showInfoMessage:@"请求失败"];
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
     }];
     [_tableView headerEndRefreshing];
     [_tableView footerEndRefreshing];
@@ -149,7 +149,8 @@
             }
             [_vote hide];
         } failure:^(NSError *error) {
-            
+            [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
+
         }];
         //
     }else if ([platform isEqualToString:Vote_Stop]){
@@ -166,7 +167,8 @@
             }
             [_vote hide];
         } failure:^(NSError *error) {
-            
+            [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
+
         }];
         
     }else if ([platform isEqualToString:Vote_Stare]){
@@ -183,7 +185,7 @@
             [_vote hide];
             
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"开始失败，请检查网络"];
+            [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
         }];
         
     }else if ([platform isEqualToString:Test_Scores_Query]){
@@ -208,7 +210,7 @@
                 [UIUtils showInfoMessage:@"暂无数据"];
             }
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"请求失败，请检查网络"];
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
         }];
     }
 }

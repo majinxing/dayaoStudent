@@ -60,6 +60,9 @@
         [self hideHud];
         [_tableView reloadData];
     } failure:^(NSError *error) {
+        
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+
         [self hideHud];
     }];
     
@@ -100,7 +103,7 @@
             [self hideHud];
         } failure:^(NSError *error) {
             NSLog(@"%@",error);
-            [UIUtils showInfoMessage:@"投票失败"];
+            [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
             [self hideHud];
             
         }];

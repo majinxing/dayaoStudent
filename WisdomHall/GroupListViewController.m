@@ -82,7 +82,7 @@
             [_tableView reloadData];
         }
     } failure:^(NSError *error) {
-        
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
     }];
 }
 - (void)didReceiveMemoryWarning {
@@ -100,7 +100,7 @@
         [[NetworkRequest sharedInstance] POST:JoinGroup dict:dict succeed:^(id data) {
             [self getData];
         } failure:^(NSError *error) {
-            
+            [UIUtils showInfoMessage:@"添加课程失败，请检查网络"];
         }];
         [_join removeFromSuperview];
         _join = nil;
@@ -158,9 +158,11 @@
             classManegeVC.signAry = [NSMutableArray arrayWithCapacity:1];
             classManegeVC.signAry = signAry;
             [self.navigationController pushViewController:classManegeVC animated:YES];
+        }else{
+            [UIUtils showInfoMessage:@"获取数据失败"];
         }
     } failure:^(NSError *error) {
-        
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
     }];
 }
 /*

@@ -254,8 +254,7 @@
         }
         [_tableView reloadData];
     } failure:^(NSError *error) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查询失败" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        [alertView show];
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
     }];
     
 }
@@ -393,8 +392,7 @@
             [self addPickView];
             
         } failure:^(NSError *error) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查询失败" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alertView show];
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
         }];
     }else if (sender.tag == 2){
         if ([UIUtils isBlankString:[NSString stringWithFormat:@"%@",_school.departmentId]]) {
@@ -420,8 +418,7 @@
             [self addPickView];
             
         } failure:^(NSError *error) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查询失败" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alertView show];
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
         }];
     }else if (sender.tag == 3){
         if ([UIUtils isBlankString:[NSString stringWithFormat:@"_school.departmentId"]]) {
@@ -445,8 +442,8 @@
             [self addPickView];
             
         } failure:^(NSError *error) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查询失败" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alertView show];
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+
         }];
         
     }else if (sender.tag == 4){
@@ -491,8 +488,8 @@
             }
             [_tableView reloadData];
         } failure:^(NSError *error) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查询失败" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alertView show];
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+
         }];
         
     }
@@ -527,7 +524,8 @@
             }
             [_tableView reloadData];
         } failure:^(NSError *error) {
-            
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+
         }];
     }else{
         NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",searchBar.text],@"name",@"1",@"start",@"1000",@"length", nil];
@@ -550,11 +548,10 @@
             }
             [_tableView reloadData];
         } failure:^(NSError *error) {
-            
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+
         }];
-        
     }
-    
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         

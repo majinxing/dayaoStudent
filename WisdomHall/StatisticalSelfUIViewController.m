@@ -38,16 +38,23 @@
     UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
     NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",user.peopleId],@"userId",t,@"termId", nil];
     [[NetworkRequest sharedInstance] GET: StatisticsSelf dict:dict succeed:^(id data) {
-        NSLog(@"%@",data);
-        NSArray * ary = [data objectForKey:@"body"];
-        for (int i = 0; i<ary.count; i++) {
-            StatisticalResultModel * s = [[StatisticalResultModel alloc] init];
-            [s setValueWithDict:ary[i]];
-            [_dataAry addObject:s];
+        NSString * str = [[data objectForKey:@"header"] objectForKey:@"code"];
+        if (![UIUtils isBlankString:str]) {
+            if ([str isEqualToString:@"0000"]) {
+                NSArray * ary = [data objectForKey:@"body"];
+                for (int i = 0; i<ary.count; i++) {
+                    StatisticalResultModel * s = [[StatisticalResultModel alloc] init];
+                    [s setValueWithDict:ary[i]];
+                    [_dataAry addObject:s];
+                }
+            }
+        }else{
+            [UIUtils showInfoMessage:@"获取数据失败"];
         }
+        
         [_tableView reloadData];
     } failure:^(NSError *error) {
-        
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
     }];
 }
 - (IBAction)querySelf:(UIButton *)sender {

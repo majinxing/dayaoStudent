@@ -217,7 +217,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
             [self hideHud];
 
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"加入失败"];
+            [UIUtils showInfoMessage:@"加入失败，请检查网络"];
             [self hideHud];
 
         }];
@@ -259,7 +259,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
         }
         
     } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"获取数据失败，请稍后再试"];
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
 
         [self hideHud];
         
@@ -326,7 +326,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
         
         [_collection reloadData];
     } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"获取数据失败，请稍后再试"];
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
 
         [self hideHud];
         

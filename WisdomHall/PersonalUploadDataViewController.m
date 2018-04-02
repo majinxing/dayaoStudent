@@ -152,6 +152,8 @@
             }
             
         } failure:^(NSError *error) {
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+
             [self hideHud];
         }];
     }
@@ -430,8 +432,11 @@
     
     [self showHudInView:self.view hint:NSLocalizedString(@"正在下载数据", @"Load data...")];
     
+    UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
     
-    NSString *urlString = [NSString stringWithFormat:@"%@%@?",BaseURL,FileDownload];
+    NSString * baseURL = user.host;
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@?",baseURL,FileDownload];
     
     urlString = [urlString stringByAppendingString:[NSString stringWithFormat:@"resourceId=%@",f.fileId]];
     
@@ -481,8 +486,11 @@
     
     if (![fileManager fileExistsAtPath:filePath]) {
         if (![UIUtils isBlankString:f.fileName]) {
+            UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
             
-            NSString *urlString = [NSString stringWithFormat:@"%@%@?",BaseURL,FileDownload];
+            NSString * baseURL = user.host;
+            
+            NSString *urlString = [NSString stringWithFormat:@"%@/%@?",baseURL,FileDownload];
             
             urlString = [urlString stringByAppendingString:[NSString stringWithFormat:@"resourceId=%@",f.fileId]];
             

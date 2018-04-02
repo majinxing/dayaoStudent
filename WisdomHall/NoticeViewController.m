@@ -129,6 +129,8 @@
         [_tableView reloadData];
         [self hideHud];
     } failure:^(NSError *error) {
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+
         [self hideHud];
     }];
 }
@@ -191,7 +193,7 @@
             [UIUtils showInfoMessage:@"删除失败"];
         }
     } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"删除失败请检查网络"];
+        [UIUtils showInfoMessage:@"删除失败，请检查网络"];
     }];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

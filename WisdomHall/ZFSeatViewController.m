@@ -42,23 +42,11 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UILabel *maoyanLabel = [[UILabel alloc]init];
+    [self setNavigationTitle];
     
-    maoyanLabel.text = @"座次表";
-    [maoyanLabel sizeToFit];
-    maoyanLabel.font = [UIFont systemFontOfSize:20];
-    maoyanLabel.textColor = [UIColor whiteColor];
-        
-    self.navigationItem.titleView = maoyanLabel;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.extendedLayoutIncludesOpaqueBars = NO;
     self.modalPresentationCapturesStatusBarAppearance = NO;
-    
-//    MBProgressHUD *HUD = [[MBProgressHUD alloc]initWithView:self.view];
-//    
-//    HUD.tintColor = [UIColor blackColor];
-//    [self.view addSubview:HUD];
-//    [HUD showAnimated:YES];
     
     __weak typeof(self) weakSelf = self;
     
@@ -66,11 +54,11 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         
-      //  NSString *path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"seats %zd.plist",arc4random_uniform(5)] ofType:nil];
+        //  NSString *path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"seats %zd.plist",arc4random_uniform(5)] ofType:nil];
         
         //模拟网络加载数据
         
-      //  NSDictionary *seatsDic = [NSDictionary dictionaryWithContentsOfFile:path];
+        //  NSDictionary *seatsDic = [NSDictionary dictionaryWithContentsOfFile:path];
         
         NSMutableString *strUrl = [NSMutableString stringWithFormat:@"%@",_seatTable];
         NSArray * ary = [strUrl componentsSeparatedByString:@"\n"];
@@ -78,7 +66,7 @@
         NSString * seatM ;
         NSString * seatN ;
         _temp = 1;
-
+        
         if ([UIUtils isBlankString:_seat]) {
             
         }else{
@@ -107,7 +95,7 @@
                         _temp = _temp + 1;
                         NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"0%d",j+1],@"columnId",[NSString stringWithFormat:@"%d,%d",j+1,seatNo],@"seatNo",@"LK",@"st",nil];
                         /**座位状态 N/表示可以购票 LK／座位已售出 E/表示过道 */
-
+                        
                         [aa addObject:dict];
                     }else{
                         if ([[NSString stringWithFormat:@"%d",j+1] isEqualToString:seatM]) {
@@ -153,7 +141,7 @@
             ZFSeatsModel *seatModel = [ZFSeatsModel mj_objectWithKeyValues:obj];
             [seatsModelArray addObject:seatModel];
         }];
-//        [HUD hideAnimated:YES];
+        //        [HUD hideAnimated:YES];
         weakSelf.seatsModelArray = seatsModelArray;
         
         //数据回来初始化选座模块
@@ -161,6 +149,23 @@
         
         [weakSelf setupSureBtn];
     });
+    
+}
+/**
+ *  显示navigation的标题
+ **/
+-(void)setNavigationTitle{
+    //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
+    self.title = @"座次表";
+    if ([UIUtils isBlankString:_type]) {
+        
+    }else{
+        UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"确定选座" style:UIBarButtonItemStylePlain target:self action:@selector(sureBtnAction)];
+        
+        self.navigationItem.rightBarButtonItem = myButton;
+        
+    }
     
 }
 //创建选座模块
@@ -173,7 +178,7 @@
                                                                               type:_type
                                                                 seatBtnActionBlock:^(NSMutableArray *selecetedSeats, NSMutableDictionary *allAvailableSeats, NSString *errorStr) {
                                                                     
-//                                                                    NSLog(@"=====%zd个选中按钮===========%zd个可选座位==========errorStr====%@=========",selecetedSeats.count,allAvailableSeats.count,errorStr);
+                                                                    //                                                                    NSLog(@"=====%zd个选中按钮===========%zd个可选座位==========errorStr====%@=========",selecetedSeats.count,allAvailableSeats.count,errorStr);
                                                                     
                                                                     if (errorStr) {
                                                                         //错误信息
@@ -181,7 +186,7 @@
                                                                     }else{
                                                                         //储存选好的座位及全部可选座位
                                                                         weakSelf.allAvailableSeats = allAvailableSeats;
-//                                                                        [weakSelf.selecetedSeats removeAllObjects];
+                                                                        //                                                                        [weakSelf.selecetedSeats removeAllObjects];
                                                                         weakSelf.selecetedSeats = selecetedSeats;
                                                                     }
                                                                 }];
@@ -190,19 +195,23 @@
 }
 
 -(void)setupSureBtn{
-    
-    UIButton *sureBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [sureBtn setTitle:@"确定选座" forState:UIControlStateNormal];
-    [sureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [sureBtn addTarget:self action:@selector(sureBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [sureBtn setBackgroundColor:[UIColor colorWithHexString:@"#29a7e1"]];
-    sureBtn.layer.cornerRadius = 5;
-    sureBtn.layer.masksToBounds = YES;
-    sureBtn.frame = CGRectMake(200, 550, 100, 50);
     if ([UIUtils isBlankString:_type]) {
+        return;
+    }
+    NSArray * ary = @[@"可选座次",@"不 可 选",@"当前已选",@"正 在 选"];
+    NSArray * aryImage = @[@"kexuan",@"ss",@"yishou",@"xuanzhong"];
+    
+    for (int i = 0; i<4; i++) {
+        UILabel * lable = [[UILabel alloc] initWithFrame:CGRectMake(20+(i%2)*140, APPLICATION_HEIGHT-150+(i/2)*25, 65, 20)];
+        lable.text = ary[i];
+        lable.font = [UIFont systemFontOfSize:14];
         
-    }else{
-        [self.view addSubview:sureBtn];
+        UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(lable.frame), APPLICATION_HEIGHT-150+(i/2)*25, 20, 20)];
+        image.image = [UIImage imageNamed:aryImage[i]];
+        
+        [self.view addSubview:lable];
+        
+        [self.view addSubview:image];
     }
 }
 
@@ -211,15 +220,15 @@
         [self showMessage:@"您还未选座"];
         return;
     }
-//    //验证是否落单
-//    if (![ZFSeatSelectionTool verifySelectedSeatsWithSeatsDic:self.allAvailableSeats seatsArray:self.seatsModelArray]) {
-//        [self showMessage:@"落单"];
-//    }else{
-//        [self showMessage:@"选座成功"];
-//    }
+    //    //验证是否落单
+    //    if (![ZFSeatSelectionTool verifySelectedSeatsWithSeatsDic:self.allAvailableSeats seatsArray:self.seatsModelArray]) {
+    //        [self showMessage:@"落单"];
+    //    }else{
+    //        [self showMessage:@"选座成功"];
+    //    }
     ZFSeatButton * z = self.selecetedSeats[self.selecetedSeats.count-1];
     ZFSeatModel * m = z.seatmodel;
-//    ZFSeatsModel * n = z.seatsmodel;
+    //    ZFSeatsModel * n = z.seatsmodel;
     NSArray * a = [m.seatNo componentsSeparatedByString:@","];
     NSString * seat = [NSString stringWithFormat:@"%d排%d座",[a[0] intValue],[a[1] intValue]];
     UserModel * user = [[Appsetting sharedInstance] getUsetInfo];

@@ -59,7 +59,7 @@
     
     _titleAry = [NSMutableArray arrayWithCapacity:1];
     
-//    _selectSchoolBtn.backgroundColor = [UIColor clearColor];
+
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
@@ -112,8 +112,9 @@
             [s setInfoWithDict:ary[i]];
             [_titleAry addObject:s];
         }
+        [_tableView reloadData];
     } failure:^(NSError *error) {
-        NSLog(@"%@",error);
+        
     }];
 }
 - (void)didReceiveMemoryWarning {
@@ -202,6 +203,11 @@
 - (IBAction)selectBtnPressed:(UIButton *)sender {
     [self.view addSubview:_listView]; // 将下拉视图添加到控件的俯视图上
     
+    if (_titleAry.count>0) {
+        
+    }else{
+        [self getSchoolList];
+    }
     if(_selectSchoolBtnStatus == NO) {
         [self showDropDown];
     }

@@ -59,7 +59,11 @@
         cell.workNo.textColor = [UIColor blackColor];
         UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
         if (![UIUtils isBlankString:[NSString stringWithFormat:@"%@",user.userHeadImageId]]) {
-            [cell.headImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@?resourceId=%@",BaseURL,FileDownload,user.userHeadImageId]] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+            UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
+            
+            NSString * baseURL = user.host;
+            
+            [cell.headImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",baseURL,FileDownload,user.userHeadImageId]] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
         }
         if ([[NSString stringWithFormat:@"%@",user.identity] isEqualToString:@"1"]) {
             cell.workNumber.text = @"工号";

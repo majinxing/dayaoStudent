@@ -132,7 +132,7 @@
         }
         
     } failure:^(NSError *error) {
-        
+        [UIUtils showInfoMessage:@"创建数据失败，请检查网络"];
     }];
 }
 -(void)sendImageWithImage:(UIImage *)image{

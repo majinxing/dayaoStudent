@@ -185,7 +185,6 @@ static NSString *cellIdentifier = @"cellIdentifier";
             });
         }else{
             [self hideHud];
-            
         }
     } failure:^(NSError *error) {
         [self hideHud];

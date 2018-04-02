@@ -90,17 +90,18 @@
                     [UIApplication sharedApplication].keyWindow.rootViewController = rootVC;
                 }
                 
-            }else{
+            }else if([[d objectForKey:@"code"] isEqualToString:@"1001"]){
                 [self hideHud];
                 
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"密码错误" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                 [alertView show];
+            }else{
+                [UIUtils showInfoMessage:@"登录失败"];
             }
             
         } failure:^(NSError *error) {
             [self hideHud];
             
-            NSLog(@"%@",error);
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"服务器连接失败" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alertView show];
             
@@ -125,8 +126,8 @@
     NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",user.userPhone],@"contact",[NSString stringWithFormat:@"手机厂商：Apple\n手机型号：%@\n产品型号：\n设备型号：\n系统版本：ios %@\n App版本：律动课堂 %@",phoneModel,system,app_build],@"retroaction",phoneModel,@"phoneModels",app_build,@"version",user.peopleId,@"userId",@"2",@"type",nil];
     
     [[NetworkRequest sharedInstance] POST:FeedBack dict:dict succeed:^(id data) {
-        NSLog(@"%@",data);
         
+
     } failure:^(NSError *error) {
         
     }];

@@ -70,9 +70,8 @@
         
     } failure:^(NSError *error) {
         NSLog(@"%@",error);
-        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:nil message:@"提交成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alter show];
-        [self.navigationController popViewControllerAnimated:YES];
+        [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
+
     }];
     
 }

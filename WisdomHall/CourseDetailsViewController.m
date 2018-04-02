@@ -153,7 +153,8 @@
         [self hideHud];
         [_tableView reloadData];
     } failure:^(NSError *error) {
-        NSLog(@"失败%@",error);
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+
         [self hideHud];
     }];
 }
@@ -211,8 +212,8 @@
         [UIUtils showInfoMessage:@"暂不能签到"];
         _c.signStatus = @"1";
     }else if ([str isEqualToString:@"1003"]){
-        [UIUtils showInfoMessage:@"已签到"];
-        _c.signStatus = @"2";
+        [UIUtils showInfoMessage:@"这台手机已经签到一次了，不能重复使用签到，谢谢"];
+        _c.signStatus = @"1";
     }else if ([str isEqualToString:@"1004"]){
         [UIUtils showInfoMessage:@"没有参加课程"];
         _c.signStatus = @"1";
@@ -320,7 +321,7 @@
                 [UIUtils showInfoMessage:@"上传失败"];
             }
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"上传失败"];
+            [UIUtils showInfoMessage:@"上传失败，请检查网络"];
         }];
     }
 
@@ -373,7 +374,7 @@
                 }
                 
             } failure:^(NSError *error) {
-                [UIUtils showInfoMessage:@"课程删除失败"];
+                [UIUtils showInfoMessage:@"课程删除失败，请检查网络"];
             }];
         }
     }else if (alertView.tag == 1002){
@@ -396,7 +397,7 @@
                 }
                 
             } failure:^(NSError *error) {
-                [UIUtils showInfoMessage:@"课程删除失败"];
+                [UIUtils showInfoMessage:@"课程删除失败，请检查网络"];
                 
             }];
         }
@@ -421,7 +422,7 @@
                 }
                 
             } failure:^(NSError *error) {
-                [UIUtils showInfoMessage:@"课程删除失败"];
+                [UIUtils showInfoMessage:@"课程删除失败，请检查网络"];
             }];
             
         }

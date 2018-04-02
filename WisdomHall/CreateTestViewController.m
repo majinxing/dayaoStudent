@@ -53,6 +53,8 @@
             [self queryLibList];
         } failure:^(NSError *error) {
             NSLog(@"%@",error);
+            [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
+
         }];
     }
 }
@@ -78,7 +80,7 @@
             [UIUtils showInfoMessage:@"创建失败"];
         }
     } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"创建失败，请检查网络"];
+        [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
     }];
 }
 -(QuestionBank *)seleCreateLib:(NSArray *)ary{

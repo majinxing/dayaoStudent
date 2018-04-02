@@ -71,7 +71,7 @@
                 [_allSchoolNameAry addObject:s.schoolName];
             }
         } failure:^(NSError *error) {
-            NSLog(@"失败 %@",error);
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
             
         }];
     }else if (_selectType == SelectDepartment){
@@ -90,7 +90,7 @@
             [_tableView reloadData];
             
         } failure:^(NSError *error) {
-            NSLog(@"失败 %@",error);
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
         }];
     }else if (_selectType == SelectMajor){
         NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"",@"level",_s.departmentId,@"parentId",@"",@"name", nil];
@@ -107,7 +107,7 @@
             _selectSchoolAry = _allSchoolNameAry;
             [_tableView reloadData];
         } failure:^(NSError *error) {
-            NSLog(@"失败 %@",error);
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
         }];
 
     }else if (_selectType == SelectClass){
@@ -125,7 +125,7 @@
             _selectSchoolAry = _allSchoolNameAry;
             [_tableView reloadData];
         } failure:^(NSError *error) {
-            NSLog(@"失败 %@",error);
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
         }];
 
     }

@@ -66,7 +66,7 @@ static dispatch_once_t onceToken;
         });
         
     } failure:^(NSError *error) {
-        
+
     }];
 }
 -(void)onceSetNil{

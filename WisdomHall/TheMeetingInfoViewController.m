@@ -109,7 +109,8 @@
         [_meetingModel setSignPeopleWithNSArray:ary];
         [_tableView reloadData];
     } failure:^(NSError *error) {
-        
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+
     }];
 }
 -(void)addTableView{
@@ -162,8 +163,8 @@
                 [self hideHud];
             }
         } failure:^(NSError *error) {
-            UIAlertView * alter = [[UIAlertView alloc] initWithTitle:nil message:@"删除会议失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-            [alter show];
+            [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
+
             [self hideHud];
             
         }];
@@ -193,8 +194,8 @@
                 [self hideHud];
             }
         } failure:^(NSError *error) {
-            UIAlertView * alter = [[UIAlertView alloc] initWithTitle:nil message:@"删除会议失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-            [alter show];
+            [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
+
             [self hideHud];
             
         }];
@@ -708,7 +709,7 @@
             [UIUtils showInfoMessage:@"上传失败"];
         }
     } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"上传失败"];
+        [UIUtils showInfoMessage:@"上传失败，请检查网络"];
     }];
     //使用模态返回到软件界面
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];

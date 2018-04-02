@@ -68,15 +68,13 @@
                 [self.navigationController popViewControllerAnimated:YES];
             }else{
                 [UIUtils showInfoMessage:@"创建失败"];
-                
             }
             [self hideHud];
-            NSLog(@"%@",data);
-        } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"创建失败"];
             
+        } failure:^(NSError *error) {
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
             [self hideHud];
-            NSLog(@"%@",error);
+            
         }];
 
     }else{
@@ -89,15 +87,13 @@
                 [self.navigationController popViewControllerAnimated:YES];
             }else{
                 [UIUtils showInfoMessage:@"创建失败"];
-                
             }
             [self hideHud];
-            NSLog(@"%@",data);
-        } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"创建失败"];
             
+        } failure:^(NSError *error) {
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
             [self hideHud];
-            NSLog(@"%@",error);
+            
         }];
 
     }
