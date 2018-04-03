@@ -26,8 +26,11 @@
 }
 -(void)addContentViewWith:(Homework *)homework{
     _homeworkInfo.text = homework.homeworkInfo;
+//    _homeworkInfo.editing = NO;
+    
     [_homeworkInfo setEnabled:NO];
     _imageNumber.text = homework.homeworkImageNumber;
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

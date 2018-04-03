@@ -182,26 +182,28 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 10;
 }
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath { 
-    if ([[NSString stringWithFormat:@"%@",_c.teacherWorkNo] isEqualToString:[NSString stringWithFormat:@"%@",_user.studentId]]) {
-        Homework * h = _dataAry[indexPath.row];
-        NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",h.homeworkId],@"id", nil];
-        [[NetworkRequest sharedInstance] POST:DeleteHomework dict:dict succeed:^(id data) {
-            NSString * code = [[data objectForKey:@"header"] objectForKey:@"code"];
-            if ([code isEqualToString:@"0000"]) {
-                [_dataAry removeObjectAtIndex:indexPath.row];
-                [_tableView reloadData];
-            }else{
-                [UIUtils showInfoMessage:@"删除失败"];
-            }
-        } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
-        }];
-    }
-}
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath { 
+//    if ([[NSString stringWithFormat:@"%@",_c.teacherWorkNo] isEqualToString:[NSString stringWithFormat:@"%@",_user.studentId]]) {
+//        Homework * h = _dataAry[indexPath.row];
+//        NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",h.homeworkId],@"id", nil];
+//        [[NetworkRequest sharedInstance] POST:DeleteHomework dict:dict succeed:^(id data) {
+//            NSString * code = [[data objectForKey:@"header"] objectForKey:@"code"];
+//            if ([code isEqualToString:@"0000"]) {
+//                [_dataAry removeObjectAtIndex:indexPath.row];
+//                [_tableView reloadData];
+//            }else{
+//                [UIUtils showInfoMessage:@"删除失败"];
+//            }
+//        } failure:^(NSError *error) {
+//            [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
+//        }];
+//    }
+//}
     
     /** * 修改Delete按钮文字为“删除” */
-- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath { return @"删除";
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return @"删除";
 }
     
     
