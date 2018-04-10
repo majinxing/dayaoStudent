@@ -64,12 +64,12 @@
             if (_dataAry.count>0) {
                 
             }else{
-                [UIUtils showInfoMessage:@"暂无数据"];
+                [UIUtils showInfoMessage:@"暂无数据" withVC:self];
             }
             [self hideHud];
             [_tableview reloadData];
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
 
             [self hideHud];
         }];
@@ -88,12 +88,12 @@
             if (_dataAry.count>0) {
                 
             }else{
-                [UIUtils showInfoMessage:@"暂无数据"];
+                [UIUtils showInfoMessage:@"暂无数据" withVC:self];
             }
             [self hideHud];
             [_tableview reloadData];
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
 
             [self hideHud];
         }];
@@ -180,7 +180,7 @@
             [self getData];
             [_vote hide];
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"删除数据失败，请检查网络"];
+            [UIUtils showInfoMessage:@"删除数据失败，请检查网络" withVC:self];
         }];
         
     }else if ([platform isEqualToString:Vote_Stop]){
@@ -190,7 +190,7 @@
             [self getData];
             [_vote hide];
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
+            [UIUtils showInfoMessage:@"发送数据失败，请检查网络" withVC:self];
 
         }];
     
@@ -201,11 +201,11 @@
             [self getData];
             [_vote hide];
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"开始失败，请检查网络"];
+            [UIUtils showInfoMessage:@"开始失败，请检查网络" withVC:self];
         }];
         
     }else if ([platform isEqualToString:Vote_Modify]){
-        [UIUtils showInfoMessage:@"未完待续"];
+        [UIUtils showInfoMessage:@"未完待续" withVC:self];
     }
 }
 #pragma mark UITableViewdelegate

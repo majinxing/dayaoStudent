@@ -122,20 +122,20 @@
         [[NetworkRequest sharedInstance] POST:CreateText dict:dict succeed:^(id data) {
             NSString * str = [[data objectForKey:@"header"] objectForKey:@"code"];
             if ([str isEqualToString:@"0000"]) {
-                [UIUtils showInfoMessage:@"创建成功"];
+                [UIUtils showInfoMessage:@"创建成功" withVC:self];
                 for (UIViewController *controller in self.navigationController.viewControllers) {
                     if ([controller isKindOfClass:[AllTestViewController class]]) {
                         [self.navigationController popToViewController:controller animated:YES];
                     }
                 }
             }else if ([str isEqualToString:@"6682"]){
-                [UIUtils showInfoMessage:@"创建失败，试卷重名"];
+                [UIUtils showInfoMessage:@"创建失败，试卷重名" withVC:self];
             }else{
-                [UIUtils showInfoMessage:@"创建失败"];
+                [UIUtils showInfoMessage:@"创建失败" withVC:self];
             }
         } failure:^(NSError *error) {
             NSLog(@"%@",error);
-            [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
+            [UIUtils showInfoMessage:@"发送数据失败，请检查网络" withVC:self];
         }];
         
     }]];
@@ -229,7 +229,7 @@
 -(void)createTopicPressedDelegate{
     Questions *q = [[Questions alloc] init];
     if ([UIUtils isBlankString:_q.title]||[UIUtils isBlankString:_q.answer]) {
-        [UIUtils showInfoMessage:@"题目和答案请填写完整"];
+        [UIUtils showInfoMessage:@"题目和答案请填写完整" withVC:self];
         return;
     }
     q.title = _q.title;
@@ -253,12 +253,12 @@
             _questionNumber.text = [NSString stringWithFormat:@"总题数：%lu",(unsigned long)_questionArt.count];
             [_tableView reloadData];
         }else{
-            [UIUtils showInfoMessage:@"创建失败"];
+            [UIUtils showInfoMessage:@"创建失败" withVC:self];
         }
         [self hideHud];
     } failure:^(NSError *error) {
         [self hideHud];
-        [UIUtils showInfoMessage:@"创建失败，请检查网络"];
+        [UIUtils showInfoMessage:@"创建失败，请检查网络" withVC:self];
     }];
 }
 

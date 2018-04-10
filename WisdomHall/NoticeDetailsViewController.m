@@ -55,10 +55,10 @@
                     _revetImage.image = [UIImage imageNamed:@"revet"];
                     self.actionBlock(str);
                 }else{
-                    [UIUtils showInfoMessage:@"通知回执失败"];
+                    [UIUtils showInfoMessage:@"通知回执失败" withVC:self];
                 }
             } failure:^(NSError *error) {
-                [UIUtils showInfoMessage:@"通知回执失败，请检查网络"];
+                [UIUtils showInfoMessage:@"通知回执失败，请检查网络" withVC:self];
             }];
         }else{
             _revetImage.image = [UIImage imageNamed:@"revet"];

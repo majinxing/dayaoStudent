@@ -96,7 +96,7 @@
             [self.delegate submitDelegateWithAccount:_accountFile.text withPassword:_passwordFile.text];
         }
     }else{
-        [UIUtils showInfoMessage:@"请填信息完整再提交"];
+        [UIUtils showInfoMessage:@"请填信息完整再提交" withVC:self];
     }
 }
 -(void)outView{

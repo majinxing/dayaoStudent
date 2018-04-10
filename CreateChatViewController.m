@@ -102,15 +102,15 @@
         EMGroup *group = [[EMClient sharedClient].groupManager createGroupWithSubject:_groupName.text description:_introduction.text invitees:_dataAry message:@"邀请您加入群组" setting:setting error:&error];
         
         if(!error){
-            [UIUtils showInfoMessage:@"创建成功"];
+            [UIUtils showInfoMessage:@"创建成功" withVC:self];
             [self.navigationController popViewControllerAnimated:YES];
             
         }else{
-            [UIUtils showInfoMessage:@"创建成功"];
+            [UIUtils showInfoMessage:@"创建成功" withVC:self];
             [self.navigationController popViewControllerAnimated:YES];
         }
     }else{
-        [UIUtils showInfoMessage:@"请填写完整信息"];
+        [UIUtils showInfoMessage:@"请填写完整信息" withVC:self];
     }
 
 }

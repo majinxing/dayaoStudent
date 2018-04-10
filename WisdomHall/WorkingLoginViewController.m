@@ -125,7 +125,7 @@
     [self showHudInView:self.view hint:NSLocalizedString(@"正在登陆请稍后……", @"Load data...")];
     _user = [[Appsetting sharedInstance] getUsetInfo];
     if ([UIUtils isBlankString:_user.host]) {
-        [UIUtils showInfoMessage:@"请先选择学校"];
+        [UIUtils showInfoMessage:@"请先选择学校" withVC:self];
         [self hideHud];
         return;
     }
@@ -150,7 +150,7 @@
                 dict = [data objectForKey:@"body"];
                 NSString * type = [NSString stringWithFormat:@"%@",[dict objectForKey:@"type"]];
                 if ([type isEqualToString:@"1"]) {
-                    [UIUtils showInfoMessage:@"您的身份是老师，本客户端只支持学生使用，请登录“律动校园”"];
+                    [UIUtils showInfoMessage:@"您的身份是老师，本客户端只支持学生使用，请登录“律动校园”" withVC:self];
                 }else{
                     [[Appsetting sharedInstance] sevaUserInfoWithDict:dict withStr:_password.text];
                     
@@ -167,15 +167,15 @@
                 [self hideHud];
             }
         }else if ([str isEqualToString:@"1014"]){
-            [UIUtils showInfoMessage:@"用户名或密码错误"];
+            [UIUtils showInfoMessage:@"用户名或密码错误" withVC:self];
         }else if ([str isEqualToString:@"9999"]){
-            [UIUtils showInfoMessage:@"网络错误或者其他不可知错误"];
+            [UIUtils showInfoMessage:@"网络错误或者其他不可知错误" withVC:self];
         }else{
-            [UIUtils showInfoMessage:@"登录失败"];
+            [UIUtils showInfoMessage:@"登录失败" withVC:self];
         }
         [self hideHud];
     } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"登陆失败，请检查网络"];
+        [UIUtils showInfoMessage:@"登陆失败，请检查网络" withVC:self];
         [self hideHud];
     }];
 }

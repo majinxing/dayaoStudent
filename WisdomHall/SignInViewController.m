@@ -188,7 +188,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
         }
     } failure:^(NSError *error) {
         [self hideHud];
-        [UIUtils showInfoMessage:@"获取课表失败，请稍后再试"];
+        [UIUtils showInfoMessage:@"获取课表失败，请稍后再试" withVC:self];
     }];
 }
 -(void)getSelfJoinClass:(NSInteger)page{
@@ -207,7 +207,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
         [self getSelfCreateClassType:page];
     } failure:^(NSError *error) {
         [self hideHud];
-        [UIUtils showInfoMessage:@"获取课表失败，请稍后再试"];
+        [UIUtils showInfoMessage:@"获取课表失败，请稍后再试" withVC:self];
     }];
 }
 //临时
@@ -228,7 +228,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
         [self getSelfJoinClassType:page];
     } failure:^(NSError *error) {
         [self hideHud];
-        [UIUtils showInfoMessage:@"获取课表失败，请稍后再试"];
+        [UIUtils showInfoMessage:@"获取课表失败，请稍后再试" withVC:self];
         
     }];
 }
@@ -271,7 +271,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
         
     } failure:^(NSError *error) {
         [self hideHud];
-        [UIUtils showInfoMessage:@"获取课表失败，请稍后再试"];
+        [UIUtils showInfoMessage:@"获取课表失败，请稍后再试" withVC:self];
         
     }];
     
@@ -400,21 +400,21 @@ static NSString *cellIdentifier = @"cellIdentifier";
         [[NetworkRequest sharedInstance] POST:JoinCourse dict:dict succeed:^(id data) {
             NSString * str = [[data objectForKey:@"header"] objectForKey:@"code"];
             if ([[NSString stringWithFormat:@"%@",str] isEqualToString:@"6680"]) {
-                [UIUtils showInfoMessage:@"该用户已经添加,不能重复添加"];
+                [UIUtils showInfoMessage:@"该用户已经添加,不能重复添加" withVC:self];
             }else if ([[NSString stringWithFormat:@"%@",str] isEqualToString:@"6676"]){
-                [UIUtils showInfoMessage:@"数据异常"];
+                [UIUtils showInfoMessage:@"数据异常" withVC:self];
             }else if([[NSString stringWithFormat:@"%@",str] isEqualToString:@"0000"]){
-                [UIUtils showInfoMessage:@"加入成功"];
+                [UIUtils showInfoMessage:@"加入成功" withVC:self];
                 [self headerRereshing];
                 [_join removeFromSuperview];
                 _join = nil;
             }else{
-                [UIUtils showInfoMessage:@"加入失败"];
+                [UIUtils showInfoMessage:@"加入失败" withVC:self];
             }
             [self hideHud];
             
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"加入失败"];
+            [UIUtils showInfoMessage:@"加入失败" withVC:self];
             [self hideHud];
             
         }];
@@ -434,11 +434,11 @@ static NSString *cellIdentifier = @"cellIdentifier";
                 [_synCourseView removeFromSuperview];
             }
         }else{
-            [UIUtils showInfoMessage:@"同步课程失败，请稍后再试"];
+            [UIUtils showInfoMessage:@"同步课程失败，请稍后再试" withVC:self];
         }
         [self hideHud];
     } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"同步课程失败，请稍后再试"];
+        [UIUtils showInfoMessage:@"同步课程失败，请稍后再试" withVC:self];
         [_synCourseView removeFromSuperview];
         [self hideHud];
     }];

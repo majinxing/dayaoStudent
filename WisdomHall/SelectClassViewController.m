@@ -173,7 +173,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
         [self getSelfJoinClass:page];
     } failure:^(NSError *error) {
         [self hideHud];
-        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
     }];
 }
 -(void)getSelfJoinClass:(NSInteger)page{
@@ -192,7 +192,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
         [self getSelfCreateClassType:page];
     } failure:^(NSError *error) {
         NSLog(@"%@",error);
-        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
 
         [self hideHud];
 
@@ -215,7 +215,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
         [self getSelfJoinClassType:page];
     } failure:^(NSError *error) {
         NSLog(@"%@",error);
-        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
 
         [self hideHud];
 
@@ -249,7 +249,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
         });
     } failure:^(NSError *error) {
         NSLog(@"%@",error);
-        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
 
         [self hideHud];
 

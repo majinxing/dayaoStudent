@@ -237,7 +237,7 @@
         
         NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
         if ([str isEqualToString:@"0000"]) {
-            [UIUtils showInfoMessage:@"选座成功"];
+            [UIUtils showInfoMessage:@"选座成功" withVC:self];
             self.actionBlock(str);
             [self.navigationController popViewControllerAnimated:YES];
         }else if ([str isEqualToString:@"6666"]){

@@ -165,7 +165,7 @@
                 
                 [[NetworkRequest sharedInstance] POSTImage:FileUpload filePath:filePath dict:dict succeed:^(id data) {
                     if (_m == _n) {
-                        [UIUtils showInfoMessage:@"上传完成"];
+                        [UIUtils showInfoMessage:@"上传完成" withVC:self];
                         [self hideHud];
                         [self.navigationController popViewControllerAnimated:YES];
                     }else{
@@ -177,7 +177,7 @@
                     }else{
                         _m++;
                     }
-                    [UIUtils showInfoMessage:@"上传失败,请检查网络"];
+                    [UIUtils showInfoMessage:@"上传失败,请检查网络" withVC:self];
                     [self hideHud];
                 }];
             }else{
@@ -185,7 +185,7 @@
                 NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"9",@"type",@"www",@"description",@"3",@"function",[NSString stringWithFormat:@"%@",str],@"relId",@"1",@"relType",nil];
                 [[NetworkRequest sharedInstance] POSTImage:FileUpload filePath:filePath dict:dict succeed:^(id data) {
                     if (_m == _n) {
-                        [UIUtils showInfoMessage:@"上传完成"];
+                        [UIUtils showInfoMessage:@"上传完成" withVC:self];
                         [self.navigationController popViewControllerAnimated:YES];
                         [self hideHud];
                     }else{
@@ -197,7 +197,7 @@
                     }else{
                         _m++;
                     }
-                    [UIUtils showInfoMessage:@"上传失败，请检查网络"];
+                    [UIUtils showInfoMessage:@"上传失败，请检查网络" withVC:self];
                     [self hideHud];
                 }];
 

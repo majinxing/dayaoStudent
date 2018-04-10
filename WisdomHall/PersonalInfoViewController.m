@@ -57,7 +57,7 @@
         _headImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",baseURL,FileDownload,user.userHeadImageId]]]];
         [_tableView reloadData];
     } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
 
     }];
 }
@@ -116,7 +116,7 @@
             }
         } failure:^(NSError *error) {
             
-            [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
+            [UIUtils showInfoMessage:@"发送数据失败，请检查网络" withVC:self];
 
         }];
     }

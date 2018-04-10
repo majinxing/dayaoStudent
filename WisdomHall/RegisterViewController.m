@@ -154,7 +154,7 @@
             dict = [data objectForKey:@"body"];
             NSString * type = [NSString stringWithFormat:@"%@",[dict objectForKey:@"type"]];
             if ([type isEqualToString:@"1"]) {
-                [UIUtils showInfoMessage:@"您的身份是老师，本客户端只支持学生使用，请登录“律动校园”"];
+                [UIUtils showInfoMessage:@"您的身份是老师，本客户端只支持学生使用，请登录“律动校园”" withVC:self];
             }else{
                 [[Appsetting sharedInstance] sevaUserInfoWithDict:dict withStr:_password];
                 
@@ -167,14 +167,14 @@
                 [UIApplication sharedApplication].keyWindow.rootViewController = rootVC;
             }
         }else if([str isEqualToString:@"1009"]){
-            [UIUtils showInfoMessage:@"绑定失败：手机号已注册"];
+            [UIUtils showInfoMessage:@"绑定失败：手机号已注册" withVC:self];
         }else{
-            [UIUtils showInfoMessage:@"系统错误"];
+            [UIUtils showInfoMessage:@"系统错误" withVC:self];
         }
         [self hideHud];
         
     } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"绑定失败请检查网络"];
+        [UIUtils showInfoMessage:@"绑定失败请检查网络" withVC:self];
         [self hideHud];
     }];
 }

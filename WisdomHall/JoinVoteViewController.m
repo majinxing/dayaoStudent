@@ -61,7 +61,7 @@
         [_tableView reloadData];
     } failure:^(NSError *error) {
         
-        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
 
         [self hideHud];
     }];
@@ -92,23 +92,23 @@
             NSLog(@"%@",data);
             NSString * str = [[data objectForKey:@"header"] objectForKey:@"message"];
             if ([str isEqualToString:@"成功"]) {
-                [UIUtils showInfoMessage:@"投票成功"];
+                [UIUtils showInfoMessage:@"投票成功" withVC:self];
             }else if ([str isEqualToString:@"用户投票出错,已经投票"]){
-                [UIUtils showInfoMessage:@"已投票"];
-            }else if ([str isEqualToString:@"用户投票出错,必须在处理中状态"]){
-                [UIUtils showInfoMessage:@"投票未开始，请老师在投票列表页面点击开始投票"];
+                [UIUtils showInfoMessage:@"已投票" withVC:self];
+            }else if ([str isEqualToString:@"用户投票出错,必须在处理中状态" ]){
+                [UIUtils showInfoMessage:@"投票未开始，请老师在投票列表页面点击开始投票" withVC:self];
             }else{
-                [UIUtils showInfoMessage:@"投票失败"];
+                [UIUtils showInfoMessage:@"投票失败" withVC:self];
             }
             [self hideHud];
         } failure:^(NSError *error) {
             NSLog(@"%@",error);
-            [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
+            [UIUtils showInfoMessage:@"发送数据失败，请检查网络" withVC:self];
             [self hideHud];
             
         }];
     }else{
-        [UIUtils showInfoMessage:@"请先投票在提交"];
+        [UIUtils showInfoMessage:@"请先投票在提交" withVC:self];
         [self hideHud];
     }
     

@@ -66,12 +66,12 @@
             _n = _n + [v.count intValue];
         }
         if (_n==0) {
-            [UIUtils showInfoMessage:@"暂无投票数据"];
+            [UIUtils showInfoMessage:@"暂无投票数据" withVC:self];
         }else{
             [_tableView reloadData];
         }
     } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
     }];
 }
 

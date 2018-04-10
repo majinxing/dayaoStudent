@@ -148,11 +148,11 @@
             if (_fileAry.count>0) {
                 
             }else{
-                [UIUtils showInfoMessage:@"暂无数据"];
+                [UIUtils showInfoMessage:@"暂无数据" withVC:self];
             }
             
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
 
             [self hideHud];
         }];
@@ -260,13 +260,13 @@
     [[NetworkRequest sharedInstance] POSTImage:FileUpload image:resultImage dict:dict1 succeed:^(id data) {
         NSString * code = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
         if ([code isEqualToString:@"0000"]) {
-            [UIUtils showInfoMessage:@"上传成功"];
+            [UIUtils showInfoMessage:@"上传成功" withVC:self];
             [self getData];
         }else{
-            [UIUtils showInfoMessage:@"上传失败"];
+            [UIUtils showInfoMessage:@"上传失败" withVC:self];
         }
     } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"上传失败"];
+        [UIUtils showInfoMessage:@"上传失败" withVC:self];
     }];
     //使用模态返回到软件界面
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
@@ -497,7 +497,7 @@
             [self downloadFileWithURL:urlString];
             
         }else{
-            [UIUtils showInfoMessage:@"请先确定文件的准确性"];
+            [UIUtils showInfoMessage:@"请先确定文件的准确性" withVC:self];
         }
         
     }else{
@@ -533,7 +533,7 @@
         [[NetworkRequest sharedInstance] POST:FileDelegate dict:dict succeed:^(id data) {
             
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"删除失败，请检查网络"];
+            [UIUtils showInfoMessage:@"删除失败，请检查网络" withVC:self];
         }];
     }
     if ([[NSString stringWithFormat:@"%@",_classModel.teacherWorkNo] isEqualToString:[NSString stringWithFormat:@"%@",user.studentId]]) {
@@ -545,7 +545,7 @@
             [[NetworkRequest sharedInstance] POST:FileDelegate dict:dict succeed:^(id data) {
                 
             } failure:^(NSError *error) {
-                [UIUtils showInfoMessage:@"删除失败，请检查网络"];
+                [UIUtils showInfoMessage:@"删除失败，请检查网络" withVC:self];
             }];
         }
     }

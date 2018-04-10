@@ -129,7 +129,7 @@
             
             [self.navigationController popViewControllerAnimated:YES];
         }else if ([[NSString stringWithFormat:@"%@",str] isEqualToString:@"9999"]){
-            [UIUtils showInfoMessage:@"系统错误"];
+            [UIUtils showInfoMessage:@"系统错误" withVC:self];
         }
         else{
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"创建失败，请填写完整课堂信息并且按照提示的格式" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
@@ -137,7 +137,7 @@
         }
         [self hideHud];
     } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"创建数据失败，请检查网络"];
+        [UIUtils showInfoMessage:@"创建数据失败，请检查网络" withVC:self];
     }];
     
 }

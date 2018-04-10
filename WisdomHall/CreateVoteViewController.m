@@ -64,15 +64,15 @@
         [[NetworkRequest sharedInstance] POST:CreateVote dict:dict succeed:^(id data) {
             NSString *str = [[data objectForKey:@"header"] objectForKey:@"message"];
             if ([str isEqualToString:@"成功"]) {
-                [UIUtils showInfoMessage:@"创建成功"];
+                [UIUtils showInfoMessage:@"创建成功" withVC:self];
                 [self.navigationController popViewControllerAnimated:YES];
             }else{
-                [UIUtils showInfoMessage:@"创建失败"];
+                [UIUtils showInfoMessage:@"创建失败" withVC:self];
             }
             [self hideHud];
             
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
             [self hideHud];
             
         }];
@@ -83,15 +83,15 @@
         [[NetworkRequest sharedInstance] POST:CreateVote dict:dict succeed:^(id data) {
             NSString *str = [[data objectForKey:@"header"] objectForKey:@"message"];
             if ([str isEqualToString:@"成功"]) {
-                [UIUtils showInfoMessage:@"创建成功"];
+                [UIUtils showInfoMessage:@"创建成功" withVC:self];
                 [self.navigationController popViewControllerAnimated:YES];
             }else{
-                [UIUtils showInfoMessage:@"创建失败"];
+                [UIUtils showInfoMessage:@"创建失败" withVC:self];
             }
             [self hideHud];
             
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
             [self hideHud];
             
         }];

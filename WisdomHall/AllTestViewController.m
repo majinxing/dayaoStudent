@@ -110,7 +110,7 @@
         
         [self hideHud];
         
-        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
     }];
     [_tableView headerEndRefreshing];
     [_tableView footerEndRefreshing];
@@ -143,13 +143,13 @@
         [[NetworkRequest sharedInstance] POST:DelecateText dict:dict succeed:^(id data) {
             NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
             if ([str isEqualToString:@"6676"]) {
-                [UIUtils showInfoMessage:@"删除考试失败，只有考试结束之后才能删除"];
+                [UIUtils showInfoMessage:@"删除考试失败，只有考试结束之后才能删除" withVC:self];
             }else{
                 [self getData];
             }
             [_vote hide];
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
+            [UIUtils showInfoMessage:@"发送数据失败，请检查网络" withVC:self];
 
         }];
         //
@@ -161,13 +161,13 @@
             NSLog(@"%@",data);
             NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
             if ([str isEqualToString:@"6676"]) {
-                [UIUtils showInfoMessage:@"考试已结束"];
+                [UIUtils showInfoMessage:@"考试已结束" withVC:self];
             }else{
                 [self getData];
             }
             [_vote hide];
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
+            [UIUtils showInfoMessage:@"发送数据失败，请检查网络" withVC:self];
 
         }];
         
@@ -178,14 +178,14 @@
             NSLog(@"%@",data);
             NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
             if ([str isEqualToString:@"6676"]) {
-                [UIUtils showInfoMessage:@"考试已结束"];
+                [UIUtils showInfoMessage:@"考试已结束" withVC:self];
             }else{
                 [self getData];
             }
             [_vote hide];
             
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
+            [UIUtils showInfoMessage:@"发送数据失败，请检查网络" withVC:self];
         }];
         
     }else if ([platform isEqualToString:Test_Scores_Query]){
@@ -207,10 +207,10 @@
                 [_vote hide];
                 [self.navigationController pushViewController:s animated:YES];
             }else{
-                [UIUtils showInfoMessage:@"暂无数据"];
+                [UIUtils showInfoMessage:@"暂无数据" withVC:self];
             }
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
         }];
     }
 }

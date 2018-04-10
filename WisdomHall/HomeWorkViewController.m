@@ -61,7 +61,7 @@
         
     } failure:^(NSError *error) {
         [self hideHud];
-        [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
+        [UIUtils showInfoMessage:@"发送数据失败，请检查网络" withVC:self];
     }];
 }
 /**

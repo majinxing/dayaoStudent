@@ -104,10 +104,10 @@
 }
 -(void)sendHomeworkPressedDelegate:(NSString *)homeworkText{
     if ([UIUtils isBlankString:_homeworkStr]) {
-        [UIUtils showInfoMessage:@"请输入作业内容"];
+        [UIUtils showInfoMessage:@"请输入作业内容" withVC:self];
         return;
     }else if ([UIUtils isBlankString:_endTime]){
-        [UIUtils showInfoMessage:@"请输入作业截止时间"];
+        [UIUtils showInfoMessage:@"请输入作业截止时间" withVC:self];
         return;
     }
    
@@ -125,14 +125,14 @@
                     [self sendImageWithImage:_imageAry[0]];
                 }
             }else{
-                [UIUtils showInfoMessage:@"作业创建失败"];
+                [UIUtils showInfoMessage:@"作业创建失败" withVC:self];
             }
         }else{
-            [UIUtils showInfoMessage:@"作业创建失败"];
+            [UIUtils showInfoMessage:@"作业创建失败" withVC:self];
         }
         
     } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"创建数据失败，请检查网络"];
+        [UIUtils showInfoMessage:@"创建数据失败，请检查网络" withVC:self];
     }];
 }
 -(void)sendImageWithImage:(UIImage *)image{
@@ -150,11 +150,11 @@
             }else if(_imageAry.count == 1){
                 if (_failureAry.count>0) {
                      [self hideHud];
-                    [UIUtils showInfoMessage:[NSString stringWithFormat:@"有%ld张照片上传失败",_failureAry.count]];
+                    [UIUtils showInfoMessage:[NSString stringWithFormat:@"有%ld张照片上传失败",_failureAry.count] withVC:self];
                     
                 }else{
                      [self hideHud];
-                    [UIUtils showInfoMessage:@"上传成功"];
+                    [UIUtils showInfoMessage:@"上传成功" withVC:self];
                 }
             }
             
@@ -167,10 +167,10 @@
                 [_failureAry addObject:_imageAry[0]];
                 if (_failureAry.count>0) {
                      [self hideHud];
-                    [UIUtils showInfoMessage:[NSString stringWithFormat:@"有%ld张照片上传失败",_failureAry.count]];
+                    [UIUtils showInfoMessage:[NSString stringWithFormat:@"有%ld张照片上传失败",_failureAry.count] withVC:self];
                 }else{
                      [self hideHud];
-                    [UIUtils showInfoMessage:@"上传成功"];
+                    [UIUtils showInfoMessage:@"上传成功" withVC:self];
                 }
             }
         }
@@ -183,10 +183,10 @@
             [_failureAry addObject:_imageAry[0]];
             if (_failureAry.count>0) {
                  [self hideHud];
-                [UIUtils showInfoMessage:[NSString stringWithFormat:@"有%ld张照片上传失败",_failureAry.count]];
+                [UIUtils showInfoMessage:[NSString stringWithFormat:@"有%ld张照片上传失败",_failureAry.count] withVC:self];
             }else{
                  [self hideHud];
-                [UIUtils showInfoMessage:@"上传成功"];
+                [UIUtils showInfoMessage:@"上传成功" withVC:self];
             }
         }
     }];

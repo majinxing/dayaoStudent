@@ -76,7 +76,7 @@
                 dict = [data objectForKey:@"body"];
                 NSString * type = [NSString stringWithFormat:@"%@",[dict objectForKey:@"type"]];
                 if ([type isEqualToString:@"1"]) {
-                    [UIUtils showInfoMessage:@"您的身份是老师，本客户端只支持学生使用，请登录“律动校园”"];
+                    [UIUtils showInfoMessage:@"您的身份是老师，本客户端只支持学生使用，请登录“律动校园”" withVC:self];
                     [self hideHud];
                 }else{
                     [[Appsetting sharedInstance] sevaUserInfoWithDict:dict withStr:str];
@@ -96,7 +96,7 @@
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"密码错误" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                 [alertView show];
             }else{
-                [UIUtils showInfoMessage:@"登录失败"];
+                [UIUtils showInfoMessage:@"登录失败" withVC:self];
             }
             
         } failure:^(NSError *error) {

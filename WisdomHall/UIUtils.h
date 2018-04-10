@@ -78,7 +78,7 @@
 //发送群体会议通知
 +(void)sendMeetingInfo:(NSDictionary *)dict;
 //显示信息
-+(void)showInfoMessage:(NSString *)str;
++(void)showInfoMessage:(NSString *)str withVC:(UIViewController *)vc;
 
 +(NSString *)timeWithTimeIntervalString:(NSString *)timeString;
 //转换显示出mac

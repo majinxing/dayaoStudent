@@ -162,7 +162,7 @@
                 [self hideHud];
             }
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
+            [UIUtils showInfoMessage:@"发送数据失败，请检查网络" withVC:self];
 
             [self hideHud];
             
@@ -193,7 +193,7 @@
                 [self hideHud];
             }
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
+            [UIUtils showInfoMessage:@"发送数据失败，请检查网络" withVC:self];
 
             [self hideHud];
             
@@ -355,7 +355,7 @@
             [self.navigationController pushViewController:c animated:YES];
             
         }else{
-            [UIUtils showInfoMessage:@"不能呼叫自己"];
+            [UIUtils showInfoMessage:@"不能呼叫自己" withVC:self];
         }
         
     }else if ([platform isEqualToString:InteractionType_Vote]){
@@ -385,10 +385,10 @@
             self.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:z animated:YES];
         }else{
-            [UIUtils showInfoMessage:@"未获取会场信息，请刷新会场页面信息获取"];
+            [UIUtils showInfoMessage:@"未获取会场信息，请刷新会场页面信息获取" withVC:self];
         }
     }else {
-        [UIUtils showInfoMessage:@"未完待续"];
+        [UIUtils showInfoMessage:@"未完待续" withVC:self];
         return;
     }
     
@@ -501,9 +501,9 @@
     
     if (![UIUtils validateWithStartTime:_meetingModel.meetingTime withExpireTime:nil]) {
         if ([[NSString stringWithFormat:@"%@",_meetingModel.signStatus] isEqualToString:@"2"]) {
-            [UIUtils showInfoMessage:@"已签到,并已过签到时间不能上传照片"];
+            [UIUtils showInfoMessage:@"已签到,并已过签到时间不能上传照片" withVC:self];
         }else{
-            [UIUtils showInfoMessage:@"会议开始之后一定时间范围内才可以签到"];
+            [UIUtils showInfoMessage:@"会议开始之后一定时间范围内才可以签到" withVC:self];
         }
         [self hideHud];
         return;
@@ -586,14 +586,14 @@
 }
 -(void)alter:(NSString *) str{
     if ([str isEqualToString:@"1002"]) {
-        [UIUtils showInfoMessage:@"暂时不能签到"];
+        [UIUtils showInfoMessage:@"暂时不能签到" withVC:self];
         _meetingModel.signStatus = @"1";
 
     }else if ([str isEqualToString:@"1003"]){
-        [UIUtils showInfoMessage:@"已签到"];
+        [UIUtils showInfoMessage:@"已签到" withVC:self];
         _meetingModel.signStatus = @"2";
     }else if ([str isEqualToString:@"1004"]){
-        [UIUtils showInfoMessage:@"未参加课程"];
+        [UIUtils showInfoMessage:@"未参加课程" withVC:self];
         _meetingModel.signStatus = @"1";
     }else if ([str isEqualToString:@"0000"]){
         
@@ -609,14 +609,14 @@
         
         [[NSNotificationCenter defaultCenter] postNotification:notification];
     }else if ([str isEqualToString:@"5000"]){
-        [UIUtils showInfoMessage:@"签到失败"];
+        [UIUtils showInfoMessage:@"签到失败" withVC:self];
         _meetingModel.signStatus = @"1";
     }else if ([str isEqualToString:@"1008"]){
         _meetingModel.signStatus = @"1";
-        [UIUtils showInfoMessage:@"这台手机已经签到一次了，不能重复使用签到，谢谢"];
+        [UIUtils showInfoMessage:@"这台手机已经签到一次了，不能重复使用签到，谢谢" withVC:self];
     }else if ([str isEqualToString:@"9999"]){
         _meetingModel.signStatus = @"1";
-        [UIUtils showInfoMessage:@"系统错误"];
+        [UIUtils showInfoMessage:@"系统错误" withVC:self];
     }
     [_tableView reloadData];
 }
@@ -707,12 +707,12 @@
     [[NetworkRequest sharedInstance] POSTImage:FileUpload image:image dict:dict1 succeed:^(id data) {
         NSString * code = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
         if ([code isEqualToString:@"0000"]) {
-            [UIUtils showInfoMessage:@"上传成功"];
+            [UIUtils showInfoMessage:@"上传成功" withVC:self];
         }else{
-            [UIUtils showInfoMessage:@"上传失败"];
+            [UIUtils showInfoMessage:@"上传失败" withVC:self];
         }
     } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"上传失败，请检查网络"];
+        [UIUtils showInfoMessage:@"上传失败，请检查网络" withVC:self];
     }];
     //使用模态返回到软件界面
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
@@ -720,7 +720,7 @@
 -(void)codePressedDelegate:(UIButton *)btn{
     if ([btn.titleLabel.text isEqualToString:@"扫码签到"]) {
         if (![UIUtils validateWithStartTime:_meetingModel.meetingTime withExpireTime:nil]) {
-            [UIUtils showInfoMessage:@"会议开始之后一定时间范围内才可以签到"];
+            [UIUtils showInfoMessage:@"会议开始之后一定时间范围内才可以签到" withVC:self];
             return;
         }
         //     1、 获取摄像设备
@@ -794,10 +794,10 @@
                 q.dict = dict;
                 [self.navigationController pushViewController:q animated:YES];
             }else{
-                [UIUtils showInfoMessage:@"请在连接指定的DAYAO或XTU开头的WiFi下生成二维码"];
+                [UIUtils showInfoMessage:@"请在连接指定的DAYAO或XTU开头的WiFi下生成二维码" withVC:self];
             }
         }else{
-            [UIUtils showInfoMessage:@"请在连接指定的DAYAO或XTU开头的WiFi下生成二维码"];
+            [UIUtils showInfoMessage:@"请在连接指定的DAYAO或XTU开头的WiFi下生成二维码" withVC:self];
         }
 
     }
@@ -815,16 +815,16 @@
                 if ([UIUtils returnMckIsHave:_meetingModel.mck withAccept:loc_array]) {
                     [self sendSignInfo];
                 }else{
-                    [UIUtils showInfoMessage:@"未识别到指定路由器，请重新扫描或者连接指定WiFi签到"];
+                    [UIUtils showInfoMessage:@"未识别到指定路由器，请重新扫描或者连接指定WiFi签到" withVC:self];
                 }
             }else{
-                [UIUtils showInfoMessage:@"二维码时间失效，请重新扫描或者连接指定WiFi签到"];
+                [UIUtils showInfoMessage:@"二维码时间失效，请重新扫描或者连接指定WiFi签到" withVC:self];
             }
         }else{
-            [UIUtils showInfoMessage:@"二维码无效，请重新扫描或者连接指定WiFi签到"];
+            [UIUtils showInfoMessage:@"二维码无效，请重新扫描或者连接指定WiFi签到" withVC:self];
         }
     }else{
-        [UIUtils showInfoMessage:@"二维码无效，请重新扫描或者连接指定WiFi签到"];
+        [UIUtils showInfoMessage:@"二维码无效，请重新扫描或者连接指定WiFi签到" withVC:self];
     }
 }
 -(NSString *) md5:(NSString *)str

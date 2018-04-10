@@ -44,7 +44,7 @@
 }
 -(void)createText{
     if ([UIUtils isBlankString:_titleTextFile.text]) {
-        [UIUtils showInfoMessage:@"请填写试卷名字"];
+        [UIUtils showInfoMessage:@"请填写试卷名字" withVC:self];
     }else{
         
         NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_titleTextFile.text,@"name",@"2",@"status", nil];
@@ -53,7 +53,7 @@
             [self queryLibList];
         } failure:^(NSError *error) {
             NSLog(@"%@",error);
-            [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
+            [UIUtils showInfoMessage:@"发送数据失败，请检查网络" withVC:self];
 
         }];
     }
@@ -77,10 +77,10 @@
             self.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:tQVC animated:YES];
         }else{
-            [UIUtils showInfoMessage:@"创建失败"];
+            [UIUtils showInfoMessage:@"创建失败" withVC:self];
         }
     } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
+        [UIUtils showInfoMessage:@"发送数据失败，请检查网络" withVC:self];
     }];
 }
 -(QuestionBank *)seleCreateLib:(NSArray *)ary{

@@ -53,7 +53,7 @@
         }
         [_tableView reloadData];
     } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
 
     }];
 }
@@ -135,7 +135,7 @@
         }
         
     } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"请求失败，请检查网络"];
+        [UIUtils showInfoMessage:@"请求失败，请检查网络" withVC:self];
     }];
 }
 //-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

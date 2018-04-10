@@ -42,7 +42,7 @@
         [self hideHud];
     } failure:^(NSError *error) {
         NSLog(@"失败%@",error);
-        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
         [self hideHud];
     }];
 }

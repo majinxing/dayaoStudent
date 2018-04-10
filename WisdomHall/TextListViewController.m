@@ -78,7 +78,7 @@
         [self addNextBtnOrOnBtnView];
         [_tableView reloadData];
     } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
 
     }];
 }
@@ -132,17 +132,17 @@
         [[NetworkRequest sharedInstance] POST:HandIn dict:dict succeed:^(id data) {
             NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
             if ([str isEqualToString:@"0000"]) {
-                [UIUtils showInfoMessage:@"交卷成功"];
+                [UIUtils showInfoMessage:@"交卷成功" withVC:self];
             }else if ([str isEqualToString:@"6676"]){
-                [UIUtils showInfoMessage:@"考试状态必须是进行中，才能交卷"];
+                [UIUtils showInfoMessage:@"考试状态必须是进行中，才能交卷" withVC:self];
             }else{
-                [UIUtils showInfoMessage:@"交卷失败"];
+                [UIUtils showInfoMessage:@"交卷失败" withVC:self];
             }
             [self hideHud];
         } failure:^(NSError *error) {
             NSLog(@"%@",error);
             [self hideHud];
-            [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
+            [UIUtils showInfoMessage:@"发送数据失败，请检查网络" withVC:self];
         }];
        
     }]];

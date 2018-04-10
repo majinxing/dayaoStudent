@@ -143,10 +143,10 @@
             
             [self.navigationController popViewControllerAnimated:YES];
         }else{
-            [UIUtils showInfoMessage:@"系统错误"];
+            [UIUtils showInfoMessage:@"系统错误" withVC:self];
         }
     } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"发送数据失败，请检查网络"];
+        [UIUtils showInfoMessage:@"发送数据失败，请检查网络" withVC:self];
 
         [self hideHud];
         

@@ -254,7 +254,7 @@
         }
         [_tableView reloadData];
     } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
     }];
     
 }
@@ -392,7 +392,7 @@
             [self addPickView];
             
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
         }];
     }else if (sender.tag == 2){
         if ([UIUtils isBlankString:[NSString stringWithFormat:@"%@",_school.departmentId]]) {
@@ -418,7 +418,7 @@
             [self addPickView];
             
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
         }];
     }else if (sender.tag == 3){
         if ([UIUtils isBlankString:[NSString stringWithFormat:@"_school.departmentId"]]) {
@@ -442,7 +442,7 @@
             [self addPickView];
             
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
 
         }];
         
@@ -488,7 +488,7 @@
             }
             [_tableView reloadData];
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
 
         }];
         
@@ -524,7 +524,7 @@
             }
             [_tableView reloadData];
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
 
         }];
     }else{
@@ -548,7 +548,7 @@
             }
             [_tableView reloadData];
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+            [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
 
         }];
     }

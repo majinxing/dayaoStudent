@@ -88,7 +88,7 @@
         if (!error) {
             [self.navigationController popViewControllerAnimated:YES];
         }else{
-            [UIUtils showInfoMessage:@"申请失败或者已经在聊天组中"];
+            [UIUtils showInfoMessage:@"申请失败或者已经在聊天组中" withVC:self];
         }
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {

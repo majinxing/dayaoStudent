@@ -205,19 +205,19 @@ static NSString * cellIdentifier = @"cellIdentifier";
         [[NetworkRequest sharedInstance] POST:JoinMeeting dict:dict succeed:^(id data) {
             NSString * str = [[data objectForKey:@"header"] objectForKey:@"code"];
             if ([[NSString stringWithFormat:@"%@",str] isEqualToString:@"6680"]) {
-                [UIUtils showInfoMessage:@"该用户已经添加,不能重复添加"];
+                [UIUtils showInfoMessage:@"该用户已经添加,不能重复添加" withVC:self];
             }else if([[NSString stringWithFormat:@"%@",str] isEqualToString:@"0000"]){
-                [UIUtils showInfoMessage:@"加入成功"];
+                [UIUtils showInfoMessage:@"加入成功" withVC:self];
                 [self headerRereshing];
                 [_join removeFromSuperview];
                 _join = nil;
             }else{
-                [UIUtils showInfoMessage:@"会议不存在或会议被删除"];
+                [UIUtils showInfoMessage:@"会议不存在或会议被删除" withVC:self];
             }
             [self hideHud];
 
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"加入失败，请检查网络"];
+            [UIUtils showInfoMessage:@"加入失败，请检查网络" withVC:self];
             [self hideHud];
 
         }];
@@ -259,7 +259,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
         }
         
     } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
 
         [self hideHud];
         
@@ -326,7 +326,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
         
         [_collection reloadData];
     } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
+        [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
 
         [self hideHud];
         

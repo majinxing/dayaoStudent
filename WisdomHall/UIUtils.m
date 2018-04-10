@@ -878,9 +878,24 @@
     
 }
 
-+(void)showInfoMessage:(NSString *)str{
-    UIAlertView *alter = [[UIAlertView alloc] initWithTitle:nil message:str delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-    [alter show];
++(void)showInfoMessage:(NSString *)str withVC:(UIViewController *)vc{
+    //显示提示框
+    //过时
+    //    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Title" message:@"message" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"ok", nil];
+    //    [alert show];
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"提示"
+                                                                   message:str
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action) {
+                                                             //响应事件
+                                                         }];
+    
+    [alert addAction:cancelAction];
+    
+    [vc presentViewController:alert animated:YES completion:nil];
 }
 //时间戳化时间
 +(NSString *)getTheTimeStamp:(NSString *)time{
@@ -1415,7 +1430,7 @@
 +(NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString {
     
     if (jsonString == nil) {
-        [UIUtils showInfoMessage:@"扫描二维码有误，请重新扫描或者连接指定WiFi签到"];
+        [UIUtils showInfoMessage:@"扫描二维码有误，请重新扫描或者连接指定WiFi签到" withVC:self];
         return nil;
         
     }
@@ -1433,7 +1448,7 @@
     if(err) {
         
         NSLog(@"json解析失败：%@",err);
-        [UIUtils showInfoMessage:@"扫描二维码失效，请重新扫描或者连接指定WiFi签到"];
+        [UIUtils showInfoMessage:@"扫描二维码失效，请重新扫描或者连接指定WiFi签到" withVC:self];
         return nil;
         
     }

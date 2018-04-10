@@ -111,7 +111,7 @@
         [self.navigationController pushViewController:vc animated:YES];
         self.hidesBottomBarWhenPushed = NO;
     }else{
-        [UIUtils showInfoMessage:@"正在加紧步伐开发中，敬请期待"];
+        [UIUtils showInfoMessage:@"正在加紧步伐开发中，敬请期待" withVC:self];
     }
 }
 

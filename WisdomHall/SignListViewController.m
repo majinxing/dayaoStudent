@@ -55,7 +55,7 @@
             [self alter:[[data objectForKey:@"header"] objectForKey:@"code"]];
             
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"签到失败，请检查网络"];
+            [UIUtils showInfoMessage:@"签到失败，请检查网络" withVC:self];
 
             NSLog(@"失败：%@",error);
         }];
@@ -65,7 +65,7 @@
         [[NetworkRequest sharedInstance] POST:ClassSign dict:dict succeed:^(id data) {
             NSLog(@"succedd:%@",data);
         } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"签到失败，请检查网络"];
+            [UIUtils showInfoMessage:@"签到失败，请检查网络" withVC:self];
 
             NSLog(@"失败：%@",error);
         }];
