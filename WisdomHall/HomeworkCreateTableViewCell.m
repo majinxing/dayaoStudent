@@ -31,11 +31,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     _sendHomework.backgroundColor = [[Appsetting sharedInstance] getThemeColor];
-    _imageBtn2.selected = NO;
-    _imageBtn3.selected = NO;
-    _imageBtn4.selected = NO;
-    _imageBtn5.selected = NO;
-    _imageBtn6.selected = NO;
+    [_imageBtn2 setEnabled:NO];
+    [_imageBtn3 setEnabled:NO];
+    [_imageBtn4 setEnabled:NO];           
+    [_imageBtn5 setEnabled:NO];
+    [_imageBtn6 setEnabled:NO];
     
     _textFile.delegate = self;
     
@@ -71,6 +71,7 @@
     if (!edit) {
         for (int i=0; i<ary.count; i++) {
             UIImageView * image = _imageAry[i];
+            
             UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
             
             NSString * baseUrl = user.host;

@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+
 #import "ClassModel.h"
 
 @interface CourseDetailsViewController : UIViewController
+
 @property (nonatomic,strong)ClassModel * c;
+
 @end

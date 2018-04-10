@@ -116,6 +116,7 @@
 #define SchoolCommunity             @"校圈"
 #define AroundSchool                @"学校周边"
 #define Community                   @"社团"
+#define SchoolRun                   @"校办"
 
 #define ThemeColorChangeNotification @"ThemeColorChangeNotification"//更改主题的通知
 

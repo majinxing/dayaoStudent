@@ -16,6 +16,7 @@
 #import "GroupListViewController.h"
 #import "DYHeader.h"
 #import "ChangeThemeInfoViewController.h"
+#import "StatisticalSelfUIViewController.h"
 
 @interface PersonalCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView * tableview;
@@ -60,7 +61,7 @@
     if (section == 0) {
         return 1;
     }else if (section == 1){
-        return 6;
+        return 7;
     }
     return 0;
 }
@@ -87,21 +88,26 @@
             [self.navigationController pushViewController:g animated:YES];
             self.hidesBottomBarWhenPushed = NO;
         }else if (indexPath.row == 2){
+            StatisticalSelfUIViewController * vc = [[StatisticalSelfUIViewController alloc] init];
+            self.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            self.hidesBottomBarWhenPushed = NO;
+        }else if (indexPath.row == 3){
             ChangeThemeInfoViewController * vc = [[ChangeThemeInfoViewController alloc] init];
             self.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
             self.hidesBottomBarWhenPushed = NO;
-        }else if (indexPath.row == 3) {
+        }else if (indexPath.row == 4) {
             SystemSettingsViewController * systemVC = [[SystemSettingsViewController alloc] init];
             self.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:systemVC animated:YES];
             self.hidesBottomBarWhenPushed = NO;
-        }else if (indexPath.row == 4){
+        }else if (indexPath.row == 5){
             CompanyProfileViewController *cVC = [[CompanyProfileViewController alloc] init];
             self.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:cVC animated:YES];
             self.hidesBottomBarWhenPushed = NO;
-        }else if (indexPath.row == 5){
+        }else if (indexPath.row == 6){
             FeedbackViewController * f = [[FeedbackViewController alloc] init];
             self.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:f animated:YES];

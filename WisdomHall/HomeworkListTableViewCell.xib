@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="331" height="146"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="331" height="145.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="331" height="146"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dbu-v0-gKa">
@@ -50,9 +50,21 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTE-et-1pc">
+                        <rect key="frame" x="110" y="123.5" width="211" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="4Qg-7A-V0C"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="kTE-et-1pc" firstAttribute="top" secondItem="8Az-FL-zDZ" secondAttribute="top" id="3pT-08-C5c"/>
                     <constraint firstItem="Dbu-v0-gKa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="5z6-Ga-AYc"/>
+                    <constraint firstItem="kTE-et-1pc" firstAttribute="leading" secondItem="8Az-FL-zDZ" secondAttribute="trailing" constant="20" id="7wo-QM-ZHS"/>
+                    <constraint firstAttribute="trailing" secondItem="kTE-et-1pc" secondAttribute="trailing" constant="10" id="99d-c0-Whe"/>
                     <constraint firstAttribute="trailing" secondItem="Dbu-v0-gKa" secondAttribute="trailing" constant="20" id="Fgs-nF-iwW"/>
                     <constraint firstItem="8Az-FL-zDZ" firstAttribute="leading" secondItem="MtM-Je-9TI" secondAttribute="trailing" constant="5" id="Pxe-j3-ztc"/>
                     <constraint firstItem="MtM-Je-9TI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="RiT-5k-k0L"/>
@@ -70,6 +82,7 @@
                 <outlet property="homeworkInfo" destination="akr-i0-aLW" id="dTe-AG-Iv0"/>
                 <outlet property="homeworkName" destination="Dbu-v0-gKa" id="iQN-pX-WuQ"/>
                 <outlet property="imageNumber" destination="8Az-FL-zDZ" id="cwW-Vx-nCT"/>
+                <outlet property="timeLabel" destination="kTE-et-1pc" id="vkk-6W-Fek"/>
             </connections>
             <point key="canvasLocation" x="39.5" y="105"/>
         </tableViewCell>

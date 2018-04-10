@@ -109,8 +109,7 @@
         [_meetingModel setSignPeopleWithNSArray:ary];
         [_tableView reloadData];
     } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
-
+//        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
     }];
 }
 -(void)addTableView{
@@ -622,6 +621,10 @@
     [_tableView reloadData];
 }
 -(void)signPictureUpdate{
+    if (![[NSString stringWithFormat:@"%@",_meetingModel.signWay] isEqualToString:@"9"]) {
+        return;
+    }
+
     if (!_photoView) {
         _photoView = [[PhotoPromptBox alloc] initWithBlack:^(NSString * str) {
             [_photoView removeFromSuperview];

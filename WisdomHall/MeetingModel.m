@@ -31,7 +31,7 @@
     self.meetingPlace = [dict objectForKey:@"roomName"];
     //    self.meetingPlaceId = [dict objectForKey:@"roomId"];
     //    self.meetingTotal = [dict objectForKey:@"total"];
-    //    self.signWay = [dict objectForKey:@"signType"];
+    self.signWay = [dict objectForKey:@"signType"];
     //    self.imageUrl = [dict objectForKey:@"url"];
     //    self.meetingStatus = [dict objectForKey:@"status"];
     self.meetingName = [dict objectForKey:@"name"];

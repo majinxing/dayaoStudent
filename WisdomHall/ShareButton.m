@@ -143,6 +143,14 @@
         UIImage * i = [[Appsetting sharedInstance] grayscale:[UIImage imageNamed:@"问答"]];
         [self setImage:i forState:UIControlStateNormal];
     }
+    if ([type isEqualToString:SchoolRun]) {
+//        UIImage * i = [[Appsetting sharedInstance] grayscale:[UIImage imageNamed:@"校办"]];
+        [self setImage:[UIImage imageNamed:@"校办"] forState:UIControlStateNormal];
+    }
+    if ([type isEqualToString:CampusLife]) {
+//        UIImage * i = [[Appsetting sharedInstance] grayscale:[UIImage imageNamed:@"生活"]];
+        [self setImage:[UIImage imageNamed:@"生活"] forState:UIControlStateNormal];
+    }
     if ([type isEqualToString:SchoolCommunity]) {
         [self setImage:[UIImage imageNamed:@"ic_school_circle"] forState:UIControlStateNormal];
     }
@@ -161,6 +169,7 @@
         UIImage * i = [[Appsetting sharedInstance] grayscale:[UIImage imageNamed:@"作业"]];
         [self setImage:i forState:UIControlStateNormal];
     }
+    
     [self setTitle:type forState:UIControlStateNormal];
 }
 

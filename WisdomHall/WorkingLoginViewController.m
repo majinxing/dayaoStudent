@@ -158,9 +158,11 @@
                     
                     [self saveInfo];
                     
-                    DYTabBarViewController *rootVC = [[DYTabBarViewController alloc] init];
-                    
-                    [UIApplication sharedApplication].keyWindow.rootViewController = rootVC;
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        DYTabBarViewController *rootVC = [[DYTabBarViewController alloc] init];
+                        
+                        [UIApplication sharedApplication].keyWindow.rootViewController = rootVC;
+                    });
                 }
                 [self hideHud];
             }

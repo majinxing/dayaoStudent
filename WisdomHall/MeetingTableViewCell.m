@@ -245,7 +245,7 @@
             [_code setBackgroundColor:[UIColor colorWithHexString:@"#29a7e1"]];
         }
     }else if ([[NSString stringWithFormat:@"%@",meetModel.signStatus] isEqualToString:@"3"]){
-        [_signBtn setTitle:@"签到状态：正在签到，请不要退出界面" forState:UIControlStateNormal];
+        [_signBtn setTitle:@"正在签到，请不要退出界面" forState:UIControlStateNormal];
         [_code setTitle:@"扫码签到" forState:UIControlStateNormal];
 
         [_signBtn setEnabled:NO];

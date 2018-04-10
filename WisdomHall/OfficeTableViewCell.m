@@ -89,10 +89,10 @@
     NSArray * array = @[
                         Meeting,
                         Announcement,
-                        Statistical,
                         SchoolCommunity,
-                        AroundSchool,
-                        Community
+                        CampusLife,
+                        Community,
+                        SchoolRun
                         ];
     NSArray * lineAry = @[_fLineView,_sLineView,_tLineView];
     //水平间距

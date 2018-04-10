@@ -41,7 +41,7 @@ static dispatch_once_t predicate;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self addChildViewControllerWithClassname:[OfficeViewController description] imagename:@"办公_normal" title:@"办公" withSelectImageName:@"办公"];
+    [self addChildViewControllerWithClassname:[OfficeViewController description] imagename:@"办公_normal" title:@"首页" withSelectImageName:@"办公"];
     
     [self addChildViewControllerWithClassname:[SignInViewController description] imagename:@"课程(1)" title:@"课程" withSelectImageName:@"课程"];
     

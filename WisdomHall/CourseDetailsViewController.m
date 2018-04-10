@@ -248,6 +248,10 @@
 }
 
 -(void)signPictureUpdate{
+    if (![[NSString stringWithFormat:@"%@",_c.signWay] isEqualToString:@"9"]) {
+        [UIUtils showInfoMessage:@"已签到"];
+        return;
+    }
     if (!_photoView) {
         _photoView = [[PhotoPromptBox alloc] initWithBlack:^(NSString * str) {
             [_photoView removeFromSuperview];
@@ -686,7 +690,7 @@
 }
 -(void)signBtnPressedDelegate:(UIButton *)btn{
     [self showHudInView:self.view hint:NSLocalizedString(@"正在加载数据", @"Load data...")];
-//    [self signPictureUpdate];
+
 
     if (![UIUtils validateWithStartTime:_c.actStarTime withExpireTime:nil]) {
         if ([[NSString stringWithFormat:@"%@",_c.signStatus] isEqualToString:@"2"]) {
@@ -698,6 +702,8 @@
         return;
     }else{
         if ([[NSString stringWithFormat:@"%@",_c.signStatus] isEqualToString:@"2"]) {
+//            [UIUtils showInfoMessage:@"已签到"];
+
             [self hideHud];
             [self signPictureUpdate];
             return;
