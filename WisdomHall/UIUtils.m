@@ -764,8 +764,8 @@
     [c getOut];
     WorkingLoginViewController * userLogin = [[WorkingLoginViewController alloc] init];
     [UIApplication sharedApplication].keyWindow.rootViewController =[[UINavigationController alloc] initWithRootViewController:userLogin];
-    UIAlertView * alter = [[UIAlertView alloc] initWithTitle:nil message:@"账号在另一台设备登录，请重新登录或修改密码" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-    [alter show];
+    [UIUtils showInfoMessage:@"账号在另一台设备登录，请重新登录或修改密码" withVC:userLogin];
+
     return ;
     
 }

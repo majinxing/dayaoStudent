@@ -50,8 +50,8 @@
 
     for (int i = 0; i<_textAry.count; i++) {
         if ([UIUtils isBlankString:_textAry[i]]) {
-            UIAlertView * alter = [[UIAlertView alloc] initWithTitle:nil message:@"请把信息填写完整在提交" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-            [alter show];
+            [UIUtils showInfoMessage:@"请把信息填写完整在提交" withVC:self];
+            
             return;
         }
     }
@@ -66,7 +66,12 @@
         NSLog(@"%@",data);
         UIAlertView * alter = [[UIAlertView alloc] initWithTitle:nil message:@"提交成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alter show];
-        [self.navigationController popViewControllerAnimated:YES];
+        [UIUtils showInfoMessage:@"提交成功" withVC:self];
+        
+        [self dismissViewControllerAnimated:YES completion:^{
+            [self.navigationController popViewControllerAnimated:YES];
+
+        }];
         
     } failure:^(NSError *error) {
         NSLog(@"%@",error);

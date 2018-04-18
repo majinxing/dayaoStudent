@@ -93,8 +93,8 @@
             }else if([[d objectForKey:@"code"] isEqualToString:@"1001"]){
                 [self hideHud];
                 
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"密码错误" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                [alertView show];
+                [UIUtils showInfoMessage:@"密码错误" withVC:self];
+                
             }else{
                 [UIUtils showInfoMessage:@"登录失败" withVC:self];
             }
@@ -102,15 +102,13 @@
         } failure:^(NSError *error) {
             [self hideHud];
             
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"服务器连接失败" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alertView show];
+            [UIUtils showInfoMessage:@"请检查网络连接状态" withVC:self];
             
         }];
     }else{
         [self hideHud];
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"请输入正确的手机号" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        [alertView show];
+        [UIUtils showInfoMessage:@"请输入正确的手机号" withVC:self];
+      
     }
     
 }

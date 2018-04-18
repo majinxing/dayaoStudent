@@ -219,7 +219,7 @@
         _c.signStatus = @"1";
     }else if ([str isEqualToString:@"0000"]){
         
-//        [UIUtils showInfoMessage:@"签到成功"];
+//        [UIUtils showInfoMessage:@"签到成功" withVC:self];
         _c.signStatus = @"2";
         _selfSignStatus = @"签到状态：已签到";
         [self signPictureUpdate];
@@ -347,18 +347,7 @@
 }
 #pragma mark ALter
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (alertView.tag == 1) {
-        if (buttonIndex == 0) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=WIFI"]];
-        }else if(buttonIndex == 1){
-            [alertView setHidden:YES];
-        }
-    }else if (alertView.tag == 2){
-        if (buttonIndex == 0) {
-            NSURL *url = [NSURL URLWithString:@"prefs:root=WIFI"];
-            [[UIApplication sharedApplication] openURL:url];
-        }
-    }else if (alertView.tag == 1001){
+    if (alertView.tag == 1001){
         if (buttonIndex == 1) {
             
             NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_c.courseDetailId,@"courseDetailId",_c.sclassId,@"id",@"2",@"courseType", nil];
@@ -606,7 +595,9 @@
             self.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:z animated:YES];
         }else{
-            [UIUtils showInfoMessage:@"获取信息缺失请重新获取" withVC:self];
+            NSString * str1 = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+            
+            [UIUtils showInfoMessage:str1 withVC:self];
         }
         [self hideHud];
 
@@ -729,21 +720,40 @@
             [self sendSignInfo];
             
         }else{
-//            NSString * s =[UIUtils returnMac:_c.mck];
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"请到WiFi列表连接指定的DAYAO或XTU开头的WiFi，若不能跳转请主动在WiFi页面连接无线信号再返回app进行签到，签到完成之后请连接数据流量保证数据传输"] message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: @"取消", nil];
-            alertView.delegate = self;
-            alertView.tag = 1;
+            NSString * str = [NSString stringWithFormat:@"请到WiFi列表连接指定的DAYAO或XTU开头的WiFi，若不能跳转请主动在WiFi页面连接无线信号再返回app进行签到，点击签到按钮若网络情况不好，请断开WiFi连接数据流量再次点击签到"];
+            
+            UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:str preferredStyle:(UIAlertControllerStyleAlert)];
+            
+            UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=WIFI"]];
+                
+            }];
+            
+            [alertC addAction:alertA];
+            
+            [self presentViewController:alertC animated:YES completion:nil];
             [self hideHud];
-            [alertView show];
+            
         }
         
     }else{
 //        NSString * s =[UIUtils returnMac:_c.mck];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"请到WiFi列表连接指定的DAYAO或XTU开头的WiFi，若不能跳转请主动在WiFi页面连接无线信号再返回app进行签到，签到完成之后请连接数据流量保证数据传输"] message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: @"取消", nil];
-        alertView.delegate = self;
-        alertView.tag = 1;
+        NSString * str = [NSString stringWithFormat:@"请到WiFi列表连接指定的DAYAO或XTU开头的WiFi，若不能跳转请主动在WiFi页面连接无线信号再返回app进行签到，点击签到按钮若网络情况不好，请断开WiFi连接数据流量再次点击签到"];
+        
+        UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:str preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=WIFI"]];
+            
+        }];
+        
+        [alertC addAction:alertA];
+        
+        [self presentViewController:alertC animated:YES completion:nil];
         [self hideHud];
-        [alertView show];
+        
     }
 }
 -(void)signSendIng{
@@ -760,9 +770,20 @@
         [self hideHud];
     } failure:^(NSError *error) {
         NSLog(@"失败：%@",error);
-        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:nil message:@"签到失败请重新签到，请保证数据流量的连接" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        alter.tag = 2;
-        [alter show];
+        NSString * str = [NSString stringWithFormat:@"签到失败请重新签到，请保证数据流量的连接"];
+        
+        UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:str preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=WIFI"]];
+            
+        }];
+        
+        [alertC addAction:alertA];
+        
+        [self presentViewController:alertC animated:YES completion:nil];
+        
         [self hideHud];
         _c.signStatus = @"4";
         [_tableView reloadData];
@@ -871,10 +892,10 @@
                 [UIUtils showInfoMessage:@"二维码失效，请重新扫描或者连接指定WiFi签到" withVC:self];
             }
         }else{
-            [UIUtils showInfoMessage:@"二维码失效，请重新扫描或者连接指定WiFi签到" withVC:self];
+            [UIUtils showInfoMessage:@"二维码无效，请重新扫描或者连接指定WiFi签到" withVC:self];
         }
     }else{
-        [UIUtils showInfoMessage:@"二维码失效，请重新扫描或者连接指定WiFi签到" withVC:self];
+        [UIUtils showInfoMessage:@"二维码无效，请重新扫描或者连接指定WiFi签到" withVC:self];
     }
     
 }

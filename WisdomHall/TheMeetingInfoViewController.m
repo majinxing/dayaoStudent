@@ -536,12 +536,19 @@
             [self sendSignInfo];
         }else{
             
-            NSString * s = [UIUtils returnMac:_meetingModel.mck];
+            NSString * str = [NSString stringWithFormat:@"请到WiFi列表连接指定的DAYAO或XTU开头的WiFi，若不能跳转请主动在WiFi页面连接无线信号再返回app进行签到，点击签到按钮若网络情况不好，请断开WiFi连接数据流量再次点击签到"];
             
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"请到WiFi列表连接指定的DAYAO或XTU开头的WiFi,再点击签到，若不能跳转请主动在WiFi页面连接无线信号再返回app进行签到，签到完成之后请连接数据流量保证数据传输"] message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: @"取消", nil];
-            alertView.delegate = self;
-            alertView.tag = 1;
-            [alertView show];
+            UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:str preferredStyle:(UIAlertControllerStyleAlert)];
+            
+            UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=WIFI"]];
+                
+            }];
+            
+            [alertC addAction:alertA];
+            
+            [self presentViewController:alertC animated:YES completion:nil];
             [self hideHud];
         }
         
@@ -551,11 +558,19 @@
         [self sendSignInfo];
         
     }else{
-        NSString * s = [UIUtils returnMac:_meetingModel.mck];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"请到WiFi列表连接指定DAYAO或XTU开头的WiFi,再点击签到，若不能跳转请主动在WiFi页面连接无线信号再返回app进行签到，签到完成之后请连接数据流量保证数据传输"] message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: @"取消", nil];
-        alertView.delegate = self;
-        alertView.tag = 1;
-        [alertView show];
+        NSString * str = [NSString stringWithFormat:@"请到WiFi列表连接指定的DAYAO或XTU开头的WiFi，若不能跳转请主动在WiFi页面连接无线信号再返回app进行签到，点击签到按钮若网络情况不好，请断开WiFi连接数据流量再次点击签到"];
+        
+        UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:str preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=WIFI"]];
+            
+        }];
+        
+        [alertC addAction:alertA];
+        
+        [self presentViewController:alertC animated:YES completion:nil];
         [self hideHud];
     }
 }
@@ -575,10 +590,19 @@
         [self hideHud];
 
     } failure:^(NSError *error) {
-        NSLog(@"失败：%@",error);
-        UIAlertView * alter = [[UIAlertView alloc] initWithTitle:nil message:@"无网络，请保证数据流量的连接后再次点击签到" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        alter.tag = 2;
-        [alter show];
+        NSString * str = [NSString stringWithFormat:@"签到失败请重新签到，请保证数据流量的连接"];
+        
+        UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:str preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=WIFI"]];
+            
+        }];
+        
+        [alertC addAction:alertA];
+        
+        [self presentViewController:alertC animated:YES completion:nil];
         [self hideHud];
         _meetingModel.signStatus = @"4";
         [_tableView reloadData];
@@ -599,7 +623,7 @@
         
         _meetingModel.signStatus = @"2";
         
-//        [UIUtils showInfoMessage:@"签到成功"];
+//        [UIUtils showInfoMessage:@"签到成功" withVC:self];
         [self signPictureUpdate];
         
         [_tableView reloadData];
@@ -622,6 +646,8 @@
 }
 -(void)signPictureUpdate{
     if (![[NSString stringWithFormat:@"%@",_meetingModel.signWay] isEqualToString:@"9"]) {
+        [UIUtils showInfoMessage:@"已签到" withVC:self];
+
         return;
     }
 

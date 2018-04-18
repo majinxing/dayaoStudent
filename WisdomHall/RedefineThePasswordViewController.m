@@ -35,9 +35,9 @@
     if ([_password.text isEqualToString:_confirmPassword.text]) {
         if ([UIUtils isBlankString:_password.text]) {
             [self hideHud];
+            
+            [UIUtils showInfoMessage:@"密码不能为空" withVC:self];
 
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"密码不能为空" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alertView show];
         }else{
 
             NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_phoneNumber,@"phone",_password.text,@"password",nil];
@@ -48,23 +48,24 @@
 
                 for (UIViewController *controller in self.navigationController.viewControllers) {
                     if ([controller isKindOfClass:[TheLoginViewController class]]) {
-                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"修改密码成功请登录" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                        [alertView show];
-                        [self.navigationController popToViewController:controller animated:YES];
+                        
+                        [UIUtils showInfoMessage:@"修改密码成功请登录" withVC:self];
+                        [self dismissViewControllerAnimated:YES completion:^{
+                            [self.navigationController popToViewController:controller animated:YES];
+                        }];
+                       
                     }
                 }
 //                DYTabBarViewController *rootVC = [[DYTabBarViewController alloc] init];
 //                [UIApplication sharedApplication].keyWindow.rootViewController = rootVC;
                 
             } failure:^(NSError *error) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"修改密码失败" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                [alertView show];
+                [UIUtils showInfoMessage:@"请检查网络的连接状态" withVC:self];
 
             }];
         }
     }else{
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"两次输入密码不一致" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        [alertView show];
+        [UIUtils showInfoMessage:@"两次输入密码不一致" withVC:self];
     }
     
 }

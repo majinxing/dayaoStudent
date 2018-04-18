@@ -61,8 +61,8 @@
         [self startTimer];
         
     }else{
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"请输入正确的手机号" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        [alertView show];
+        [UIUtils showInfoMessage:@"请输入正确的手机号" withVC:self];
+
     }
 }
 - (void)startTimer
@@ -127,8 +127,8 @@
             [self.navigationController pushViewController:redeFineVC animated:YES];
         }else
         {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"请输入正确的验证码" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alertView show];
+            [UIUtils showInfoMessage:@"请输入正确的验证码" withVC:self];
+
         }
     }];
 }

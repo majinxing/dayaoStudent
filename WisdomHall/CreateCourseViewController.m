@@ -146,16 +146,19 @@
         NSLog(@"%@",data);
         NSString * str = [[data objectForKey:@"header"] objectForKey:@"message"];
         if ([str isEqualToString:@"成功"]) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"创建成功" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alertView show];
-            [alertView setHidden:YES];
             // 2.创建通知
             NSNotification *notification =[NSNotification notificationWithName:@"UpdateTheClassPage" object:nil userInfo:nil];
             // 3.通过 通知中心 发送 通知
             
             [[NSNotificationCenter defaultCenter] postNotification:notification];
             
-            [self.navigationController popViewControllerAnimated:YES];
+            [UIUtils showInfoMessage:@"创建成功" withVC:self];
+            [self dismissViewControllerAnimated:YES completion:^{
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
+            
+            
+            
         }else if ([str isEqualToString:@"系统错误"]){
             [UIUtils showInfoMessage:@"系统错误" withVC:self];
         }else{
@@ -276,8 +279,8 @@
         if ([str isEqualToString:@"星期一"]) {
            [_textFileAry setObject:[NSString stringWithFormat:@"%d-%@-%@",2017+_year,month,day] atIndexedSubscript:7];
         }else{
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"选择的日期并不是周一，请重新选择日期" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alertView show];
+            [UIUtils showInfoMessage:@"选择的日期并不是周一，请重新选择日期" withVC:self];
+            
             
         }
         _year1 = _year;

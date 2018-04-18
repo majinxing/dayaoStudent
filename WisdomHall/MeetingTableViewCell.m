@@ -54,6 +54,14 @@
     _meetCode.text = [NSString stringWithFormat:@"邀请码：%@",meetModel.meetingId];
     _meetPlace.text = [NSString stringWithFormat:@"地址：%@",meetModel.meetingPlace];
     _teacherPicture.image = [UIImage imageNamed:@"meet"];
+    
+    if (![UIUtils isBlankString:[NSString stringWithFormat:@"%@",meetModel.signStatus]]) {
+        if ([[NSString stringWithFormat:@"%@",meetModel.signStatus] isEqualToString:@"2"]) {
+            _signCode.frame = CGRectMake(APPLICATION_WIDTH/2+30, 40, 50, 50);
+            _signCode.image = [UIImage imageNamed:@"ic_sgin_success"];
+            [self.contentView addSubview:_signCode];
+        }
+    }
 }
 -(void)addFirstCOntentViewWithClassModel:(ClassModel *)classModel{
     _meetName.text = [NSString stringWithFormat:@"课程名：%@",classModel.name];

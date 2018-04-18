@@ -17,6 +17,7 @@
 #import "JSMSSDK.h"
 #import "RegisterViewController.h"
 #import "SchoolModel.h"
+#import "ForgotPasswordViewController.h"
 
 #define AnimateTime 0.25f   // 下拉动画时间
 
@@ -201,17 +202,46 @@
     TheLoginViewController * login = [[TheLoginViewController alloc] init];
     [self.navigationController pushViewController:login animated:YES];
 }
+- (IBAction)forgetPassword:(id)sender {
+    ForgotPasswordViewController * forgetVC = [[ForgotPasswordViewController alloc] init];
+    // self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
+    // 方式二
+    UIBarButtonItem * backButtonItem = [[UIBarButtonItem alloc] init];
+    backButtonItem.title = @"返回";
+    self.navigationItem.backBarButtonItem = backButtonItem;
+    [self.navigationController pushViewController:forgetVC animated:YES];
+}
 
 - (IBAction)selectBtnPressed:(UIButton *)sender {
     [self.view addSubview:_listView]; // 将下拉视图添加到控件的俯视图上
-    
-    if (_titleAry.count>0) {
-        
-    }else{
-        [self getSchoolList];
-    }
+
     if(_selectSchoolBtnStatus == NO) {
-        [self showDropDown];
+        if (_titleAry.count>0) {
+            [self showDropDown];
+        }else{
+            [self showHudInView:self.view hint:NSLocalizedString(@"正在加载数据", @"Load data...")];
+            [[NetworkRequest sharedInstance] GETSchool:SchoolList dict:nil succeed:^(id data) {
+                NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+                if ([str isEqualToString:@"成功"]) {
+                    NSArray * ary = [data objectForKey:@"body"];
+                    for (int i = 0; i<ary.count; i++) {
+                        SchoolModel * s = [[SchoolModel alloc] init];
+                        [s setInfoWithDict:ary[i]];
+                        [_titleAry addObject:s];
+                    }
+                    
+                    [self showDropDown];
+                    
+                }else{
+                    [UIUtils showInfoMessage:str withVC:self];
+                }
+                [self hideHud];
+                [_tableView reloadData];
+            } failure:^(NSError *error) {
+                [self hideHud];
+                [UIUtils showInfoMessage:@"网络连接失败，请检查网络" withVC:self];
+            }];
+        }
     }
     else {
         [self hideDropDown];

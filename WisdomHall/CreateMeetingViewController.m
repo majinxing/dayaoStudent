@@ -84,8 +84,8 @@
     
     for (int i = 0; i<_textFileAry.count; i++) {
         if ([UIUtils isBlankString:_textFileAry[i]]) {
-            UIAlertView * alter = [[UIAlertView alloc] initWithTitle:nil message:@"请填写完整会议信息" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-            [alter show];
+            [UIUtils showInfoMessage:@"请填写完整会议信息" withVC:self];
+            
             return;
         }
     }
@@ -135,13 +135,14 @@
             
             [[NSNotificationCenter defaultCenter] postNotification:notification];
             
-            UIAlertView * alter = [[UIAlertView alloc] initWithTitle:nil message:@"会议创建成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-            
-            [alter show];
+            [UIUtils showInfoMessage:@"会议创建成功" withVC:self];
+            [self dismissViewControllerAnimated:YES completion:^{
+                [self.navigationController popViewControllerAnimated:YES];
+
+            }];
             
 //            [UIUtils sendMeetingInfo:sendDict]; 发送环信消息，提示会议创建成功
             
-            [self.navigationController popViewControllerAnimated:YES];
         }else{
             [UIUtils showInfoMessage:@"系统错误" withVC:self];
         }

@@ -396,8 +396,8 @@
         }];
     }else if (sender.tag == 2){
         if ([UIUtils isBlankString:[NSString stringWithFormat:@"%@",_school.departmentId]]) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"请先选择学校" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alertView show];
+            [UIUtils showInfoMessage:@"请选择学校" withVC:self];
+            
             return;
         }
         
@@ -422,8 +422,8 @@
         }];
     }else if (sender.tag == 3){
         if ([UIUtils isBlankString:[NSString stringWithFormat:@"_school.departmentId"]]) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"请先选择专业" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alertView show];
+            [UIUtils showInfoMessage:@"请选择专业" withVC:self];
+            
             return;
         }
         NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_school.majorId],@"parentId",@"",@"level",@"",@"name", nil];

@@ -65,8 +65,7 @@
     if ([UIUtils isSimplePhone:_phoneNumber]) {
         [self startTimer];
     }else{
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"请输入正确的手机号" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        [alertView show];
+        [UIUtils showInfoMessage:@"请输入正确的手机号" withVC:self];
     }
 }
 - (void)startTimer
@@ -138,9 +137,8 @@
                 [self.navigationController pushViewController:definePWVC animated:YES];
             }
         }else{
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"验证码错误" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alertView show];
-            NSLog(@"失败");
+            [UIUtils showInfoMessage:@"验证码错误" withVC:self];
+
         }
     }];
     

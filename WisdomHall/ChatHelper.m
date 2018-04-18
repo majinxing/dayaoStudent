@@ -107,10 +107,10 @@ static dispatch_once_t onceToken;
         EMError *error = [[EMClient sharedClient] registerWithUsername:[NSString stringWithFormat:@"%@%@",user.school,user.studentId] password:[NSString stringWithFormat:@"%@",user.studentId]];
         
         [JPUSHService setAlias:[NSString stringWithFormat:@"%@%@",user.school,user.studentId] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
-
+            
         } seq:0];
         
-         if (error==nil) {
+        if (error==nil) {
             NSLog(@"注册成功");
         }
         
@@ -118,11 +118,12 @@ static dispatch_once_t onceToken;
         
         if (!error2) {
             NSLog(@"登录成功");
+            [[EMClient sharedClient].options setIsAutoLogin:YES];
         }else{
             NSLog(@"环信登录失败%@",error);
         }
     });
-
+    
 }
 -(void)tagsAliasCallback:(int)iResCode tags:(NSSet*)tags alias:(NSString*)alias {
     
@@ -136,7 +137,7 @@ static dispatch_once_t onceToken;
     UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
     NSArray * a = [[NSArray alloc] initWithObjects:[NSString stringWithFormat:@"%@%@",user.school,user.studentId], nil];
     [[EMClient sharedClient].groupManager addOccupants:a toGroup:aGroup.groupId welcomeMessage:@"message" error:&error];
-
+    
 }
 /*!
  @method
@@ -218,12 +219,12 @@ static dispatch_once_t onceToken;
 //接收语音聊天 mjx
 -(void)callDidReceive:(EMCallSession *)aSession{
     
-//    NSLog(@"%s",__func__);
-//    ConversationVC * c  = [[ConversationVC alloc] init];
-//    c.callSession = aSession;
-//    [UIApplication sharedApplication].keyWindow.rootViewController = [[UINavigationController alloc]initWithRootViewController:c];
-//    //    调用:
-//    EMError *error = nil;
+    //    NSLog(@"%s",__func__);
+    //    ConversationVC * c  = [[ConversationVC alloc] init];
+    //    c.callSession = aSession;
+    //    [UIApplication sharedApplication].keyWindow.rootViewController = [[UINavigationController alloc]initWithRootViewController:c];
+    //    //    调用:
+    //    EMError *error = nil;
     
     NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:aSession,@"session", nil];
     // 2.创建通知
@@ -243,7 +244,7 @@ static dispatch_once_t onceToken;
     message.chatType =  EMChatTypeGroupChat;
     
     UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
-
+    
     NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",user.userName],@"name",[NSString stringWithFormat:@"%@",user.userHeadImageId],@"headImage", nil];
     message.ext = dict;
     
@@ -273,9 +274,9 @@ static dispatch_once_t onceToken;
         
     } completion:^(EMMessage *message, EMError *error) {
         if (!error) {
-//            NSLog(@"成功");
+            //            NSLog(@"成功");
         }else{
-//            NSLog(@"失败");
+            //            NSLog(@"失败");
         }
     }];
     

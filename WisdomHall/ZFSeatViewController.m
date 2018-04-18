@@ -232,7 +232,7 @@
     NSArray * a = [m.seatNo componentsSeparatedByString:@","];
     NSString * seat = [NSString stringWithFormat:@"%d排%d座",[a[0] intValue],[a[1] intValue]];
     UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
-    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_classModel.sclassId],@"id",user.peopleId,@"studentId",seat,@"seat",_classModel.roomId,@"roomId", nil];
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_classModel.courseDetailId],@"id",user.peopleId,@"studentId",seat,@"seat",_classModel.roomId,@"roomId", nil];
     [[NetworkRequest sharedInstance] POST:UpdateSeat dict:dict succeed:^(id data) {
         
         NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
@@ -240,10 +240,9 @@
             [UIUtils showInfoMessage:@"选座成功" withVC:self];
             self.actionBlock(str);
             [self.navigationController popViewControllerAnimated:YES];
-        }else if ([str isEqualToString:@"6666"]){
-            [self showMessage:@"座位已经分配"];
-        }else{
-            
+        }else {
+            NSString * str1 = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+            [self showMessage:str1];
         }
     } failure:^(NSError *error) {
         [self showMessage:@"选座失败，请检查网络"];
