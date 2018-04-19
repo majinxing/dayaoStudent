@@ -52,13 +52,14 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    _titleAry = [NSMutableArray arrayWithCapacity:1];
+
     [self getSchoolList];
     
     _password.secureTextEntry = YES;
     
     _selectSchoolBtnStatus = NO;
     
-    _titleAry = [NSMutableArray arrayWithCapacity:1];
     
 
     

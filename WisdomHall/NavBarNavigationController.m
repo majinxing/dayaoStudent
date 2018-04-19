@@ -69,6 +69,10 @@
         NSDictionary * dict = @{@"appState":@"1",@"id":[NSString stringWithFormat:@"%@",user.peopleId]};
         [[NetworkRequest sharedInstance] POST:ChangeAppState dict:dict succeed:^(id data) {
             //            NSLog(@"%@",data);
+            NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
+            if ([str isEqualToString:@"401"]) {
+                [_showTimer invalidate];
+            }
         } failure:^(NSError *error) {
             
         }];

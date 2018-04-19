@@ -134,7 +134,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 }
 - (void)fetchChatRoomsWithPage:(NSInteger)aPage
                       isHeader:(BOOL)aIsHeader{
-    [self hideHud];
+//    [self hideHud];
     [self showHudInView:self.view hint:NSLocalizedString(@"正在加载数据", @"Load data...")];
     __weak typeof(self)weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -240,7 +240,6 @@ static NSString *cellIdentifier = @"cellIdentifier";
     NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%ld",(long)page],@"start",_userModel.peopleId,@"studentId",[NSString stringWithFormat:@"%@ 00:00:00",_dictDay[@"firstDay"]],@"actStartTime",[NSString stringWithFormat:@"%@ 23:59:59",_dictDay[@"lastDay"]],@"actEndTime",@"1000",@"length",_userModel.school,@"universityId",@"1",@"type",@"2",@"courseType",nil];
     [[NetworkRequest sharedInstance] GET:QueryCourse dict:dict succeed:^(id data) {
         //        NSLog(@"4");
-        [self hideHud];
         NSString * str = [[data objectForKey:@"header"] objectForKey:@"message"];
         if ([str isEqualToString:@"成功"]) {
             NSArray * ary = [[data objectForKey:@"body"] objectForKey:@"list"];
@@ -271,7 +270,8 @@ static NSString *cellIdentifier = @"cellIdentifier";
         
         [_tableView reloadData];
         
-        
+        [self hideHud];
+
     } failure:^(NSError *error) {
         [self hideHud];
         [UIUtils showInfoMessage:@"获取课表失败，请稍后再试" withVC:self];
