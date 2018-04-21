@@ -15,6 +15,7 @@ typedef enum{
     CALLING,//主叫
 }CallType;
 
+typedef void(^refused)(EMCallEndReason reason);
 
 @interface ConversationVC : UIViewController
 
@@ -29,4 +30,8 @@ typedef enum{
 @property (nonatomic,assign)BOOL isSender;
 
 @property (nonatomic,assign)CallType call;
+
+@property (nonatomic,copy)refused reasonBlock;
+
+-(void)returnReason:(refused)reasonBlock;
 @end

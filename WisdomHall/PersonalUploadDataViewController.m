@@ -249,25 +249,29 @@
     
     
     //刚才已经看了info中的键值对，可以从info中取出一个UIImage对象，将取出的对象赋给按钮的image
-    
-    UIImage *resultImage = [info objectForKey:@"UIImagePickerControllerEditedImage"];
-    
-    //    NSString * filePath = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
-    UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
-    NSString * str = [NSString stringWithFormat:@"%@-%@-%@",user.userName,user.studentId,[UIUtils getTime]];
-    NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",str,@"description",@"6",@"function",[NSString stringWithFormat:@"%@",_classModel.courseDetailId],@"relId",@"1",@"relType",nil];
-    
-    [[NetworkRequest sharedInstance] POSTImage:FileUpload image:resultImage dict:dict1 succeed:^(id data) {
-        NSString * code = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
-        if ([code isEqualToString:@"0000"]) {
-            [UIUtils showInfoMessage:@"上传成功" withVC:self];
-            [self getData];
-        }else{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    // 异步执行任务创建方法
+    dispatch_async(queue, ^{
+        UIImage *resultImage = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+        
+        //    NSString * filePath = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
+        UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
+        NSString * str = [NSString stringWithFormat:@"%@-%@-%@",user.userName,user.studentId,[UIUtils getTime]];
+        NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",str,@"description",@"6",@"function",[NSString stringWithFormat:@"%@",_classModel.courseDetailId],@"relId",@"1",@"relType",nil];
+        
+        [[NetworkRequest sharedInstance] POSTImage:FileUpload image:resultImage dict:dict1 succeed:^(id data) {
+            NSString * code = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
+            if ([code isEqualToString:@"0000"]) {
+                [UIUtils showInfoMessage:@"上传成功" withVC:self];
+                [self getData];
+            }else{
+                [UIUtils showInfoMessage:@"上传失败" withVC:self];
+            }
+        } failure:^(NSError *error) {
             [UIUtils showInfoMessage:@"上传失败" withVC:self];
-        }
-    } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"上传失败" withVC:self];
-    }];
+        }];
+    });
+    
     //使用模态返回到软件界面
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }

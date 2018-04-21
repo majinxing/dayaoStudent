@@ -88,6 +88,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UpdateTheClassPage) name:@"UpdateTheClassPage" object:nil];
     
     [UIUtils getInternetDate];
+    
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     //NSString *homeDir = NSHomeDirectory();沙盒路径
     // Do any additional setup after loading the view from its nib.
@@ -134,7 +135,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 }
 - (void)fetchChatRoomsWithPage:(NSInteger)aPage
                       isHeader:(BOOL)aIsHeader{
-//    [self hideHud];
+    [self hideHud];
     [self showHudInView:self.view hint:NSLocalizedString(@"正在加载数据", @"Load data...")];
     __weak typeof(self)weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

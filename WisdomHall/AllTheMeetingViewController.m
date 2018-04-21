@@ -68,7 +68,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
     [self.view endEditing:YES];
 }
 -(void)viewWillAppear:(BOOL)animated{
-    
+    self.navigationController.navigationBarHidden = NO; //设置隐藏
 }
 /**
  *  显示navigation的标题

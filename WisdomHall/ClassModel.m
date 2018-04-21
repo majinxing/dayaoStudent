@@ -7,9 +7,11 @@
 //
 
 #import "ClassModel.h"
+#import "DYHeader.h"
 
 @implementation ClassModel
 -(void)setInfoWithDict:(NSDictionary *)dict{
+    
     
     self.sclassId = [dict objectForKey:@"id"];
     self.signWay = [dict objectForKey:@"signWay"];
@@ -19,6 +21,7 @@
     self.weekDayName = [dict objectForKey:@"weekDayName"];
     self.endTh = [dict objectForKey:@"endTh"];
     self.startTh = [dict objectForKey:@"startTh"];
+    
     self.actEndTime = [dict objectForKey:@"actEndTime"];
     self.actEndTime = [self.actEndTime stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
     self.actEndTime = [self.actEndTime stringByReplacingOccurrencesOfString:@"\t" withString:@""];
@@ -27,6 +30,14 @@
     self.actStarTime = [self.actStarTime stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
     self.actStarTime = [self.actStarTime stringByReplacingOccurrencesOfString:@"\t" withString:@""];
     
+    NSString * str = [NSString stringWithFormat:@"%@",[dict objectForKey:@"signStartTime"]];
+    if (![UIUtils isBlankString:str]) {
+        self.signStartTime = str;//[dict objectForKey:@"actStartTime"];
+        self.signStartTime = [self.signStartTime stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+        self.signStartTime = [self.signStartTime stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+    }else{
+        self.signStartTime = [NSString stringWithFormat:@"%@",self.actStarTime];
+    }
     self.courseDetailId = [dict objectForKey:@"courseDetailId"];
     self.time = [dict objectForKey:@"actStartTime"];
     self.total = [dict objectForKey:@"total"];

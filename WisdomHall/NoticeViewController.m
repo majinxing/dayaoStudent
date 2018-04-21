@@ -35,6 +35,9 @@
     [self setNavigationTitle];
     // Do any additional setup after loading the view from its nib.
 }
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBarHidden = NO; //设置隐藏
+}
 -(void)addTableView{
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, APPLICATION_WIDTH, APPLICATION_HEIGHT-64) style:UITableViewStylePlain];
     _tableView.delegate = self;
@@ -66,7 +69,7 @@
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     self.title = @"通知";
-    UIBarButtonItem * myButton = [[UIBarButtonItem alloc] initWithTitle:@"< 返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    UIBarButtonItem * myButton = [[UIBarButtonItem alloc] initWithTitle:@"<返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     self.navigationItem.leftBarButtonItem = myButton;
 }
 -(void)back{

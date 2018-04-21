@@ -25,13 +25,17 @@
     }
     return self;
 }
+-(void)viewWillAppear:(BOOL)animated{
+        self.navigationController.navigationBarHidden = NO; //设置隐藏
+
+}
 /**
  *  显示navigation的标题
  **/
 -(void)setNavigationTitle{
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
-    self.title = @"通知";
+    self.title = @"通知详情";
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

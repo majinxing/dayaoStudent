@@ -34,6 +34,9 @@
     [self addTableView];
     // Do any additional setup after loading the view from its nib.
 }
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBarHidden = NO; //设置隐藏
+}
 -(void)getDataWith:(NSString *)t{
     UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
     NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",user.peopleId],@"userId",t,@"termId", nil];

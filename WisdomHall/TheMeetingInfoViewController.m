@@ -81,8 +81,8 @@
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSignNumber) name:@"SignSucceed" object:nil];
     
     // 1.注册通知
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(voiceCalls:) name:@"VoiceCalls" object:nil];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(voiceCalls:) name:@"VoiceCalls" object:nil];
     
     // Do any additional setup after loading the view from its nib.
 }
@@ -351,8 +351,21 @@
             c.call = CALLING;
             
             self.hidesBottomBarWhenPushed = YES;
-            
-            [self.navigationController pushViewController:c animated:YES];
+            [self presentViewController:c animated:YES completion:^{
+                
+            }];
+            [c returnReason:^(EMCallEndReason reason) {
+                if (reason == EMCallEndReasonRemoteOffline) {
+                    [UIUtils showInfoMessage:@"对方不在线" withVC:self];
+                }else if (reason == EMCallEndReasonBusy){
+                    [UIUtils showInfoMessage:@"对方占线" withVC:self];
+                    
+                }else if (reason == EMCallEndReasonHangup){
+//                    [UIUtils showInfoMessage:@"对方挂断" withVC:self];
+                }else if (reason == EMCallEndReasonFailed){
+                    [UIUtils showInfoMessage:@"呼叫失败" withVC:self];
+                }
+            }];
             
         }else{
             [UIUtils showInfoMessage:@"不能呼叫自己" withVC:self];

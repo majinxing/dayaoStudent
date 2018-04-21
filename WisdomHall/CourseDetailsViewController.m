@@ -88,9 +88,6 @@
     [self getData];
     
     [self addTableView];
-    // 1.注册通知
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(voiceCalls:) name:@"VoiceCalls" object:nil];
     
     // Do any additional setup after loading the view from its nib.
 }
@@ -545,7 +542,23 @@
         c.HyNumaber = [NSString stringWithFormat:@"%@%@",s.school,_c.teacherWorkNo];
         c.call = CALLING;
         c.teacherName = _c.teacherName;
-        [self.navigationController pushViewController:c animated:YES];
+        [self presentViewController:c animated:YES completion:^{
+            
+        }];
+        [c returnReason:^(EMCallEndReason reason) {
+            if (reason == EMCallEndReasonRemoteOffline) {
+                [UIUtils showInfoMessage:@"未开始抢答" withVC:self];
+            }else if (reason == EMCallEndReasonBusy){
+                [UIUtils showInfoMessage:@"对方占线" withVC:self];
+        
+            }else if (reason == EMCallEndReasonHangup){
+//                [UIUtils showInfoMessage:@"对方挂断" withVC:self];
+            }else if (reason == EMCallEndReasonFailed){
+                [UIUtils showInfoMessage:@"呼叫失败" withVC:self];
+            }
+        }];
+        
+//        [self.navigationController pushViewController:c animated:YES];
     }
     else if ([platform isEqualToString:InteractionType_Test]){
         NSLog(@"测试");
@@ -627,7 +640,7 @@
     if ([[NSString stringWithFormat:@"%@",_user.peopleId] isEqualToString:[NSString stringWithFormat:@"%@",_c.teacherId]]) {
         return;
     }
-    if (![UIUtils validateWithStartTime:_c.actStarTime withExpireTime:nil]) {
+    if (![UIUtils validateWithStartTime:_c.signStartTime withExpireTime:nil]) {
         return;
     }else{
         if ([[NSString stringWithFormat:@"%@",_c.signStatus] isEqualToString:@"2"]) {
@@ -638,7 +651,7 @@
     }
 }
 -(void)autoSign{
-    if (![UIUtils validateWithStartTime:_c.actStarTime withExpireTime:nil]) {
+    if (![UIUtils validateWithStartTime:_c.signStartTime withExpireTime:nil]) {
   
         return;
     }else{
@@ -683,7 +696,7 @@
     [self showHudInView:self.view hint:NSLocalizedString(@"正在加载数据", @"Load data...")];
 
 
-    if (![UIUtils validateWithStartTime:_c.actStarTime withExpireTime:nil]) {
+    if (![UIUtils validateWithStartTime:_c.signStartTime withExpireTime:nil]) {
         if ([[NSString stringWithFormat:@"%@",_c.signStatus] isEqualToString:@"2"]) {
             [UIUtils showInfoMessage:@"已签到" withVC:self];
         }else{
@@ -792,7 +805,7 @@
 
 -(void)codePressedDelegate:(UIButton *)btn{
     if ([btn.titleLabel.text isEqualToString:@"扫码签到"]) {
-        if (![UIUtils validateWithStartTime:_c.actStarTime withExpireTime:nil]) {
+        if (![UIUtils validateWithStartTime:_c.signStartTime withExpireTime:nil]) {
             [UIUtils showInfoMessage:@"课程开始之后一定时间范围内才可以签到" withVC:self];
             return;
         }

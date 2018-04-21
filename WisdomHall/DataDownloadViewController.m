@@ -15,9 +15,13 @@
 #import "MJRefresh.h"
 
 @interface DataDownloadViewController ()<UITableViewDelegate,UITableViewDataSource,UIDocumentInteractionControllerDelegate,DataDownloadTableViewCellDelegate,NSURLSessionDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+
 @property (nonatomic,strong)UITableView * tableView;
 @property  (nonatomic,strong)NSMutableArray * fileAry;
 @property (nonatomic,strong)FileModel * f;
+@property (nonatomic,strong)UIImage * image;
+
+
 @end
 
 @implementation DataDownloadViewController
@@ -35,8 +39,37 @@
     
     [self addTableView];
     
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendImage) name:@"sendImage" object:nil];
     // Do any additional setup after loading the view from its nib.
+}
+-(void)sendImage{
+    //    NSString * filePath = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
+    //刚才已经看了info中的键值对，可以从info中取出一个UIImage对象，将取出的对象赋给按钮的image
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    // 异步执行任务创建方法
+    dispatch_async(queue, ^{
+        UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
+        NSString * str = [NSString stringWithFormat:@"%@-%@-%@",user.userName,user.studentId,[UIUtils getTime]];
+        NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",str,@"description",@"6",@"function",[NSString stringWithFormat:@"%@",_classModel.courseDetailId],@"relId",@"1",@"relType",nil];
+        
+        [[NetworkRequest sharedInstance] POSTImage:FileUpload image:_image dict:dict1 succeed:^(id data) {
+            NSString * code = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
+            if ([code isEqualToString:@"0000"]) {
+                [UIUtils showInfoMessage:@"上传成功" withVC:self];
+                [self getData];
+            }else{
+                [UIUtils showInfoMessage:@"上传失败" withVC:self];
+            }
+            
+            
+        } failure:^(NSError *error) {
+            [UIUtils showInfoMessage:@"上传失败，请检查网络" withVC:self];
+            
+        }];
+        
+    });
+    
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [self getData];
@@ -147,93 +180,81 @@
         }
     }else{
         self.title = @"问答";
-        UIBarButtonItem * createMeeting = [[UIBarButtonItem alloc] initWithTitle:@"上传解答" style:UIBarButtonItemStylePlain target:self action:@selector(selectImage)];
+        UIBarButtonItem * createMeeting = [[UIBarButtonItem alloc] initWithTitle:@"上传解答" style:UIBarButtonItemStylePlain target:self action:@selector(selectImageee)];
         
         self.navigationItem.rightBarButtonItem = createMeeting;
+        
         UIButton * allStudents = [UIButton buttonWithType:UIButtonTypeCustom];
         allStudents.frame = CGRectMake(APPLICATION_WIDTH/2-100, 30, 100, 30);
         [allStudents setTitle:@"全部答案" forState:UIControlStateNormal];
     }
 }
 //实现button点击事件的回调方法
-- (void)selectImage{
+- (void)selectImageee{
     
+    //实现button点事件的回调方法
     //调用系统相册的类
     UIImagePickerController *pickerController = [[UIImagePickerController alloc]init];
     
     //设置选取的照片是否可编辑
-    pickerController.allowsEditing = YES;
-    //设置相册呈现的样式
     
-    //    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:nil preferredStyle:  UIAlertControllerStyleActionSheet];
-    //    //分别按顺序放入每个按钮；
-    //    [alert addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    pickerController.sourceType =  UIImagePickerControllerSourceTypeCamera;//图片分组列表样式
+    //   pickerController.allowsEditing = YES;
     
-    //选择完成图片或者点击取消按钮都是通过代理来操作我们所需要的逻辑过程
-    pickerController.delegate = self;
-    //使用模态呈现相册
-    [self.navigationController presentViewController:pickerController animated:YES completion:^{
+//    //设置相册呈现的样式
+//
+//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:nil preferredStyle:  UIAlertControllerStyleActionSheet];
+//    //分别按顺序放入每个按钮；
+//    [alert addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        pickerController.sourceType =  UIImagePickerControllerSourceTypeCamera;//图片分组列表样式
+        pickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;
         
-    }];
-    //    }]];
+        //选择完成图片或者点击取消按钮都是通过代理来操作我们所需要的逻辑过程
+        pickerController.delegate = self;
+        //使用模态呈现相册
+        [self.navigationController presentViewController:pickerController animated:YES completion:^{
+            
+        }];
+//    }]];
     
-    //    [alert addAction:[UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    //
-    //        pickerController.sourceType =  UIImagePickerControllerSourceTypeSavedPhotosAlbum;//图片分组列表样式
-    //        //照片的选取样式还有以下两种
-    //        //UIImagePickerControllerSourceTypePhotoLibrary,直接全部呈现系统相册UIImagePickerControllerSourceTypeSavedPhotosAlbum
-    //        //UIImagePickerControllerSourceTypeCamera//调取摄像头
-    //
-    //        //选择完成图片或者点击取消按钮都是通过代理来操作我们所需要的逻辑过程
-    //        pickerController.delegate = self;
-    //        //使用模态呈现相册
-    //        [self.navigationController presentViewController:pickerController animated:YES completion:^{
-    //
-    //        }];
-    //
-    //    }]];
-    //
-    //
-    //    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-    //        //点击按钮的响应事件；
-    //    }]];
-    //
-    //    //弹出提示框；
-    //    [self presentViewController:alert animated:true completion:nil];
+//    [alert addAction:[UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//
+//        pickerController.sourceType =  UIImagePickerControllerSourceTypeSavedPhotosAlbum;//图片分组列表样式
+//        //照片的选取样式还有以下两种
+//        //UIImagePickerControllerSourceTypePhotoLibrary,直接全部呈现系统相册UIImagePickerControllerSourceTypeSavedPhotosAlbum
+//        //UIImagePickerControllerSourceTypeCamera//调取摄像头
+//
+//        //选择完成图片或者点击取消按钮都是通过代理来操作我们所需要的逻辑过程
+//        pickerController.delegate = self;
+//        //使用模态呈现相册
+//        [self.navigationController presentViewController:pickerController animated:YES completion:^{
+//
+//        }];
+//
+//    }]];
+//
+//
+//    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+//        //点击按钮的响应事件；
+//    }]];
+//
+//    //弹出提示框；
+//    [self presentViewController:alert animated:true completion:nil];
     
 }
 //选择照片完成之后的代理方法
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     
-    //info是所选择照片的信息
-    
-    //    UIImagePickerControllerEditedImage//编辑过的图片
-    //    UIImagePickerControllerOriginalImage//原图
-    
-    
-    //刚才已经看了info中的键值对，可以从info中取出一个UIImage对象，将取出的对象赋给按钮的image
-    
     UIImage *resultImage = [info objectForKey:@"UIImagePickerControllerEditedImage"];
     
-    //    NSString * filePath = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
-    UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
-    NSString * str = [NSString stringWithFormat:@"%@-%@-%@",user.userName,user.studentId,[UIUtils getTime]];
-    NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",str,@"description",@"6",@"function",[NSString stringWithFormat:@"%@",_classModel.sclassId],@"relId",@"1",@"relType",nil];
+    _image = [[UIImage alloc] init];
+    _image = resultImage;
+    // 2.创建通知
+    NSNotification *notification =[NSNotification notificationWithName:@"sendImage" object:nil userInfo:nil];
     
-    [[NetworkRequest sharedInstance] POSTImage:FileUpload image:resultImage dict:dict1 succeed:^(id data) {
-        NSString * code = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
-        if ([code isEqualToString:@"0000"]) {
-            [UIUtils showInfoMessage:@"上传成功" withVC:self];
-            [self getData];
-        }else{
-            [UIUtils showInfoMessage:@"上传失败" withVC:self];
-        }
-    } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"上传失败，请检查网络" withVC:self];
-    }];
-    //使用模态返回到软件界面
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    
+    
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 -(void)uploadLocalFile{

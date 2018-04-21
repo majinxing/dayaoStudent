@@ -66,9 +66,13 @@
     
     
     if ([[Appsetting sharedInstance] isLogin]) {
+        
         _chat = [ChatHelper shareHelper];
+        
         DYTabBarViewController * tab = [[DYTabBarViewController alloc] init];
+        
         self.window.rootViewController = tab;
+        
     }else{
         WorkingLoginViewController * loginVC = [[WorkingLoginViewController alloc] init];
 //        TheLoginViewController * loginVC = [[TheLoginViewController alloc] init];
@@ -138,8 +142,11 @@
 -(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
     
     NoticeViewController * n = [[NoticeViewController alloc] init];
+    
     _chat = [ChatHelper shareHelper];
+    
     n.backType = @"TabBar";
+    
     self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:n];
     
         NSLog(@"%s",__func__);
@@ -163,8 +170,13 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    [[EMClient sharedClient] applicationDidEnterBackground:application];
-    _chat.outOrIn = @"out";
+    
+//    [[EMClient sharedClient] applicationDidEnterBackground:application];
+    
+//    _chat.outOrIn = @"out";
+    
+    [_chat getOut];
+    
     [[CollectionHeadView sharedInstance] onceSetNil];
     
     if ([UIUtils didUserPressLockButton]) {
@@ -246,11 +258,7 @@
     if ([UIUtils didUserPressLockButton]) {
         NSLog(@"%s",__func__);
     }
-    //        if (backgroundTimeRemaining == DBL_MAX){
-    //            NSLog(@"Background Time Remaining = Undetermined");
-    //        } else {
-    //            NSLog(@"Background Time Remaining = %.02f Seconds", backgroundTimeRemaining);
-    //        }
+
     
 }
 
@@ -258,9 +266,15 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     [[EMClient sharedClient] applicationWillEnterForeground:application];
-    _chat.outOrIn = @"In";
+    
+    [_chat getOut];
+    
+    _chat = [ChatHelper shareHelper];
+    
     CollectionHeadView *view = [CollectionHeadView sharedInstance];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:InApp object:nil];
+    
     if (view) {
         
     }

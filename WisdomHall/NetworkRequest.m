@@ -12,6 +12,8 @@
 #import "AppDelegate.h"
 #import <UIKit/UIKit.h>
 
+//#define Local @"http://192.168.1.100:8080";
+
 @implementation NetworkRequest
 +(instancetype)sharedInstance{
     static NetworkRequest *tools;
@@ -42,7 +44,7 @@
 -(void)afnetwroingPostWithUrl:(NSString *)url withDict:(NSDictionary *)dict{
     UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
     
-    NSString * baseUrl = user.host;
+    NSString * baseUrl =  user.host;
     
     NSString * str = [NSString stringWithFormat:@"%@/%@",baseUrl,url];
     

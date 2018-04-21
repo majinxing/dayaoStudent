@@ -17,11 +17,15 @@
 #import "DiscussViewController.h"
 #import "OfficeViewController.h"
 #import "NavBarNavigationController.h"
+#import <Hyphenate/Hyphenate.h>
+#import "ConversationVC.h"
+#import "ChatHelper.h"
 
 static dispatch_once_t predicate;
 
 @interface DYTabBarViewController ()<UIAlertViewDelegate>
 @property (nonatomic,copy)NSString * url;
+@property (nonatomic,strong) ChatHelper * chat;
 @end
 
 @implementation DYTabBarViewController
@@ -50,13 +54,41 @@ static dispatch_once_t predicate;
     [self addChildViewControllerWithClassname:[PersonalCenterViewController description] imagename:@"我的(1)" title:@"我的" withSelectImageName:@"我的"];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:InApp object:nil];
+//    // 1.注册通知
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(voiceCalls:) name:@"VoiceCalls" object:nil];
 
     [self selectApp];
     
 
     // Do any additional setup after loading the view from its nib.
 }
+-(void)viewWillAppear:(BOOL)animated{
+    _chat = [ChatHelper shareHelper];
 
+    [_chat getOut];
+    
+    _chat = [ChatHelper shareHelper];
+}
+-(void)voiceCalls:(NSNotification *)dict{
+    EMCallSession * aSession = [dict.userInfo objectForKey:@"session"];
+    ConversationVC * c  = [[ConversationVC alloc] init];
+    c.callSession = aSession;
+    UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
+    
+    int n = (int)[NSString stringWithFormat:@"%@",user.school].length;
+    
+    NSMutableString * str = [NSMutableString stringWithFormat:@"%@",aSession.remoteName];
+    [str deleteCharactersInRange:NSMakeRange(0,n)];
+    c.teacherName = str;
+    c.call = CALLED;
+    self.hidesBottomBarWhenPushed = YES;
+    [self presentViewController:c animated:YES completion:^{
+        
+    }];
+//    [self.navigationController pushViewController:c animated:YES];
+    //    调用:
+}
 #pragma mark Alter
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     

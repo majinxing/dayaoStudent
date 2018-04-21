@@ -69,6 +69,7 @@
         [_endTime setTitle:time forState:UIControlStateNormal];
     }
     if (!edit) {
+        
         for (int i=0; i<ary.count; i++) {
             UIImageView * image = _imageAry[i];
             
@@ -79,8 +80,14 @@
             [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",baseUrl,FileDownload,ary[i]]] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
             
             [self.contentView addSubview:image];
+            
+            UIButton *btn1 = [self viewWithTag:i+2];
+            
+            [btn1 setEnabled:YES];
         }
+        
         [_endTime setEnabled:NO];
+        
     }else{
         for (int i = 0; i<ary.count; i++) {
             UIButton *btn = (UIButton *)[self.contentView viewWithTag:i+2];
@@ -89,13 +96,13 @@
         
         if (ary.count<6) {
             UIButton *btn1 = [self viewWithTag:ary.count+2];
-            btn1.selected = YES;
+            
+            [btn1 setEnabled:YES];
+            
             [btn1 setBackgroundImage:[UIImage imageNamed:@"addImage"] forState:UIControlStateNormal];
             
         }
     }
-    
-    
     
 }
 -(void)addContentFirstView:(NSString *)str{

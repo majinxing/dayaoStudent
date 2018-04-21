@@ -19,6 +19,9 @@
 @property (nonatomic,copy)NSString * startTh;//上课开始的节数
 @property (nonatomic,copy)NSString * actEndTime;
 @property (nonatomic,copy)NSString * actStarTime;
+
+@property (nonatomic,copy)NSString * signStartTime;//签到开始时间
+
 @property (nonatomic,copy)NSString * courseStatus;
 @property (nonatomic,copy)NSString * teacherId;
 @property (nonatomic,copy)NSString * teacherWorkNo;

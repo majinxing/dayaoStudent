@@ -118,7 +118,7 @@ static dispatch_once_t onceToken;
         
         if (!error2) {
             NSLog(@"登录成功");
-            [[EMClient sharedClient].options setIsAutoLogin:YES];
+//            [[EMClient sharedClient].options setIsAutoLogin:YES];
         }else{
             NSLog(@"环信登录失败%@",error);
         }
@@ -153,7 +153,7 @@ static dispatch_once_t onceToken;
     
     [[NSNotificationCenter defaultCenter] postNotification:notification];
     
-    [self addLocalNotificationWith:aMessages];
+//    [self addLocalNotificationWith:aMessages];
     
 }
 // 发送本地通知通知

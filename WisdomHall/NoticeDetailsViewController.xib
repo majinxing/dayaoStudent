@@ -48,10 +48,10 @@
                         <constraint firstAttribute="height" constant="1" id="E3Y-41-f5e"/>
                     </constraints>
                 </view>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.90000000000000002" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pEp-Iq-Mtg">
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.90000000000000002" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pEp-Iq-Mtg">
                     <rect key="frame" x="19" y="131" width="337" height="476"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <mutableString key="text">发件人苹果2。1性能:应用程序完整性4所示。设计:序言指南2.1 -所需的信息我们已经开始评估你的应用程序,但我们不能继续,因为我们需要更多的信息关于你的应用。下一个步骤帮助我们进行的审查程序,请检查以下问题,并提供尽可能多的详细信息。——你的应用程序访问任何付费内容或服务吗?——是什么付费内容或服务,成本是什么?——谁支付内容或服务?他们支付,支付方式是什么?——如果用户使用你的应用程序创建一个帐户,有相关费用吗?一旦你回复这个消息在解决中心所请求的信息,我们可以开始你的审查。指南4.0 -设计你的应用程序包括一个更新按钮或提醒用户更新应用程序。为了避免用户混淆,应用版本更新必须使用iOS内置更新机制。详情请见附件截图。下一个步骤为了解决这个问题,请删除从您的应用程序更新功能。发布你的应用程序的新版本,上传新的应用程序二进制版本相同的iTunes Connect应用先前版本的创建记录。更新版本保持相同的苹果ID,iTunes Connect ID(SKU),和包ID作为原始版本,免费提供给顾客购买前一个版本。资源创建新版本的应用程序,请检查在iTunes中创建一个新版本部分连接开发人员的帮助。</mutableString>
+                    <string key="text">发件人苹果2。1性能:应用程序完整性4所示。设计:序言指南2.1 -所需的信息我们已经开始评估你的应用程序,但我们不能继续,因为我们需要更多的信息关于你的应用。下一个步骤帮助我们进行的审查程序,请检查以下问题,并提供尽可能多的详细信息。——你的应用程序访问任何付费内容或服务吗?——是什么付费内容或服务,成本是什么?——谁支付内容或服务?他们支付,支付方式是什么?——如果用户使用你的应用程序创建一个帐户,有相关费用吗?一旦你回复这个消息在解决中心所请求的信息,我们可以开始你的审查。指南4.0 -设计你的应用程序包括一个更新按钮或提醒用户更新应用程序。为了避免用户混淆,应用版本更新必须使用iOS内置更新机制。详情请见附件截图。下一个步骤为了解决这个问题,请删除从您的应用程序更新功能。发布你的应用程序的新版本,上传新的应用程序二进制版本相同的iTunes Connect应用先前版本的创建记录。更新版本保持相同的苹果ID,iTunes Connect ID(SKU),和包ID作为原始版本,免费提供给顾客购买前一个版本。资源创建新版本的应用程序,请检查在iTunes中创建一个新版本部分连接开发人员的帮助。</string>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>

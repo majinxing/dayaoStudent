@@ -271,6 +271,8 @@
 		8BB221E91FA708A300EC6478 /* QRCodeGenerateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB221E41FA708A300EC6478 /* QRCodeGenerateVC.m */; };
 		8BB221EA1FA708A300EC6478 /* ScanSuccessJumpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB221E61FA708A300EC6478 /* ScanSuccessJumpVC.m */; };
 		8BB221EB1FA708A300EC6478 /* SGQRCodeScanningVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB221E81FA708A300EC6478 /* SGQRCodeScanningVC.m */; };
+		8BB47BA6208872CD005407D9 /* called.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8BB47BA5208872CC005407D9 /* called.mp3 */; };
+		8BB47BA82088945E005407D9 /* call.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8BB47BA72088945E005407D9 /* call.mp3 */; };
 		8BB56D641EAF38CA0023DAFF /* AppSetingPersongInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB56D631EAF38CA0023DAFF /* AppSetingPersongInfo.m */; };
 		8BB56D671EAF3C620023DAFF /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB56D661EAF3C620023DAFF /* UserModel.m */; };
 		8BB56D6A1EB037410023DAFF /* UIUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB56D691EB037410023DAFF /* UIUtils.m */; };
@@ -1017,6 +1019,8 @@
 		8BB221E61FA708A300EC6478 /* ScanSuccessJumpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanSuccessJumpVC.m; sourceTree = "<group>"; };
 		8BB221E71FA708A300EC6478 /* SGQRCodeScanningVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanningVC.h; sourceTree = "<group>"; };
 		8BB221E81FA708A300EC6478 /* SGQRCodeScanningVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanningVC.m; sourceTree = "<group>"; };
+		8BB47BA5208872CC005407D9 /* called.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = called.mp3; sourceTree = "<group>"; };
+		8BB47BA72088945E005407D9 /* call.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = call.mp3; sourceTree = "<group>"; };
 		8BB56D621EAF38CA0023DAFF /* AppSetingPersongInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSetingPersongInfo.h; sourceTree = "<group>"; };
 		8BB56D631EAF38CA0023DAFF /* AppSetingPersongInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSetingPersongInfo.m; sourceTree = "<group>"; };
 		8BB56D651EAF3C620023DAFF /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
@@ -1775,6 +1779,8 @@
 				8B064E571F00F53F0004C3D4 /* Assets.xcassets */,
 				8BA2246D1EADF68500627A1B /* Info.plist */,
 				8B06176420634CA7000D95E9 /* SchoolList.plist */,
+				8BB47BA5208872CC005407D9 /* called.mp3 */,
+				8BB47BA72088945E005407D9 /* call.mp3 */,
 				8BA2245C1EADF68500627A1B /* Supporting Files */,
 			);
 			path = WisdomHall;
@@ -2711,6 +2717,7 @@
 				8BA224AE1EAE00B000627A1B /* DYTabBarViewController.xib in Resources */,
 				8B01483720666A220037A107 /* StatisticalResultTableViewCell.xib in Resources */,
 				8B0DB13C1ED6CA4E0042DF0D /* ImportTextViewController.xib in Resources */,
+				8BB47BA82088945E005407D9 /* call.mp3 in Resources */,
 				8BA224D51EAF25DC00627A1B /* RegisterViewController.xib in Resources */,
 				8BA2249E1EADFFA400627A1B /* SignInViewController.xib in Resources */,
 				8B3CAEC91F75091000BDE092 /* OfficeViewController.xib in Resources */,
@@ -2786,6 +2793,7 @@
 				8BEE94491F2C780500488651 /* CompanyProfileViewController.xib in Resources */,
 				8B1A502D1F75EB7000A11CB2 /* TheMessageViewController.xib in Resources */,
 				8B1A50331F75F85C00A11CB2 /* OfficeTableViewCell.xib in Resources */,
+				8BB47BA6208872CD005407D9 /* called.mp3 in Resources */,
 				8B081E0F1F0B766D00493B81 /* SelectMeetingOrClassViewController.xib in Resources */,
 				8B05CB6C1EC0056B0063EC20 /* TextsTableViewCell.xib in Resources */,
 				8B014E4D206670900037A107 /* CreateHomeworkViewController.xib in Resources */,
@@ -3311,7 +3319,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = AM9UTP2CL3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3521,7 +3529,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = AM9UTP2CL3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3578,7 +3586,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = AM9UTP2CL3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
