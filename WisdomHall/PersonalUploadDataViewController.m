@@ -207,37 +207,15 @@
     
     //选择完成图片或者点击取消按钮都是通过代理来操作我们所需要的逻辑过程
     pickerController.delegate = self;
+    
+//    [self addSomeElements:pickerController];
+    
     //使用模态呈现相册
     [self.navigationController presentViewController:pickerController animated:YES completion:^{
         
     }];
-    //    }]];
-    
-    //    [alert addAction:[UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    //
-    //        pickerController.sourceType =  UIImagePickerControllerSourceTypeSavedPhotosAlbum;//图片分组列表样式
-    //        //照片的选取样式还有以下两种
-    //        //UIImagePickerControllerSourceTypePhotoLibrary,直接全部呈现系统相册UIImagePickerControllerSourceTypeSavedPhotosAlbum
-    //        //UIImagePickerControllerSourceTypeCamera//调取摄像头
-    //
-    //        //选择完成图片或者点击取消按钮都是通过代理来操作我们所需要的逻辑过程
-    //        pickerController.delegate = self;
-    //        //使用模态呈现相册
-    //        [self.navigationController presentViewController:pickerController animated:YES completion:^{
-    //
-    //        }];
-    //
-    //    }]];
-    //
-    //
-    //    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-    //        //点击按钮的响应事件；
-    //    }]];
-    //
-    //    //弹出提示框；
-    //    [self presentViewController:alert animated:true completion:nil];
-    
 }
+
 //选择照片完成之后的代理方法
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
@@ -626,6 +604,62 @@
 
 /** * 请求结束 */
 -(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
+    
+}
+-(UIView *)findView:(UIView *)aView withName:(NSString *)name{
+    
+    Class cl = [aView class];
+    
+    NSString *desc = [cl description];
+    
+    
+    
+    if ([name isEqualToString:desc])
+        
+        return aView;
+    
+    
+    
+    for (NSUInteger i = 0; i < [aView.subviews count]; i++)
+        
+    {
+        
+        UIView *subView = [aView.subviews objectAtIndex:i];
+        
+        subView = [self findView:subView withName:name];
+        
+        if (subView)
+            
+            return subView;
+        
+    }
+    
+    return nil;
+    
+}
+
+-(void)addSomeElements:(UIViewController *)viewController{
+    
+    
+    UIView *PLCameraView=[self findView:viewController.view withName:@"PLCropOverlay"];
+    
+    UIView *bottomBar=[self findView:PLCameraView withName:@"PLCropOverlayBottomBar"];
+    
+    UIImageView *bottomBarImageForSave = [bottomBar.subviews objectAtIndex:0];
+    
+    UIButton *retakeButton=[bottomBarImageForSave.subviews objectAtIndex:0];
+    
+    [retakeButton setTitle:@"重拍"forState:UIControlStateNormal]; //左下角按钮
+    
+    UIButton *useButton=[bottomBarImageForSave.subviews objectAtIndex:1];
+    
+    [useButton setTitle:@"上传"forState:UIControlStateNormal]; //右下角按钮
+    
+}
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    
+    [self addSomeElements:viewController];
     
 }
 /*

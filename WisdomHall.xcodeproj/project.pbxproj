@@ -183,6 +183,15 @@
 		8B32FEA81F4C03C200D9BF23 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B32FEA71F4C03C200D9BF23 /* CoreFoundation.framework */; };
 		8B32FEAA1F4C043000D9BF23 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B32FEA91F4C043000D9BF23 /* UserNotifications.framework */; };
 		8B32FEAC1F4C045900D9BF23 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B32FEAB1F4C045900D9BF23 /* libresolv.tbd */; };
+		8B396B06208B134600F20060 /* RHScanLineAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B396AF7208B134600F20060 /* RHScanLineAnimation.m */; };
+		8B396B07208B134600F20060 /* RHScanNative.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B396AF9208B134600F20060 /* RHScanNative.m */; };
+		8B396B08208B134600F20060 /* RHScanNetAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B396AFB208B134600F20060 /* RHScanNetAnimation.m */; };
+		8B396B09208B134600F20060 /* RHScanPermissions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B396AFD208B134600F20060 /* RHScanPermissions.m */; };
+		8B396B0A208B134600F20060 /* RHScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B396AFF208B134600F20060 /* RHScanView.m */; };
+		8B396B0B208B134600F20060 /* RHScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B396B01208B134600F20060 /* RHScanViewController.m */; };
+		8B396B0C208B134600F20060 /* RHScanViewStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B396B03208B134600F20060 /* RHScanViewStyle.m */; };
+		8B396B0D208B134600F20060 /* sc_qrcode_scan_light_green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B396B04208B134600F20060 /* sc_qrcode_scan_light_green@2x.png */; };
+		8B396B0E208B134600F20060 /* sc_qrcode_scan_light_green@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B396B05208B134600F20060 /* sc_qrcode_scan_light_green@3x.png */; };
 		8B3CAEC81F75091000BDE092 /* OfficeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3CAEC61F75091000BDE092 /* OfficeViewController.m */; };
 		8B3CAEC91F75091000BDE092 /* OfficeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B3CAEC71F75091000BDE092 /* OfficeViewController.xib */; };
 		8B3EBBCE205A1A4D009974B1 /* NavBarNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3EBBCC205A1A4D009974B1 /* NavBarNavigationController.m */; };
@@ -874,6 +883,22 @@
 		8B32FEA91F4C043000D9BF23 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		8B32FEAB1F4C045900D9BF23 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		8B32FEAD1F4C052700D9BF23 /* WisdomHall.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WisdomHall.entitlements; sourceTree = "<group>"; };
+		8B396AF6208B134600F20060 /* RHScanLineAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHScanLineAnimation.h; sourceTree = "<group>"; };
+		8B396AF7208B134600F20060 /* RHScanLineAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHScanLineAnimation.m; sourceTree = "<group>"; };
+		8B396AF8208B134600F20060 /* RHScanNative.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHScanNative.h; sourceTree = "<group>"; };
+		8B396AF9208B134600F20060 /* RHScanNative.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHScanNative.m; sourceTree = "<group>"; };
+		8B396AFA208B134600F20060 /* RHScanNetAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHScanNetAnimation.h; sourceTree = "<group>"; };
+		8B396AFB208B134600F20060 /* RHScanNetAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHScanNetAnimation.m; sourceTree = "<group>"; };
+		8B396AFC208B134600F20060 /* RHScanPermissions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHScanPermissions.h; sourceTree = "<group>"; };
+		8B396AFD208B134600F20060 /* RHScanPermissions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHScanPermissions.m; sourceTree = "<group>"; };
+		8B396AFE208B134600F20060 /* RHScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHScanView.h; sourceTree = "<group>"; };
+		8B396AFF208B134600F20060 /* RHScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHScanView.m; sourceTree = "<group>"; };
+		8B396B00208B134600F20060 /* RHScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHScanViewController.h; sourceTree = "<group>"; };
+		8B396B01208B134600F20060 /* RHScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHScanViewController.m; sourceTree = "<group>"; };
+		8B396B02208B134600F20060 /* RHScanViewStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHScanViewStyle.h; sourceTree = "<group>"; };
+		8B396B03208B134600F20060 /* RHScanViewStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHScanViewStyle.m; sourceTree = "<group>"; };
+		8B396B04208B134600F20060 /* sc_qrcode_scan_light_green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sc_qrcode_scan_light_green@2x.png"; sourceTree = "<group>"; };
+		8B396B05208B134600F20060 /* sc_qrcode_scan_light_green@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sc_qrcode_scan_light_green@3x.png"; sourceTree = "<group>"; };
 		8B3CAEC51F75091000BDE092 /* OfficeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfficeViewController.h; sourceTree = "<group>"; };
 		8B3CAEC61F75091000BDE092 /* OfficeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfficeViewController.m; sourceTree = "<group>"; };
 		8B3CAEC71F75091000BDE092 /* OfficeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OfficeViewController.xib; sourceTree = "<group>"; };
@@ -1651,6 +1676,29 @@
 			path = Lib;
 			sourceTree = "<group>";
 		};
+		8B396AF5208B134600F20060 /* Scan */ = {
+			isa = PBXGroup;
+			children = (
+				8B396AF6208B134600F20060 /* RHScanLineAnimation.h */,
+				8B396AF7208B134600F20060 /* RHScanLineAnimation.m */,
+				8B396AF8208B134600F20060 /* RHScanNative.h */,
+				8B396AF9208B134600F20060 /* RHScanNative.m */,
+				8B396AFA208B134600F20060 /* RHScanNetAnimation.h */,
+				8B396AFB208B134600F20060 /* RHScanNetAnimation.m */,
+				8B396AFC208B134600F20060 /* RHScanPermissions.h */,
+				8B396AFD208B134600F20060 /* RHScanPermissions.m */,
+				8B396AFE208B134600F20060 /* RHScanView.h */,
+				8B396AFF208B134600F20060 /* RHScanView.m */,
+				8B396B00208B134600F20060 /* RHScanViewController.h */,
+				8B396B01208B134600F20060 /* RHScanViewController.m */,
+				8B396B02208B134600F20060 /* RHScanViewStyle.h */,
+				8B396B03208B134600F20060 /* RHScanViewStyle.m */,
+				8B396B04208B134600F20060 /* sc_qrcode_scan_light_green@2x.png */,
+				8B396B05208B134600F20060 /* sc_qrcode_scan_light_green@3x.png */,
+			);
+			path = Scan;
+			sourceTree = "<group>";
+		};
 		8B3CAEC41F75085500BDE092 /* Office */ = {
 			isa = PBXGroup;
 			children = (
@@ -1989,6 +2037,7 @@
 		8BA224961EADFF2700627A1B /* FrameWork */ = {
 			isa = PBXGroup;
 			children = (
+				8B396AF5208B134600F20060 /* Scan */,
 				8BF79F47205F41F60033CCC3 /* HKClipper */,
 				8BB221E21FA708A300EC6478 /* SGQRController */,
 				8B0D30EE20565E4C0022610A /* SGQRView */,
@@ -2717,6 +2766,7 @@
 				8BA224AE1EAE00B000627A1B /* DYTabBarViewController.xib in Resources */,
 				8B01483720666A220037A107 /* StatisticalResultTableViewCell.xib in Resources */,
 				8B0DB13C1ED6CA4E0042DF0D /* ImportTextViewController.xib in Resources */,
+				8B396B0D208B134600F20060 /* sc_qrcode_scan_light_green@2x.png in Resources */,
 				8BB47BA82088945E005407D9 /* call.mp3 in Resources */,
 				8BA224D51EAF25DC00627A1B /* RegisterViewController.xib in Resources */,
 				8BA2249E1EADFFA400627A1B /* SignInViewController.xib in Resources */,
@@ -2779,6 +2829,7 @@
 				8B0F41311EF522CF001AF4DF /* MJXChatViewController.xib in Resources */,
 				8BE24D611F8B488E00621055 /* GroupListViewController.xib in Resources */,
 				8BF864871ECAD21200B7EED4 /* MJRefresh.bundle in Resources */,
+				8B396B0E208B134600F20060 /* sc_qrcode_scan_light_green@3x.png in Resources */,
 				8B0207161F8DA4DB00CE3B8C /* NoticeSwiftViewController.xib in Resources */,
 				8B17374F1EC5AC3600BE3C8F /* CreateTextTableViewCell.xib in Resources */,
 				8BE8777C1EBC2D8E00866A34 /* NotStartTestingViewController.xib in Resources */,
@@ -2886,6 +2937,8 @@
 				8B2E16DA1EBAB968008B7C57 /* ClassManagementViewController.m in Sources */,
 				8BF864C31ECAD97300B7EED4 /* SDWebImageManager.m in Sources */,
 				8B045B9B1F3458E40021699B /* ZFIndicatorView.m in Sources */,
+				8B396B0B208B134600F20060 /* RHScanViewController.m in Sources */,
+				8B396B09208B134600F20060 /* RHScanPermissions.m in Sources */,
 				8BB56D871EB2E2820023DAFF /* RedefineThePasswordViewController.m in Sources */,
 				8B081DFF1F06524000493B81 /* PinyinHelper.m in Sources */,
 				8B081DFA1F06524000493B81 /* ChineseToPinyinResource.m in Sources */,
@@ -2916,6 +2969,7 @@
 				8B087E421FEA573700649094 /* ZFSeatSelectionView.m in Sources */,
 				8B05CB7B1EC2ABFD0063EC20 /* PersonalInfoViewController.m in Sources */,
 				8B045B821F3458CC0021699B /* ZFSeatModel.m in Sources */,
+				8B396B07208B134600F20060 /* RHScanNative.m in Sources */,
 				8BF79F62205F421E0033CCC3 /* UIImage+Extends.m in Sources */,
 				8B045B761F3458820021699B /* NSObject+MJCoding.m in Sources */,
 				8B045B9D1F3458E40021699B /* ZFSeatButton.m in Sources */,
@@ -2931,6 +2985,7 @@
 				8B0502FC2021A8BA0030CF75 /* PersonalUploadDataViewController.m in Sources */,
 				8B9CCC8C1F14D3B7001833FD /* RecorderView.m in Sources */,
 				8BA224641EADF68500627A1B /* ViewController.m in Sources */,
+				8B396B08208B134600F20060 /* RHScanNetAnimation.m in Sources */,
 				8B0F41301EF522CF001AF4DF /* MJXChatViewController.m in Sources */,
 				8BF864C01ECAD97300B7EED4 /* SDWebImageDecoder.m in Sources */,
 				8BCE7CB01F03888D00FE261B /* EMCallOptions+NSCoding.m in Sources */,
@@ -3028,6 +3083,7 @@
 				8B01483A20666E470037A107 /* SynchronousCourseView.m in Sources */,
 				8B045B771F3458820021699B /* NSObject+MJKeyValue.m in Sources */,
 				8BF82D771EDFB32500D33473 /* CollectionHeadView.m in Sources */,
+				8B396B06208B134600F20060 /* RHScanLineAnimation.m in Sources */,
 				8B014E44206670700037A107 /* HomeworkListTableViewCell.m in Sources */,
 				8BB56D641EAF38CA0023DAFF /* AppSetingPersongInfo.m in Sources */,
 				8B05CB701EC015DB0063EC20 /* PersonalInfoTableViewCell.m in Sources */,
@@ -3059,6 +3115,7 @@
 				8BE913A41EEFB80000000282 /* MBProgressHUD.m in Sources */,
 				8B045B731F3458820021699B /* MJPropertyKey.m in Sources */,
 				8BF864711ECACAE800B7EED4 /* FMDatabaseQueue.m in Sources */,
+				8B396B0C208B134600F20060 /* RHScanViewStyle.m in Sources */,
 				8BE877691EBAF7A800866A34 /* ShareView.m in Sources */,
 				8B07DB7E1F78E7E500DC371C /* CreateChatViewController.m in Sources */,
 				8B045B791F3458820021699B /* NSString+MJExtension.m in Sources */,
@@ -3076,6 +3133,7 @@
 				8BF864751ECACBEC00B7EED4 /* FMDBTool.m in Sources */,
 				8B014E52206671100037A107 /* Homework.m in Sources */,
 				8BF864721ECACAE800B7EED4 /* FMResultSet.m in Sources */,
+				8B396B0A208B134600F20060 /* RHScanView.m in Sources */,
 				8B04643F1F5FE44F005EEE36 /* QuestionListViewController.m in Sources */,
 				8BE913A31EEFB80000000282 /* MBProgressHUD+Add.m in Sources */,
 				8B7D5D901EB9782C0068058E /* CourseCollectionViewCell.m in Sources */,

@@ -25,6 +25,7 @@
 @property (nonatomic,assign) int temp;
 
 @property (nonatomic,copy) void (^actionBlock)(NSString * str);
+@property (nonatomic,strong) UILabel * seatLable;
 @end
 
 @implementation ZFSeatViewController
@@ -61,6 +62,7 @@
         //  NSDictionary *seatsDic = [NSDictionary dictionaryWithContentsOfFile:path];
         
         NSMutableString *strUrl = [NSMutableString stringWithFormat:@"%@",_seatTable];
+        
         NSArray * ary = [strUrl componentsSeparatedByString:@"\n"];
         NSMutableArray * a = [NSMutableArray arrayWithCapacity:1];
         NSString * seatM ;
@@ -122,16 +124,16 @@
             NSDictionary * d = [[NSDictionary alloc] initWithObjectsAndKeys:aa,@"columns",[NSString stringWithFormat:@"%d",j+1],@"rowId",[NSString stringWithFormat:@"%d",j+1],@"rowNum",nil];//与实际数值可能不符
             [a addObject:d];
         }
-        UILabel * seatLable = [[UILabel alloc] initWithFrame:CGRectMake(APPLICATION_WIDTH/2-50, 30, 100, 25)];
+        _seatLable = [[UILabel alloc] initWithFrame:CGRectMake(APPLICATION_WIDTH/2-50, 30, 100, 25)];
         if (![UIUtils isBlankString:_seat]) {
-            seatLable.text = [NSString stringWithFormat:@"座次:%@",_seat];
+            _seatLable.text = [NSString stringWithFormat:@"座次:%@",_seat];
         }else{
-            seatLable.text = [NSString stringWithFormat:@"座次:未选座"];
+            _seatLable.text = [NSString stringWithFormat:@"座次:未选座"];
         }
-        seatLable.font = [UIFont systemFontOfSize:15];
-        seatLable.textColor = [UIColor blackColor];
-        seatLable.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:seatLable];
+        _seatLable.font = [UIFont systemFontOfSize:15];
+        _seatLable.textColor = [UIColor blackColor];
+        _seatLable.textAlignment = NSTextAlignmentCenter;
+        [self.view addSubview:_seatLable];
         
         __block  NSMutableArray *  seatsArray = a;//seatsDic[@"seats"];
         
@@ -232,13 +234,14 @@
     NSArray * a = [m.seatNo componentsSeparatedByString:@","];
     NSString * seat = [NSString stringWithFormat:@"%d排%d座",[a[0] intValue],[a[1] intValue]];
     UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
-    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_classModel.courseDetailId],@"id",user.peopleId,@"studentId",seat,@"seat",_classModel.roomId,@"roomId", nil];
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_classModel.courseDetailId],@"courseDetailId",user.peopleId,@"studentId",seat,@"seat", nil];
     [[NetworkRequest sharedInstance] POST:UpdateSeat dict:dict succeed:^(id data) {
         
         NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
         if ([str isEqualToString:@"0000"]) {
             [UIUtils showInfoMessage:@"选座成功" withVC:self];
             self.actionBlock(str);
+            _seatLable.text = seat;
             [self.navigationController popViewControllerAnimated:YES];
         }else {
             NSString * str1 = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];

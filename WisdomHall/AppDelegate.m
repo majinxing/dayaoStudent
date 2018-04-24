@@ -180,6 +180,7 @@
     [[CollectionHeadView sharedInstance] onceSetNil];
     
     if ([UIUtils didUserPressLockButton]) {
+        
         //目的是为了停止inApp的时钟
         [[NSNotificationCenter defaultCenter] postNotificationName:@"stopTime" object:nil];
         
@@ -278,6 +279,7 @@
     if (view) {
         
     }
+    [UIUtils AFNReachability];
 }
 
 

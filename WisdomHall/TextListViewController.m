@@ -126,6 +126,7 @@
             //获取主线程
             [self hideHud];
             [self showHudInView:self.view hint:NSLocalizedString(@"正在交卷数据", @"Load data...")];
+            [self.view endEditing:YES];
         });
         NSMutableArray * ary = [Questions returnText:_questionsAry];
         NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_t.textId],@"id",ary,@"examAnswerList", nil];

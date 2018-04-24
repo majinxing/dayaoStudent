@@ -35,9 +35,12 @@
         self.signStartTime = str;//[dict objectForKey:@"actStartTime"];
         self.signStartTime = [self.signStartTime stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
         self.signStartTime = [self.signStartTime stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+        self.signStartTime = [UIUtils timeAddTenMin:self.signStartTime];
     }else{
         self.signStartTime = [NSString stringWithFormat:@"%@",self.actStarTime];
     }
+    
+    
     self.courseDetailId = [dict objectForKey:@"courseDetailId"];
     self.time = [dict objectForKey:@"actStartTime"];
     self.total = [dict objectForKey:@"total"];

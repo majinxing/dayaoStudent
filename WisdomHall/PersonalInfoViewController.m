@@ -38,6 +38,8 @@
     _sex = [[NSString alloc] init];
     
     _headImage = [[UIImage alloc] init];
+    
+    [self keyboardNotification];
        // Do any additional setup after loading the view from its nib.
 }
 -(void)getData{
@@ -101,30 +103,56 @@
         NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_user.peopleId,@"id",_textAry[6],@"email",_textAry[7],@"region",_sex,@"sex",_textAry[9],@"birthday",_textAry[10],@"sign",nil];
         [[NetworkRequest sharedInstance] POST:ChangeSelfInfo dict:dict succeed:^(id data) {
 //            NSLog(@"%@",data);
+            NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
+            if ([str isEqualToString:@"0000"]) {
+                [UIUtils showInfoMessage:@"修改成功" withVC:self];
+            }
         } failure:^(NSError *error) {
             
         }];
         
         NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",@"www",@"description",@"4",@"function",nil];
-
-        [[NetworkRequest sharedInstance] POSTImage:FileUpload image:_headImage dict:dict1 succeed:^(id data) {
-            NSString * code = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
-            if ([code isEqualToString:@"0000"]) {
+        if (_headImage) {
+            [[NetworkRequest sharedInstance] POSTImage:FileUpload image:_headImage dict:dict1 succeed:^(id data) {
+                NSString * code = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
+                if ([code isEqualToString:@"0000"]) {
+                    
+                    NSArray * ary = [data objectForKey:@"body"];
+                    [[Appsetting sharedInstance].mySettingData setValue:ary[0] forKey:@"user_pictureId"];
+                }
+            } failure:^(NSError *error) {
                 
-                NSArray * ary = [data objectForKey:@"body"];
-                [[Appsetting sharedInstance].mySettingData setValue:ary[0] forKey:@"user_pictureId"];
-            }
-        } failure:^(NSError *error) {
-            
-            [UIUtils showInfoMessage:@"发送数据失败，请检查网络" withVC:self];
-
-        }];
+                [UIUtils showInfoMessage:@"发送数据失败，请检查网络" withVC:self];
+                
+            }];
+        }
+        
     }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+/**
+ * 键盘监听
+ **/
+-(void)keyboardNotification{
+    //监听键盘出现和消失
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+}
+#pragma mark 键盘出现
+-(void)keyboardWillShow:(NSNotification *)note
+{
+    CGRect keyBoardRect=[note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, keyBoardRect.size.height, 0);
+}
+#pragma mark 键盘消失
+-(void)keyboardWillHide:(NSNotification *)note
+{
+    self.tableView.contentInset = UIEdgeInsetsZero;
 }
 #pragma mark - HKClipperHelper
 

@@ -60,9 +60,6 @@
     
     _selectSchoolBtnStatus = NO;
     
-    
-
-    
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     _user = [[Appsetting sharedInstance] getUsetInfo];
@@ -329,6 +326,8 @@
     SchoolModel * s = _titleAry[indexPath.row];
     
     [_selectSchoolBtn setTitle:s.schoolName forState:UIControlStateNormal];
+    
+//    s.schoolHost = @"http://192.168.1.100:8080";
     
     [[Appsetting sharedInstance] saveUserSchool:s];
     

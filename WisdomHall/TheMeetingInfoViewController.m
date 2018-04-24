@@ -356,14 +356,13 @@
             }];
             [c returnReason:^(EMCallEndReason reason) {
                 if (reason == EMCallEndReasonRemoteOffline) {
-                    [UIUtils showInfoMessage:@"对方不在线" withVC:self];
+                    [UIUtils showInfoMessage:@"抢答还没开始呢，不要太心急哦~" withVC:self];
                 }else if (reason == EMCallEndReasonBusy){
-                    [UIUtils showInfoMessage:@"对方占线" withVC:self];
-                    
+                    [UIUtils showInfoMessage:@"已有人抢答成功，下次手速要更快哦~" withVC:self];
                 }else if (reason == EMCallEndReasonHangup){
-//                    [UIUtils showInfoMessage:@"对方挂断" withVC:self];
-                }else if (reason == EMCallEndReasonFailed){
-                    [UIUtils showInfoMessage:@"呼叫失败" withVC:self];
+                    
+                }else {
+                    [UIUtils showInfoMessage:@"抢答貌似失败了呢~" withVC:self];
                 }
             }];
             
@@ -728,31 +727,35 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     
     //info是所选择照片的信息
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    // 异步执行任务创建方法
+    dispatch_async(queue, ^{
+        //    UIImagePickerControllerEditedImage//编辑过的图片
+        //    UIImagePickerControllerOriginalImage//原图
+        //刚才已经看了info中的键值对，可以从info中取出一个UIImage对象，将取出的对象赋给按钮的image
+        
+        UIImage *resultImage = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+        
+        //    NSString * filePath = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
+        UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
+        NSString * str = [NSString stringWithFormat:@"%@-%@-%@",user.userName,user.studentId,[UIUtils getTime]];
+        
+        NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",str,@"description",@"10",@"function",[NSString stringWithFormat:@"%@",_meetingModel.meetingDetailId],@"relId",@"2",@"relType",nil];
+        
+        UIImage * image = [UIUtils addWatemarkTextAfteriOS7_WithLogoImage:resultImage watemarkText:[NSString stringWithFormat:@"%@-%@-%@",_user.userName,_user.studentId,[UIUtils getCurrentDate]]];
+        
+        [[NetworkRequest sharedInstance] POSTImage:FileUpload image:image dict:dict1 succeed:^(id data) {
+            NSString * code = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
+            if ([code isEqualToString:@"0000"]) {
+                [UIUtils showInfoMessage:@"上传成功" withVC:self];
+            }else{
+                [UIUtils showInfoMessage:@"上传失败" withVC:self];
+            }
+        } failure:^(NSError *error) {
+            [UIUtils showInfoMessage:@"上传失败，请检查网络" withVC:self];
+        }];
+    });
     
-    //    UIImagePickerControllerEditedImage//编辑过的图片
-    //    UIImagePickerControllerOriginalImage//原图
-    //刚才已经看了info中的键值对，可以从info中取出一个UIImage对象，将取出的对象赋给按钮的image
-    
-    UIImage *resultImage = [info objectForKey:@"UIImagePickerControllerEditedImage"];
-    
-    //    NSString * filePath = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
-    UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
-    NSString * str = [NSString stringWithFormat:@"%@-%@-%@",user.userName,user.studentId,[UIUtils getTime]];
-    
-    NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",str,@"description",@"10",@"function",[NSString stringWithFormat:@"%@",_meetingModel.meetingDetailId],@"relId",@"2",@"relType",nil];
-    
-    UIImage * image = [UIUtils addWatemarkTextAfteriOS7_WithLogoImage:resultImage watemarkText:[NSString stringWithFormat:@"%@-%@-%@",_user.userName,_user.studentId,[UIUtils getCurrentDate]]];
-
-    [[NetworkRequest sharedInstance] POSTImage:FileUpload image:image dict:dict1 succeed:^(id data) {
-        NSString * code = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
-        if ([code isEqualToString:@"0000"]) {
-            [UIUtils showInfoMessage:@"上传成功" withVC:self];
-        }else{
-            [UIUtils showInfoMessage:@"上传失败" withVC:self];
-        }
-    } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"上传失败，请检查网络" withVC:self];
-    }];
     //使用模态返回到软件界面
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
@@ -850,7 +853,7 @@
         NSString * checkcodeLocal = [NSString stringWithFormat:@"%@dayaokeji",date];
         NSString * md5 = [self md5:checkcodeLocal];
         if ([md5 isEqualToString:checkcode]) {
-            if ([UIUtils dateTimeDifferenceWithStartTime:dateTime]) {
+            if ([UIUtils dateTimeDifferenceWithStartTime:dateTime withTime:CodeEffectiveTime]) {
                 if ([UIUtils returnMckIsHave:_meetingModel.mck withAccept:loc_array]) {
                     [self sendSignInfo];
                 }else{

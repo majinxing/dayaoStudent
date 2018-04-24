@@ -102,8 +102,6 @@ static NSString * cellIdentifier = @"cellIdentifier";
             _join.frame = CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);
             [self.view addSubview:_join];
         }
-        
-        
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"搜索会议" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self selectionBtnPressed];
@@ -138,7 +136,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
  * 添加collection
  **/
 -(void)addCollection{
-    _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0,64,APPLICATION_WIDTH,APPLICATION_HEIGHT-64-44) collectionViewLayout:[[CollectionFlowLayout alloc] init]];
+    _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0,64,APPLICATION_WIDTH,APPLICATION_HEIGHT-64) collectionViewLayout:[[CollectionFlowLayout alloc] init]];
     //注册
     [_collection registerClass:[CourseCollectionViewCell class] forCellWithReuseIdentifier:cellIdentifier];
     
@@ -321,13 +319,18 @@ static NSString * cellIdentifier = @"cellIdentifier";
                 }
             }
         }
+        if (_meetingModelAry.count>0) {
+            [_alterView removeFromSuperview];
+        }else{
+            [self.view addSubview:_alterView];
+        }
         
         [self hideHud];
         
         [_collection reloadData];
     } failure:^(NSError *error) {
         [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
-
+        [_collection reloadData];
         [self hideHud];
         
     }];
@@ -350,10 +353,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     if (_meetingModelAry.count>0) {
-        [_alterView removeFromSuperview];
         return _meetingModelAry.count;
-    }else{
-        [self.view addSubview:_alterView];
     }
     return 0;
 }

@@ -343,6 +343,17 @@
     return effectedImage;
 }
 
+-(void)saveWiFiMac:(NSString *)wifiMac{
+    [_mySettingData setValue:wifiMac forKey:@"WIFI_mac"];
+    [_mySettingData setValue:[UIUtils getCurrentDate ] forKey:@"WIFI_time"];
+    [_mySettingData synchronize];
+}
+-(NSDictionary *)getWifiMacAndTime{
+    NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
+    [dict setValue:[_mySettingData objectForKey:@"WIFI_mac"] forKey:@"WIFI_mac"];
+    [dict setValue:[_mySettingData objectForKey:@"WIFI_time"] forKey:@"WIFI_time"];
+    return dict;
+}
 @end
 
 

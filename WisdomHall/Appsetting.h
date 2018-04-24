@@ -33,4 +33,8 @@
 -(SchoolModel *)getUserSchool;
 //存储学校数据
 -(void)saveUserSchool:(SchoolModel *)school;
+// 缓存wifi
+-(void)saveWiFiMac:(NSString *)wifiMac;
+//获取缓存的wifi
+-(NSDictionary *)getWifiMacAndTime;
 @end

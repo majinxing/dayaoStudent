@@ -211,7 +211,9 @@ static NSString *cellIdentifier = @"cellIdentifier";
         [self getSelfJoinClassType:page];
     } failure:^(NSError *error) {
         [self hideHud];
+        [_tableView reloadData];
         [UIUtils showInfoMessage:@"获取课表失败，请稍后再试" withVC:self];
+        
     }];
 }
 ////临时
@@ -275,6 +277,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 
     } failure:^(NSError *error) {
         [self hideHud];
+        [_tableView reloadData];
         [UIUtils showInfoMessage:@"获取课表失败，请稍后再试" withVC:self];
     }];
     
@@ -405,7 +408,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
             if ([[NSString stringWithFormat:@"%@",str] isEqualToString:@"6680"]) {
                 [UIUtils showInfoMessage:@"该用户已经添加,不能重复添加" withVC:self];
             }else if ([[NSString stringWithFormat:@"%@",str] isEqualToString:@"6676"]){
-                [UIUtils showInfoMessage:@"数据异常" withVC:self];
+                [UIUtils showInfoMessage:@"课堂已经被删除或者不存在" withVC:self];
             }else if([[NSString stringWithFormat:@"%@",str] isEqualToString:@"0000"]){
                 [UIUtils showInfoMessage:@"加入成功" withVC:self];
                 [self headerRereshing];

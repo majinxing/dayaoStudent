@@ -108,7 +108,7 @@
  * 开始到结束的时间差
  
  */
-+ (BOOL)dateTimeDifferenceWithStartTime:(NSString *)startTime;
++ (BOOL)dateTimeDifferenceWithStartTime:(NSString *)startTime withTime:(int)time;
 /**
  *  判断二维码数组是否与接口数组有重叠数据
  **/
@@ -124,5 +124,11 @@
 //修改屏幕亮度
 
 +(BOOL)didUserPressLockButton;
+//md5
++(NSString *)md5:(NSString *)str;
+//时间加10分钟
++(NSString *)timeAddTenMin:(NSString *)time;
+//网络状态监听
++(void)AFNReachability;
 @end
 

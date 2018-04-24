@@ -163,7 +163,7 @@ static SGQRCodeScanManager *_instance;
     SystemSoundID soundID = 0;
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)(fileUrl), &soundID);
     AudioServicesAddSystemSoundCompletion(soundID, NULL, NULL, soundCompleteCallback, NULL);
-    AudioServicesPlaySystemSound(soundID); // 播放音效
+//    AudioServicesPlaySystemSound(soundID); // 播放音效
 }
 void soundCompleteCallback(SystemSoundID soundID, void *clientData){
 

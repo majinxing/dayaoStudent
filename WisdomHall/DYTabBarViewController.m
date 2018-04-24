@@ -21,6 +21,8 @@
 #import "ConversationVC.h"
 #import "ChatHelper.h"
 
+#import "AFNetworking/AFNetworking.h"
+
 static dispatch_once_t predicate;
 
 @interface DYTabBarViewController ()<UIAlertViewDelegate>
@@ -59,6 +61,7 @@ static dispatch_once_t predicate;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(voiceCalls:) name:@"VoiceCalls" object:nil];
 
     [self selectApp];
+    
     
 
     // Do any additional setup after loading the view from its nib.
@@ -134,11 +137,13 @@ static dispatch_once_t predicate;
     //设置字体颜色（普通类型）
     [nav.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]} forState:UIControlStateNormal];
     [self addChildViewController:nav];
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 -(void)selectApp{
     
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
@@ -190,6 +195,9 @@ static dispatch_once_t predicate;
         
     }];
 }
+
+
+
 /*
  #pragma mark - Navigation
  

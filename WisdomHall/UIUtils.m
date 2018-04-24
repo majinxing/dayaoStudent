@@ -21,6 +21,7 @@
 #import "WorkingLoginViewController.h"
 #import "ClassModel.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <CommonCrypto/CommonDigest.h>
 
 
 @interface UIUtils()
@@ -336,7 +337,7 @@
  
  */
 
-+ (BOOL)dateTimeDifferenceWithStartTime:(NSString *)startTime{
++ (BOOL)dateTimeDifferenceWithStartTime:(NSString *)startTime withTime:(int)time{
     
     NSDateFormatter *date = [[NSDateFormatter alloc]init];
     
@@ -380,11 +381,10 @@
     if (abs((int)dateCom.minute+(int)minute)>0) {
         return NO;
     }
-    if (abs((int)dateCom.second+(int)second)<CodeEffectiveTime) {
+    if (abs((int)dateCom.second+(int)second)<time) {
         return YES;
     }
     return NO;
-    
 }
 //获取网路时间与本地时间的差值
 +(NSDate *)getInternetDate
@@ -1527,6 +1527,95 @@
     //判断屏幕亮度是否能够被改变
     return oldBrightness != newBrightness;
     
+}
++(NSString *)md5:(NSString *)str
+{
+    const char *cStr = [str UTF8String];
+    unsigned char digest[CC_MD5_DIGEST_LENGTH];
+    CC_MD5( cStr, strlen(cStr), digest );
+    
+    NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+    
+    for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
+        [output appendFormat:@"%02x", digest[i]];
+    
+    return output;
+}
++(NSString *)timeAddTenMin:(NSString *)time{
+    
+    NSArray *ary = [time componentsSeparatedByString:@" "];
+    NSString * expireTime = ary[1];
+    NSMutableArray * ary1 = [expireTime componentsSeparatedByString:@":"];
+    expireTime = ary1[0];
+    NSString * mm = ary1[1];
+    
+    
+    
+    long n = [expireTime integerValue];
+    long m = [mm integerValue];
+
+    
+    if (m>=50) {
+        if (n == 24) {
+            n = 1;
+            m = m + 10 - 60;
+            ary1[0] = [NSString stringWithFormat:@"%ld",n];
+            ary1[1] = [NSString stringWithFormat:@"%ld",m];
+            
+        }else {
+            n = n+1;
+            m = m + 10 - 60;
+            
+            ary1[0] = [NSString stringWithFormat:@"%ld",n];
+            ary1[1] = [NSString stringWithFormat:@"%ld",m];
+            
+        }
+    }else{
+        m = m + 10;
+        ary1[1] = [NSString stringWithFormat:@"%ld",m];
+        
+    }
+    
+    
+    expireTime = [NSString stringWithFormat:@"%@ %@:%@",ary[0],ary1[0],ary1[1]];
+    
+    return expireTime;
+}
+//使用AFN框架来检测网络状态的改变
++(void)AFNReachability
+{
+    //1.创建网络监听管理者
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+    
+    //2.监听网络状态的改变
+    /*
+     AFNetworkReachabilityStatusUnknown     = 未知
+     AFNetworkReachabilityStatusNotReachable   = 没有网络
+     AFNetworkReachabilityStatusReachableViaWWAN = 3G
+     AFNetworkReachabilityStatusReachableViaWiFi = WIFI
+     */
+    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        switch (status) {
+            case AFNetworkReachabilityStatusUnknown:
+                NSLog(@"未知");
+                break;
+            case AFNetworkReachabilityStatusNotReachable:
+                NSLog(@"没有网络");
+                break;
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+                NSLog(@"数据流量");
+                break;
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+                NSLog(@"WIFI");
+                break;
+                
+            default:
+                break;
+        }
+    }];
+    
+    //3.开始监听
+    [manager startMonitoring];
 }
 @end
 
