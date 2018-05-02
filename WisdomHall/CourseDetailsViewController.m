@@ -301,8 +301,10 @@
         //    NSString * filePath = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
         UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
         NSString * str = [NSString stringWithFormat:@"%@-%@-%@",user.userName,user.studentId,[UIUtils getTime]];
+        
         if ([_pictureType isEqualToString:@"QAPicture"]) {
-            NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",str,@"description",@"6",@"function",[NSString stringWithFormat:@"%@",_c.sclassId],@"relId",@"1",@"relType",nil];
+            
+            NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",str,@"description",@"6",@"function",[NSString stringWithFormat:@"%@",_c.sclassId],@"relId",@"false",@"deleteOld",nil];
             
             [[NetworkRequest sharedInstance] POSTImage:FileUpload image:resultImage dict:dict1 succeed:^(id data) {
                 NSString * code = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
@@ -315,7 +317,9 @@
                 [UIUtils showInfoMessage:@"上传失败" withVC:self];
             }];
         }else if ([_pictureType isEqualToString:@"SignPicture"]){
-            NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",str,@"description",@"10",@"function",[NSString stringWithFormat:@"%@",_c.courseDetailId],@"relId",@"1",@"relType",nil];
+            
+            NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",str,@"description",@"10",@"function",[NSString stringWithFormat:@"%@",_c.courseSignId],@"relId",@"true",@"deleteOld",nil];
+            
             UIImage * image = [UIUtils addWatemarkTextAfteriOS7_WithLogoImage:resultImage watemarkText:[NSString stringWithFormat:@"%@-%@-%@",_user.userName,_user.studentId,[UIUtils getCurrentDate]]];
             
             [[NetworkRequest sharedInstance] POSTImage:FileUpload image:image dict:dict1 succeed:^(id data) {
@@ -586,6 +590,7 @@
         _pictureType = @"QAPicture";
         self.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController: d animated:YES];
+        
     }else if ([platform isEqualToString:InteractionType_Sit]){
         [self getCourseRoomSeat];
     }else if ([platform isEqualToString:InteractionType_Homework]){
@@ -706,6 +711,8 @@
     if (![UIUtils validateWithStartTime:_c.signStartTime withExpireTime:nil]) {
         if ([[NSString stringWithFormat:@"%@",_c.signStatus] isEqualToString:@"2"]) {
             [UIUtils showInfoMessage:@"已签到" withVC:self];
+//            [self signPictureUpdate];
+
         }else{
             [UIUtils showInfoMessage:@"课程开始之后一定时间范围内才可以签到" withVC:self];
         }
@@ -742,6 +749,9 @@
             [self signSendIng];
             [self sendSignInfo];
             
+        }else if ([UIUtils determineWifiAndtimeCorrect:_c.mck]){
+            [self signSendIng];
+            [self sendSignInfo];
         }else{
             NSString * str = [NSString stringWithFormat:@"请到WiFi列表连接指定的DAYAO或XTU开头的WiFi，若不能跳转请主动在WiFi页面连接无线信号再返回app进行签到，点击签到按钮若网络情况不好，请断开WiFi连接数据流量再次点击签到"];
             
@@ -796,7 +806,7 @@
         
     } failure:^(NSError *error) {
         
-        NSString * str = [NSString stringWithFormat:@"签到失败请重新签到，请保证数据流量的连接"];
+        NSString * str = [NSString stringWithFormat:@"签到失败请重新签到，请保证数据流量的连接后再次点击"];
         
         UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:str preferredStyle:(UIAlertControllerStyleAlert)];
         

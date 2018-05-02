@@ -251,6 +251,11 @@ static NSString *cellIdentifier = @"cellIdentifier";
                 [c setInfoWithDict:ary[i]];
                 [_classAry addObject:c];
             }
+        }else{
+            [UIUtils showInfoMessage:str withVC:self];
+            [self hideHud];
+            [_tableView reloadData];
+            return ;
         }
         for (int i = 0 ; i<_classAry.count; i++) {
             ClassModel * c = _classAry[i];

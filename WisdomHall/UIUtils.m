@@ -1617,6 +1617,33 @@
     //3.开始监听
     [manager startMonitoring];
 }
+//对缓存wifi进行判断
++(BOOL)determineWifiAndtimeCorrect:(NSMutableArray *)macAry{
+ 
+    NSDictionary * dict = [[Appsetting sharedInstance] getWifiMacAndTime];
+    NSString * mac = [dict objectForKey:@"WIFI_mac"];
+    NSString * time = [dict objectForKey:@"WIFI_time"];
+    if ([UIUtils isBlankString:mac]) {
+        return NO;
+    }else{
+        if ([UIUtils matchingMacWith:macAry withMac:mac]) {
+            if ([UIUtils isBlankString:time]) {
+                return NO;
+            }else{
+                if([UIUtils dateTimeDifferenceWithStartTime:time withTime:60]) {
+                    return YES;
+                }else{
+                    return NO;
+                }
+                
+            }
+        }else{
+            return NO;
+        }
+    }
+    return NO;
+    
+}
 @end
 
 

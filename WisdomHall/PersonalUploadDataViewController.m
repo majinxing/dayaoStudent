@@ -40,7 +40,7 @@
     [self setNavigationTitle];
     
     //    [self getData];
-    [self addBtn];
+//    [self addBtn];
     
     [self addTableView];
     
@@ -101,6 +101,9 @@
     }
 }
 -(void)viewWillAppear:(BOOL)animated{
+    
+    _temp = 1;
+    
     [self getData];
 }
 -(void)getData{
@@ -235,7 +238,7 @@
         //    NSString * filePath = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
         UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
         NSString * str = [NSString stringWithFormat:@"%@-%@-%@",user.userName,user.studentId,[UIUtils getTime]];
-        NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",str,@"description",@"6",@"function",[NSString stringWithFormat:@"%@",_classModel.courseDetailId],@"relId",@"1",@"relType",nil];
+        NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",str,@"description",@"6",@"function",[NSString stringWithFormat:@"%@",_classModel.courseDetailId],@"relId",@"ture",@"deleteOld",nil];
         
         [[NetworkRequest sharedInstance] POSTImage:FileUpload image:resultImage dict:dict1 succeed:^(id data) {
             NSString * code = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
@@ -267,7 +270,7 @@
     
 }
 -(void)addTableView{
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,64+41, APPLICATION_WIDTH, APPLICATION_HEIGHT-64-41) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,64, APPLICATION_WIDTH, APPLICATION_HEIGHT-64) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     self.automaticallyAdjustsScrollViewInsets = NO;

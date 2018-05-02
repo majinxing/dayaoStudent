@@ -161,7 +161,7 @@
 
             if ([_type isEqualToString:@"meeting"]) {
                 str = [NSString stringWithFormat:@"%@",_meeting.meetingId];
-                NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"9",@"type",@"www",@"description",@"2",@"function",[NSString stringWithFormat:@"%@",str],@"relId",@"2",@"relType",nil];
+                NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"9",@"type",@"www",@"description",@"2",@"function",[NSString stringWithFormat:@"%@",str],@"relId",@"false",@"deleteOld",nil];
                 
                 [[NetworkRequest sharedInstance] POSTImage:FileUpload filePath:filePath dict:dict succeed:^(id data) {
                     if (_m == _n) {
@@ -182,7 +182,7 @@
                 }];
             }else{
                 str = [NSString stringWithFormat:@"%@",_classModel.sclassId];
-                NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"9",@"type",@"www",@"description",@"3",@"function",[NSString stringWithFormat:@"%@",str],@"relId",@"1",@"relType",nil];
+                NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"9",@"type",@"www",@"description",@"3",@"function",[NSString stringWithFormat:@"%@",str],@"relId",@"false",@"deleteOld",nil];
                 [[NetworkRequest sharedInstance] POSTImage:FileUpload filePath:filePath dict:dict succeed:^(id data) {
                     if (_m == _n) {
                         [UIUtils showInfoMessage:@"上传完成" withVC:self];

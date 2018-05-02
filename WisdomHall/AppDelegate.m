@@ -279,7 +279,7 @@
     if (view) {
         
     }
-    [UIUtils AFNReachability];
+    
 }
 
 

@@ -57,6 +57,7 @@
     self.courseType = [dict objectForKey:@"courseType"];
     self.signStatus = [dict objectForKey:@"signStatus"];
     
+    _courseSignId = [dict objectForKey:@"courseSignId"];
 }
 @end
 

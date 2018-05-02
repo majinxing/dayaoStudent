@@ -130,5 +130,7 @@
 +(NSString *)timeAddTenMin:(NSString *)time;
 //网络状态监听
 +(void)AFNReachability;
+//对缓存的wifi进行判断
++(BOOL)determineWifiAndtimeCorrect:(NSMutableArray *)macAry;
 @end
 

@@ -192,6 +192,8 @@
 		8B396B0C208B134600F20060 /* RHScanViewStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B396B03208B134600F20060 /* RHScanViewStyle.m */; };
 		8B396B0D208B134600F20060 /* sc_qrcode_scan_light_green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B396B04208B134600F20060 /* sc_qrcode_scan_light_green@2x.png */; };
 		8B396B0E208B134600F20060 /* sc_qrcode_scan_light_green@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B396B05208B134600F20060 /* sc_qrcode_scan_light_green@3x.png */; };
+		8B396B12208F071E00F20060 /* AboutUSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B396B10208F071D00F20060 /* AboutUSViewController.m */; };
+		8B396B13208F071E00F20060 /* AboutUSViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B396B11208F071D00F20060 /* AboutUSViewController.xib */; };
 		8B3CAEC81F75091000BDE092 /* OfficeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3CAEC61F75091000BDE092 /* OfficeViewController.m */; };
 		8B3CAEC91F75091000BDE092 /* OfficeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B3CAEC71F75091000BDE092 /* OfficeViewController.xib */; };
 		8B3EBBCE205A1A4D009974B1 /* NavBarNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3EBBCC205A1A4D009974B1 /* NavBarNavigationController.m */; };
@@ -899,6 +901,9 @@
 		8B396B03208B134600F20060 /* RHScanViewStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHScanViewStyle.m; sourceTree = "<group>"; };
 		8B396B04208B134600F20060 /* sc_qrcode_scan_light_green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sc_qrcode_scan_light_green@2x.png"; sourceTree = "<group>"; };
 		8B396B05208B134600F20060 /* sc_qrcode_scan_light_green@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sc_qrcode_scan_light_green@3x.png"; sourceTree = "<group>"; };
+		8B396B0F208F071D00F20060 /* AboutUSViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutUSViewController.h; sourceTree = "<group>"; };
+		8B396B10208F071D00F20060 /* AboutUSViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutUSViewController.m; sourceTree = "<group>"; };
+		8B396B11208F071D00F20060 /* AboutUSViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutUSViewController.xib; sourceTree = "<group>"; };
 		8B3CAEC51F75091000BDE092 /* OfficeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfficeViewController.h; sourceTree = "<group>"; };
 		8B3CAEC61F75091000BDE092 /* OfficeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfficeViewController.m; sourceTree = "<group>"; };
 		8B3CAEC71F75091000BDE092 /* OfficeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OfficeViewController.xib; sourceTree = "<group>"; };
@@ -1964,10 +1969,10 @@
 				8B087E471FEA660F00649094 /* NoticeDetailsViewController.xib */,
 				8B087E481FEA661200649094 /* NoticeViewController.h */,
 				8B087E491FEA661600649094 /* NoticeViewController.m */,
-				8B087E4B1FEA661D00649094 /* NoticeViewController.xib */,
 				8BB56D891EB31C110023DAFF /* SystemSettingsViewController.h */,
 				8BB56D8A1EB31C110023DAFF /* SystemSettingsViewController.m */,
 				8BB56D8B1EB31C110023DAFF /* SystemSettingsViewController.xib */,
+				8B087E4B1FEA661D00649094 /* NoticeViewController.xib */,
 				8BEE94451F2C780500488651 /* CompanyProfileViewController.h */,
 				8BEE94461F2C780500488651 /* CompanyProfileViewController.m */,
 				8BEE94471F2C780500488651 /* CompanyProfileViewController.xib */,
@@ -1979,6 +1984,9 @@
 				8B3EBBD3205A1BF0009974B1 /* ChangeThemeInfoViewController.h */,
 				8B3EBBD4205A1BF0009974B1 /* ChangeThemeInfoViewController.m */,
 				8B3EBBD2205A1BF0009974B1 /* ChangeThemeInfoViewController.xib */,
+				8B396B0F208F071D00F20060 /* AboutUSViewController.h */,
+				8B396B10208F071D00F20060 /* AboutUSViewController.m */,
+				8B396B11208F071D00F20060 /* AboutUSViewController.xib */,
 				8B05CB721EC06FD60063EC20 /* Cell */,
 				8B0207121F8DA4DA00CE3B8C /* WisdomHall-Bridging-Header.h */,
 			);
@@ -2772,6 +2780,7 @@
 				8BA2249E1EADFFA400627A1B /* SignInViewController.xib in Resources */,
 				8B3CAEC91F75091000BDE092 /* OfficeViewController.xib in Resources */,
 				8B9171CC1ED41BC7009686FD /* QuestionsTableViewCell.xib in Resources */,
+				8B396B13208F071E00F20060 /* AboutUSViewController.xib in Resources */,
 				8B64EB5C1F1A2BA900BF7D0F /* SelectClassViewController.xib in Resources */,
 				8B7D5D831EB961260068058E /* CreateCourseViewController.xib in Resources */,
 				8B7D5D911EB9782C0068058E /* CourseCollectionViewCell.xib in Resources */,
@@ -3096,6 +3105,7 @@
 				8BF82D861EE1573200D33473 /* CreateVoteViewController.m in Sources */,
 				8B081E131F0C980200493B81 /* SelectClassRoomViewController.m in Sources */,
 				8B045B991F3458E40021699B /* ZFCenterLineView.m in Sources */,
+				8B396B12208F071E00F20060 /* AboutUSViewController.m in Sources */,
 				8BF8648E1ECAD21200B7EED4 /* UIView+MJExtension.m in Sources */,
 				8BF864C51ECAD97300B7EED4 /* UIButton+WebCache.m in Sources */,
 				8B4D91141EBDAB1000A4BE34 /* SignListViewController.m in Sources */,

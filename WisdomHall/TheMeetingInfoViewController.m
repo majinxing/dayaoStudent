@@ -537,7 +537,8 @@
         
         if ([UIUtils matchingMacWith:_meetingModel.mck withMac:bssid]) {
             _mac = 1;
-            
+            [[Appsetting sharedInstance] saveWiFiMac:bssid];
+
             [self signSendIng];
             
             [self sendSignInfo];
@@ -545,6 +546,9 @@
         }else if (_mac == 1){
             [self signSendIng];
             
+            [self sendSignInfo];
+        }else if ([UIUtils determineWifiAndtimeCorrect:_meetingModel.mck]){
+            [self signSendIng];
             [self sendSignInfo];
         }else{
             
@@ -740,8 +744,8 @@
         UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
         NSString * str = [NSString stringWithFormat:@"%@-%@-%@",user.userName,user.studentId,[UIUtils getTime]];
         
-        NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",str,@"description",@"10",@"function",[NSString stringWithFormat:@"%@",_meetingModel.meetingDetailId],@"relId",@"2",@"relType",nil];
-        
+        NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",str,@"description",@"14",@"function",[NSString stringWithFormat:@"%@",_meetingModel.meetingDetailId],@"relId",@"true",@"deleteOld",nil];
+     
         UIImage * image = [UIUtils addWatemarkTextAfteriOS7_WithLogoImage:resultImage watemarkText:[NSString stringWithFormat:@"%@-%@-%@",_user.userName,_user.studentId,[UIUtils getCurrentDate]]];
         
         [[NetworkRequest sharedInstance] POSTImage:FileUpload image:image dict:dict1 succeed:^(id data) {

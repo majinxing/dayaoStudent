@@ -57,7 +57,9 @@
         NSString * baseURL = user.host;
         
         _headImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",baseURL,FileDownload,user.userHeadImageId]]]];
+        
         [_tableView reloadData];
+        
     } failure:^(NSError *error) {
         [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
 
@@ -104,6 +106,7 @@
         [[NetworkRequest sharedInstance] POST:ChangeSelfInfo dict:dict succeed:^(id data) {
 //            NSLog(@"%@",data);
             NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
+            
             if ([str isEqualToString:@"0000"]) {
                 [UIUtils showInfoMessage:@"修改成功" withVC:self];
             }
@@ -111,7 +114,7 @@
             
         }];
         
-        NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",@"www",@"description",@"4",@"function",nil];
+        NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",@"www",@"description",[NSString stringWithFormat:@"%@",_user.peopleId],@" relId",@"4",@"function",@"true",@"deleteOld",nil];
         if (_headImage) {
             [[NetworkRequest sharedInstance] POSTImage:FileUpload image:_headImage dict:dict1 succeed:^(id data) {
                 NSString * code = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];

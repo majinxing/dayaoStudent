@@ -139,7 +139,7 @@
 }
 -(void)sendImageWithImage:(UIImage *)image{
     NSString * str = [NSString stringWithFormat:@"%@-%@-%@",_user.userName,_user.studentId,[UIUtils getTime]];
-    NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",str,@"description",@"11",@"function",_homeworkId,@"relId",@"3",@"relType",nil];
+    NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",str,@"description",@"11",@"function",_homeworkId,@"relId",@"false",@"deleteOld",nil];
     
     [[NetworkRequest sharedInstance] POSTImage:FileUpload image:image dict:dict1 succeed:^(id data) {
         NSString * code = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
