@@ -16,7 +16,7 @@
 #import "ContactModel.h"
 #import "QuestionBank.h"
 #import "Questions.h"
-#import "QuestionListViewController.h"
+
 
 @interface ImportTextViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)NSMutableArray * questionsAry;
@@ -127,11 +127,11 @@
                 [q getSelfInfo:ary[i]];
                 [d addObject:q];
             }
-            QuestionListViewController * qVC = [[QuestionListViewController alloc] init];
-            qVC.questionAry = [[NSMutableArray alloc] initWithArray:d];
-            qVC.isSelect = YES;
-            self.hidesBottomBarWhenPushed  = YES;
-            [self.navigationController pushViewController:qVC animated:YES];
+//            QuestionListViewController * qVC = [[QuestionListViewController alloc] init];
+//            qVC.questionAry = [[NSMutableArray alloc] initWithArray:d];
+//            qVC.isSelect = YES;
+//            self.hidesBottomBarWhenPushed  = YES;
+//            [self.navigationController pushViewController:qVC animated:YES];
         }
         
     } failure:^(NSError *error) {

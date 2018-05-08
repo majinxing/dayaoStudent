@@ -60,7 +60,9 @@
 - (void)viewWillDisappear:(BOOL)animated {
     
     if (self.returnTextBlock != nil) {
+        
         self.returnTextBlock(_classRoom);
+        
     }
 }
 - (void)didReceiveMemoryWarning {

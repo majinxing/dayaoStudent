@@ -7,12 +7,12 @@
 //
 
 #import "CreateTestViewController.h"
-#import "TextListViewController.h"
+//#import "TextListViewController.h"
 #import "TextModel.h"
 #import "DYHeader.h"
 #import "CreateTextTableViewCell.h"
 #import "QuestionBank.h"
-#import "TestQuestionsViewController.h"
+//#import "TestQuestionsViewController.h"
 
 @interface CreateTestViewController ()<CreateTextTableViewCellDelegate>
 @property(nonatomic,strong)TextModel * textModel;
@@ -70,12 +70,12 @@
             _questionModel = [self seleCreateLib:ary];
             TextModel * t = [[TextModel alloc] init];
             t.title = _titleTextFile.text;
-            TestQuestionsViewController * tQVC = [[TestQuestionsViewController alloc] init];
-            tQVC.t = t;
-            tQVC.qBank = _questionModel;
-            tQVC.classModel = _classModel;
-            self.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:tQVC animated:YES];
+//            TestQuestionsViewController * tQVC = [[TestQuestionsViewController alloc] init];
+//            tQVC.t = t;
+//            tQVC.qBank = _questionModel;
+//            tQVC.classModel = _classModel;
+//            self.hidesBottomBarWhenPushed = YES;
+//            [self.navigationController pushViewController:tQVC animated:YES];
         }else{
             [UIUtils showInfoMessage:@"创建失败" withVC:self];
         }

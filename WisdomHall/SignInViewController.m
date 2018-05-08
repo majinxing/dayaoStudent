@@ -544,11 +544,17 @@ static NSString *cellIdentifier = @"cellIdentifier";
     NSMutableArray * ary = [_dict objectForKey:str];
     if (btn.count == 1) {
         self.hidesBottomBarWhenPushed = YES;
+        
         CourseDetailsViewController * cdetailVC = [[CourseDetailsViewController alloc] init];
+        
         int n = [btn[0] intValue];
+        
         cdetailVC.c = ary[n];
+        
         [self.navigationController pushViewController:cdetailVC animated:YES];
+        
         self.hidesBottomBarWhenPushed=NO;
+        
     }else{
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"有重复课程请选择要查看的课" message:nil preferredStyle:  UIAlertControllerStyleActionSheet];
         for (int i = 0; i<btn.count; i++) {

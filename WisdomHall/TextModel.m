@@ -21,6 +21,7 @@
         self.textId = [NSString stringWithFormat:@"%@",[UIUtils getCurrentDate]];
         self.totalScore = @"0";
         self.totalNumber = @"0";
+        self.score = @"0";
     }
     return self;
 }
@@ -48,22 +49,34 @@
 
 -(void)setSelfInfoWithDict:(NSDictionary *)dict{
     _textId = [dict objectForKey:@"id"];
+    
     _createName = [dict objectForKey:@"createName"];
+    
     _createUserId = [dict objectForKey:@"createUser"];
-    _score = [dict objectForKey:@"score"];
+    if ([UIUtils isBlankString:[NSString stringWithFormat:@"%@",[dict objectForKey:@"actScore"]]]) {
+        _score = @"0";
+    }else{
+        _score = [NSString stringWithFormat:@"%@",[dict objectForKey:@"actScore"]];
+
+    }
+    
+    _totalScore = [NSString stringWithFormat:@"%@",[dict objectForKey:@"totalScore"]];
+    
     _title = [dict objectForKey:@"name"];
+    
+    _resultStatus = [NSString stringWithFormat:@"%@",[dict objectForKey:@"resultStatus"]];
     
     NSString * str = [NSString stringWithFormat:@"%@",[dict objectForKey:@"status"]];
     if ([str isEqualToString:@"1"]) {
-        _statusName = @"考试关闭";
+        _statusName = @"关闭";
     }else if ([str isEqualToString:@"2"]){
-        _statusName = @"考试未进行";
+        _statusName = @"未进行";
     }else if ([str isEqualToString:@"3"]){
-        _statusName = @"考试进行中";
+        _statusName = @"进行中";
     }else if ([str isEqualToString:@"4"]){
-        _statusName = @"考试已完成";
+        _statusName = @"已完成";
     }else if ([str isEqualToString:@"5"]){
-        _statusName = @"考试已批阅";
+        _statusName = @"已批阅";
     }
     
 }

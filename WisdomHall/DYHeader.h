@@ -73,6 +73,7 @@
 #import "UserModel.h"
 #import "ThemeTool.h"
 
+
 #define Collection_height 120
 
 #define CodeEffectiveTime 10
@@ -296,9 +297,9 @@
 
 #define ChangeAppState          @"course/user/changeAppState"       //app状态改变
 
+#define UploadTemp              @"course/resource/uploadTemp"       //上传临时文件
 
-
-
+#define QueryStudentAnswer      @"course/exam/queryStudentAnswerInfo"//查询作答详情
 
 
 

@@ -118,6 +118,14 @@
      selector:@selector(setColor)
      name:ThemeColorChangeNotification object:nil];
     
+    //可以通过以下方式禁用
+    
+    if (@available(iOS 11.0, *)) {
+        
+        UITableView.appearance.estimatedRowHeight = 0;
+        UITableView.appearance.estimatedSectionFooterHeight = 0;
+        UITableView.appearance.estimatedSectionHeaderHeight = 0;
+    }
     return YES;
 }
 -(void)setColor{

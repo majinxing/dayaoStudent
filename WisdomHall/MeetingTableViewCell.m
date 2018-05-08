@@ -27,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *code;
 @property (strong, nonatomic) IBOutlet UIImageView *teacherPicture;
 @property (strong,nonatomic) UIImageView * signCode;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *classImageWide;
 
 @end
 @implementation MeetingTableViewCell
@@ -64,6 +65,7 @@
     }
 }
 -(void)addFirstCOntentViewWithClassModel:(ClassModel *)classModel{
+    _classImageWide.constant -= (APPLICATION_WIDTH/2-40);
     _meetName.text = [NSString stringWithFormat:@"课程名：%@",classModel.name];
     NSMutableString *strUrl = [NSMutableString stringWithFormat:@"%@",classModel.time];
     [strUrl deleteCharactersInRange:NSMakeRange(strUrl.length-3, 3)];
@@ -143,7 +145,6 @@
                               InteractionType_Responder,
                               InteractionType_Test,
                               InteractionType_Discuss,
-                              InteractionType_Picture,
                               InteractionType_Sit,
                               InteractionType_Homework
                               ];

@@ -12,7 +12,11 @@
 typedef void (^ReturnTextBlock)(ClassRoomModel *returnText);
 
 @interface SelectClassRoomViewController : UIViewController
+
 @property (nonatomic,strong)ClassRoomModel * classRoom;
+
 @property (nonatomic, copy) ReturnTextBlock returnTextBlock;
+
 - (void)returnText:(ReturnTextBlock)block;
+
 @end

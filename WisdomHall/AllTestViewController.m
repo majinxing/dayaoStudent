@@ -13,12 +13,14 @@
 #import "FMDatabase.h"
 #import "DYHeader.h"
 #import "TextModel.h"
-#import "TextListViewController.h"
+//#import "TextListViewController.h"
 #import "CreateTestViewController.h"
 #import "MJRefresh.h"
 #import "ShareView.h"
 #import "StudentSorce.h"
 #import "StudentScoreViewController.h"
+
+#import "AnswerTestQuestionsViewController.h"
 
 @interface AllTestViewController ()<UITableViewDelegate,UITableViewDataSource,TextsTableViewCellDelegate,ShareViewDelegate>
 @property (nonatomic,strong)UITableView * tableView;
@@ -247,11 +249,25 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    TextListViewController * listVC = [[TextListViewController alloc] init];
-    listVC.t = _dataAry[indexPath.row];
+    AnswerTestQuestionsViewController * vc= [[AnswerTestQuestionsViewController alloc] init];
+    vc.t = _dataAry[indexPath.row];
+    vc.editable = NO;
+//    
     self.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:listVC animated:YES];
     
+    [self.navigationController pushViewController:vc animated:YES];
+    
+//    if ([vc.t.statusName isEqualToString:@"进行中"]) {
+//        self.hidesBottomBarWhenPushed = YES;
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }else{
+//        if([vc.t.resultStatus isEqualToString:@"2"]){
+//            self.hidesBottomBarWhenPushed = YES;
+//            [self.navigationController pushViewController:vc animated:YES];
+//        }else {
+//            [UIUtils showInfoMessage:@"考试已经结束，试卷批阅后才可以查看" withVC:self];
+//        }
+//    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 65;

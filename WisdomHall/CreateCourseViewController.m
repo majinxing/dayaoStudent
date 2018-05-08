@@ -442,7 +442,9 @@
         [self addPickView];
     }else if (btn.tag == 5){
         [self.view endEditing: YES];
+        
         SelectClassRoomViewController * s = [[SelectClassRoomViewController alloc] init];
+        
         self.hidesBottomBarWhenPushed = YES;
         
         [self.navigationController pushViewController:s animated:YES];
@@ -457,6 +459,7 @@
                 }
             }
         }];
+        
     }else if (btn.tag == 4){
         SelectPeopleToClassViewController * s = [[SelectPeopleToClassViewController alloc] init];
         self.hidesBottomBarWhenPushed = YES;
@@ -550,6 +553,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 10;
 }
+
 
 /*
  #pragma mark - Navigation
