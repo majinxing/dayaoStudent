@@ -14,5 +14,8 @@
     _attendanceRate = [dict objectForKey:@"attendanceRate"];
     _totalNum = [dict objectForKey:@"totalNum"];
     _courseName = [dict objectForKey:@"courseName"];
+    _lateNum = [NSString stringWithFormat:@"%@",[dict objectForKey:@"lateNum"]];
+    _leaveEarlyNum = [NSString stringWithFormat:@"%@",[dict objectForKey:@"leaveEarlyNum"]];
+
 }
 @end

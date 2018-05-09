@@ -15,6 +15,9 @@
 @property (nonatomic,copy) NSString * meetingPlace;//会议地点
 @property (nonatomic,copy) NSString * meetingPlaceId;//会议室的id
 @property (nonatomic,copy) NSString * meetingTime;//会议时间
+
+@property (nonatomic,copy) NSString * signStartTime;//会议签到时间
+
 @property (nonatomic,copy) NSString * meetingImage;//会议图片
 @property (nonatomic,copy) NSString * peopleNumber;//会议人数
 @property (nonatomic,copy) NSString * meetingId;//会议id
@@ -37,6 +40,7 @@
 @property (nonatomic,assign)NSInteger n;//签到人数
 @property (nonatomic,assign)NSInteger m;//未签到人数
 
+@property (nonatomic,copy) NSString *meetingSignId;//拍照上传id
 
 -(void)setMeetingInfoWithDict:(NSDictionary *)dict;
 //会议参与人员信息

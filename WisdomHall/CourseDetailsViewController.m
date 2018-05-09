@@ -57,12 +57,19 @@
 
 
 @property (nonatomic,copy)NSString * selfSignStatus;
+
 @property (nonatomic,copy)NSString * seatNo;
+
 @property (nonatomic,assign)int temp;//记录mac不被覆盖
+
 @property (nonatomic,strong)UITableView * tableView;
+
 @property (nonatomic,strong)PhotoPromptBox * photoView;
+
 @property (nonatomic,copy)NSString * pictureType;//标明是问答还是签到照片
+
 @property (nonatomic,strong)AlterView * alterView;
+
 @property (nonatomic,strong) NSTimer * t;
 
 @end
@@ -78,11 +85,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _signAry = [NSMutableArray arrayWithCapacity:1];
+    
     _notSignAry = [NSMutableArray arrayWithCapacity:1];
+    
     _user = [[Appsetting sharedInstance] getUsetInfo];
+    
     _n = 0;
+    
     _m = 0;
+    
     _temp = 0;
+    
     _isEnable = NO;
     
     [self setNavigationTitle];
@@ -138,8 +151,16 @@
                     _isEnable = YES;
                 }else if ([[NSString stringWithFormat:@"%@",s.signStatus] isEqualToString:@"3"]){
                     _selfSignStatus = @"签到状态：请假";
+                    _c.signStatus = @"3";
+                    _isEnable = YES;
+                }else if ([[NSString stringWithFormat:@"%@",s.signStatus] isEqualToString:@"4"]){
+                    _selfSignStatus = @"签到状态：迟到";
+                    _c.signStatus = @"4";
+                    _isEnable = YES;
+                }else if ([[NSString stringWithFormat:@"%@",s.signStatus] isEqualToString:@"5"]){
+                    _selfSignStatus = @"签到状态：早退";
                     _c.signStatus = @"5";
-                    _isEnable = NO;
+                    _isEnable = YES;
                 }
                 _seatNo = [NSString stringWithFormat:@"%@",s.seat];
             }
@@ -152,7 +173,7 @@
         [self hideHud];
         [_tableView reloadData];
     } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
+//        [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
 
         [self hideHud];
     }];
@@ -205,46 +226,6 @@
     }
 }
 
--(void)alter:(NSString *) str{
-    [self hideHud];
-    if ([str isEqualToString:@"1002"]) {
-        [UIUtils showInfoMessage:@"暂不能签到" withVC:self];
-        _c.signStatus = @"1";
-    }else if ([str isEqualToString:@"1003"]){
-        [UIUtils showInfoMessage:@"这台手机已经签到一次了，不能重复使用签到，谢谢" withVC:self];
-        _c.signStatus = @"1";
-    }else if ([str isEqualToString:@"1004"]){
-        [UIUtils showInfoMessage:@"没有参加课程" withVC:self];
-        _c.signStatus = @"1";
-    }else if ([str isEqualToString:@"0000"]){
-        
-//        [UIUtils showInfoMessage:@"签到成功" withVC:self];
-        _c.signStatus = @"2";
-        _selfSignStatus = @"签到状态：已签到";
-        [self signPictureUpdate];
-        // 2.创建通知
-        NSNotification *notification =[NSNotification notificationWithName:@"UpdateTheClassPage" object:nil userInfo:nil];
-        // 3.通过 通知中心 发送 通知
-        
-        [[NSNotificationCenter defaultCenter] postNotification:notification];
-        
-        
-        //  _signNumber.text = @"签到状态：已签到";
-    }else if ([str isEqualToString:@"5000"]){
-        [UIUtils showInfoMessage:@"签到失败" withVC:self];
-        _c.signStatus = @"1";
-    }else if ([str isEqualToString:@"1016"]){
-        [UIUtils showInfoMessage:@"暂不能签到" withVC:self];
-        _c.signStatus = @"1";
-    }else if ([str isEqualToString:@"1008"]){
-        [UIUtils showInfoMessage:@"这台手机已经签到一次了，不能重复使用签到，谢谢" withVC:self];
-        _c.signStatus =@"1";
-    }else if ([str isEqualToString:@"9999"]){
-        _c.signStatus = @"1";
-        [UIUtils showInfoMessage:@"系统错误" withVC:self];
-    }
-    [_tableView reloadData];
-}
 
 -(void)signPictureUpdate{
     if (![[NSString stringWithFormat:@"%@",_c.signWay] isEqualToString:@"9"]) {
@@ -300,6 +281,7 @@
         
         //    NSString * filePath = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
         UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
+        
         NSString * str = [NSString stringWithFormat:@"%@-%@-%@",user.userName,user.studentId,[UIUtils getTime]];
         
         if ([_pictureType isEqualToString:@"QAPicture"]) {
@@ -655,7 +637,7 @@
     if (![UIUtils validateWithStartTime:_c.signStartTime withExpireTime:nil]) {
         return;
     }else{
-        if ([[NSString stringWithFormat:@"%@",_c.signStatus] isEqualToString:@"2"]) {
+        if (![[NSString stringWithFormat:@"%@",_c.signStatus] isEqualToString:@"1"]) {
             return;
         }else{
             [self autoSign];
@@ -667,7 +649,7 @@
   
         return;
     }else{
-        if ([[NSString stringWithFormat:@"%@",_c.signStatus] isEqualToString:@"2"]) {
+        if (![[NSString stringWithFormat:@"%@",_c.signStatus] isEqualToString:@"1"]) {
             return;
         }
     }
@@ -709,7 +691,7 @@
 
 
     if (![UIUtils validateWithStartTime:_c.signStartTime withExpireTime:nil]) {
-        if ([[NSString stringWithFormat:@"%@",_c.signStatus] isEqualToString:@"2"]) {
+        if (![[NSString stringWithFormat:@"%@",_c.signStatus] isEqualToString:@"1"]) {
             [UIUtils showInfoMessage:@"已签到" withVC:self];
 //            [self signPictureUpdate];
 
@@ -719,7 +701,7 @@
         [self hideHud];
         return;
     }else{
-        if ([[NSString stringWithFormat:@"%@",_c.signStatus] isEqualToString:@"2"]) {
+        if (![[NSString stringWithFormat:@"%@",_c.signStatus] isEqualToString:@"1"]) {
 //            [UIUtils showInfoMessage:@"已签到"];
 
             [self hideHud];
@@ -753,7 +735,7 @@
             [self signSendIng];
             [self sendSignInfo];
         }else{
-            NSString * str = [NSString stringWithFormat:@"请到WiFi列表连接指定的DAYAO或XTU开头的WiFi，若不能跳转请主动在WiFi页面连接无线信号再返回app进行签到，点击签到按钮若网络情况不好，请断开WiFi连接数据流量再次点击签到"];
+            NSString * str = [NSString stringWithFormat:@"请连接老师指定wifi，若不能跳转请主动在WiFi页面连接无线信号再返回app进行签到，点击签到按钮若网络情况不好，请断开WiFi连接数据流量再次点击签到"];
             
             UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:str preferredStyle:(UIAlertControllerStyleAlert)];
             
@@ -772,7 +754,7 @@
         
     }else{
 //        NSString * s =[UIUtils returnMac:_c.mck];
-        NSString * str = [NSString stringWithFormat:@"请到WiFi列表连接指定的DAYAO或XTU开头的WiFi，若不能跳转请主动在WiFi页面连接无线信号再返回app进行签到，点击签到按钮若网络情况不好，请断开WiFi连接数据流量再次点击签到"];
+        NSString * str = [NSString stringWithFormat:@"请连接老师指定wifi，若不能跳转请主动在WiFi页面连接无线信号再返回app进行签到，点击签到按钮若网络情况不好，请断开WiFi连接数据流量再次点击签到"];
         
         UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:str preferredStyle:(UIAlertControllerStyleAlert)];
         
@@ -790,7 +772,7 @@
     }
 }
 -(void)signSendIng{
-    _c.signStatus = @"3";
+    _c.signStatus = @"300";
     [_tableView reloadData];
 }
 -(void)sendSignInfo{
@@ -800,9 +782,30 @@
     
     [[NetworkRequest sharedInstance] POST:ClassSign dict:dict succeed:^(id data) {
         
-        [self alter:[[data objectForKey:@"header"] objectForKey:@"code"]];
+//        [self alter:[[data objectForKey:@"header"] objectForKey:@"code"]];
+        
+//        NSString * code = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
+        
+        NSString *message = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+        
+        _c.signStatus = [NSString stringWithFormat:@"%@",[[data objectForKey:@"body"] objectForKey:@"status"]];
+        
+        _c.courseSignId = [NSString stringWithFormat:@"%@",[[data objectForKey:@"body"] objectForKey:@"id"]];
+        
+        if (![_c.signStatus isEqualToString:@"1"]) {
+            [self signPictureUpdate];
+            // 2.创建通知
+            NSNotification *notification =[NSNotification notificationWithName:@"UpdateTheClassPage" object:nil userInfo:nil];
+            // 3.通过 通知中心 发送 通知
+            
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
+        }else{
+            [UIUtils showInfoMessage:message withVC:self];
+        }
         
         [self hideHud];
+        
+        [_tableView reloadData];
         
     } failure:^(NSError *error) {
         
@@ -822,7 +825,7 @@
         
         [self hideHud];
         
-        _c.signStatus = @"4";
+        _c.signStatus = @"400";
         
         [_tableView reloadData];
         
@@ -830,7 +833,7 @@
 }
 
 -(void)codePressedDelegate:(UIButton *)btn{
-    if ([btn.titleLabel.text isEqualToString:@"扫码签到"]) {
+    if ([_c.signStatus isEqualToString:@"1"]) {
         if (![UIUtils validateWithStartTime:_c.signStartTime withExpireTime:nil]) {
             [UIUtils showInfoMessage:@"课程开始之后一定时间范围内才可以签到" withVC:self];
             return;
@@ -913,7 +916,7 @@
                 [UIUtils showInfoMessage:@"请在连接指定的DAYAO或XTU开头的WiFi下生成二维码" withVC:self];
             }
         }else{
-            [UIUtils showInfoMessage:@"请在连接指定的DAYAO或XTU开头的WiFi下生成二维码" withVC:self];
+            [UIUtils showInfoMessage:@"请连接老师指定WiFi下生成二维码" withVC:self];
         }
     }
 }

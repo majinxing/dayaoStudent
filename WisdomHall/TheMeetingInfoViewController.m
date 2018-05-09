@@ -450,10 +450,10 @@
     [self.navigationController pushViewController:signListVC animated:YES];
 }
 -(void)viewWillAppear:(BOOL)animated{
-    if (![UIUtils validateWithStartTime:_meetingModel.meetingTime withExpireTime:nil]) {
+    if (![UIUtils validateWithStartTime:_meetingModel.signStartTime withExpireTime:nil]) {
         return;
     }else{
-        if ([[NSString stringWithFormat:@"%@",_meetingModel.signStatus] isEqualToString:@"2"]) {
+        if (![[NSString stringWithFormat:@"%@",_meetingModel.signStatus] isEqualToString:@"1"]) {
             return;
         }else{
             if ([[NSString stringWithFormat:@"%@",_user.peopleId] isEqualToString:[NSString stringWithFormat:@"%@",_meetingModel.meetingHostId]]) {
@@ -466,9 +466,15 @@
 }
 -(void)autoSign{
     
-    if (![UIUtils validateWithStartTime:_meetingModel.meetingTime withExpireTime:nil]) {
+    if (![UIUtils validateWithStartTime:_meetingModel.signStartTime withExpireTime:nil]) {
+        
         return;
+    }else{
+        if (![[NSString stringWithFormat:@"%@",_meetingModel.signStatus] isEqualToString:@"1"]) {
+            return;
+        }
     }
+    
     _isEnabel = YES;
     [_tableView reloadData];
     NSMutableDictionary * dictWifi =  [UIUtils getWifiName];
@@ -511,7 +517,7 @@
     
     [self showHudInView:self.view hint:NSLocalizedString(@"正在加载数据", @"Load data...")];
     
-    if (![UIUtils validateWithStartTime:_meetingModel.meetingTime withExpireTime:nil]) {
+    if (![UIUtils validateWithStartTime:_meetingModel.signStartTime withExpireTime:nil]) {
         if ([[NSString stringWithFormat:@"%@",_meetingModel.signStatus] isEqualToString:@"2"]) {
             [UIUtils showInfoMessage:@"已签到,并已过签到时间不能上传照片" withVC:self];
         }else{
@@ -591,7 +597,7 @@
     }
 }
 -(void)signSendIng{
-    _meetingModel.signStatus = @"3";
+    _meetingModel.signStatus = @"300";
     [_tableView reloadData];
 }
 -(void)sendSignInfo{
@@ -601,9 +607,27 @@
     NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_meetingModel.meetingDetailId,@"detailId",_user.peopleId,@"userId" ,idfv,@"mck",@"2",@"status",_meetingModel.meetingId,@"meetingId",nil];
     
     [[NetworkRequest sharedInstance] POST:MeetingSign dict:dict succeed:^(id data) {
-//        NSLog(@"succedd:%@",data);
-        [self alter:[[data objectForKey:@"header"] objectForKey:@"code"]];
+
+        NSString *message = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+        
+        _meetingModel.signStatus = [NSString stringWithFormat:@"%@",[[data objectForKey:@"body"] objectForKey:@"status"]];
+        
+        _meetingModel.meetingSignId = [NSString stringWithFormat:@"%@",[[data objectForKey:@"body"] objectForKey:@"id"]];
+        
+        if (![_meetingModel.signStatus isEqualToString:@"1"]) {
+            [self signPictureUpdate];
+            // 2.创建通知
+            NSNotification *notification =[NSNotification notificationWithName:@"UpdateTheClassPage" object:nil userInfo:nil];
+            // 3.通过 通知中心 发送 通知
+            
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
+        }else{
+            [UIUtils showInfoMessage:message withVC:self];
+        }
+        
         [self hideHud];
+        
+        [_tableView reloadData];
 
     } failure:^(NSError *error) {
         NSString * str = [NSString stringWithFormat:@"签到失败请重新签到，请保证数据流量的连接"];
@@ -620,46 +644,11 @@
         
         [self presentViewController:alertC animated:YES completion:nil];
         [self hideHud];
-        _meetingModel.signStatus = @"4";
+        _meetingModel.signStatus = @"400";
         [_tableView reloadData];
     }];
 }
--(void)alter:(NSString *) str{
-    if ([str isEqualToString:@"1002"]) {
-        [UIUtils showInfoMessage:@"暂时不能签到" withVC:self];
-        _meetingModel.signStatus = @"1";
 
-    }else if ([str isEqualToString:@"1003"]){
-        [UIUtils showInfoMessage:@"已签到" withVC:self];
-        _meetingModel.signStatus = @"2";
-    }else if ([str isEqualToString:@"1004"]){
-        [UIUtils showInfoMessage:@"未参加课程" withVC:self];
-        _meetingModel.signStatus = @"1";
-    }else if ([str isEqualToString:@"0000"]){
-        
-        _meetingModel.signStatus = @"2";
-        
-//        [UIUtils showInfoMessage:@"签到成功" withVC:self];
-        [self signPictureUpdate];
-        
-        [_tableView reloadData];
-        // 2.创建通知
-        NSNotification *notification =[NSNotification notificationWithName:@"UpdateTheMeetingPage" object:nil userInfo:nil];
-        // 3.通过 通知中心 发送 通知
-        
-        [[NSNotificationCenter defaultCenter] postNotification:notification];
-    }else if ([str isEqualToString:@"5000"]){
-        [UIUtils showInfoMessage:@"签到失败" withVC:self];
-        _meetingModel.signStatus = @"1";
-    }else if ([str isEqualToString:@"1008"]){
-        _meetingModel.signStatus = @"1";
-        [UIUtils showInfoMessage:@"这台手机已经签到一次了，不能重复使用签到，谢谢" withVC:self];
-    }else if ([str isEqualToString:@"9999"]){
-        _meetingModel.signStatus = @"1";
-        [UIUtils showInfoMessage:@"系统错误" withVC:self];
-    }
-    [_tableView reloadData];
-}
 -(void)signPictureUpdate{
     if (![[NSString stringWithFormat:@"%@",_meetingModel.signWay] isEqualToString:@"9"]) {
         [UIUtils showInfoMessage:@"已签到" withVC:self];
@@ -765,7 +754,7 @@
 }
 -(void)codePressedDelegate:(UIButton *)btn{
     if ([btn.titleLabel.text isEqualToString:@"扫码签到"]) {
-        if (![UIUtils validateWithStartTime:_meetingModel.meetingTime withExpireTime:nil]) {
+        if (![UIUtils validateWithStartTime:_meetingModel.signStartTime withExpireTime:nil]) {
             [UIUtils showInfoMessage:@"会议开始之后一定时间范围内才可以签到" withVC:self];
             return;
         }

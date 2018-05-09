@@ -10,4 +10,6 @@
 
 @interface StatisticalSelfUIViewController : UIViewController
 
+@property (nonatomic,strong) NSMutableArray * dataAry;
+
 @end

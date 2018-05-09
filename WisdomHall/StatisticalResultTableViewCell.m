@@ -28,6 +28,10 @@
 @property (strong, nonatomic) IBOutlet UIView *bSecView;
 
 @property (strong, nonatomic) IBOutlet UILabel *teacherSecName;
+@property (strong, nonatomic) IBOutlet UILabel *leaveEralyLab;
+@property (strong, nonatomic) IBOutlet UILabel *lateLab;
+@property (strong, nonatomic) IBOutlet UILabel *leaveEarlyNumLab;
+@property (strong, nonatomic) IBOutlet UILabel *lateNumLab;
 
 @end
 
@@ -46,22 +50,40 @@
 }
 -(void)addContentView:(StatisticalResultModel *)s{
     _nameLabel.text = [NSString stringWithFormat:@"名        称：   %@",s.courseName];
+    
     _totalLabel.text = [NSString stringWithFormat:@"应到次数：   %@",s.totalNum];
-    _actLabel.text = [NSString stringWithFormat:@"实到次数：   %@",s.actNum];
-    _colorView.frame = CGRectMake(0, 0, self.bView.frame.size.width*[s.attendanceRate doubleValue]/100, 21);
+    
+    int actInt = [[NSString stringWithFormat:@"%@",s.actNum] intValue]+[[NSString stringWithFormat:@"%@",s.leaveEarlyNum] intValue]+[[NSString stringWithFormat:@"%@",s.lateNum] intValue];
+    
+    _actLabel.text = [NSString stringWithFormat:@"实到次数：   %d",actInt];
+   
+    double attendanceRate;
+
+    if ([[NSString stringWithFormat:@"%@",s.totalNum] doubleValue]==0) {
+        attendanceRate = 0;
+    }else{
+        attendanceRate = (double)actInt/[[NSString stringWithFormat:@"%@",s.totalNum] doubleValue]*100;
+    }
+    
+    _colorView.frame = CGRectMake(0, 0, self.bView.frame.size.width*attendanceRate/100, 21);
+    
+    _lateNumLab.text = [NSString stringWithFormat:@"迟到次数：   %@",s.lateNum];
+    
+    _leaveEarlyNumLab.text = [NSString stringWithFormat:@"早退次数：   %@",s.leaveEarlyNum];
+    
     _attendanceLabel.text = [NSString stringWithFormat:@"%.0f%%",[s.attendanceRate doubleValue]];
     
-    if (0<=[s.attendanceRate doubleValue]&&[s.attendanceRate doubleValue]<=20) {
+    if (0<=attendanceRate&&attendanceRate<=20) {
         _colorView.backgroundColor = [UIColor colorWithHexString:@"#e51c23"];
         _attendanceLabel.textColor = [UIColor colorWithHexString:@"#e51c23"];
 
-    }else if (20<[s.attendanceRate doubleValue]&&[s.attendanceRate doubleValue]<=60) {
+    }else if (20<attendanceRate&&attendanceRate<=60) {
         _colorView.backgroundColor = [UIColor colorWithHexString:@"#eb3d52"];
         _attendanceLabel.textColor = [UIColor colorWithHexString:@"#eb3d52"];
-    }else if (60<[s.attendanceRate doubleValue]&&[s.attendanceRate doubleValue]<=80) {
+    }else if (60<attendanceRate&&attendanceRate<=80) {
         _colorView.backgroundColor = [UIColor colorWithHexString:@"#45b033"];
         _attendanceLabel.textColor = [UIColor colorWithHexString:@"#45b033"];
-    }else if (80<[s.attendanceRate doubleValue]&&[s.attendanceRate doubleValue]<=100) {
+    }else if (80<attendanceRate&&attendanceRate<=100) {
         _colorView.backgroundColor = [UIColor colorWithHexString:@"#259b24"];
         _attendanceLabel.textColor = [UIColor colorWithHexString:@"#259b24"];
     }

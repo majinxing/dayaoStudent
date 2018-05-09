@@ -13,5 +13,10 @@
 @property (nonatomic,copy) NSString * attendanceRate;//到课率
 @property (nonatomic,copy) NSString * courseName;//课程名字
 @property (nonatomic,copy) NSString * totalNum;
+
+@property (nonatomic,copy) NSString * lateNum;//迟到数
+
+@property (nonatomic,copy) NSString * leaveEarlyNum;//早退人数
+
 -(void)setValueWithDict:(NSDictionary *)dict;
 @end

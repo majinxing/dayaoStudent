@@ -31,6 +31,7 @@
     self.actStarTime = [self.actStarTime stringByReplacingOccurrencesOfString:@"\t" withString:@""];
     
     NSString * str = [NSString stringWithFormat:@"%@",[dict objectForKey:@"signStartTime"]];
+    
     if (![UIUtils isBlankString:str]) {
         self.signStartTime = str;//[dict objectForKey:@"actStartTime"];
         self.signStartTime = [self.signStartTime stringByReplacingOccurrencesOfString:@"\n" withString:@" "];

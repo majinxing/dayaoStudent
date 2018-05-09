@@ -217,7 +217,18 @@
 		8B45D3871F7CF6A700A00677 /* libsms-lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B45D3861F7CF6A700A00677 /* libsms-lib.a */; };
 		8B47AB831F96DC6A00DB1B9A /* ClassTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B47AB811F96DC6A00DB1B9A /* ClassTableViewCell.m */; };
 		8B47AB841F96DC6A00DB1B9A /* ClassTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B47AB821F96DC6A00DB1B9A /* ClassTableViewCell.xib */; };
+		8B48003E20A2A68200038B47 /* DAYCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B48003320A2A68200038B47 /* DAYCalendarView.m */; };
+		8B48003F20A2A68200038B47 /* DAYComponentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B48003720A2A68200038B47 /* DAYComponentView.m */; };
+		8B48004020A2A68200038B47 /* DAYIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B48003920A2A68200038B47 /* DAYIndicatorView.m */; };
+		8B48004120A2A68200038B47 /* DAYNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B48003B20A2A68200038B47 /* DAYNavigationBar.m */; };
+		8B48004220A2A68200038B47 /* DAYUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B48003D20A2A68200038B47 /* DAYUtils.m */; };
 		8B48F9E020A049A600038B47 /* CorrectAnswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B48F9DF20A049A600038B47 /* CorrectAnswer.m */; };
+		8B48F9E420A29F1100038B47 /* StatisticalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B48F9E220A29F0F00038B47 /* StatisticalViewController.m */; };
+		8B48F9E520A29F1100038B47 /* StatisticalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B48F9E320A29F1000038B47 /* StatisticalViewController.xib */; };
+		8B48F9E920A29F4000038B47 /* StatisticalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B48F9E620A29F3F00038B47 /* StatisticalTableViewCell.m */; };
+		8B48F9EA20A29F4000038B47 /* StatisticalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B48F9E820A29F3F00038B47 /* StatisticalTableViewCell.xib */; };
+		8B48F9EE20A2A60E00038B47 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B48F9EB20A2A60D00038B47 /* CalendarViewController.m */; };
+		8B48F9EF20A2A60E00038B47 /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B48F9EC20A2A60D00038B47 /* CalendarViewController.xib */; };
 		8B4D91141EBDAB1000A4BE34 /* SignListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D91121EBDAB1000A4BE34 /* SignListViewController.m */; };
 		8B4D91151EBDAB1000A4BE34 /* SignListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B4D91131EBDAB1000A4BE34 /* SignListViewController.xib */; };
 		8B51AAA31F3EE71900AE034E /* MeetingChooseSeatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B51AAA11F3EE71900AE034E /* MeetingChooseSeatViewController.m */; };
@@ -950,8 +961,28 @@
 		8B47AB801F96DC6A00DB1B9A /* ClassTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassTableViewCell.h; sourceTree = "<group>"; };
 		8B47AB811F96DC6A00DB1B9A /* ClassTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassTableViewCell.m; sourceTree = "<group>"; };
 		8B47AB821F96DC6A00DB1B9A /* ClassTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClassTableViewCell.xib; sourceTree = "<group>"; };
+		8B48003220A2A68200038B47 /* DAYCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAYCalendarView.h; sourceTree = "<group>"; };
+		8B48003320A2A68200038B47 /* DAYCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAYCalendarView.m; sourceTree = "<group>"; };
+		8B48003420A2A68200038B47 /* Daysquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Daysquare.h; sourceTree = "<group>"; };
+		8B48003620A2A68200038B47 /* DAYComponentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAYComponentView.h; sourceTree = "<group>"; };
+		8B48003720A2A68200038B47 /* DAYComponentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAYComponentView.m; sourceTree = "<group>"; };
+		8B48003820A2A68200038B47 /* DAYIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAYIndicatorView.h; sourceTree = "<group>"; };
+		8B48003920A2A68200038B47 /* DAYIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAYIndicatorView.m; sourceTree = "<group>"; };
+		8B48003A20A2A68200038B47 /* DAYNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAYNavigationBar.h; sourceTree = "<group>"; };
+		8B48003B20A2A68200038B47 /* DAYNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAYNavigationBar.m; sourceTree = "<group>"; };
+		8B48003C20A2A68200038B47 /* DAYUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAYUtils.h; sourceTree = "<group>"; };
+		8B48003D20A2A68200038B47 /* DAYUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAYUtils.m; sourceTree = "<group>"; };
 		8B48F9DE20A049A600038B47 /* CorrectAnswer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CorrectAnswer.h; sourceTree = "<group>"; };
 		8B48F9DF20A049A600038B47 /* CorrectAnswer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CorrectAnswer.m; sourceTree = "<group>"; };
+		8B48F9E120A29F0F00038B47 /* StatisticalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticalViewController.h; sourceTree = "<group>"; };
+		8B48F9E220A29F0F00038B47 /* StatisticalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticalViewController.m; sourceTree = "<group>"; };
+		8B48F9E320A29F1000038B47 /* StatisticalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatisticalViewController.xib; sourceTree = "<group>"; };
+		8B48F9E620A29F3F00038B47 /* StatisticalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticalTableViewCell.m; sourceTree = "<group>"; };
+		8B48F9E720A29F3F00038B47 /* StatisticalTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticalTableViewCell.h; sourceTree = "<group>"; };
+		8B48F9E820A29F3F00038B47 /* StatisticalTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatisticalTableViewCell.xib; sourceTree = "<group>"; };
+		8B48F9EB20A2A60D00038B47 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
+		8B48F9EC20A2A60D00038B47 /* CalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarViewController.xib; sourceTree = "<group>"; };
+		8B48F9ED20A2A60E00038B47 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
 		8B4D91111EBDAB1000A4BE34 /* SignListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignListViewController.h; sourceTree = "<group>"; };
 		8B4D91121EBDAB1000A4BE34 /* SignListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignListViewController.m; sourceTree = "<group>"; };
 		8B4D91131EBDAB1000A4BE34 /* SignListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignListViewController.xib; sourceTree = "<group>"; };
@@ -1690,6 +1721,9 @@
 				8B01483320666A210037A107 /* StatisticalResultTableViewCell.h */,
 				8B01483420666A220037A107 /* StatisticalResultTableViewCell.m */,
 				8B01483520666A220037A107 /* StatisticalResultTableViewCell.xib */,
+				8B48F9E720A29F3F00038B47 /* StatisticalTableViewCell.h */,
+				8B48F9E620A29F3F00038B47 /* StatisticalTableViewCell.m */,
+				8B48F9E820A29F3F00038B47 /* StatisticalTableViewCell.xib */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -1766,12 +1800,18 @@
 				8B3CAEC51F75091000BDE092 /* OfficeViewController.h */,
 				8B3CAEC61F75091000BDE092 /* OfficeViewController.m */,
 				8B3CAEC71F75091000BDE092 /* OfficeViewController.xib */,
+				8B48F9E120A29F0F00038B47 /* StatisticalViewController.h */,
+				8B48F9E220A29F0F00038B47 /* StatisticalViewController.m */,
+				8B48F9E320A29F1000038B47 /* StatisticalViewController.xib */,
 				8B084DB52064A680004B9C7C /* StatisticalSelfUIViewController.h */,
 				8B084DB62064A680004B9C7C /* StatisticalSelfUIViewController.m */,
 				8B084DB72064A680004B9C7C /* StatisticalSelfUIViewController.xib */,
 				8B0E5391209FE0D200327823 /* StatisticalConditionsViewController.h */,
 				8B0E5392209FE0D200327823 /* StatisticalConditionsViewController.m */,
 				8B0E5393209FE0D200327823 /* StatisticalConditionsViewController.xib */,
+				8B48F9ED20A2A60E00038B47 /* CalendarViewController.h */,
+				8B48F9EB20A2A60D00038B47 /* CalendarViewController.m */,
+				8B48F9EC20A2A60D00038B47 /* CalendarViewController.xib */,
 			);
 			name = Office;
 			sourceTree = "<group>";
@@ -1792,6 +1832,32 @@
 				8B45D3851F7CF6A700A00677 /* JSMSSDK.h */,
 			);
 			path = include;
+			sourceTree = "<group>";
+		};
+		8B48003120A2A68200038B47 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				8B48003220A2A68200038B47 /* DAYCalendarView.h */,
+				8B48003320A2A68200038B47 /* DAYCalendarView.m */,
+				8B48003420A2A68200038B47 /* Daysquare.h */,
+				8B48003520A2A68200038B47 /* Internal */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		8B48003520A2A68200038B47 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				8B48003620A2A68200038B47 /* DAYComponentView.h */,
+				8B48003720A2A68200038B47 /* DAYComponentView.m */,
+				8B48003820A2A68200038B47 /* DAYIndicatorView.h */,
+				8B48003920A2A68200038B47 /* DAYIndicatorView.m */,
+				8B48003A20A2A68200038B47 /* DAYNavigationBar.h */,
+				8B48003B20A2A68200038B47 /* DAYNavigationBar.m */,
+				8B48003C20A2A68200038B47 /* DAYUtils.h */,
+				8B48003D20A2A68200038B47 /* DAYUtils.m */,
+			);
+			path = Internal;
 			sourceTree = "<group>";
 		};
 		8B7D5D841EB969B70068058E /* Collection */ = {
@@ -2106,6 +2172,7 @@
 		8BA224961EADFF2700627A1B /* FrameWork */ = {
 			isa = PBXGroup;
 			children = (
+				8B48003120A2A68200038B47 /* Classes */,
 				8B396AF5208B134600F20060 /* Scan */,
 				8BF79F47205F41F60033CCC3 /* HKClipper */,
 				8BB221E21FA708A300EC6478 /* SGQRController */,
@@ -2895,8 +2962,10 @@
 				8BF864871ECAD21200B7EED4 /* MJRefresh.bundle in Resources */,
 				8B396B0E208B134600F20060 /* sc_qrcode_scan_light_green@3x.png in Resources */,
 				8B0207161F8DA4DB00CE3B8C /* NoticeSwiftViewController.xib in Resources */,
+				8B48F9EF20A2A60E00038B47 /* CalendarViewController.xib in Resources */,
 				8B17374F1EC5AC3600BE3C8F /* CreateTextTableViewCell.xib in Resources */,
 				8BE8777C1EBC2D8E00866A34 /* NotStartTestingViewController.xib in Resources */,
+				8B48F9E520A29F1100038B47 /* StatisticalViewController.xib in Resources */,
 				8B429C011FA8149000084A99 /* QrCodeViewController.xib in Resources */,
 				8BA224C21EAEF5CB00627A1B /* TheLoginViewController.xib in Resources */,
 				8B087E4C1FEA661D00649094 /* NoticeDetailsViewController.xib in Resources */,
@@ -2906,6 +2975,7 @@
 				8BF82D821EE001D600D33473 /* VoteTableViewCell.xib in Resources */,
 				8BA2246C1EADF68500627A1B /* LaunchScreen.storyboard in Resources */,
 				8B0E5381209FD93E00327823 /* AnswerTOFQuestionViewController.xib in Resources */,
+				8B48F9EA20A29F4000038B47 /* StatisticalTableViewCell.xib in Resources */,
 				8BEE94491F2C780500488651 /* CompanyProfileViewController.xib in Resources */,
 				8B1A502D1F75EB7000A11CB2 /* TheMessageViewController.xib in Resources */,
 				8B1A50331F75F85C00A11CB2 /* OfficeTableViewCell.xib in Resources */,
@@ -3022,6 +3092,7 @@
 				8B0AF75E1F511AA2003858A4 /* VoteResultTableViewCell.m in Sources */,
 				8B2E16DE1EBABBC0008B7C57 /* InteractiveView.m in Sources */,
 				8BB221DB1FA7088E00EC6478 /* SGQRCodeHelperTool.m in Sources */,
+				8B48F9E420A29F1100038B47 /* StatisticalViewController.m in Sources */,
 				8BF79F52205F41F60033CCC3 /* HKClipperHelper.m in Sources */,
 				8BF864C71ECAD97300B7EED4 /* UIImage+MultiFormat.m in Sources */,
 				8B64EB5B1F1A2BA900BF7D0F /* SelectClassViewController.m in Sources */,
@@ -3079,6 +3150,7 @@
 				8B17374E1EC5AC3600BE3C8F /* CreateTextTableViewCell.m in Sources */,
 				8B087E3B1FEA56AE00649094 /* ZFSeatViewController.m in Sources */,
 				8BCE7CCE1F04F07600FE261B /* AFSecurityPolicy.m in Sources */,
+				8B48004020A2A68200038B47 /* DAYIndicatorView.m in Sources */,
 				8BE877761EBC2D6B00866A34 /* AllTestViewController.m in Sources */,
 				8B0E5394209FE0D200327823 /* StatisticalConditionsViewController.m in Sources */,
 				8BB221EA1FA708A300EC6478 /* ScanSuccessJumpVC.m in Sources */,
@@ -3088,6 +3160,7 @@
 				8B77250F1F31586300D1B521 /* AlterView.m in Sources */,
 				8B045BA61F3462640021699B /* SeatIngModel.m in Sources */,
 				8BF864C21ECAD97300B7EED4 /* SDWebImageDownloaderOperation.m in Sources */,
+				8B48004120A2A68200038B47 /* DAYNavigationBar.m in Sources */,
 				8BCE7CCD1F04F07600FE261B /* AFNetworkReachabilityManager.m in Sources */,
 				8BA224C11EAEF5CB00627A1B /* TheLoginViewController.m in Sources */,
 				8B2E16F21EBADA2F008B7C57 /* TheMeetingNotStartViewController.m in Sources */,
@@ -3096,6 +3169,7 @@
 				8BA224611EADF68500627A1B /* AppDelegate.m in Sources */,
 				8B0AF7621F5179F2003858A4 /* FileDowan.m in Sources */,
 				8B0D960B1F1893A2006796E3 /* CreateCouresTableViewCell.m in Sources */,
+				8B48F9EE20A2A60E00038B47 /* CalendarViewController.m in Sources */,
 				8B0E5380209FD93E00327823 /* AnswerTOFQuestionViewController.m in Sources */,
 				8B1A50321F75F85C00A11CB2 /* OfficeTableViewCell.m in Sources */,
 				8BE877901EBD69C000866A34 /* CreateTestViewController.m in Sources */,
@@ -3139,8 +3213,10 @@
 				8BE877701EBC1CA800866A34 /* TextViewController.m in Sources */,
 				8B2F145A1F5E9D7200438374 /* StudentScoreViewController.m in Sources */,
 				8BA224AD1EAE00B000627A1B /* DYTabBarViewController.m in Sources */,
+				8B48004220A2A68200038B47 /* DAYUtils.m in Sources */,
 				8BF7D3651F3D7D700087D35D /* CreateMeetingViewController.m in Sources */,
 				8BF864CA1ECAD97300B7EED4 /* UIView+WebCacheOperation.m in Sources */,
+				8B48003F20A2A68200038B47 /* DAYComponentView.m in Sources */,
 				8B1737091EC2BE2B00BE3C8F /* PersonalDataTableViewCell.m in Sources */,
 				8B087E431FEA573700649094 /* ZFSeatSelectionTool.m in Sources */,
 				8B7D5D821EB961260068058E /* CreateCourseViewController.m in Sources */,
@@ -3188,6 +3264,7 @@
 				8B045B731F3458820021699B /* MJPropertyKey.m in Sources */,
 				8BF864711ECACAE800B7EED4 /* FMDatabaseQueue.m in Sources */,
 				8B396B0C208B134600F20060 /* RHScanViewStyle.m in Sources */,
+				8B48003E20A2A68200038B47 /* DAYCalendarView.m in Sources */,
 				8BE877691EBAF7A800866A34 /* ShareView.m in Sources */,
 				8B07DB7E1F78E7E500DC371C /* CreateChatViewController.m in Sources */,
 				8B045B791F3458820021699B /* NSString+MJExtension.m in Sources */,
@@ -3221,6 +3298,7 @@
 				8B0333F81F8C70190021D495 /* JoinMessageGroupViewController.m in Sources */,
 				8BF79F54205F41F60033CCC3 /* HKClipperVeiw.m in Sources */,
 				8B9171C71ED3D9D8009686FD /* contactTool.m in Sources */,
+				8B48F9E920A29F4000038B47 /* StatisticalTableViewCell.m in Sources */,
 				8B0DB1331ED5188C0042DF0D /* ContactModel.m in Sources */,
 				8B081DE11F06238E00493B81 /* DefinitionPersonalTableViewCell.m in Sources */,
 				8BE24D681F8B6E2200621055 /* GroupPeopleViewController.m in Sources */,

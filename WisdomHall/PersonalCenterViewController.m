@@ -19,6 +19,8 @@
 #import "StatisticalSelfUIViewController.h"
 #import "AboutUSViewController.h"
 
+#import "StatisticalViewController.h"
+
 @interface PersonalCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView * tableview;
 @end
@@ -89,10 +91,12 @@
             [self.navigationController pushViewController:g animated:YES];
             self.hidesBottomBarWhenPushed = NO;
         }else if (indexPath.row == 2){
-            StatisticalSelfUIViewController * vc = [[StatisticalSelfUIViewController alloc] init];
+            
+            StatisticalViewController * vc = [[StatisticalViewController alloc] init];
             self.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
             self.hidesBottomBarWhenPushed = NO;
+            
         }else if (indexPath.row == 3){
             ChangeThemeInfoViewController * vc = [[ChangeThemeInfoViewController alloc] init];
             self.hidesBottomBarWhenPushed = YES;

@@ -41,7 +41,7 @@
 @property (nonatomic,assign)int n;//已签到
 @property (nonatomic,assign)int m;//未签到
 
-@property (nonatomic,copy)NSString * courseSignId;
+@property (nonatomic,copy)NSString * courseSignId;//拍照上传用的id
 
 -(void)setInfoWithDict:(NSDictionary *)dict;
 @end
