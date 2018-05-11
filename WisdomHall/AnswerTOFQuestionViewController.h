@@ -10,7 +10,14 @@
 #import "QuestionModel.h"
 #import "TextModel.h"
 
+@protocol AnswerTOFQuestionViewControllerDelegate<NSObject>
+
+-(void)handleSwipeFromDelegate:(UISwipeGestureRecognizer *)recognizer;
+
+@end
 @interface AnswerTOFQuestionViewController : UIViewController
+
+@property (nonatomic,weak)id<AnswerTOFQuestionViewControllerDelegate>delegate;
 
 @property (nonatomic,strong)TextModel *t;
 

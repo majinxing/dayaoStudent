@@ -14,14 +14,16 @@
 #import "ImportTextViewController.h"
 
 #import "AnswerChoiceQuestionViewController.h"
+
 #import "AnswerEssayQuestionViewController.h"
+
 #import "AnswerTOFQuestionViewController.h"
 
 #import "ChooseTopicView.h"
 
 #import "CorrectAnswer.h"
 
-@interface AnswerTestQuestionsViewController ()<UITextViewDelegate,ChooseTopicViewDelegate>
+@interface AnswerTestQuestionsViewController ()<UITextViewDelegate,ChooseTopicViewDelegate,AnswerTOFQuestionViewControllerDelegate,AnswerEssayQuestionViewControllerDelegate,AnswerChoiceQuestionViewControllerDelegate>
 @property (nonatomic,strong)UITableView *tableView;
 
 @property (nonatomic,strong)UserModel * user;
@@ -44,6 +46,7 @@
 
 @property (nonatomic,strong)UIView * scoreView;
 
+@property (nonatomic,assign) int temp;//标志位 标明所在的题目
 @end
 
 @implementation AnswerTestQuestionsViewController
@@ -58,6 +61,7 @@
     
     _allQuestionAry = [NSMutableArray arrayWithCapacity:1];
     
+    _temp = 0;
     
     [self initCorrectAnswerView];
     
@@ -70,7 +74,15 @@
     
     // Do any additional setup after loading the view from its nib.
 }
+-(void)viewDidAppear:(BOOL)animated{
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+}
 
+-(void)viewWillDisappear:(BOOL)animated{
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+}
 -(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [_choiceQVC touchesMoved:touches withEvent:event];
 }
@@ -203,9 +215,9 @@
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
-    self.title = @"试题";
+    self.title = _titleStr;
     if ([_t.statusName isEqualToString:@"进行中"]) {
-        UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"交卷" style:UIBarButtonItemStylePlain target:self action:@selector(more)];
+        UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(more)];
         
         [myButton setTintColor:[UIColor whiteColor]];
         
@@ -247,6 +259,7 @@
         QuestionModel *q = _allQuestionAry[i];
         
         NSMutableDictionary * dict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",q.questionId],@"examQuestionId",[NSString stringWithFormat:@"%@",q.questionAnswer],@"answer",nil];
+        
         if (q.questionAnswerImageIdAry.count>0) {
             [dict setObject:q.questionAnswerImageIdAry forKey:@"resourceList"];
         }
@@ -259,9 +272,13 @@
         NSLog(@"%@",data);
         NSString * message = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
         [UIUtils showInfoMessage:message withVC:self];
+        if ([message isEqualToString:@"成功"]) {
+            [self.navigationController dismissViewControllerAnimated:YES completion:^{
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
+        }
     } failure:^(NSError *error) {
         NSLog(@"%@",error);
-        
     }];
 }
 - (IBAction)addQuestion:(UIButton *)sender {
@@ -282,6 +299,7 @@
     button.frame = CGRectMake(APPLICATION_WIDTH/3*(tag-1),0,APPLICATION_WIDTH/3,40);
     
     _scrollView.contentSize = CGSizeMake(APPLICATION_WIDTH/3*tag, 40);
+    
     if (tag>3) {
         [_scrollView setContentOffset:CGPointMake(APPLICATION_WIDTH/3*(tag-3),0) animated:YES];
     }
@@ -312,6 +330,8 @@
 
 //顶部滑框选择试题
 -(void)titleClick:(UIButton *)btn{
+    
+    _temp = (int)btn.tag;
     
     [self.view endEditing:YES];
     
@@ -347,7 +367,7 @@
         
         if (![_t.statusName isEqualToString:@"进行中"]) {
             
-            [_cAnswer addContentView:q.correctAnswer withScore:q.getScore];
+            [_cAnswer addContentView:[NSString stringWithFormat:@"%@",q.correctAnswer] withScore:q.getScore];
             
             _cAnswer.frame = CGRectMake(0, 104, APPLICATION_WIDTH, APPLICATION_HEIGHT);
             
@@ -426,6 +446,9 @@
             [self.view sendSubviewToBack:_essayQVC.view];
         }
     }
+    _choiceQVC.delegate = self;
+    _essayQVC.delegate = self;
+    _tOFQVC.delegate = self;
 }
 -(void)theScoreView{
     if (!_scoreView) {
@@ -485,6 +508,52 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+#pragma mark 问题代理方法
+-(void)handleSwipeFromDelegate:(UISwipeGestureRecognizer *)recognizer{
+    if(recognizer.direction == UISwipeGestureRecognizerDirectionDown) {
+        NSLog(@"swipe down");
+        
+    } if(recognizer.direction == UISwipeGestureRecognizerDirectionUp) {
+        NSLog(@"swipe up");
+        
+    } if(recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
+        NSLog(@"swipe left");
+        if ([_t.statusName isEqualToString:@"进行中"]) {
+            if (_temp<_allQuestionAry.count) {
+                UIButton * btn = [[UIButton alloc] init];
+                
+                btn.tag = _temp +1;
+                
+                [self titleClick:btn];
+            }
+        }else{
+            if (_temp<_allQuestionAry.count+1) {
+                UIButton * btn = [[UIButton alloc] init];
+                
+                btn.tag = _temp +1;
+                
+                [self titleClick:btn];
+            }
+        }
+    } if(recognizer.direction == UISwipeGestureRecognizerDirectionRight) {
+        
+        if (_temp>1) {
+            UIButton * btn = [[UIButton alloc] init];
+            
+            btn.tag = _temp -1;
+            
+            [self titleClick:btn];
+        }
+    }
+    
+//    if (_temp>3) {
+    
+        [_scrollView setContentOffset:CGPointMake(APPLICATION_WIDTH*((_temp-1)/3),0) animated:YES];
+
+//    }
+
+//    [_scrollView];
 }
 #pragma mark ChooseTopicDelegate
 -(void)chooseDelegateOutOfChooseTopicView{

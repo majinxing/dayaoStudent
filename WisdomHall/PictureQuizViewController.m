@@ -1,12 +1,13 @@
 //
-//  AllTestViewController.m
+//  PictureQuizViewController.m
 //  WisdomHall
 //
-//  Created by XTU-TI on 2017/5/5.
-//  Copyright © 2017年 majinxing. All rights reserved.
+//  Created by XTU-TI on 2018/5/10.
+//  Copyright © 2018年 majinxing. All rights reserved.
 //
 
-#import "AllTestViewController.h"
+#import "PictureQuizViewController.h"
+
 #import "DYHeader.h"
 #import "TextsTableViewCell.h"
 #import "FMDBTool.h"
@@ -22,7 +23,8 @@
 
 #import "AnswerTestQuestionsViewController.h"
 
-@interface AllTestViewController ()<UITableViewDelegate,UITableViewDataSource,TextsTableViewCellDelegate,ShareViewDelegate>
+@interface PictureQuizViewController ()<UITableViewDelegate,UITableViewDataSource,TextsTableViewCellDelegate,ShareViewDelegate>
+
 @property (nonatomic,strong)UITableView * tableView;
 @property (nonatomic,strong)FMDatabase *db;
 @property (nonatomic,strong)NSMutableArray * dataAry;//数据源
@@ -32,7 +34,7 @@
 
 @end
 
-@implementation AllTestViewController
+@implementation PictureQuizViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -56,7 +58,7 @@
 -(void)setNavigationTitle{
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
-    self.title = @"测验";
+    self.title = @"问答";
     _userModel = [[Appsetting sharedInstance] getUsetInfo];
     if ([[NSString stringWithFormat:@"%@",_classModel.teacherId] isEqualToString:[NSString stringWithFormat:@"%@",_userModel.peopleId]]) {
         UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"创建测试" style:UIBarButtonItemStylePlain target:self action:@selector(createText)];
@@ -79,7 +81,9 @@
     _tableView.backgroundColor = [UIColor clearColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self.view addSubview:_tableView];
-    __weak AllTestViewController * weakSelf = self;
+    
+    __weak PictureQuizViewController * weakSelf = self;
+    
     [self.tableView addHeaderWithCallback:^{
         [weakSelf getData];
     }];
@@ -104,10 +108,8 @@
         for (int i = 0; i<ary.count; i++) {
             TextModel * text = [[TextModel alloc] init];
             [text setSelfInfoWithDict:ary[i]];
-            
+           
             if ([text.title rangeOfString:@"【拍照问答】"].location!=NSNotFound) {
-                //  [_dataAry addObject:text];
-            }else{
                 [_dataAry addObject:text];
             }
         }
@@ -157,7 +159,7 @@
             [_vote hide];
         } failure:^(NSError *error) {
             [UIUtils showInfoMessage:@"发送数据失败，请检查网络" withVC:self];
-
+            
         }];
         //
     }else if ([platform isEqualToString:Vote_Stop]){
@@ -175,7 +177,7 @@
             [_vote hide];
         } failure:^(NSError *error) {
             [UIUtils showInfoMessage:@"发送数据失败，请检查网络" withVC:self];
-
+            
         }];
         
     }else if ([platform isEqualToString:Vote_Stare]){
@@ -242,10 +244,14 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:@"TextsTableViewCell" owner:nil options:nil] objectAtIndex:0];
     }
     TextModel * t = _dataAry[indexPath.row];
+    
     [cell addContentView:t withIndex:(int)indexPath.row+1];
+    
     if (![[NSString stringWithFormat:@"%@",_classModel.teacherId] isEqualToString:[NSString stringWithFormat:@"%@",_userModel.peopleId]]) {
+        
         cell.moreImage.image = [UIImage imageNamed:@""];
         [cell.moreBtn setEnabled:NO];
+        
     }
     cell.delegate = self;
     return cell;
@@ -257,22 +263,22 @@
     AnswerTestQuestionsViewController * vc= [[AnswerTestQuestionsViewController alloc] init];
     vc.t = _dataAry[indexPath.row];
     vc.editable = NO;
-    vc.titleStr = @"试题";
+    vc.titleStr = @"问答";
     self.hidesBottomBarWhenPushed = YES;
     
     [self.navigationController pushViewController:vc animated:YES];
     
-//    if ([vc.t.statusName isEqualToString:@"进行中"]) {
-//        self.hidesBottomBarWhenPushed = YES;
-//        [self.navigationController pushViewController:vc animated:YES];
-//    }else{
-//        if([vc.t.resultStatus isEqualToString:@"2"]){
-//            self.hidesBottomBarWhenPushed = YES;
-//            [self.navigationController pushViewController:vc animated:YES];
-//        }else {
-//            [UIUtils showInfoMessage:@"考试已经结束，试卷批阅后才可以查看" withVC:self];
-//        }
-//    }
+    //    if ([vc.t.statusName isEqualToString:@"进行中"]) {
+    //        self.hidesBottomBarWhenPushed = YES;
+    //        [self.navigationController pushViewController:vc animated:YES];
+    //    }else{
+    //        if([vc.t.resultStatus isEqualToString:@"2"]){
+    //            self.hidesBottomBarWhenPushed = YES;
+    //            [self.navigationController pushViewController:vc animated:YES];
+    //        }else {
+    //            [UIUtils showInfoMessage:@"考试已经结束，试卷批阅后才可以查看" withVC:self];
+    //        }
+    //    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 65;
@@ -280,15 +286,14 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 10;
 }
-
 /*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

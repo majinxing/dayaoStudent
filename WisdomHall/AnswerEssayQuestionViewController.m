@@ -60,6 +60,18 @@
     _tableView.dataSource = self;
     
     [self.view addSubview:_tableView];
+    
+    UISwipeGestureRecognizer * priv = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
+    [priv setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [_tableView addGestureRecognizer:priv];
+    UISwipeGestureRecognizer * recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    [_tableView addGestureRecognizer:recognizer];
+}
+-(void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(handleSwipeFromDelegate:)]) {
+        [self.delegate handleSwipeFromDelegate:recognizer];
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -179,6 +191,10 @@
 }
 #pragma mark ChoiceQuestionTableViewCellDelegate
 -(void)deleAnswerImageDelegate:(UIButton *)sender{
+    if (![_t.statusName isEqualToString:@"进行中"]) {
+//        [self.view endEditing:YES];
+        return;
+    }
     int n = (int)sender.tag-1001;
     if (n<_questionModel.questionAnswerImageAry.count&&n>=0) {
         [_questionModel.questionAnswerImageAry removeObjectAtIndex:n];
@@ -390,8 +406,13 @@
         }
     }else if(indexPath.section == 1){
         if ([_questionModel.titleType  isEqualToString:@"5"]) {
-            //问答。可上传图片
-            [cell addFirstTitleTextView:_questionModel.questionAnswer withImageAry:_questionModel.questionAnswerImageAry withIsEdit:YES];
+            if (![_t.statusName isEqualToString:@"进行中"]) {
+                [cell addFirstTitleTextView:_questionModel.questionAnswer withImageAry:_questionModel.questionAnswerImageAry withIsEdit:YES];
+            }else{
+                //问答。可上传图片
+                [cell addFirstTitleTextView:_questionModel.questionAnswer withImageAry:_questionModel.questionAnswerImageAry withIsEdit:YES];
+            }
+           
         }else{
             [cell addSeventhTextViewWithStr:_questionModel.questionAnswer];
         }
@@ -506,7 +527,7 @@
     
     __weak AnswerEssayQuestionViewController * weakSelf = self;
     
-    NSData *imageData = UIImageJPEGRepresentation(image,0.5);
+    NSData *imageData = UIImageJPEGRepresentation(image,0.1);
     
     NSArray * ary = [NSArray arrayWithObject:imageData];
     

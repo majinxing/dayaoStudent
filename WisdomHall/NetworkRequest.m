@@ -173,7 +173,7 @@
     
     [manager POST:URLString parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         
-        NSData *imageData = UIImageJPEGRepresentation(uploadImage,0.5);
+        NSData *imageData = UIImageJPEGRepresentation(uploadImage,0.1);
         
         NSString *str = [NSString stringWithFormat:@"%@-%@-%@",user.userName,user.studentId,[UIUtils getTime]];
 

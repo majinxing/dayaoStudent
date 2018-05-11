@@ -52,7 +52,7 @@
 }
 -(void)inApp{
     //时间间隔
-    NSTimeInterval timeInterval = 3*60 ;
+    NSTimeInterval timeInterval = 30 ;
     
     //定时器
     _showTimer = [NSTimer scheduledTimerWithTimeInterval:timeInterval

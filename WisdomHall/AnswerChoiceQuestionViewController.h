@@ -10,7 +10,14 @@
 #import "QuestionModel.h"
 #import "TextModel.h"
 
+
+@protocol AnswerChoiceQuestionViewControllerDelegate<NSObject>
+-(void)handleSwipeFromDelegate:(UISwipeGestureRecognizer *)recognizer;
+@end
 @interface AnswerChoiceQuestionViewController : UIViewController
+
+@property (nonatomic,weak)id<AnswerChoiceQuestionViewControllerDelegate>delegate;
+
 @property (nonatomic,strong)TextModel *t;
 
 @property (nonatomic,assign)BOOL selectMore;//是否多选

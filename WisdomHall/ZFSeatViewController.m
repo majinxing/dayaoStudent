@@ -242,7 +242,10 @@
             [UIUtils showInfoMessage:@"选座成功" withVC:self];
             self.actionBlock(str);
             _seatLable.text = seat;
-            [self.navigationController popViewControllerAnimated:YES];
+            [self.navigationController dismissViewControllerAnimated:YES completion:^{
+                [self.navigationController popViewControllerAnimated:YES];
+
+            }];
         }else {
             NSString * str1 = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
             [self showMessage:str1];

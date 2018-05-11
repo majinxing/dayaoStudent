@@ -21,6 +21,9 @@
 
 #import "StatisticalViewController.h"
 
+#import "HelpViewController.h"
+
+
 @interface PersonalCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView * tableview;
 @end
@@ -64,7 +67,7 @@
     if (section == 0) {
         return 1;
     }else if (section == 1){
-        return 7;
+        return 8;
     }
     return 0;
 }
@@ -114,6 +117,11 @@
             self.hidesBottomBarWhenPushed = NO;
         }else if (indexPath.row == 6){
             FeedbackViewController * f = [[FeedbackViewController alloc] init];
+            self.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:f animated:YES];
+            self.hidesBottomBarWhenPushed = NO;
+        }else if (indexPath.row == 7){
+            HelpViewController * f = [[HelpViewController alloc] init];
             self.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:f animated:YES];
             self.hidesBottomBarWhenPushed = NO;

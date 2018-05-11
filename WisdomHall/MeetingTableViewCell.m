@@ -140,13 +140,13 @@
 }
 -(void)addFourthContentViewWithClassModel:(ClassModel *)classModel{
     NSArray * array = @[
-                              InteractionType_Data,
-                              InteractionType_Vote,
-                              InteractionType_Responder,
-                              InteractionType_Test,
-                              InteractionType_Discuss,
-                              InteractionType_Sit,
-                              InteractionType_Homework
+                        InteractionType_Data,
+                        InteractionType_Test,
+                        InteractionType_Picture,
+                        InteractionType_Vote,
+                        InteractionType_Responder,
+                        InteractionType_Sit,
+                        InteractionType_Homework
                               ];
     
     //水平间距
@@ -311,7 +311,7 @@
         }
     }else if ([[NSString stringWithFormat:@"%@",classModel.signStatus] isEqualToString:@"3"]){
         [_signBtn setTitle:@"签到状态：请假" forState:UIControlStateNormal];
-        [_code setTitle:@"扫码签到" forState:UIControlStateNormal];
+        [_code setTitle:@"生成二维码" forState:UIControlStateNormal];
         [_signBtn setEnabled:YES];
         if (!isEnable) {
             [_code setEnabled:NO];
@@ -322,7 +322,7 @@
         }
     }else if ([[NSString stringWithFormat:@"%@",classModel.signStatus] isEqualToString:@"4"]){
         [_signBtn setTitle:@"签到状态：迟到" forState:UIControlStateNormal];
-        [_code setTitle:@"扫码签到" forState:UIControlStateNormal];
+        [_code setTitle:@"生成二维码" forState:UIControlStateNormal];
         [_signBtn setEnabled:YES];
         if (!isEnable) {
             [_code setEnabled:NO];
@@ -333,7 +333,7 @@
         }
     }else if ([[NSString stringWithFormat:@"%@",classModel.signStatus] isEqualToString:@"5"]){
         [_signBtn setTitle:@"签到状态：早退" forState:UIControlStateNormal];
-        [_code setTitle:@"扫码签到" forState:UIControlStateNormal];
+        [_code setTitle:@"生成二维码" forState:UIControlStateNormal];
         [_signBtn setEnabled:YES];
         if (!isEnable) {
             [_code setEnabled:NO];
@@ -344,7 +344,7 @@
         }
     }else{
         [_signBtn setTitle:@"一键签到" forState:UIControlStateNormal];
-        [_code setTitle:@"扫码签到" forState:UIControlStateNormal];
+        [_code setTitle:@"生成二维码" forState:UIControlStateNormal];
         [_signBtn setEnabled:YES];
         if (!isEnable) {
             [_code setEnabled:NO];

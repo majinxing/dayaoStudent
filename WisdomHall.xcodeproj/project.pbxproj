@@ -222,6 +222,10 @@
 		8B48004020A2A68200038B47 /* DAYIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B48003920A2A68200038B47 /* DAYIndicatorView.m */; };
 		8B48004120A2A68200038B47 /* DAYNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B48003B20A2A68200038B47 /* DAYNavigationBar.m */; };
 		8B48004220A2A68200038B47 /* DAYUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B48003D20A2A68200038B47 /* DAYUtils.m */; };
+		8B48004620A3F08200038B47 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B48004420A3F08100038B47 /* HelpViewController.m */; };
+		8B48004720A3F08200038B47 /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B48004520A3F08100038B47 /* HelpViewController.xib */; };
+		8B48009420A4507500038B47 /* PictureQuizViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B48009220A4507500038B47 /* PictureQuizViewController.m */; };
+		8B48009520A4507500038B47 /* PictureQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B48009320A4507500038B47 /* PictureQuizViewController.xib */; };
 		8B48F9E020A049A600038B47 /* CorrectAnswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B48F9DF20A049A600038B47 /* CorrectAnswer.m */; };
 		8B48F9E420A29F1100038B47 /* StatisticalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B48F9E220A29F0F00038B47 /* StatisticalViewController.m */; };
 		8B48F9E520A29F1100038B47 /* StatisticalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B48F9E320A29F1000038B47 /* StatisticalViewController.xib */; };
@@ -972,6 +976,12 @@
 		8B48003B20A2A68200038B47 /* DAYNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAYNavigationBar.m; sourceTree = "<group>"; };
 		8B48003C20A2A68200038B47 /* DAYUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAYUtils.h; sourceTree = "<group>"; };
 		8B48003D20A2A68200038B47 /* DAYUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAYUtils.m; sourceTree = "<group>"; };
+		8B48004320A3F08100038B47 /* HelpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
+		8B48004420A3F08100038B47 /* HelpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
+		8B48004520A3F08100038B47 /* HelpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
+		8B48009120A4507500038B47 /* PictureQuizViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PictureQuizViewController.h; sourceTree = "<group>"; };
+		8B48009220A4507500038B47 /* PictureQuizViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PictureQuizViewController.m; sourceTree = "<group>"; };
+		8B48009320A4507500038B47 /* PictureQuizViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PictureQuizViewController.xib; sourceTree = "<group>"; };
 		8B48F9DE20A049A600038B47 /* CorrectAnswer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CorrectAnswer.h; sourceTree = "<group>"; };
 		8B48F9DF20A049A600038B47 /* CorrectAnswer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CorrectAnswer.m; sourceTree = "<group>"; };
 		8B48F9E120A29F0F00038B47 /* StatisticalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticalViewController.h; sourceTree = "<group>"; };
@@ -1673,6 +1683,9 @@
 				8B0E5372209FD93C00327823 /* AnswerTOFQuestionViewController.h */,
 				8B0E5376209FD93D00327823 /* AnswerTOFQuestionViewController.m */,
 				8B0E5377209FD93D00327823 /* AnswerTOFQuestionViewController.xib */,
+				8B48009120A4507500038B47 /* PictureQuizViewController.h */,
+				8B48009220A4507500038B47 /* PictureQuizViewController.m */,
+				8B48009320A4507500038B47 /* PictureQuizViewController.xib */,
 			);
 			name = Answer;
 			sourceTree = "<group>";
@@ -2110,6 +2123,9 @@
 				8B396B0F208F071D00F20060 /* AboutUSViewController.h */,
 				8B396B10208F071D00F20060 /* AboutUSViewController.m */,
 				8B396B11208F071D00F20060 /* AboutUSViewController.xib */,
+				8B48004320A3F08100038B47 /* HelpViewController.h */,
+				8B48004420A3F08100038B47 /* HelpViewController.m */,
+				8B48004520A3F08100038B47 /* HelpViewController.xib */,
 				8B05CB721EC06FD60063EC20 /* Cell */,
 				8B0207121F8DA4DA00CE3B8C /* WisdomHall-Bridging-Header.h */,
 			);
@@ -2890,6 +2906,7 @@
 				8B64EB571F1A162F00BF7D0F /* CreateTemporaryCourseViewController.xib in Resources */,
 				8BF7D36B1F3DA6BF0087D35D /* QueryMeetingRoomViewController.xib in Resources */,
 				8BE877771EBC2D6B00866A34 /* AllTestViewController.xib in Resources */,
+				8B48009520A4507500038B47 /* PictureQuizViewController.xib in Resources */,
 				8BA224AE1EAE00B000627A1B /* DYTabBarViewController.xib in Resources */,
 				8B01483720666A220037A107 /* StatisticalResultTableViewCell.xib in Resources */,
 				8B0DB13C1ED6CA4E0042DF0D /* ImportTextViewController.xib in Resources */,
@@ -2987,6 +3004,7 @@
 				8B081E001F06524000493B81 /* unicode_to_hanyu_pinyin.txt in Resources */,
 				8B17370F1EC2EDE400BE3C8F /* MeetingViewController.xib in Resources */,
 				8BE877861EBC2E0C00866A34 /* EndTheTestViewController.xib in Resources */,
+				8B48004720A3F08200038B47 /* HelpViewController.xib in Resources */,
 				8BA224671EADF68500627A1B /* Main.storyboard in Resources */,
 				8B2E16F31EBADA2F008B7C57 /* TheMeetingNotStartViewController.xib in Resources */,
 				8B0333F91F8C70190021D495 /* JoinMessageGroupViewController.xib in Resources */,
@@ -3204,6 +3222,7 @@
 				8B429C001FA8149000084A99 /* QrCodeViewController.m in Sources */,
 				8BB221EB1FA708A300EC6478 /* SGQRCodeScanningVC.m in Sources */,
 				8B027A291EFB4E0000600E18 /* DataDownloadTableViewCell.m in Sources */,
+				8B48004620A3F08200038B47 /* HelpViewController.m in Sources */,
 				8BF8648D1ECAD21200B7EED4 /* UIScrollView+MJRefresh.m in Sources */,
 				8B51AAA31F3EE71900AE034E /* MeetingChooseSeatViewController.m in Sources */,
 				8B0E5370209FD8D900327823 /* optionsModel.m in Sources */,
@@ -3316,6 +3335,7 @@
 				8BB221DC1FA7088E00EC6478 /* SGQRCodeScanManager.m in Sources */,
 				8B8C3D111ECC336500E9FB56 /* ConversationVC.m in Sources */,
 				8B0857971F7E3A30009D5AC9 /* WorkingLoginViewController.m in Sources */,
+				8B48009420A4507500038B47 /* PictureQuizViewController.m in Sources */,
 				8B014E41206670700037A107 /* HomeworkCreateTableViewCell.m in Sources */,
 				8B6E61CB1EE292B10040FDC1 /* CreateVoteTableViewCell.m in Sources */,
 				8B014E42206670700037A107 /* imageBigView.m in Sources */,

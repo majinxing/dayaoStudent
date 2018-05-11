@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.21</string>
+	<string>1.0.24</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -30,7 +30,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.0.20</string>
+	<string>1.0.0.22</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>Launch image(iPhone)</key>
@@ -54,6 +54,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCalendarsUsageDescription</key>
+	<string>请允许使用日历，方便您的查看信息</string>
 	<key>NSCameraUsageDescription</key>
 	<string>请允许使用相机，采集你的照片信息，方便签到拍照上传和一些资料的上传</string>
 	<key>NSContactsUsageDescription</key>

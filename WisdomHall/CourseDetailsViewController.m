@@ -38,6 +38,8 @@
 
 #import "RHScanViewController.h"//二维码
 
+#import "PictureQuizViewController.h"
+
 @interface CourseDetailsViewController ()<UIActionSheetDelegate,ShareViewDelegate,UIAlertViewDelegate,UITableViewDelegate,UITableViewDataSource,MeetingTableViewCellDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIDocumentInteractionControllerDelegate,AlterViewDelegate>
 
 @property (nonatomic,strong) InteractiveView * interactiveView;
@@ -565,11 +567,8 @@
         [self.navigationController pushViewController:d animated:YES];
         NSLog(@"讨论");
     }else if ([platform isEqualToString:InteractionType_Picture]){
-        PersonalUploadDataViewController * d = [[PersonalUploadDataViewController alloc] init];
+        PictureQuizViewController * d = [[PictureQuizViewController alloc] init];
         d.classModel = _c;
-        d.type = @"classModel";
-        d.function = @"6";
-        _pictureType = @"QAPicture";
         self.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController: d animated:YES];
         
@@ -701,7 +700,7 @@
         [self hideHud];
         return;
     }else{
-        if (![[NSString stringWithFormat:@"%@",_c.signStatus] isEqualToString:@"1"]) {
+        if (![[NSString stringWithFormat:@"%@",_c.signStatus] isEqualToString:@"1"]&&![UIUtils isBlankString:_c.signStatus]) {
 //            [UIUtils showInfoMessage:@"已签到"];
 
             [self hideHud];
@@ -792,7 +791,7 @@
         
         _c.courseSignId = [NSString stringWithFormat:@"%@",[[data objectForKey:@"body"] objectForKey:@"id"]];
         
-        if (![_c.signStatus isEqualToString:@"1"]) {
+        if (![_c.signStatus isEqualToString:@"1"]&&![UIUtils isBlankString:_c.signStatus]) {
             [self signPictureUpdate];
             // 2.创建通知
             NSNotification *notification =[NSNotification notificationWithName:@"UpdateTheClassPage" object:nil userInfo:nil];
@@ -800,6 +799,7 @@
             
             [[NSNotificationCenter defaultCenter] postNotification:notification];
         }else{
+            _c.signStatus = @"1";
             [UIUtils showInfoMessage:message withVC:self];
         }
         

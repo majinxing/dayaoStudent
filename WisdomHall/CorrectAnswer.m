@@ -84,13 +84,14 @@
     
     _textView.textAlignment = NSTextAlignmentCenter;
     
-    _textView.textColor = [UIColor colorWithHexString:@"#1d8728"];
+    _textView.textColor = [UIColor colorWithHexString:@"#01ff1b"];
     
-    if (![UIUtils isBlankString:correctAnswer]) {
-        _textView.text = [NSString stringWithFormat:@"正确答案：%@",correctAnswer];;
-    }
+//    if (![UIUtils isBlankString:correctAnswer]) {
+    _textView.text = [NSString stringWithFormat:@"正确答案：%@",correctAnswer];;
+//    }
+    _textView.scrollEnabled = NO;
     
-    _textView.font = [UIFont systemFontOfSize:20];
+    _textView.font = [UIFont systemFontOfSize:30];
     
     
     _scoreLabel.frame = CGRectMake(0, CGRectGetMaxY(_textView.frame)+10, APPLICATION_WIDTH, 20);
@@ -101,9 +102,9 @@
     
     [_scoreLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:25]];
     
-    _scoreLabel.font = [UIFont systemFontOfSize:20];
+    _scoreLabel.font = [UIFont systemFontOfSize:30];
     
-    _scoreLabel.textColor = [UIColor redColor];
+    _scoreLabel.textColor = [UIColor colorWithHexString:@"#FF0033"];
     
 }
 -(float)returnTextHeight:(NSString *)str{
@@ -112,7 +113,7 @@
     textView.text = str;
     
     CGSize size = CGSizeMake( APPLICATION_WIDTH-10-10, CGFLOAT_MAX);
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:20],NSFontAttributeName, nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:30],NSFontAttributeName, nil];
     
     CGFloat curheight = [textView.text boundingRectWithSize:size
                                                     options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
