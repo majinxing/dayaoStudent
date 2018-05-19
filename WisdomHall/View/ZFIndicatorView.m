@@ -106,8 +106,18 @@
     self.miniImageView.frame = CGRectMake(0, 0,self.width, self.height );
     //设置线框的高宽
     //下面代码还有很多需要优化的地方,座位少的时候还是有点定位不准，等有时间了再来收拾它😄
-    self.miniIndicator.x = (self.myScrollview.contentOffset.x * self.width)  / self.myScrollview.contentSize.width;
-    self.miniIndicator.y = (self.myScrollview.contentOffset.y * self.height) / self.myScrollview.contentSize.height;
+    if (self.myScrollview.contentSize.width<=0) {
+        
+    }else{
+       self.miniIndicator.x = (self.myScrollview.contentOffset.x * self.width)  / self.myScrollview.contentSize.width;
+    }
+    
+    if (self.myScrollview.contentSize.height<=0) {
+        
+    }else{
+        self.miniIndicator.y = (self.myScrollview.contentOffset.y * self.height) / self.myScrollview.contentSize.height;
+    }
+    
     
     if (self.miniIndicator.height == self.height && self.miniIndicator.width == self.width) {
         self.miniIndicator.x = 0;

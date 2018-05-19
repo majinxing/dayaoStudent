@@ -15,6 +15,8 @@
 
 #import <Hyphenate/Hyphenate.h>
 
+#import "UserModel.h"
+
 @interface ConversationVC ()<EMCallManagerDelegate,AVAudioPlayerDelegate>
 
 @property (nonatomic,strong)UIView * videoView;
@@ -23,11 +25,14 @@
 @property (nonatomic,strong)UIButton * hangupBtn;
 @property (nonatomic,strong)UIButton * receiveBtn;
 
-
+@property (nonatomic,strong)UserModel * user;
 
 @property (nonatomic,strong)UILabel * typeLab;
+
 @property (nonatomic,assign) int n;
+
 @property (nonatomic,assign) int m;
+
 @property (nonatomic,assign) EMCallEndReason reasonA;
 
 @property (nonatomic,strong) AVAudioPlayer *audioPlayer;
@@ -50,6 +55,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    
+    _user = [[Appsetting sharedInstance] getUsetInfo];
     
     if (!_callSession) {
         [self playMusic:@"call"];
@@ -132,7 +139,9 @@
             [_hangupBtn setTitle:@"接受" forState:UIControlStateNormal];
             
             [_hangupBtn addTarget:self action:@selector(receiveBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+            
         }else{
+            
             [_hangupBtn setTitle:@"挂断" forState:UIControlStateNormal];
             
             [_hangupBtn addTarget:self action:@selector(hangupBtnClick) forControlEvents:UIControlEventTouchUpInside];
@@ -365,7 +374,11 @@
     NSLog(@"callDidAccept 同意通话");
     _typeLab.text = @"正在通话中";
     [_audioPlayer stop];
-    
+    if (_c) {
+        [self sentNumberResponderWithDetid:_c.courseDetailId withSOF:@"1" post:ClassResponder];
+    }else if(_meetingModel){
+        [self sentNumberResponderWithDetid:_meetingModel.meetingDetailId withSOF:@"1" post:MeetingResponder];
+    }
     
 }
 
@@ -424,7 +437,15 @@
     
 }
 
-
+//课程抢答收集
+-(void)sentNumberResponderWithDetid:(NSString *)detid withSOF:(NSString *)sOf post:(NSString *)responder{
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:detid,@"detailId",_user.peopleId,@"userId",@"1",@"type",@"1",@"successNum",nil];
+    [[NetworkRequest sharedInstance] POST:responder dict:dict succeed:^(id data) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
 
 #pragma mark -------------------同意
 
@@ -438,6 +459,8 @@
         NSLog(@"receiveBtnClick errorDescription = %@",error.errorDescription);
         [[EMClient sharedClient].callManager endCall:_callSession.callId reason:EMCallEndReasonFailed];
     }else{
+        
+        
         [_hangupBtn setTitle:@"挂断" forState:UIControlStateNormal];
         
         [_hangupBtn addTarget:self action:@selector(hangupBtnClick) forControlEvents:UIControlEventTouchUpInside];

@@ -506,9 +506,13 @@ static NSString *cellIdentifier = @"cellIdentifier";
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView * view = [[UIView alloc] init];
+    
     view.backgroundColor = [UIColor whiteColor];//RGBA_COLOR(201, 242, 253, 1);
+    
     NSString * month = [UIUtils getMonth];
+    
     NSMutableArray * day = [UIUtils getWeekAllTimeWithType:nil];
+    
     NSMutableArray * ary = [NSMutableArray arrayWithCapacity:1];;
     if (day.count==7) {
         NSArray *  a = @[month,@"周一",@"周二",@"周三",@"周四",@"周五",@"周六",@"周日"];

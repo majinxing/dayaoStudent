@@ -996,6 +996,7 @@
 		8B4D91111EBDAB1000A4BE34 /* SignListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignListViewController.h; sourceTree = "<group>"; };
 		8B4D91121EBDAB1000A4BE34 /* SignListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignListViewController.m; sourceTree = "<group>"; };
 		8B4D91131EBDAB1000A4BE34 /* SignListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignListViewController.xib; sourceTree = "<group>"; };
+		8B5141B520AC2F9C00549C7A /* ZFSeatsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZFSeatsView.h; path = "../../../../../../GitHub/dayao-/dayao/WisdomHall/View/ZFSeatsView.h"; sourceTree = "<group>"; };
 		8B51AAA01F3EE71900AE034E /* MeetingChooseSeatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MeetingChooseSeatViewController.h; path = Model/MeetingChooseSeatViewController.h; sourceTree = "<group>"; };
 		8B51AAA11F3EE71900AE034E /* MeetingChooseSeatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MeetingChooseSeatViewController.m; path = Model/MeetingChooseSeatViewController.m; sourceTree = "<group>"; };
 		8B51AAA21F3EE71900AE034E /* MeetingChooseSeatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MeetingChooseSeatViewController.xib; path = Model/MeetingChooseSeatViewController.xib; sourceTree = "<group>"; };
@@ -1095,7 +1096,6 @@
 		8BA41B731F9F0D6B00B9886E /* MeetingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetingTableViewCell.h; sourceTree = "<group>"; };
 		8BA41B741F9F0D6B00B9886E /* MeetingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetingTableViewCell.m; sourceTree = "<group>"; };
 		8BA41B751F9F0D6B00B9886E /* MeetingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeetingTableViewCell.xib; sourceTree = "<group>"; };
-		8BAFFC4B206C8EA40087439D /* ZFSeatsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZFSeatsView.h; path = ../../../../../../../Desktop/ZFSeatsView.h; sourceTree = "<group>"; };
 		8BB221C91FA7088E00EC6478 /* UIImage+ImageSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageSize.h"; sourceTree = "<group>"; };
 		8BB221CA1FA7088E00EC6478 /* UIImage+ImageSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageSize.m"; sourceTree = "<group>"; };
 		8BB221CB1FA7088E00EC6478 /* SGQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SGQRCode.bundle; sourceTree = "<group>"; };
@@ -1562,7 +1562,7 @@
 				8B087E3D1FEA572D00649094 /* ZFSeatSelectionTool.m */,
 				8B087E3F1FEA573000649094 /* ZFSeatSelectionView.h */,
 				8B087E3C1FEA572900649094 /* ZFSeatSelectionView.m */,
-				8BAFFC4B206C8EA40087439D /* ZFSeatsView.h */,
+				8B5141B520AC2F9C00549C7A /* ZFSeatsView.h */,
 				8B087E401FEA573400649094 /* ZFSeatsView.m */,
 			);
 			path = View;

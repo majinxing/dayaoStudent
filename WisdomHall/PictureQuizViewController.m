@@ -62,7 +62,7 @@
     _userModel = [[Appsetting sharedInstance] getUsetInfo];
     if ([[NSString stringWithFormat:@"%@",_classModel.teacherId] isEqualToString:[NSString stringWithFormat:@"%@",_userModel.peopleId]]) {
         UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"创建测试" style:UIBarButtonItemStylePlain target:self action:@selector(createText)];
-        self.navigationItem.rightBarButtonItem = myButton;
+//        self.navigationItem.rightBarButtonItem = myButton;
     }
     
 }

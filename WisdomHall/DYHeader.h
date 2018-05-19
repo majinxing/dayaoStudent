@@ -301,7 +301,9 @@
 
 #define QueryStudentAnswer      @"course/exam/queryStudentAnswerInfo"//查询作答详情
 
+#define ClassResponder          @"course/course/collect"             //课堂抢答统计
 
+#define MeetingResponder        @"course/meeting/collect"            //会议抢答统计
 
 
 

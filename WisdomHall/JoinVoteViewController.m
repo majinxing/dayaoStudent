@@ -93,12 +93,11 @@
             NSString * str = [[data objectForKey:@"header"] objectForKey:@"message"];
             if ([str isEqualToString:@"成功"]) {
                 [UIUtils showInfoMessage:@"投票成功" withVC:self];
-            }else if ([str isEqualToString:@"用户投票出错,已经投票"]){
-                [UIUtils showInfoMessage:@"已投票" withVC:self];
-            }else if ([str isEqualToString:@"用户投票出错,必须在处理中状态" ]){
-                [UIUtils showInfoMessage:@"投票未开始，请老师在投票列表页面点击开始投票" withVC:self];
+                [self.navigationController dismissViewControllerAnimated:YES completion:^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                }];
             }else{
-                [UIUtils showInfoMessage:@"投票失败" withVC:self];
+                [UIUtils showInfoMessage:str withVC:self];
             }
             [self hideHud];
         } failure:^(NSError *error) {

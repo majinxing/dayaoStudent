@@ -199,8 +199,11 @@
     ZFSeatsModel *seatsModel = seatsArray.firstObject;
     NSUInteger cloCount = [seatsModel.columns count];
     if (cloCount % 2) cloCount += 1;
+    
     CGFloat ZFMiniMeIndicatorMaxHeight = self.height / 6;//设置最大高度
+    
     CGFloat MaxWidth = (self.width - 2 * ZFseastsRowMargin) * 0.5;
+    
     CGFloat currentMiniBtnW_H = MaxWidth / cloCount;
     CGFloat MaxHeight = currentMiniBtnW_H * seatsArray.count;
     

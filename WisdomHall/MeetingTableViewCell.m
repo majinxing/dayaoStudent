@@ -105,7 +105,6 @@
                          InteractionType_Data,
                          InteractionType_Vote,
                          InteractionType_Responder,
-                         InteractionType_Discuss,
                          InteractionType_Sit
                          ];
     UserModel * user = [[Appsetting sharedInstance] getUsetInfo];

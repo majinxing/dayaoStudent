@@ -10,6 +10,10 @@
 #import <Hyphenate/Hyphenate.h>
 #import "EMCallOptions+NSCoding.h"
 
+#import "ClassModel.h"
+
+#import "MeetingModel.h"
+
 typedef enum{
     CALLED,//被叫
     CALLING,//主叫
@@ -21,7 +25,7 @@ typedef void(^refused)(EMCallEndReason reason);
 
 @property (nonatomic,copy) NSString * teacherName;
 
-@property (nonatomic,copy)NSString *HyNumaber;
+@property (nonatomic,copy) NSString *HyNumaber;
 
 @property (nonatomic,assign)int type;
 
@@ -33,5 +37,13 @@ typedef void(^refused)(EMCallEndReason reason);
 
 @property (nonatomic,copy)refused reasonBlock;
 
+@property (nonatomic,copy)NSString * callType;//是从教室呼叫的还是会议室呼叫的
+
+@property (nonatomic,strong)ClassModel * c;
+
+@property (nonatomic,strong)MeetingModel * meetingModel;
+
 -(void)returnReason:(refused)reasonBlock;
+
+
 @end

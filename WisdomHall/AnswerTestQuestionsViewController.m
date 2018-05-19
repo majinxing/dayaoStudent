@@ -133,9 +133,11 @@
                 btn.tag = 1;
                 
                 [self titleClick:btn];
-                
-                [self hideHud];
+            }else{
+                [UIUtils showInfoMessage:[NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]] withVC:self];
             }
+            [self hideHud];
+
         } failure:^(NSError *error) {
             [self hideHud];
             
@@ -178,9 +180,11 @@
                 btn.tag = 1;
                 
                 [self titleClick:btn];
-                [self hideHud];
-                
+            }else{
+                [UIUtils showInfoMessage:[NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]] withVC:self];
             }
+            [self hideHud];
+
         } failure:^(NSError *error) {
             [self hideHud];
             
@@ -237,7 +241,7 @@
         [self.navigationController popViewControllerAnimated:YES];
         
     }
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"返回后将不保存答题信息，若想保存请交卷保存" preferredStyle:  UIAlertControllerStyleActionSheet];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"返回后将不保存答题信息，若想保存请提交保存" preferredStyle:  UIAlertControllerStyleActionSheet];
     //分别按顺序放入每个按钮；
     [alert addAction:[UIAlertAction actionWithTitle:@"退出页面" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self.navigationController popViewControllerAnimated: YES];

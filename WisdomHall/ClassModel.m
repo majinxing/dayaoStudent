@@ -42,7 +42,7 @@
     }
     
     
-    self.courseDetailId = [dict objectForKey:@"courseDetailId"];
+    self.courseDetailId = [NSString stringWithFormat:@"%@",[dict objectForKey:@"courseDetailId"]];
     self.time = [dict objectForKey:@"actStartTime"];
     self.total = [dict objectForKey:@"total"];
     self.pictureId = [dict objectForKey:@"pictureId"];

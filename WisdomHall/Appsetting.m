@@ -73,7 +73,7 @@
     userInfo.professional = [_mySettingData objectForKey:@"user_majorCode"];
     userInfo.classNumber = [_mySettingData objectForKey:@"user_classCode"];
     userInfo.studentId = [_mySettingData objectForKey:@"user_workNo"];
-    userInfo.peopleId = [_mySettingData objectForKey:@"user_id"];
+    userInfo.peopleId = [NSString stringWithFormat:@"%@",[_mySettingData objectForKey:@"user_id"]];
     userInfo.userPassword = [_mySettingData objectForKey:@"user_password"];
     userInfo.departmentsName = [_mySettingData objectForKey:@"user_facultyName"];
     userInfo.professionalName = [_mySettingData objectForKey:@"user_majorName"];

@@ -350,7 +350,12 @@
             
             c.call = CALLING;
             
+            c.meetingModel = _meetingModel;
+            
+            c.teacherName = _meetingModel.meetingHost;
+
             self.hidesBottomBarWhenPushed = YES;
+            
             [self presentViewController:c animated:YES completion:^{
                 
             }];
@@ -359,6 +364,7 @@
                     [UIUtils showInfoMessage:@"抢答还没开始呢，不要太心急哦~" withVC:self];
                 }else if (reason == EMCallEndReasonBusy){
                     [UIUtils showInfoMessage:@"已有人抢答成功，下次手速要更快哦~" withVC:self];
+                    [self sentNumberResponder];
                 }else if (reason == EMCallEndReasonHangup){
                     
                 }else {
@@ -394,8 +400,12 @@
             ZFSeatViewController * z = [[ZFSeatViewController alloc] init];
             z.seatTable = _seatModel.seatTable;
             z.seat = _meetingModel.userSeat;
-            self.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:z animated:YES];
+            if (![UIUtils isBlankString:z.seatTable]) {
+                [self.navigationController pushViewController:z animated:YES];
+                self.hidesBottomBarWhenPushed = YES;
+            }else{
+                [UIUtils showInfoMessage:@"会场拉取失败，请稍微在操作" withVC:self];
+            }
         }else{
             [UIUtils showInfoMessage:@"未获取会场信息，请刷新会场页面信息获取" withVC:self];
         }
@@ -403,37 +413,16 @@
         [UIUtils showInfoMessage:@"未完待续" withVC:self];
         return;
     }
-    
-    
-    //  else if ([platform isEqualToString:InteractionType_Responder]){
-    //        NSLog(@"抢答");
-    //        if (_meetingModel.workNo.length>0) {
-    //
-    //            ConversationVC * c =[[ConversationVC alloc] init];
-    //            c.HyNumaber = [NSString stringWithFormat:@"%@%@",_user.school,_meetingModel.workNo];
-    //            c.call = CALLING;
-    //            self.hidesBottomBarWhenPushed = YES;
-    //            [self.navigationController pushViewController:c animated:YES];
-    //
-    //        }else{
-    //            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"不能呼叫自己" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-    //            [alertView show];
-    //        }
-    //
-    //    }
-    //    else if ([platform isEqualToString:InteractionType_Test]){
-    //        NSLog(@"测试");
-    //    }
-    //    else if ([platform isEqualToString:InteractionType_Add]){
-    //        NSLog(@"更多");
-    //    }else if ([platform isEqualToString:InteractionType_Data]){
-    //        NSLog(@"资料");
-    //        DataDownloadViewController * d = [[DataDownloadViewController alloc] init];
-    //        d.meeting = _meetingModel;
-    //        d.type = @"meeting";
-    //        self.hidesBottomBarWhenPushed = YES;
-    //        [self.navigationController pushViewController: d animated:YES];
-    //    }
+
+}
+//课程抢答收集
+-(void)sentNumberResponder{
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_meetingModel.meetingDetailId,@"detailId",_user.peopleId,@"userId",@"1",@"type",@"0",@"successNum",nil];
+    [[NetworkRequest sharedInstance] POST:MeetingResponder dict:dict succeed:^(id data) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 -(void)peopleManagementDelegate{
     ClassManagementViewController * classManegeVC = [[ClassManagementViewController alloc] init];

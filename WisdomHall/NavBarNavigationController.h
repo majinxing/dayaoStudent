@@ -10,4 +10,11 @@
 
 @interface NavBarNavigationController : UINavigationController
 
+@property (nonatomic,strong)NSTimer *showTimer;
+
++(NavBarNavigationController *)sharedInstance;
+
+-(void)handleMaxShowTimer:(NSTimer *)theTimer;
+
+-(void)outApp;
 @end

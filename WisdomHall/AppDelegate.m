@@ -213,10 +213,14 @@
                                                      selector:@selector(timerMethod:)     userInfo:nil
                                                       repeats:YES];
         [_myTimer fire];
-    }
-    else {
+    }else {
         NSLog(@"Home.");
+        //目的是为了停止inApp的时钟
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"stopTime" object:nil];
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:OutApp object:nil];
+        
     };
 }
 - (void)endBackgroundTask{
@@ -257,6 +261,7 @@
             }];
         }else{
             NSDictionary * dict = @{@"appState":@"1",@"id":[NSString stringWithFormat:@"%@",user.peopleId]};
+            
             [[NetworkRequest sharedInstance] POST:ChangeAppState dict:dict succeed:^(id data) {
                 
             } failure:^(NSError *error) {

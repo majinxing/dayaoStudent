@@ -96,9 +96,9 @@
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
-    if (_selectSchoolBtnStatus) {
-        [self hideDropDown];
-    }
+//    if (_selectSchoolBtnStatus) {
+//        [self hideDropDown];
+//    }
 }
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden = YES;
@@ -326,8 +326,11 @@
     SchoolModel * s = _titleAry[indexPath.row];
     
     [_selectSchoolBtn setTitle:s.schoolName forState:UIControlStateNormal];
-    
-//    s.schoolHost = @"http://192.168.1.100:8080";
+    if (indexPath.row == 0) {
+        s.schoolHost = @"http://192.168.1.100:8080";
+    }else if (indexPath.row == 1){
+        s.schoolHost = @"http://api.dayaokeji.com";
+    }
     
     [[Appsetting sharedInstance] saveUserSchool:s];
     

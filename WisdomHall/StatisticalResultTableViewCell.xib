@@ -56,16 +56,16 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ydu-PE-P10">
-                        <rect key="frame" x="83" y="153" width="260" height="21"/>
+                        <rect key="frame" x="83" y="153" width="265" height="21"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="l2s-2b-mNH"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="80%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drS-go-Mz2">
-                        <rect key="frame" x="353" y="153" width="30" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drS-go-Mz2">
+                        <rect key="frame" x="358" y="153" width="35" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="30" id="Cpz-fY-kcN"/>
+                            <constraint firstAttribute="width" constant="35" id="Cpz-fY-kcN"/>
                             <constraint firstAttribute="height" constant="21" id="Daw-LD-BxS"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -96,7 +96,7 @@
                     <constraint firstItem="EcM-TR-8Lg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="50k-4D-Tkh"/>
                     <constraint firstItem="4Hq-wu-PAJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="C9p-OL-qZN"/>
                     <constraint firstItem="38c-fP-b3V" firstAttribute="top" secondItem="hcu-tr-LGI" secondAttribute="bottom" constant="8" id="CTo-ar-qiW"/>
-                    <constraint firstAttribute="trailing" secondItem="drS-go-Mz2" secondAttribute="trailing" constant="10" id="GQ1-86-7at"/>
+                    <constraint firstAttribute="trailing" secondItem="drS-go-Mz2" secondAttribute="trailing" id="GQ1-86-7at"/>
                     <constraint firstAttribute="trailing" secondItem="hcu-tr-LGI" secondAttribute="trailing" constant="10" id="PZz-sQ-h7D"/>
                     <constraint firstItem="Ydu-PE-P10" firstAttribute="leading" secondItem="EcM-TR-8Lg" secondAttribute="trailing" constant="8" id="ZNX-9t-P3w"/>
                     <constraint firstItem="Ydu-PE-P10" firstAttribute="top" secondItem="38c-fP-b3V" secondAttribute="bottom" constant="8" id="aSU-hN-bmD"/>

@@ -11,10 +11,19 @@
 #import <CoreLocation/CoreLocation.h>
 
 @interface NavBarNavigationController ()
-@property (nonatomic,strong)NSTimer *showTimer;
 @property (nonatomic,strong)NSDictionary * dict;
 @end
 @implementation NavBarNavigationController
+
++(NavBarNavigationController *)sharedInstance{
+    static dispatch_once_t predicate;
+
+    static NavBarNavigationController * sharedDYTabBarViewControllerInstance = nil;
+    dispatch_once(&predicate, ^{
+        sharedDYTabBarViewControllerInstance = [[self alloc] init];
+    });
+    return sharedDYTabBarViewControllerInstance;
+}
 -(void)setColor{
     self.navigationBar.barTintColor = [[ThemeTool shareInstance] getThemeColor];
 }
@@ -48,30 +57,38 @@
      name:@"stopTime" object:nil];
 }
 -(void)stopTime{
-    [_showTimer invalidate];
+    
+    [[NavBarNavigationController sharedInstance].showTimer invalidate];
+    
+    [NavBarNavigationController sharedInstance].showTimer = nil;
+
 }
 -(void)inApp{
     //时间间隔
-    NSTimeInterval timeInterval = 30 ;
+    NSTimeInterval timeInterval = 25;
+    if (![NavBarNavigationController sharedInstance].showTimer) {
+        //定时器
+        [NavBarNavigationController sharedInstance].showTimer = [NSTimer scheduledTimerWithTimeInterval:timeInterval
+                                                      target:self
+                                                    selector:@selector(handleMaxShowTimer:)
+                                                    userInfo:nil
+                                                     repeats:YES];
+    }
+   
     
-    //定时器
-    _showTimer = [NSTimer scheduledTimerWithTimeInterval:timeInterval
-                                                  target:self
-                                                selector:@selector(handleMaxShowTimer:)
-                                                userInfo:nil
-                                                 repeats:YES];
-    [_showTimer fire];
+    [[NavBarNavigationController sharedInstance].showTimer fire];
 }
 -(void)handleMaxShowTimer:(NSTimer *)theTimer{
     
     UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
+    NSLog(@"111");
     if (user.peopleId) {
         NSDictionary * dict = @{@"appState":@"1",@"id":[NSString stringWithFormat:@"%@",user.peopleId]};
         [[NetworkRequest sharedInstance] POST:ChangeAppState dict:dict succeed:^(id data) {
             //            NSLog(@"%@",data);
             NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
             if ([str isEqualToString:@"401"]) {
-                [_showTimer invalidate];
+//                [[NavBarNavigationController sharedInstance].showTimer invalidate];
             }
         } failure:^(NSError *error) {
             
@@ -81,8 +98,10 @@
 -(void)outApp{
     
     UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
-    [_showTimer invalidate];
     
+    [[NavBarNavigationController sharedInstance].showTimer invalidate];
+    
+    [NavBarNavigationController sharedInstance].showTimer = nil;
     if (user.peopleId) {
         NSDictionary * dict = @{@"appState":@"3",@"id":[NSString stringWithFormat:@"%@",user.peopleId]};
         [[NetworkRequest sharedInstance] POST:ChangeAppState dict:dict succeed:^(id data) {

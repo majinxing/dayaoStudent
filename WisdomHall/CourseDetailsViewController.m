@@ -538,19 +538,29 @@
         c.HyNumaber = [NSString stringWithFormat:@"%@%@",s.school,_c.teacherWorkNo];
         c.call = CALLING;
         c.teacherName = _c.teacherName;
+        c.c = _c;
+        
         [self presentViewController:c animated:YES completion:^{
             
         }];
         [c returnReason:^(EMCallEndReason reason) {
+            
             if (reason == EMCallEndReasonRemoteOffline) {
+                
                 [UIUtils showInfoMessage:@"抢答还没开始呢，不要太心急哦~" withVC:self];
+                
             }else if (reason == EMCallEndReasonBusy){
+                
                 [UIUtils showInfoMessage:@"已有人抢答成功，下次手速要更快哦~" withVC:self];
+                
+                [self sentNumberResponder];
+                
             }else if (reason == EMCallEndReasonHangup){
                 
             }else {
                 [UIUtils showInfoMessage:@"抢答貌似失败了呢~" withVC:self];
             }
+            
         }];
         
 //        [self.navigationController pushViewController:c animated:YES];
@@ -584,6 +594,15 @@
         NSLog(@"更多");
     }
 }
+//课程抢答收集
+-(void)sentNumberResponder{
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_c.courseDetailId,@"detailId",_user.peopleId,@"userId",@"1",@"type",@"0",@"successNum",nil];
+    [[NetworkRequest sharedInstance] POST:ClassResponder dict:dict succeed:^(id data) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
 -(void)getCourseRoomSeat{
     [self showHudInView:self.view hint:NSLocalizedString(@"正在加载数据", @"Load data...")];
     NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_c.courseDetailId],@"courseDetailId", nil];
@@ -599,7 +618,11 @@
             z.classModel = _c;
             z.seat = _seatNo;
             self.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:z animated:YES];
+            if (![UIUtils isBlankString:z.seatTable]) {
+                [self.navigationController pushViewController:z animated:YES];
+            }else{
+                [UIUtils showInfoMessage:@"会场拉取失败，请稍微在操作" withVC:self];
+            }
         }else{
             NSString * str1 = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
             
