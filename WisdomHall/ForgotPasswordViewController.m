@@ -67,14 +67,24 @@
 }
 - (void)startTimer
 {
-    [JSMSSDK getVerificationCodeWithPhoneNumber:_phoneNumber.text andTemplateID:@"144851" completionHandler:^(id resultObject, NSError *error) {
-        if (!error) {
-            NSLog(@"Get verification code success!");
-        }else{
-            NSLog(@"Get verification code failure!");
-            NSLog(@"%@",error);
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_phoneNumber.text,@"phone",@"3",@"type", nil];
+    
+    [[NetworkRequest sharedInstance] POST:SmsSend dict:dict succeed:^(id data) {
+        NSString * message = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+        if (![message isEqualToString:@"成功"]) {
+            [UIUtils showInfoMessage:message withVC:self];
         }
+    } failure:^(NSError *error) {
+        [UIUtils showInfoMessage:@"网络连接失败，请检查网络" withVC:self];
     }];
+//    [JSMSSDK getVerificationCodeWithPhoneNumber:_phoneNumber.text andTemplateID:@"144851" completionHandler:^(id resultObject, NSError *error) {
+//        if (!error) {
+//            NSLog(@"Get verification code success!");
+//        }else{
+//            NSLog(@"Get verification code failure!");
+//            NSLog(@"%@",error);
+//        }
+//    }];
     
     [_sendVerification setEnabled:NO];
         //时间间隔
@@ -101,6 +111,7 @@
     }
     
     NSString *str = [NSString stringWithFormat:@"%ld秒", (long)count];
+    
     [_sendVerification setTitle:str forState:UIControlStateNormal];
     [_sendVerification setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
     _sendVerification.layer.borderColor=[[UIColor colorWithHexString:@"#999999"] CGColor];
@@ -117,20 +128,35 @@
 
 - (IBAction)nextButtonPressed:(id)sender {
     
-    //验证验证码
-    [JSMSSDK commitWithPhoneNumber:_phoneNumber.text verificationCode:_Verification.text completionHandler:^(id resultObject, NSError *error) {
-        if (!error)
-        {
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_phoneNumber.text,@"phone",@"3",@"type",_Verification.text,@"code",nil];
+    [[NetworkRequest sharedInstance] POST:SmsValidate dict:dict succeed:^(id data) {
+        NSString * message = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+        if ([message isEqualToString:@"成功"]) {
             // 验证成功
             RedefineThePasswordViewController * redeFineVC = [[RedefineThePasswordViewController alloc] init];
             redeFineVC.phoneNumber = _phoneNumber.text;
             [self.navigationController pushViewController:redeFineVC animated:YES];
-        }else
-        {
-            [UIUtils showInfoMessage:@"请输入正确的验证码" withVC:self];
-
+        }else{
+            [UIUtils showInfoMessage:message withVC:self];
         }
+        
+    } failure:^(NSError *error) {
+        [UIUtils showInfoMessage:@"网络连接失败，请检查网络" withVC:self];
     }];
+//    //验证验证码
+//    [JSMSSDK commitWithPhoneNumber:_phoneNumber.text verificationCode:_Verification.text completionHandler:^(id resultObject, NSError *error) {
+//        if (!error)
+//        {
+//            // 验证成功
+//            RedefineThePasswordViewController * redeFineVC = [[RedefineThePasswordViewController alloc] init];
+//            redeFineVC.phoneNumber = _phoneNumber.text;
+//            [self.navigationController pushViewController:redeFineVC animated:YES];
+//        }else
+//        {
+//            [UIUtils showInfoMessage:@"请输入正确的验证码" withVC:self];
+//
+//        }
+//    }];
 }
 
 /*

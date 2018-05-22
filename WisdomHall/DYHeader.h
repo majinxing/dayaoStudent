@@ -305,7 +305,9 @@
 
 #define MeetingResponder        @"course/meeting/collect"            //会议抢答统计
 
+#define SmsSend                 @"course/sms/send"                   //发送短信
 
+#define SmsValidate             @"course/sms/validate"               //验证短信
 
 
 

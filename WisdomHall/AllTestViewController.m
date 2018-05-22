@@ -254,13 +254,21 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    
     AnswerTestQuestionsViewController * vc= [[AnswerTestQuestionsViewController alloc] init];
     vc.t = _dataAry[indexPath.row];
     vc.editable = NO;
     vc.titleStr = @"试题";
-    self.hidesBottomBarWhenPushed = YES;
     
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([vc.t.statusName isEqualToString:@"未进行"]) {
+        [UIUtils showInfoMessage:@"考试未进行，不能查看" withVC:self];
+    }else{
+        self.hidesBottomBarWhenPushed = YES;
+        
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    
     
 //    if ([vc.t.statusName isEqualToString:@"进行中"]) {
 //        self.hidesBottomBarWhenPushed = YES;

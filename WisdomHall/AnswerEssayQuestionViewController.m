@@ -521,9 +521,6 @@
     
     [self showHudInView:self.view hint:NSLocalizedString(@"正在上传数据", @"Load data...")];
     
-    //    NSString * str = [NSString stringWithFormat:@"%@-%@-%@",_user.userName,_user.studentId,[UIUtils getTime]];
-    //
-    //    NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",str,@"description",@"21",@"function",_questionModel.questionId,@"relId",@"false",@"deleteOld",nil];
     
     __weak AnswerEssayQuestionViewController * weakSelf = self;
     
@@ -532,6 +529,10 @@
     NSArray * ary = [NSArray arrayWithObject:imageData];
     
     NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:ary,@"myfiles", nil];
+    
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(sendImageBeginDelegate)]) {
+        [self.delegate sendImageBeginDelegate];
+    }
     
     [[NetworkRequest sharedInstance] POSTImage:UploadTemp image:image dict:dict succeed:^(id data) {
         NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
@@ -558,10 +559,15 @@
         }else{
             [weakSelf sendImage:image with:index];
         }
+        if (self.delegate&&[self.delegate respondsToSelector:@selector(sendImageEndDelegate)]) {
+            [self.delegate sendImageEndDelegate];
+        }
     } failure:^(NSError *error) {
         
         [self hideHud];
-        
+        if (self.delegate&&[self.delegate respondsToSelector:@selector(sendImageEndDelegate)]) {
+            [self.delegate sendImageEndDelegate];
+        }
         [UIUtils showInfoMessage:@"上传失败，请检查网络" withVC:self];
     }];
 }

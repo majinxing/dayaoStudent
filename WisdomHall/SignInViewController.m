@@ -158,38 +158,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
     });
 }
 #pragma mark 获取数据
-//-(void)getDataWithPage:(NSInteger)page{
-//
-//
-//    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%ld",(long)page],@"start",_userModel.peopleId,@"teacherId",[NSString stringWithFormat:@"%@ 00:00:00",_dictDay[@"firstDay"]],@"actStartTime",[NSString stringWithFormat:@"%@ 23:59:59",_dictDay[@"lastDay"]],@"actEndTime",@"1000",@"length",_userModel.school,@"universityId",@"2",@"type",[NSString stringWithFormat:@"%d",[UIUtils getTermId]],@"termId",@"1",@"courseType",nil];
-//
-//    [[NetworkRequest sharedInstance] GET:QueryCourse dict:dict succeed:^(id data) {
-//        //        NSLog(@"1");
-//        NSString * str = [[data objectForKey:@"header"] objectForKey:@"message"];
-//        if ([str isEqualToString:@"成功"]) {
-//            NSArray * ary = [[data objectForKey:@"body"] objectForKey:@"list"];
-//            for (int i = 0; i<ary.count; i++) {
-//
-//                ClassModel * c = [[ClassModel alloc] init];
-//                [c setInfoWithDict:ary[i]];
-//                [_classAry addObject:c];
-//            }
-//
-//            [self getSelfJoinClass:page];
-//            //            [self hideHud];
-//        }else if ([str isEqualToString:@"无效token"]){
-//            [self hideHud];
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [UIUtils accountWasUnderTheRoof];
-//            });
-//        }else{
-//            [self hideHud];
-//        }
-//    } failure:^(NSError *error) {
-//        [self hideHud];
-//        [UIUtils showInfoMessage:@"获取课表失败，请稍后再试" withVC:self];
-//    }];
-//}
+
 -(void)getSelfJoinClass:(NSInteger)page{
     NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%ld",(long)page],@"start",_userModel.peopleId,@"studentId",[NSString stringWithFormat:@"%@ 00:00:00",_dictDay[@"firstDay"]],@"actStartTime",[NSString stringWithFormat:@"%@ 23:59:59",_dictDay[@"lastDay"]],@"actEndTime",@"1000",@"length",_userModel.school,@"universityId",@"1",@"type",[NSString stringWithFormat:@"%d",[UIUtils getTermId]],@"termId",@"1",@"courseType",nil];
     
@@ -339,32 +308,6 @@ static NSString *cellIdentifier = @"cellIdentifier";
         _join.frame = CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);
         [self.view addSubview:_join];
     }
-    //    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:nil preferredStyle:  UIAlertControllerStyleActionSheet];
-    //
-    //    //分别按顺序放入每个按钮；
-    //    [alert addAction:[UIAlertAction actionWithTitle:@"同步课程" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    //        //点击按钮的响应事件；
-    //        [UIView animateWithDuration:2.5 animations:^{
-    //
-    //            _synCourseView.frame = CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);
-    //            [self.view addSubview:_synCourseView];
-    //        }completion:^(BOOL finished) {
-    //
-    //
-    //        }];
-    //    }]];
-    //    //分别按顺序放入每个按钮；
-    //    [alert addAction:[UIAlertAction actionWithTitle:@"加入课程" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    //
-    //    }]];
-    //    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-    //
-    //
-    //        //点击按钮的响应事件；
-    //    }]];
-    //    //弹出提示框；
-    //    [self presentViewController:alert animated:true completion:nil];
-    
 }
 /**
  *  创建课程

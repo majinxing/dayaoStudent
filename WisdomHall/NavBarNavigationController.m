@@ -81,9 +81,11 @@
 -(void)handleMaxShowTimer:(NSTimer *)theTimer{
     
     UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
-    NSLog(@"111");
-    if (user.peopleId) {
+    
+    if ([UIUtils isBlankString:user.peopleId]) {
+    
         NSDictionary * dict = @{@"appState":@"1",@"id":[NSString stringWithFormat:@"%@",user.peopleId]};
+    
         [[NetworkRequest sharedInstance] POST:ChangeAppState dict:dict succeed:^(id data) {
             //            NSLog(@"%@",data);
             NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
@@ -102,13 +104,17 @@
     [[NavBarNavigationController sharedInstance].showTimer invalidate];
     
     [NavBarNavigationController sharedInstance].showTimer = nil;
-    if (user.peopleId) {
+    
+    if ([UIUtils isBlankString:user.peopleId]) {
+        
         NSDictionary * dict = @{@"appState":@"3",@"id":[NSString stringWithFormat:@"%@",user.peopleId]};
+        
         [[NetworkRequest sharedInstance] POST:ChangeAppState dict:dict succeed:^(id data) {
             //            NSLog(@"%@",data);
         } failure:^(NSError *error) {
             
         }];
     }
+    
 }
 @end

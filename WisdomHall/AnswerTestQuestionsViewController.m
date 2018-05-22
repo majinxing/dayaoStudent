@@ -47,6 +47,8 @@
 @property (nonatomic,strong)UIView * scoreView;
 
 @property (nonatomic,assign) int temp;//标志位 标明所在的题目
+
+@property (nonatomic,strong)UIButton *myButton;//提交按钮
 @end
 
 @implementation AnswerTestQuestionsViewController
@@ -79,8 +81,13 @@
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [self.navigationController setNavigationBarHidden:YES];
 
+}
 -(void)viewWillDisappear:(BOOL)animated{
+    [self.navigationController setNavigationBarHidden:NO];
+
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 }
 -(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
@@ -217,23 +224,50 @@
  **/
 -(void)setNavigationTitle{
     
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    UIView * navigationBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, APPLICATION_WIDTH, 64)];
+    navigationBar.backgroundColor = [[Appsetting sharedInstance] getThemeColor];
     
-    self.title = _titleStr;
+    [self.view addSubview:navigationBar];
+    
+    UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(APPLICATION_WIDTH/2-40, 30, 80, 20)];
+    titleLabel.text = _titleStr;
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.font = [UIFont systemFontOfSize:18];
+    [self.view addSubview:titleLabel];
+    
+    
+    UIImageView * b = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ic_arrow_left"]];
+    b.frame = CGRectMake(3, 30, 25, 20);
+    [self.view addSubview:b];
+    
+    UIButton * backBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    backBtn.frame = CGRectMake(13,18, 60, 44);
+    [backBtn setTitle:@"返回" forState:UIControlStateNormal];
+    [backBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    backBtn.titleLabel.font = [UIFont systemFontOfSize:17];//[UIFont fontWithName:@"Helvetica-Bold" size:17];
+    
+    backBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
+    
+    [self.view addSubview:backBtn];
+    
+    [backBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    
+    
     if ([_t.statusName isEqualToString:@"进行中"]) {
-        UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(more)];
+        _myButton =[UIButton buttonWithType:UIButtonTypeSystem];
         
-        [myButton setTintColor:[UIColor whiteColor]];
+        [_myButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
-        self.navigationItem.rightBarButtonItem = myButton;
+        [_myButton setTitle:@"提交" forState:UIControlStateNormal];
+        [_myButton addTarget:self action:@selector(more) forControlEvents:UIControlEventTouchUpInside];
+        _myButton.frame = CGRectMake(APPLICATION_WIDTH-80, 18, 80, 44);
+        _myButton.titleLabel.textAlignment = NSTextAlignmentRight;
+        _myButton.titleLabel.font = [UIFont systemFontOfSize:17];
+        [self.view addSubview:_myButton];
     }
     
-    
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc]initWithTitle:@"<返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
-    
-    [backItem setTintColor:[UIColor whiteColor]];
-    
-    self.navigationItem.leftBarButtonItem = backItem;
 }
 -(void)back{
     if (![_t.statusName isEqualToString:@"进行中"]) {
@@ -512,6 +546,13 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+#pragma mark AnswerEssayQuestionViewControllerDelegate
+-(void)sendImageBeginDelegate{
+    [_myButton setEnabled:NO];
+}
+-(void)sendImageEndDelegate{
+    [_myButton setEnabled:YES];
 }
 #pragma mark 问题代理方法
 -(void)handleSwipeFromDelegate:(UISwipeGestureRecognizer *)recognizer{

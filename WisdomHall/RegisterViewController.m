@@ -27,6 +27,7 @@
 
 @property (nonatomic,strong)NSTimer *showTimer;
 
+@property (nonatomic,strong)NSString * sendSmsType;
 @end
 
 @implementation RegisterViewController
@@ -38,6 +39,11 @@
     [self.phoneTextFile addTarget:self action:@selector(passConTextChange:) forControlEvents:UIControlEventEditingChanged];
     [self.vTextFile addTarget:self action:@selector(passConTextChange:) forControlEvents:UIControlEventEditingChanged];
     [self setNavigationTitle];
+    if ([_type isEqualToString:@"bindPhone"]) {
+        _sendSmsType = [NSString stringWithFormat:@"1"];
+    }else{
+        _sendSmsType = [NSString stringWithFormat:@"2"];
+    }
     // Do any additional setup after loading the view from its nib.
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
@@ -70,13 +76,25 @@
 }
 - (void)startTimer
 {
-    [JSMSSDK getVerificationCodeWithPhoneNumber:_phoneNumber andTemplateID:@"144851" completionHandler:^(id resultObject, NSError *error) {
-        if (!error) {
-            NSLog(@"Get verification code success!");
-        }else{
-            NSLog(@"失败");
+    
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_phoneNumber,@"phone",_sendSmsType,@"type", nil];
+    
+    [[NetworkRequest sharedInstance] POST:SmsSend dict:dict succeed:^(id data) {
+        NSString * message = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+        if (![message isEqualToString:@"成功"]) {
+            [UIUtils showInfoMessage:message withVC:self];
         }
+    } failure:^(NSError *error) {
+        [UIUtils showInfoMessage:@"网络连接失败，请检查网络" withVC:self];
     }];
+    
+//    [JSMSSDK getVerificationCodeWithPhoneNumber:_phoneNumber andTemplateID:@"144851" completionHandler:^(id resultObject, NSError *error) {
+//        if (!error) {
+//            NSLog(@"Get verification code success!");
+//        }else{
+//            NSLog(@"失败");
+//        }
+//    }];
     
     [_getVerificationCodeBtn setEnabled:NO];
     //时间间隔
@@ -123,11 +141,12 @@
         [self.navigationController pushViewController:definePWVC animated:YES];
         return;
     }
-    //验证验证码
-    [JSMSSDK commitWithPhoneNumber:_phoneNumber verificationCode:_Verification completionHandler:^(id resultObject, NSError *error) {
-        
-        if (!error)
-        {
+    
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_phoneNumber,@"phone",_sendSmsType,@"type",_Verification,@"code",nil];
+    
+    [[NetworkRequest sharedInstance] POST:SmsValidate dict:dict succeed:^(id data) {
+        NSString * message = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+        if ([message isEqualToString:@"成功"]) {
             if ([_type isEqualToString:@"bindPhone"]) {
                 [self bindPhoneA];
             }else{
@@ -137,11 +156,31 @@
                 [self.navigationController pushViewController:definePWVC animated:YES];
             }
         }else{
-            [UIUtils showInfoMessage:@"验证码错误" withVC:self];
-
+            [UIUtils showInfoMessage:message withVC:self];
         }
+        
+    } failure:^(NSError *error) {
+        [UIUtils showInfoMessage:@"网络连接失败，请检查网络" withVC:self];
     }];
-    
+//    //验证验证码
+//    [JSMSSDK commitWithPhoneNumber:_phoneNumber verificationCode:_Verification completionHandler:^(id resultObject, NSError *error) {
+//
+//        if (!error)
+//        {
+//            if ([_type isEqualToString:@"bindPhone"]) {
+//                [self bindPhoneA];
+//            }else{
+//                // 验证成功
+//                DefineThePasswordViewController * definePWVC = [[DefineThePasswordViewController alloc] init];
+//                definePWVC.phoneNumber = _phoneNumber;
+//                [self.navigationController pushViewController:definePWVC animated:YES];
+//            }
+//        }else{
+//            [UIUtils showInfoMessage:@"验证码错误" withVC:self];
+//
+//        }
+//    }];
+//
 }
 -(void)bindPhoneA{
     NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_phoneTextFile.text],@"phone",_workNo,@"workNo", nil];

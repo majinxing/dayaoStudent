@@ -57,7 +57,7 @@
     _teacherPicture.image = [UIImage imageNamed:@"meet"];
     
     if (![UIUtils isBlankString:[NSString stringWithFormat:@"%@",meetModel.signStatus]]) {
-        if ([[NSString stringWithFormat:@"%@",meetModel.signStatus] isEqualToString:@"2"]) {
+        if (![[NSString stringWithFormat:@"%@",meetModel.signStatus] isEqualToString:@"1"]) {
             _signCode.frame = CGRectMake(APPLICATION_WIDTH/2+30, 40, 50, 50);
             _signCode.image = [UIImage imageNamed:@"ic_sgin_success"];
             [self.contentView addSubview:_signCode];
@@ -83,7 +83,7 @@
         _teacherPicture.image = [UIImage imageNamed:@"course"];
     }
     if (![UIUtils isBlankString:[NSString stringWithFormat:@"%@",classModel.signStatus]]) {
-        if ([[NSString stringWithFormat:@"%@",classModel.signStatus] isEqualToString:@"2"]) {
+        if (![[NSString stringWithFormat:@"%@",classModel.signStatus] isEqualToString:@"1"]) {
             _signCode.frame = CGRectMake(APPLICATION_WIDTH/2+30, 40, 50, 50);
             _signCode.image = [UIImage imageNamed:@"ic_sgin_success"];
             [self.contentView addSubview:_signCode];

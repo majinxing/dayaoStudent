@@ -14,6 +14,10 @@
 
 -(void)handleSwipeFromDelegate:(UISwipeGestureRecognizer *)recognizer;
 
+-(void)sendImageBeginDelegate;
+
+-(void)sendImageEndDelegate;
+
 @end
 @interface AnswerEssayQuestionViewController : UIViewController
 

@@ -250,7 +250,7 @@
     //     backgroundTimeRemaining 属性包含了程序留给的我们的时间
     NSTimeInterval backgroundTimeRemaining =[[UIApplication sharedApplication] backgroundTimeRemaining];
     UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
-    if (user.peopleId) {
+    if ([UIUtils isBlankString:user.peopleId]) {
         
         if (backgroundTimeRemaining<=30) {
             NSDictionary * dict = @{@"appState":@"2",@"id":[NSString stringWithFormat:@"%@",user.peopleId]};
