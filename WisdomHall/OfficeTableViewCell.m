@@ -41,6 +41,7 @@
     _fLineView = [[UIView alloc] init];
     _sLineView = [[UIView alloc] init];
     _tLineView = [[UIView alloc] init];
+    
     _collectionHeadView = [CollectionHeadView sharedInstance];
     
     _collectionHeadView.delegate = self;
@@ -130,6 +131,8 @@
     [_btnView addSubview:view];
     
     _collectionHeadView.frame = CGRectMake(10,APPLICATION_HEIGHT-20-100-140-100, ScrollViewW,ScrollViewH);
+    
+    [_collectionHeadView getData];
     
     [self.contentView addSubview:_collectionHeadView];
     

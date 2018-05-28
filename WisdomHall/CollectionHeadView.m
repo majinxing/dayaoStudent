@@ -18,6 +18,7 @@ static dispatch_once_t onceToken;
 @property (nonatomic,strong)UIPageControl * myPageControl;
 @property (nonatomic,strong)NSMutableArray * ary;
 @property (nonatomic,assign) int temp;
+@property (nonatomic,strong) UIScrollView * s;
 @end
 @implementation CollectionHeadView
 - (instancetype) init{
@@ -26,7 +27,7 @@ static dispatch_once_t onceToken;
         self.backgroundColor = [UIColor clearColor];
         _ary = [NSMutableArray arrayWithCapacity:1];
         _temp = 0;
-        [self getData];
+//        [self getData];
     }
     return self;
 }
@@ -45,6 +46,7 @@ static dispatch_once_t onceToken;
         NSString * str = [[data objectForKey:@"header"] objectForKey:@"code"];
         if ([str isEqualToString:@"0000"]) {
             NSArray * ary = [[data objectForKey:@"body"] objectForKey:@"list"];
+            [_ary removeAllObjects];
             for (int i = 0; i<ary.count; i++) {
                 NoticeModel * notice = [[NoticeModel alloc] init];
                 notice.noticeTime = [UIUtils timeWithTimeIntervalString:[ary[i] objectForKey:@"time"]];
@@ -74,24 +76,31 @@ static dispatch_once_t onceToken;
 }
 -(void)addScrollView{
     if (_ary.count>0) {
+        [_rotateTimer  invalidate];
+        _rotateTimer = nil;
+        [_s removeFromSuperview];
         _temp = (int)_ary.count;
     }else{
+        [_rotateTimer  invalidate];
+        _rotateTimer = nil;
+        [_s removeFromSuperview];
         return;
     }
     self.backgroundColor = [UIColor clearColor];
     
-    UIScrollView * s = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0,ScrollViewW, 70)];
+    _s = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0,ScrollViewW, 70)];
     
-    s.backgroundColor = [UIColor clearColor];
     
-    s.contentSize = CGSizeMake(ScrollViewW*_temp, 70);
-    s.scrollEnabled = YES;//是否可以滚动
-    s.pagingEnabled = YES;//是否整页滚动
-    s.showsVerticalScrollIndicator = NO;//水平方向的滚动条
-    s.showsHorizontalScrollIndicator = NO;
-    s.bounces = NO;
-    [self addSubview:s];
+    _s.backgroundColor = [UIColor clearColor];
     
+    _s.contentSize = CGSizeMake(ScrollViewW*_temp, 70);
+    _s.scrollEnabled = YES;//是否可以滚动
+    _s.pagingEnabled = YES;//是否整页滚动
+    _s.showsVerticalScrollIndicator = NO;//水平方向的滚动条
+    _s.showsHorizontalScrollIndicator = NO;
+    _s.bounces = NO;
+    [self addSubview:_s];
+
     for (int i = 0; i<_temp; i++) {
         UIView * vBlack = [[UIView alloc] initWithFrame:CGRectMake((APPLICATION_WIDTH-20)*i, 0, APPLICATION_WIDTH-20, 70)];
         
@@ -99,11 +108,11 @@ static dispatch_once_t onceToken;
         
         vBlack.alpha = 0.25;
         
-        [s addSubview:vBlack];
+        [_s addSubview:vBlack];
         
         UIView * v = [self scrollViewWithInt:i];
         
-        [s addSubview:v];
+        [_s addSubview:v];
     }
     UIView * vBlack = [[UIView alloc] initWithFrame:CGRectMake((APPLICATION_WIDTH-20)*_temp, 0, APPLICATION_WIDTH-20, 70)];
     
@@ -111,13 +120,13 @@ static dispatch_once_t onceToken;
     
     vBlack.alpha = 0.25;
     
-    [s addSubview:vBlack];
+    [_s addSubview:vBlack];
     
     UIView * v = [[UIView alloc] initWithFrame:CGRectMake((APPLICATION_WIDTH-20)*_temp, 0, APPLICATION_WIDTH-20, 70)];
     
     v.backgroundColor = [UIColor clearColor];
     
-    s.tag = 1000;
+    _s.tag = 1000;
     
     UIImageView * i = [[UIImageView alloc] initWithFrame:CGRectMake(10, 20, 30, 30)];
     
@@ -153,7 +162,7 @@ static dispatch_once_t onceToken;
     
     [v addSubview:i];
     
-    [s addSubview:v];
+    [_s addSubview:v];
     
     _myPageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 50, CGRectGetWidth(self.frame), 20)];
     _myPageControl.numberOfPages = _temp;
@@ -163,7 +172,7 @@ static dispatch_once_t onceToken;
     //启动定时器
     _rotateTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(changeView) userInfo:nil repeats:YES];
     
-    s.delegate = self;
+    _s.delegate = self;
 }
 -(UIView *)scrollViewWithInt:(int)i{
     UIView * v = [[UIView alloc] initWithFrame:CGRectMake((APPLICATION_WIDTH-20)*i, 0, APPLICATION_WIDTH-20, 70)];

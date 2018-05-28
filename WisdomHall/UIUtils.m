@@ -386,6 +386,77 @@
     }
     return NO;
 }
+/**
+ 
+ * 距离签到时间的差值
+ 
+ */
+
++(NSString *)dateTimeDifferenceWithStartTime:(NSString *)startTime{
+    
+    startTime = [UIUtils timeSubtractTenMin:startTime];
+    
+    NSDateFormatter *date = [[NSDateFormatter alloc]init];
+    
+    [date setDateFormat:@"yyyy-MM-dd HH:mm"];
+    
+    NSDate *startD  = [date dateFromString:startTime];
+    
+    NSDate *endD = [NSDate date];//[date dateFromString:endTime];
+    
+    NSTimeInterval start = [startD timeIntervalSince1970]*1;
+    
+    NSTimeInterval end = [endD timeIntervalSince1970]*1;
+    
+    NSTimeInterval value = end - start;
+    // 当前日历
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    // 需要对比的时间数据
+    NSCalendarUnit unit = NSCalendarUnitYear | NSCalendarUnitMonth
+    | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+    // 对比时间差
+    NSDateComponents *dateCom = [calendar components:unit fromDate:endD toDate:startD options:0];
+    
+    NSInteger year = [[[Appsetting sharedInstance].mySettingData objectForKey:@"year"] integerValue];
+    NSInteger month = [[[Appsetting sharedInstance].mySettingData objectForKey:@"month"] integerValue];
+    NSInteger day = [[[   Appsetting sharedInstance].mySettingData objectForKey:@"day"] integerValue];
+    NSInteger hour = [[[Appsetting sharedInstance].mySettingData objectForKey:@"hour"] integerValue];
+    NSInteger minute = [[[Appsetting sharedInstance].mySettingData objectForKey:@"minute"] integerValue];
+    NSInteger second = [[[Appsetting sharedInstance].mySettingData objectForKey:@"second"] integerValue];
+    NSString * str = [[NSString alloc] init];
+    
+    if (abs((int)dateCom.year+(int)year)>0) {
+        if (((int)dateCom.year+(int)year)>0) {
+            str = [str stringByAppendingString:[NSString stringWithFormat:@"%d年",(int)dateCom.year+(int)year]];
+        }
+    }
+    if (abs((int)dateCom.month+(int)month)>0){
+        if (((int)dateCom.month+(int)month)>0) {
+            str = [str stringByAppendingString:[NSString stringWithFormat:@"%d个月",(int)dateCom.month+(int)month]];
+        }
+    }
+    if (abs((int)dateCom.day+(int)day)>0) {
+        if (((int)dateCom.day+(int)day)>0) {
+            str = [str stringByAppendingString:[NSString stringWithFormat:@"%d天",(int)dateCom.day+(int)day]];
+        }
+    }
+    if (abs((int)dateCom.hour+(int)hour)>0) {
+        if (((int)dateCom.hour+(int)hour)>0) {
+            str = [str stringByAppendingString:[NSString stringWithFormat:@" %d小时",(int)dateCom.hour+(int)hour]];
+        }
+    }
+    if (abs((int)dateCom.minute+(int)minute)>0) {
+        if (((int)dateCom.minute+(int)minute)>0) {
+            str = [str stringByAppendingString:[NSString stringWithFormat:@"%d分钟",(int)dateCom.minute+(int)minute]];
+        }
+    }
+//    if (abs((int)dateCom.second+(int)second)>0) {
+//        if (((int)dateCom.second+(int)second)>0) {
+//            str = [str stringByAppendingString:[NSString stringWithFormat:@"-%d秒",(int)dateCom.second+(int)second]];
+//        }
+//    }
+    return str;
+}
 //获取网路时间与本地时间的差值
 +(NSDate *)getInternetDate
 {
@@ -1518,16 +1589,28 @@
 //修改屏幕亮度
 
 +(BOOL)didUserPressLockButton{
-    //获取屏幕亮度
-    CGFloat oldBrightness = [UIScreen mainScreen].brightness;
-    //以较小的数量改变屏幕亮度
-    [UIScreen mainScreen].brightness = oldBrightness + (oldBrightness <= 0.01 ? (0.01) : (-0.01));
     
-    CGFloat newBrightness = [UIScreen mainScreen].brightness;
-    //恢复屏幕亮度
-    [UIScreen mainScreen].brightness = oldBrightness;
-    //判断屏幕亮度是否能够被改变
-    return oldBrightness != newBrightness;
+    CGFloat screenBrightness = [[UIScreen mainScreen] brightness];
+    if (screenBrightness > 0) {
+        // Home事件
+        NSLog(@"Home事件");
+        return NO;
+    } else {
+        // 锁屏事件
+        NSLog(@"锁屏事件");
+        return YES;
+    }
+    return NO;
+//    //获取屏幕亮度
+//    CGFloat oldBrightness = [UIScreen mainScreen].brightness;
+//    //以较小的数量改变屏幕亮度
+//    [UIScreen mainScreen].brightness = oldBrightness + (oldBrightness <= 0.01 ? (0.01) : (-0.01));
+//
+//    CGFloat newBrightness = [UIScreen mainScreen].brightness;
+//    //恢复屏幕亮度
+//    [UIScreen mainScreen].brightness = oldBrightness;
+//    //判断屏幕亮度是否能够被改变
+//    return oldBrightness != newBrightness;
     
 }
 +(NSString *)md5:(NSString *)str
@@ -1574,6 +1657,47 @@
         }
     }else{
         m = m + 10;
+        ary1[1] = [NSString stringWithFormat:@"%ld",m];
+        
+    }
+    
+    
+    expireTime = [NSString stringWithFormat:@"%@ %@:%@",ary[0],ary1[0],ary1[1]];
+    
+    return expireTime;
+}
+//减10分钟
++(NSString *)timeSubtractTenMin:(NSString *)time{
+    
+    NSArray *ary = [time componentsSeparatedByString:@" "];
+    NSString * expireTime = ary[1];
+    NSMutableArray * ary1 = [expireTime componentsSeparatedByString:@":"];
+    expireTime = ary1[0];
+    NSString * mm = ary1[1];
+    
+    
+    
+    long n = [expireTime integerValue];
+    long m = [mm integerValue];
+    
+    
+    if (m<=10) {
+        if (n == 24) {
+            n = 23;
+            m = m - 10 + 60;
+            ary1[0] = [NSString stringWithFormat:@"%ld",n];
+            ary1[1] = [NSString stringWithFormat:@"%ld",m];
+            
+        }else {
+            n = n-1;
+            m = m - 10 + 60;
+            
+            ary1[0] = [NSString stringWithFormat:@"%ld",n];
+            ary1[1] = [NSString stringWithFormat:@"%ld",m];
+            
+        }
+    }else{
+        m = m - 10;
         ary1[1] = [NSString stringWithFormat:@"%ld",m];
         
     }

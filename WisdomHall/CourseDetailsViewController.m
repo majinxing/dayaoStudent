@@ -715,10 +715,15 @@
     if (![UIUtils validateWithStartTime:_c.signStartTime withExpireTime:nil]) {
         if (![[NSString stringWithFormat:@"%@",_c.signStatus] isEqualToString:@"1"]) {
             [UIUtils showInfoMessage:@"已签到" withVC:self];
-//            [self signPictureUpdate];
-
         }else{
-            [UIUtils showInfoMessage:@"课程开始之后一定时间范围内才可以签到" withVC:self];
+            
+            NSString * str = [UIUtils dateTimeDifferenceWithStartTime:_c.signStartTime];
+            
+            if ([UIUtils isBlankString:str]) {
+                [UIUtils showInfoMessage:@"签到已过期" withVC:self];
+            }else{
+                [UIUtils showInfoMessage:[NSString stringWithFormat:@"距离签到还有 %@",str] withVC:self];
+            }
         }
         [self hideHud];
         return;
@@ -858,8 +863,12 @@
 -(void)codePressedDelegate:(UIButton *)btn{
     if ([_c.signStatus isEqualToString:@"1"]) {
         if (![UIUtils validateWithStartTime:_c.signStartTime withExpireTime:nil]) {
-            [UIUtils showInfoMessage:@"课程开始之后一定时间范围内才可以签到" withVC:self];
-            return;
+            NSString * str = [UIUtils dateTimeDifferenceWithStartTime:_c.signStartTime];
+            if ([UIUtils isBlankString:str]) {
+                [UIUtils showInfoMessage:@"签到已过期" withVC:self];
+            }else{
+                [UIUtils showInfoMessage:[NSString stringWithFormat:@"距离签到还有 %@",str] withVC:self];
+            }            return;
         }
         //     1、 获取摄像设备
         AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];

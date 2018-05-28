@@ -56,7 +56,7 @@
     
     self.teacherWorkNo = [dict objectForKey:@"teacherWorkNo"];
     self.courseType = [dict objectForKey:@"courseType"];
-    self.signStatus = [dict objectForKey:@"signStatus"];
+    self.signStatus = [NSString stringWithFormat:@"%@",[dict objectForKey:@"signStatus"]];
     
     _courseSignId = [dict objectForKey:@"courseSignId"];
 }

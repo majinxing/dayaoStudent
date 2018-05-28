@@ -510,7 +510,12 @@
         if ([[NSString stringWithFormat:@"%@",_meetingModel.signStatus] isEqualToString:@"2"]) {
             [UIUtils showInfoMessage:@"已签到,并已过签到时间不能上传照片" withVC:self];
         }else{
-            [UIUtils showInfoMessage:@"会议开始之后一定时间范围内才可以签到" withVC:self];
+            NSString * str = [UIUtils dateTimeDifferenceWithStartTime:_meetingModel.signStartTime];
+            if ([UIUtils isBlankString:str]) {
+                [UIUtils showInfoMessage:@"签到已过期" withVC:self];
+            }else{
+                [UIUtils showInfoMessage:[NSString stringWithFormat:@"距离签到还有 %@",str] withVC:self];
+            }
         }
         [self hideHud];
         return;
@@ -744,7 +749,12 @@
 -(void)codePressedDelegate:(UIButton *)btn{
     if ([btn.titleLabel.text isEqualToString:@"扫码签到"]) {
         if (![UIUtils validateWithStartTime:_meetingModel.signStartTime withExpireTime:nil]) {
-            [UIUtils showInfoMessage:@"会议开始之后一定时间范围内才可以签到" withVC:self];
+            NSString * str = [UIUtils dateTimeDifferenceWithStartTime:_meetingModel.signStartTime];
+            if ([UIUtils isBlankString:str]) {
+                [UIUtils showInfoMessage:@"签到已过期" withVC:self];
+            }else{
+                [UIUtils showInfoMessage:[NSString stringWithFormat:@"距离签到还有 %@",str] withVC:self];
+            }
             return;
         }
         //     1、 获取摄像设备

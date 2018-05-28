@@ -91,7 +91,7 @@
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 }
 -(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [_choiceQVC touchesMoved:touches withEvent:event];
+//    [_choiceQVC touchesMoved:touches withEvent:event];
 }
 -(void)initCorrectAnswerView{
     _cAnswer = [[CorrectAnswer alloc] init];
@@ -261,11 +261,16 @@
         [_myButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
         [_myButton setTitle:@"提交" forState:UIControlStateNormal];
+        
         [_myButton addTarget:self action:@selector(more) forControlEvents:UIControlEventTouchUpInside];
+        
         _myButton.frame = CGRectMake(APPLICATION_WIDTH-80, 18, 80, 44);
+        
         _myButton.titleLabel.textAlignment = NSTextAlignmentRight;
+        
         _myButton.titleLabel.font = [UIFont systemFontOfSize:17];
-        [self.view addSubview:_myButton];
+        
+        [navigationBar addSubview:_myButton];
     }
     
 }
@@ -549,9 +554,13 @@
 }
 #pragma mark AnswerEssayQuestionViewControllerDelegate
 -(void)sendImageBeginDelegate{
+    [self.navigationController setNavigationBarHidden:YES];
+
     [_myButton setEnabled:NO];
 }
 -(void)sendImageEndDelegate{
+    [self.navigationController setNavigationBarHidden:YES];
+
     [_myButton setEnabled:YES];
 }
 #pragma mark 问题代理方法

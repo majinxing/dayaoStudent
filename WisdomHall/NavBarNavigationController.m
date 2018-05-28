@@ -82,7 +82,7 @@
     
     UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
     
-    if ([UIUtils isBlankString:user.peopleId]) {
+    if (![UIUtils isBlankString:user.peopleId]) {
     
         NSDictionary * dict = @{@"appState":@"1",@"id":[NSString stringWithFormat:@"%@",user.peopleId]};
     
@@ -105,7 +105,7 @@
     
     [NavBarNavigationController sharedInstance].showTimer = nil;
     
-    if ([UIUtils isBlankString:user.peopleId]) {
+    if (![UIUtils isBlankString:user.peopleId]) {
         
         NSDictionary * dict = @{@"appState":@"3",@"id":[NSString stringWithFormat:@"%@",user.peopleId]};
         

@@ -221,6 +221,7 @@
     //在这里实现删除操作
     NoticeModel * notice = _noticeAry[indexPath.row];
     NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",notice.noticeId],@"id", nil];
+    
     [[NetworkRequest sharedInstance] POST:Noticedelect dict:dict succeed:^(id data) {
         
         NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];

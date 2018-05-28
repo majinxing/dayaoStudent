@@ -40,7 +40,6 @@
 
     [self addTableView];
 
-
     [self setAlias];
     
     
@@ -55,14 +54,13 @@
         [JPUSHService setAlias:[NSString stringWithFormat:@"%@%@",user.school,user.studentId] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
             
         } seq:1];
-        //        [JPUSHService setTags:nil alias:[NSString stringWithFormat:@"%@%@",user.school,user.studentId] fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
-        //            NSLog(@"%d-------------%@,-------------%@",iResCode,iTags,iAlias);
-        //        }];
+        
     });
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden = YES; //设置隐藏
+    [_tableView reloadData];
 }
 -(void)viewWillDisappear:(BOOL)animated{
 //    self.navigationController.navigationBarHidden = YES; //设置隐藏
@@ -139,19 +137,13 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     OfficeTableViewCell * cell;
-    //    if (indexPath.section == 0) {
-    //        cell = [tableView dequeueReusableCellWithIdentifier:@"OfficeTableViewCellFirst"];
-    //        if (!cell) {
-    //            cell = [[[NSBundle mainBundle] loadNibNamed:@"OfficeTableViewCell" owner:self options:nil] objectAtIndex:0];
-    //        }
-    //        [cell signState];
-    //    }else{
+    
     cell = [tableView dequeueReusableCellWithIdentifier:@"OfficeTableViewCellSecond"];
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"OfficeTableViewCell" owner:self options:nil] objectAtIndex:1];
-        [cell addSecondContentView];
     }
-    
+    [cell addSecondContentView];
+
     //    }
     cell.delegate = self;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -169,36 +161,6 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 0;
 }
-//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-////    if (section == 0) {
-////        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, APPLICATION_WIDTH, 20)];
-////        view.backgroundColor = RGBA_COLOR(236, 236, 236, 1);
-////        UILabel * l = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 40, 20)];
-////        l.text = @"签到";
-////        l.font = [UIFont systemFontOfSize:14];
-////        [view addSubview:l];
-////        return view;
-////    }else{
-//        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, APPLICATION_WIDTH, 20)];
-//        view.backgroundColor = RGBA_COLOR(236, 236, 236, 1);
-//        UILabel * l = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 40, 20)];
-//        l.text = @"办公";
-//        l.font = [UIFont systemFontOfSize:14];
-//        [view addSubview:l];
-//        return view;
-//
-////    }
-//    return nil;
-//}
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end
 

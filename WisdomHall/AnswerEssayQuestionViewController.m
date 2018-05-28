@@ -171,6 +171,8 @@
 #pragma mark imageBigViewDelegate
 -(void)outViewDelegate{
     [_v removeFromSuperview];
+    _v = nil;
+
 }
 #pragma mark EditPageViewDelegate
 -(void)saveTextStrDelegate:(UIButton *)btn{
@@ -242,7 +244,7 @@
     
     float f = i.size.width;
     if (!_v) {
-        _v = [[imageBigView alloc] initWithFrame:CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT-104)];
+        _v = [[imageBigView alloc] initWithFrame:CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT)];
     }
     
     _v.delegate = self;

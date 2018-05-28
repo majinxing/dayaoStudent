@@ -67,8 +67,11 @@
                 [UIUtils showInfoMessage:@"暂无数据" withVC:self];
             }
             [self hideHud];
+            
             [_tableview reloadData];
+            
         } failure:^(NSError *error) {
+            
             [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
 
             [self hideHud];
