@@ -276,7 +276,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 -(void)setNavigationTitle{
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
-//    self.title = @"本周课程";
+
     
     UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"加入课程" style:UIBarButtonItemStylePlain target:self action:@selector(joinCourse)];
     self.navigationItem.rightBarButtonItem = myButton;
