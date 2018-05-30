@@ -450,11 +450,11 @@
             str = [str stringByAppendingString:[NSString stringWithFormat:@"%d分钟",(int)dateCom.minute+(int)minute]];
         }
     }
-//    if (abs((int)dateCom.second+(int)second)>0) {
-//        if (((int)dateCom.second+(int)second)>0) {
-//            str = [str stringByAppendingString:[NSString stringWithFormat:@"-%d秒",(int)dateCom.second+(int)second]];
-//        }
-//    }
+    if (abs((int)dateCom.second+(int)second)>0) {
+        if (((int)dateCom.second+(int)second)>0) {
+            str = [str stringByAppendingString:[NSString stringWithFormat:@"%d秒",(int)dateCom.second+(int)second]];
+        }
+    }
     return str;
 }
 //获取网路时间与本地时间的差值
@@ -1681,7 +1681,7 @@
     long m = [mm integerValue];
     
     
-    if (m<=10) {
+    if (m<10) {
         if (n == 24) {
             n = 23;
             m = m - 10 + 60;

@@ -142,7 +142,9 @@
 -(void)addImageViewWithImage:(UIImage  *)image1{
     
 //    _imageview = [[UIImageView alloc] init];//WithFrame:CGRectMake(10,40, APPLICATION_WIDTH-20, self.frame.size.height- 80)];
-
+    if (!image1) {
+//        [UIUtils showInfoMessage:@"图片资源未获取，退出后请再次点击" withVC:];
+    }
     _imageview.image = image1;
     
     double n = _imageview.image.size.height/_imageview.image.size.width;

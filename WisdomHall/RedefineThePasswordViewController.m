@@ -10,6 +10,7 @@
 #import "DYTabBarViewController.h"
 #import "DYHeader.h"
 #import "TheLoginViewController.h"
+#import "WorkingLoginViewController.h"
 
 @interface RedefineThePasswordViewController ()
 
@@ -47,7 +48,7 @@
                 [self hideHud];
 
                 for (UIViewController *controller in self.navigationController.viewControllers) {
-                    if ([controller isKindOfClass:[TheLoginViewController class]]) {
+                    if ([controller isKindOfClass:[WorkingLoginViewController class]]) {
                         
                         [UIUtils showInfoMessage:@"修改密码成功请登录" withVC:self];
                         [self dismissViewControllerAnimated:YES completion:^{

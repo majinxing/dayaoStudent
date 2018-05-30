@@ -48,6 +48,7 @@
 
 @property (nonatomic,assign) int temp;//标志位 标明所在的题目
 
+@property (nonatomic,assign) int textTemp;//标志位，标明是否有文字编辑未保存就提交
 @property (nonatomic,strong)UIButton *myButton;//提交按钮
 @end
 
@@ -296,6 +297,10 @@
 }
 
 -(void)more{
+    if (_textTemp == 1) {
+        [self showTextStatus];
+        return;
+    }
     NSMutableArray * dataAry = [NSMutableArray arrayWithCapacity:1];
     
     for (int i = 0;i<_allQuestionAry.count; i++) {
@@ -562,6 +567,17 @@
     [self.navigationController setNavigationBarHidden:YES];
 
     [_myButton setEnabled:YES];
+}
+-(void)textEditorBeginDelegate{
+    _textTemp = 1;
+//    [_myButton addTarget:self action:@selector(showTextStatus) forControlEvents:UIControlEventTouchUpInside];
+}
+-(void)textEditorEndDelegate{
+    _textTemp = 0;
+//    [_myButton addTarget:self action:@selector(more) forControlEvents:UIControlEventTouchUpInside];
+}
+-(void)showTextStatus{
+    [UIUtils showInfoMessage:@"请保存或取消已编辑的文字再提交" withVC:self];
 }
 #pragma mark 问题代理方法
 -(void)handleSwipeFromDelegate:(UISwipeGestureRecognizer *)recognizer{

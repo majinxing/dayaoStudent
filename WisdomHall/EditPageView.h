@@ -17,4 +17,6 @@
 
 @property (nonatomic,copy)NSString * editStr;
 @property (nonatomic,strong)UITextView * textView;
+@property (nonatomic,strong) UIButton * cancle;
+@property (nonatomic,strong) UIButton * save;
 @end

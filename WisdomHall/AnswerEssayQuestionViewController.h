@@ -18,6 +18,11 @@
 
 -(void)sendImageEndDelegate;
 
+-(void)textEditorBeginDelegate;
+
+-(void)textEditorEndDelegate;
+
+
 @end
 @interface AnswerEssayQuestionViewController : UIViewController
 

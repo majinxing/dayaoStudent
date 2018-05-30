@@ -140,7 +140,7 @@ static dispatch_once_t onceToken;
     
     NoticeModel * notice = _ary[0];
     
-    textLabel.text = [NSString stringWithFormat:@"会议通知:%@",notice.noticeContent];
+    textLabel.text = [NSString stringWithFormat:@"通知:%@",notice.noticeContent];
     [v addSubview:textLabel];
     
     textLabel.textColor = [UIColor whiteColor];
@@ -186,7 +186,7 @@ static dispatch_once_t onceToken;
     textLabel.font = [UIFont systemFontOfSize:14];
     
     NoticeModel * notice = _ary[i];
-    textLabel.text = [NSString stringWithFormat:@"会议通知:%@",notice.noticeContent];
+    textLabel.text = [NSString stringWithFormat:@"通知:%@",notice.noticeContent];
     [v addSubview:textLabel];
     textLabel.textColor = [UIColor whiteColor];
     

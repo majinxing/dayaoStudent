@@ -608,7 +608,7 @@
         
         _meetingModel.meetingSignId = [NSString stringWithFormat:@"%@",[[data objectForKey:@"body"] objectForKey:@"id"]];
         
-        if (![_meetingModel.signStatus isEqualToString:@"1"]) {
+        if (![_meetingModel.signStatus isEqualToString:@"1"]&&![UIUtils isBlankString:_meetingModel.signStatus]) {
             [self signPictureUpdate];
             // 2.创建通知
             NSNotification *notification =[NSNotification notificationWithName:@"UpdateTheClassPage" object:nil userInfo:nil];

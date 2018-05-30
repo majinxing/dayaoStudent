@@ -189,7 +189,9 @@
     [_editPageView removeFromSuperview];
     
     _editPageView  = nil;
-    
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(textEditorEndDelegate)]) {
+        [self.delegate textEditorEndDelegate];
+    }
 }
 #pragma mark ChoiceQuestionTableViewCellDelegate
 -(void)deleAnswerImageDelegate:(UIButton *)sender{
@@ -213,7 +215,9 @@
         [self.view endEditing:YES];
         return;
     }
-    
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(textEditorBeginDelegate)]) {
+        [self.delegate textEditorBeginDelegate];
+    }
     if (!_editPageView) {
         _editPageView = [[EditPageView alloc] init];
     }
