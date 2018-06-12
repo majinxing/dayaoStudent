@@ -10,4 +10,5 @@
 
 @interface DefineThePasswordViewController : UIViewController
 @property (nonatomic,copy)NSString * phoneNumber;
+@property (nonatomic,copy)NSString * schoolId;
 @end

@@ -12,4 +12,5 @@
 @property(nonatomic,copy)NSString * type;
 @property(nonatomic,copy)NSString * workNo;
 @property(nonatomic,copy)NSString * password;
+@property(nonatomic,copy)NSString * schoolId;
 @end

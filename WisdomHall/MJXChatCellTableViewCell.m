@@ -136,11 +136,15 @@
         _firstTextView.text = textBody.text;
         
         NSDictionary *dict = message.ext;
+        
         NSString * name = [dict objectForKey:@"name"];
+        
         NSString * headimage = [dict objectForKey:@"headImage"];
         
         _firstNameLabel.text = [NSString stringWithFormat:@"%@",name];
+        
         if (![UIUtils isBlankString:headimage]) {
+            
             UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
             
             NSString * baseURL = user.host;

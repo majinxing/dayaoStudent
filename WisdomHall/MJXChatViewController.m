@@ -36,7 +36,10 @@
 @property (nonatomic,strong)NSMutableArray * dataChat;
 
 @property (nonatomic,assign)BOOL currentIsInBottom;
+
 @property (nonatomic,strong)RecorderView  *recorderView;
+
+@property (nonatomic,strong)UserModel * user;
 @end
 
 @implementation MJXChatViewController
@@ -52,6 +55,7 @@
     _dataChat = [NSMutableArray arrayWithCapacity:10];
     // 1.注册通知
     
+    _user = [[Appsetting sharedInstance] getUsetInfo];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"InfoNotification" object:nil];
     
     [self getHistoryMessage];
@@ -159,16 +163,23 @@
 #pragma mark 发送语音按钮
 -(void)sendVoice:(UIButton *)btn{
     if (_sendVoice.frame.size.height == 0) {
+        
         _rect = _btoView.frame;
+        
         _btoView.frame = CGRectMake(0, APPLICATION_HEIGHT-40, APPLICATION_WIDTH, 40);
+        
         _sendVoice.frame = CGRectMake(45, 2, APPLICATION_WIDTH-45-80, 34);
+        
         [btn setImage:[UIImage imageNamed:@"chat_bar_input_normal"] forState:UIControlStateNormal];
 
         [self.view endEditing:YES];
     }else{
         _sendVoice.frame = CGRectMake(0, 0, 0, 0);
+        
         _btoView.frame = _rect;
+        
         [btn setImage:[UIImage imageNamed:@"chat_bar_voice_normal"] forState:UIControlStateNormal];
+        
         [_textView becomeFirstResponder];
     }
     
@@ -300,6 +311,8 @@
        EMMessage * message = [[ChatHelper shareHelper] sendTextMessage:_textView.text withReceiver:_chatroom.groupId];
         
         _textView.text = @"";
+       
+        
         [self textViewDidChange:_textView];
         
         [_dataChat addObject:message];

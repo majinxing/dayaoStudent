@@ -22,7 +22,7 @@
 #import "StatisticalViewController.h"
 
 #import "HelpViewController.h"
-
+#import "AFNetworking.h"
 
 @interface PersonalCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView * tableview;
@@ -42,6 +42,7 @@
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 
+//    [self getWANIPAddress];
     // Do any additional setup after loading the view from its nib.
 }
 /**
@@ -59,6 +60,47 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+    
+-(NSString *)getWANIPAddress  {
+    
+    NSError *error;
+    
+    NSURL *ipURL = [NSURL URLWithString:@"http://pv.sohu.com/cityjson?ie=utf-8"];
+    
+    NSMutableString *ip = [NSMutableString stringWithContentsOfURL:ipURL encoding:NSUTF8StringEncoding error:&error];
+    
+    //判断返回字符串是否为所需数据
+    
+    if ([ip hasPrefix:@"var returnCitySN = "]) {
+        
+        //对字符串进行处理，然后进行json解析
+        
+        //删除字符串多余字符串
+        
+        NSRange range = NSMakeRange(0, 19);
+        
+        [ip deleteCharactersInRange:range];
+        
+        NSString * nowIp =[ip substringToIndex:ip.length-1];
+        
+        //将字符串转换成二进制进行Json解析
+        
+        NSData * data = [nowIp dataUsingEncoding:NSUTF8StringEncoding];
+        
+        NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        
+        NSLog(@"%@",dict);
+        
+        return dict[@"cip"] ? dict[@"cip"] : @"";
+        
+    }
+    
+    return @"";
+    
+}
+
+
 #pragma mark UITableViewdelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;

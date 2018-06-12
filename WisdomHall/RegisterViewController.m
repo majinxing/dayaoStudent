@@ -39,6 +39,7 @@
     [self.phoneTextFile addTarget:self action:@selector(passConTextChange:) forControlEvents:UIControlEventEditingChanged];
     [self.vTextFile addTarget:self action:@selector(passConTextChange:) forControlEvents:UIControlEventEditingChanged];
     [self setNavigationTitle];
+    
     if ([_type isEqualToString:@"bindPhone"]) {
         _sendSmsType = [NSString stringWithFormat:@"1"];
     }else{
@@ -138,6 +139,7 @@
     if ([[NSString stringWithFormat:@"%@",_Verification] isEqualToString:@"0"]) {
         DefineThePasswordViewController * definePWVC = [[DefineThePasswordViewController alloc] init];
         definePWVC.phoneNumber = _phoneNumber;
+        definePWVC.schoolId = _schoolId;
         [self.navigationController pushViewController:definePWVC animated:YES];
         return;
     }
@@ -153,6 +155,7 @@
                 // 验证成功
                 DefineThePasswordViewController * definePWVC = [[DefineThePasswordViewController alloc] init];
                 definePWVC.phoneNumber = _phoneNumber;
+                definePWVC.schoolId = _schoolId;
                 [self.navigationController pushViewController:definePWVC animated:YES];
             }
         }else{

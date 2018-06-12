@@ -725,6 +725,7 @@
     }else{
         [ary addObject:[NSString stringWithFormat:@"%@",user.region]];
     }
+    
     if ([UIUtils isBlankString:[NSString stringWithFormat:@"%@",user.sex]]) {
         [ary addObject:[NSString stringWithFormat:@""]];
         
@@ -733,15 +734,18 @@
             [ary addObject:[NSString stringWithFormat:@"男"]];
         }else if([[NSString stringWithFormat:@"%@",user.sex] isEqualToString:@"2"]){
             [ary addObject:[NSString stringWithFormat:@"女"]];
+        }else{
+            [ary addObject:[NSString stringWithFormat:@" "]];
         }
-        
     }
+    
     if ([UIUtils isBlankString:[NSString stringWithFormat:@"%@",user.birthday]]) {
         [ary addObject:[NSString stringWithFormat:@""]];
         
     }else{
         [ary addObject:[NSString stringWithFormat:@"%@",user.birthday]];
     }
+    
     if ([UIUtils isBlankString:[NSString stringWithFormat:@"%@",user.sign]]) {
         [ary addObject:[NSString stringWithFormat:@""]];
         

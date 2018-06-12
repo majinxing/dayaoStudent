@@ -246,6 +246,7 @@ static dispatch_once_t onceToken;
     UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
     
     NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",user.userName],@"name",[NSString stringWithFormat:@"%@",user.userHeadImageId],@"headImage", nil];
+    
     message.ext = dict;
     
     [[EMClient sharedClient].chatManager sendMessage:message progress:^(int progress) {

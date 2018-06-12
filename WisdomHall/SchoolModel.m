@@ -13,5 +13,6 @@
     _schoolName = [dict objectForKey:@"name"];
     _schoolId = [dict objectForKey:@"id"];
     _schoolHost = [dict objectForKey:@"host"];
+    _allowregister = [dict objectForKey:@"allowregister"];
 }
 @end

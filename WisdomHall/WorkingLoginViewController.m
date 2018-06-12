@@ -18,6 +18,7 @@
 #import "RegisterViewController.h"
 #import "SchoolModel.h"
 #import "ForgotPasswordViewController.h"
+#import "RegisterViewController.h"
 
 #define AnimateTime 0.25f   // 下拉动画时间
 
@@ -33,6 +34,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *password;
 @property (strong, nonatomic) IBOutlet UIButton *selectSchoolBtn;
 @property (strong, nonatomic) IBOutlet UIImageView *selectImage;
+@property (strong, nonatomic) IBOutlet UIButton *registerBtn;
 
 @property (nonatomic,strong)BindPhone * bindPhone;
 @property (nonatomic,copy)NSString * phone;
@@ -74,6 +76,8 @@
     _password.textColor = [UIColor blackColor];
 
     [self setTableView];
+    
+    [_registerBtn setHidden:YES];
     // Do any additional setup after loading the view from its nib.
 }
 -(void)setTableView{
@@ -122,7 +126,9 @@
 }
 - (IBAction)login:(id)sender {
     [self showHudInView:self.view hint:NSLocalizedString(@"正在登陆请稍后……", @"Load data...")];
+    
     _user = [[Appsetting sharedInstance] getUsetInfo];
+    
     if ([UIUtils isBlankString:_user.host]) {
         [UIUtils showInfoMessage:@"请先选择学校" withVC:self];
         [self hideHud];
@@ -199,6 +205,16 @@
 - (IBAction)phoneLogin:(id)sender {
     TheLoginViewController * login = [[TheLoginViewController alloc] init];
     [self.navigationController pushViewController:login animated:YES];
+}
+- (IBAction)registerBtn:(id)sender {
+    _user = [[Appsetting sharedInstance] getUsetInfo];
+
+    RegisterViewController * registerVC = [[RegisterViewController alloc] init];
+    UIBarButtonItem * backButtonItem = [[UIBarButtonItem alloc] init];
+    backButtonItem.title = @"取消";
+    registerVC.schoolId = _user.school;
+    self.navigationItem.backBarButtonItem = backButtonItem;
+    [self.navigationController pushViewController:registerVC animated:YES];
 }
 - (IBAction)forgetPassword:(id)sender {
     ForgotPasswordViewController * forgetVC = [[ForgotPasswordViewController alloc] init];
@@ -326,15 +342,22 @@
     SchoolModel * s = _titleAry[indexPath.row];
     
     [_selectSchoolBtn setTitle:s.schoolName forState:UIControlStateNormal];
-//    if (indexPath.row == 0) {
-//        s.schoolHost = @"http://192.168.1.100:8080";
-//    }else if (indexPath.row == 1){
-//        s.schoolHost = @"http://api.dayaokeji.com";
-//    }
     
+    if (indexPath.row == 1) {
+        s.schoolHost = @"http://192.168.1.81:8080";
+    }else if (indexPath.row == 0){
+        s.schoolHost = @"http://api.dayaokeji.com";
+    }
+//
     [[Appsetting sharedInstance] saveUserSchool:s];
     
     [self hideDropDown];
+    
+    if ([[NSString stringWithFormat:@"%@",s.allowregister] isEqualToString:@"true"]||[[NSString stringWithFormat:@"%@",s.allowregister] isEqualToString:@"1"]) {
+        [_registerBtn setHidden:NO];
+    }else{
+        [_registerBtn setHidden:YES];
+    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 40;

@@ -379,6 +379,8 @@
 //顶部滑框选择试题
 -(void)titleClick:(UIButton *)btn{
     
+     _textTemp = 0;
+    
     _temp = (int)btn.tag;
     
     [self.view endEditing:YES];
