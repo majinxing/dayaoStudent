@@ -37,6 +37,38 @@
 
 #import <CoreLocation/CoreLocation.h>
 
+
+//#ifdef TEST_ROOM
+#import "RoomLoginViewController.h"
+//#elif defined TEST_GROUP
+#import "GroupLoginViewController.h"
+//#elif defined TEST_CUSTOMER
+#import "CustomerViewController.h"
+#import "CustomerManager.h"
+//#else
+#import "MainViewController.h"
+//#endif
+
+//#import <gobelieve/IMService.h>
+#import "IMService.h"
+//#import <gobelieve/PeerMessageHandler.h>
+#import "PeerMessageHandler.h"
+//#import <gobelieve/GroupMessageHandler.h>
+#import "GroupMessageHandler.h"
+//#import <gobelieve/CustomerMessageHandler.h>
+#import "CustomerMessageHandler.h"
+//#import <gobelieve/CustomerMessageDB.h>
+#import "CustomerMessageDB.h"
+//#import <gobelieve/CustomerOutbox.h>
+#import "CustomerOutbox.h"
+//#import <gobelieve/IMHttpAPI.H>
+#import "IMHttpAPI.h"
+
+#include <netdb.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#import "IMTool.h"
+
 @interface AppDelegate ()<EMCallManagerDelegate,EMChatManagerDelegate,EMChatroomManagerDelegate,JPUSHRegisterDelegate>
 @property(nonatomic,strong)ChatHelper * chat;
 @property (nonatomic,strong)FMDatabase * db;
@@ -45,6 +77,9 @@
 @property (nonatomic,strong) NSTimer *  myTimer;
 
 @property(nonatomic,strong)CLLocationManager * locationManager;
+
+@property(nonatomic) MainViewController *mainViewController;
+
 @end
 
 @implementation AppDelegate
@@ -54,6 +89,16 @@
     //移除消息回调
     [[EMClient sharedClient].chatManager removeDelegate:self];
 }
+
++(AppDelegate*)instance {
+    return (AppDelegate*)[UIApplication sharedApplication].delegate;
+}
+-(NSString*)getDocumentPath {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    return basePath;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [Bugly startWithAppId:@"64f1536e43"];//用于崩溃统计
@@ -118,6 +163,7 @@
      selector:@selector(setColor)
      name:ThemeColorChangeNotification object:nil];
     
+    [self IM:application];
     //可以通过以下方式禁用
     
     if (@available(iOS 11.0, *)) {
@@ -126,7 +172,72 @@
         UITableView.appearance.estimatedSectionFooterHeight = 0;
         UITableView.appearance.estimatedSectionHeaderHeight = 0;
     }
+    [IMTool IMLogin:@"11"];
+    
     return YES;
+    
+    
+}
+-(void)IM:(UIApplication *)application{
+    //app可以单独部署服务器，给予第三方应用更多的灵活性
+    [IMHttpAPI instance].apiURL = @"http://192.168.1.100:8010/course-im";
+    [IMService instance].host = @"192.168.1.100";
+    //    //app可以单独部署服务器，给予第三方应用更多的灵活性
+    //    [IMHttpAPI instance].apiURL = @"http://api.gobelieve.io";
+    //    [IMService instance].host = @"imnode2.gobelieve.io";
+    
+    //
+    
+#if TARGET_IPHONE_SIMULATOR
+    NSString *deviceID = @"7C8A8F5B-E5F4-4797-8758-05367D2A4D61";
+#else
+    NSString *deviceID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+#endif
+    [IMService instance].deviceID = deviceID;
+    NSLog(@"device id:%@", deviceID);
+    
+    [IMService instance].peerMessageHandler = [PeerMessageHandler instance];
+    [IMService instance].groupMessageHandler = [GroupMessageHandler instance];
+    [IMService instance].customerMessageHandler = [CustomerMessageHandler instance];
+    [[IMService instance] startRechabilityNotifier];
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert
+                                                                                         | UIUserNotificationTypeBadge
+                                                                                         | UIUserNotificationTypeSound) categories:nil];
+    [application registerUserNotificationSettings:settings];
+    
+    
+    [self refreshHost];
+}
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    
+    /// Required - 注册 DeviceToken
+    [JPUSHService registerDeviceToken:deviceToken];
+    
+    NSString* newToken = [deviceToken description];
+    newToken = [newToken stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    newToken = [newToken stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    NSLog(@"device token is: %@:%@", deviceToken, newToken);
+    
+    self.deviceToken = deviceToken;
+    
+#ifdef TEST_ROOM
+    
+#elif defined TEST_GROUP
+    self.mainViewController.deviceToken = newToken;
+#elif defined TEST_CUSTOMER
+    if ([CustomerManager instance].clientID > 0) {
+        [[CustomerManager instance] bindDeviceToken:deviceToken  completion:^(NSError *error) {
+            if (error) {
+                NSLog(@"bind device token fail");
+            } else {
+                NSLog(@"bind device token success");
+            }
+        }];
+    }
+#else
+    self.mainViewController.deviceToken = newToken;
+#endif
 }
 -(void)setColor{
     DYTabBarViewController * tab = [[DYTabBarViewController alloc] init];
@@ -137,10 +248,7 @@
     DYTabBarViewController * tab = [[DYTabBarViewController alloc] init];
     self.window.rootViewController = tab;
 }
--(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
-    /// Required - 注册 DeviceToken
-    [JPUSHService registerDeviceToken:deviceToken];
-}
+
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     //Optional
@@ -180,7 +288,8 @@
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
-    
+    [[IMService instance] enterBackground];
+
     [_chat getOut];
     
     [[CollectionHeadView sharedInstance] onceSetNil];
@@ -277,6 +386,11 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    
+    [[IMService instance] enterForeground];
+    
+    [self refreshHost];
+    
     [[EMClient sharedClient] applicationWillEnterForeground:application];
     
     [_chat getOut];
@@ -408,5 +522,66 @@ fetchCompletionHandler:
                                      errorDescription:NULL];
     return str;
 }
+-(void)refreshHost {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        NSLog(@"refresh host ip...");
+        
+        for (int i = 0; i < 10; i++) {
+            NSString *host = @"imnode.gobelieve.io";
+            NSString *ip = [self resolveIP:host];
+            
+            NSString *apiHost = @"api.gobelieve.io";
+            NSString *apiIP = [self resolveIP:apiHost];
+            
+            
+            NSLog(@"host:%@ ip:%@", host, ip);
+            NSLog(@"api host:%@ ip:%@", apiHost, apiIP);
+            
+            if (ip.length == 0 || apiIP.length == 0) {
+                continue;
+            } else {
+                break;
+            }
+        }
+    });
+}
 
+-(NSString*)IP2String:(struct in_addr)addr {
+    char buf[64] = {0};
+    const char *p = inet_ntop(AF_INET, &addr, buf, 64);
+    if (p) {
+        return [NSString stringWithUTF8String:p];
+    }
+    return nil;
+    
+}
+
+-(NSString*)resolveIP:(NSString*)host {
+    struct addrinfo hints;
+    struct addrinfo *result, *rp;
+    int s;
+    
+    char buf[32];
+    snprintf(buf, 32, "%d", 0);
+    
+    memset(&hints, 0, sizeof(struct addrinfo));
+    hints.ai_family = AF_INET;
+    hints.ai_socktype = SOCK_STREAM;
+    hints.ai_protocol = IPPROTO_TCP;
+    hints.ai_flags = 0;
+    
+    s = getaddrinfo([host UTF8String], buf, &hints, &result);
+    if (s != 0) {
+        NSLog(@"get addr info error:%s", gai_strerror(s));
+        return nil;
+    }
+    NSString *ip = nil;
+    rp = result;
+    if (rp != NULL) {
+        struct sockaddr_in *addr = (struct sockaddr_in*)rp->ai_addr;
+        ip = [self IP2String:addr->sin_addr];
+    }
+    freeaddrinfo(result);
+    return ip;
+}
 @end

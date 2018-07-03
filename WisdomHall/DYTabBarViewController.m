@@ -23,6 +23,9 @@
 
 #import "AFNetworking/AFNetworking.h"
 
+#import "MainViewController.h"
+#import "MessageListViewController.h"
+#import "GroupLoginViewController.h"
 static dispatch_once_t predicate;
 
 @interface DYTabBarViewController ()<UIAlertViewDelegate>
@@ -51,7 +54,7 @@ static dispatch_once_t predicate;
     
     [self addChildViewControllerWithClassname:[SignInViewController description] imagename:@"课程(1)" title:@"课程" withSelectImageName:@"课程"];
     
-    [self addChildViewControllerWithClassname:[TheMessageViewController description] imagename:@"消息(1)" title:@"消息" withSelectImageName:@"消息"];
+    [self addChildViewControllerWithClassname:[MessageListViewController description] imagename:@"消息(1)" title:@"消息" withSelectImageName:@"消息"];
     
     [self addChildViewControllerWithClassname:[PersonalCenterViewController description] imagename:@"我的(1)" title:@"我的" withSelectImageName:@"我的"];
     

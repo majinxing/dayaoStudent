@@ -965,16 +965,18 @@
                 if ([UIUtils returnMckIsHave:_c.mck withAccept:loc_array]) {
                     [self sendSignInfo];
                 }else{
-                    [UIUtils showInfoMessage:@"二维码有误，请重新扫描或者连接指定WiFi签到" withVC:self];
+                    NSString *string1 = [loc_array componentsJoinedByString:@","];
+                    NSString *string2 = [_c.mck componentsJoinedByString:@","];
+                    [UIUtils showInfoMessage:[NSString stringWithFormat:@"二维码有误，请重新扫描或者连接指定WiFi签到(扫描的mac地址为%@，录入的mac为%@)",string1,string2] withVC:self];
                 }
             }else{
-                [UIUtils showInfoMessage:@"二维码失效，请重新扫描或者连接指定WiFi签到" withVC:self];
+                [UIUtils showInfoMessage:[NSString stringWithFormat:@"二维码失效，请重新扫描或者连接指定WiFi签到(扫码时间为%@，二维码生成时间为%@)",dateTime] withVC:self];
             }
         }else{
-            [UIUtils showInfoMessage:@"二维码无效，请重新扫描或者连接指定WiFi签到" withVC:self];
+            [UIUtils showInfoMessage:@"二维码无效，请重新扫描或者连接指定WiFi签到（MD5异常）" withVC:self];
         }
     }else{
-        [UIUtils showInfoMessage:@"二维码无效，请重新扫描或者连接指定WiFi签到" withVC:self];
+        [UIUtils showInfoMessage:@"二维码无效，请重新扫描或者连接指定WiFi签到（二维码解析内容为空）" withVC:self];
     }
     
 }
