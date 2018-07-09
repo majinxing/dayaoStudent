@@ -10,6 +10,16 @@
 #import "DYHeader.h"
 
 @implementation ClassModel
+-(instancetype)init{
+    self = [super init];
+    if (self) {
+        _signAry = [NSMutableArray arrayWithCapacity:1];
+        _signNo = [NSMutableArray arrayWithCapacity:1];
+        _n = 0;
+        _m = 0;
+    }
+    return self;
+}
 -(void)setInfoWithDict:(NSDictionary *)dict{
     
     

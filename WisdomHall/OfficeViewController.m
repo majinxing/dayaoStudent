@@ -18,6 +18,7 @@
 #import "CollectionHeadView.h"
 #import "NoticeDetailsViewController.h"
 #import "StatisticalSelfUIViewController.h"
+#import "SignInViewController.h"
 
 @interface OfficeViewController ()<UITableViewDelegate,UITableViewDataSource,OfficeTableViewCellDelegate>
 @property (nonatomic,strong)UITableView * tableView;

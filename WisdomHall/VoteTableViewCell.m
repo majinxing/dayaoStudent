@@ -24,17 +24,32 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     [self addContentView];
+    
     // Initialization code
 }
 -(void)addContentView{
     _voteState.layer.masksToBounds = YES;
     _voteState.layer.cornerRadius = 10;
     
+    _voteState.font = [UIFont fontWithName:@"PingFangSC-Semibold" size:12];
+    
+    _voteState.textColor = [UIColor colorWithRed:0/255.0 green:118/255.0 blue:253/255.0 alpha:1/1.0];
+    
+    _voteTitle.font =  [UIFont fontWithName:@"PingFangSC-Regular" size:14];
+    
+    _voteTitle.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1/1.0];
+    
+    _voteCreateTime.font = [UIFont fontWithName:@"PingFangSC-Regular" size:12];
+    _voteCreateTime.textColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1/1.0];
 }
 -(void)voteTitle:(NSString *)title withCreateTime:(NSString *)time withState:(NSString *)state withIndex:(int)n withVoteStatus:(NSString *)voteStatus{
-    _voteTitle.text = [NSString stringWithFormat:@"投票主题：%@",title];
-    _voteCreateTime.text = [NSString stringWithFormat:@"创建时间：%@",time];
+    
+    _voteTitle.text = [NSString stringWithFormat:@"%@",title];
+    
+    _voteCreateTime.text = [NSString stringWithFormat:@"%@",time];
+    
     _voteState.text = [NSString stringWithFormat:@"%@:%@",voteStatus,state];
+    
     _temp = n;
     
 }

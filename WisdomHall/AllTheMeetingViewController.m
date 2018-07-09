@@ -62,6 +62,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(headerRereshing) name:@"UpdateTheMeetingPage" object:nil];
     
+    self.view.backgroundColor =  [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1/1.0];
     // Do any additional setup after loading the view from its nib.
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
@@ -80,20 +81,13 @@ static NSString * cellIdentifier = @"cellIdentifier";
     
     //    UIBarButtonItem * selection = [[UIBarButtonItem alloc] initWithTitle:@"搜索" style:UIBarButtonItemStylePlain target:self action:@selector(selectionBtnPressed)];
     //    self.navigationItem.leftBarButtonItem = selection;
-    UIBarButtonItem * createMeeting = [[UIBarButtonItem alloc] initWithTitle:@"更多" style:UIBarButtonItemStylePlain target:self action:@selector(createMeeting)];
+    UIBarButtonItem * createMeeting = [[UIBarButtonItem alloc] initWithTitle:@"..." style:UIBarButtonItemStylePlain target:self action:@selector(createMeeting)];
     self.navigationItem.rightBarButtonItem = createMeeting;
 }
 -(void)createMeeting{
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:nil preferredStyle:  UIAlertControllerStyleActionSheet];
-//    //分别按顺序放入每个按钮；
-//    [alert addAction:[UIAlertAction actionWithTitle:@"创建会议" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//        //点击按钮的响应事件；
-//        CreateMeetingViewController * c = [[CreateMeetingViewController alloc] init];
-//        self.hidesBottomBarWhenPushed = YES;
-//        [self.navigationController pushViewController:c animated:YES];
-//        //        self.hidesBottomBarWhenPushed = NO;
-//    }]];
+
     
     [alert addAction:[UIAlertAction actionWithTitle:@"加入会议" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if (_join==nil) {
@@ -120,9 +114,9 @@ static NSString * cellIdentifier = @"cellIdentifier";
     SelectMeetingOrClassViewController * s = [[SelectMeetingOrClassViewController alloc] init];
     self.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:s animated:YES];
-    self.hidesBottomBarWhenPushed = NO;
-    UIBarButtonItem * selection = [[UIBarButtonItem alloc] initWithTitle:@"搜索" style:UIBarButtonItemStylePlain target:self action:@selector(selectionBtnPressed)];
-    self.navigationItem.leftBarButtonItem = selection;
+//    self.hidesBottomBarWhenPushed = NO;
+//    UIBarButtonItem * selection = [[UIBarButtonItem alloc] initWithTitle:@"搜索" style:UIBarButtonItemStylePlain target:self action:@selector(selectionBtnPressed)];
+//    self.navigationItem.leftBarButtonItem = selection;
 
 }
 -(void)addAlterView{

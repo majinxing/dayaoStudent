@@ -11,9 +11,13 @@
 #import "DYHeader.h"
 #import "ShareButton.h"
 #import "UIImageView+WebCache.h"
+#import "DetailsButton.h"
+#import "peopleListView.h"
 
-#define columns 4
+#define columns 3
 #define buttonWH 60
+#define buttonW 120
+#define buttonH 60
 #define marginHeight 25
 
 @interface MeetingTableViewCell()
@@ -25,9 +29,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *singNumber;
 @property (weak, nonatomic) IBOutlet UIButton *signBtn;
 @property (weak, nonatomic) IBOutlet UIButton *code;
+@property (strong, nonatomic) IBOutlet UILabel *meetAttention;
 @property (strong, nonatomic) IBOutlet UIImageView *teacherPicture;
 @property (strong,nonatomic) UIImageView * signCode;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *classImageWide;
+@property (strong, nonatomic) IBOutlet peopleListView *peopleListView;
+@property (strong, nonatomic) IBOutlet UILabel *peopleNum;
+
 
 @end
 @implementation MeetingTableViewCell
@@ -38,6 +46,36 @@
     
     _signCode = [[UIImageView alloc] init];
     
+    _meetName.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
+    _meetName.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1/1.0];
+    
+    _meetTime.font = [UIFont fontWithName:@"PingFangSC-Regular" size:12];
+    _meetTime.textColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1/1.0];
+
+    _meetAttention.font = [UIFont fontWithName:@"PingFangSC-Regular" size:12];
+    _meetAttention.textColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1/1.0];
+    
+    _meetPlace.font = [UIFont fontWithName:@"PingFangSC-Thin" size:13];
+    _meetPlace.textColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1/1.0];
+    
+    _meetHost.font =  [UIFont fontWithName:@"PingFangSC-Regular" size:14];
+    _meetHost.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
+    _meetHost.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1/1.0];
+    
+    _meetCode.font =  [UIFont fontWithName:@"PingFangSC-Regular" size:14];
+    _meetCode.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
+    _meetCode.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1/1.0];
+    
+    _code.backgroundColor = [UIColor whiteColor];
+    _code.layer.masksToBounds = YES;
+    _code.layer.cornerRadius = 20;
+    _signBtn.layer.masksToBounds = YES;
+    _signBtn.layer.cornerRadius = 20;
+    
+    _peopleNum.layer.masksToBounds = YES;
+    _peopleNum.layer.cornerRadius = 8;
+    _peopleNum.backgroundColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1/1.0];
+    _peopleNum.textColor = [UIColor whiteColor];
     // Initialization code
 }
 -(void)addFirstContentView:(MeetingModel *)meetModel{
@@ -51,9 +89,19 @@
     }else{
         _meetHost.text = [NSString stringWithFormat:@"创建者：%@",meetModel.meetingHost];
     }
-    _meetTime.text = [NSString stringWithFormat:@"时间：%@",meetModel.meetingTime];
+    NSMutableString *strUrl = [NSMutableString stringWithFormat:@"%@",meetModel.meetingTime];
+    
+    
+    [strUrl deleteCharactersInRange:NSMakeRange(0,5)];
+    
+    [strUrl deleteCharactersInRange:NSMakeRange(strUrl.length-3,3)];
+
+    _meetTime.text = [NSString stringWithFormat:@"%@",strUrl];
+    
     _meetCode.text = [NSString stringWithFormat:@"邀请码：%@",meetModel.meetingId];
+    
     _meetPlace.text = [NSString stringWithFormat:@"地址：%@",meetModel.meetingPlace];
+    
     _teacherPicture.image = [UIImage imageNamed:@"meet"];
     
     if (![UIUtils isBlankString:[NSString stringWithFormat:@"%@",meetModel.signStatus]]) {
@@ -63,6 +111,13 @@
             [self.contentView addSubview:_signCode];
         }
     }
+    NSMutableArray * ary = [NSMutableArray arrayWithArray:meetModel.signAry];
+    
+    [ary addObjectsFromArray:meetModel.signNo];
+    
+    [_peopleListView addContentView:ary];
+    
+    _peopleNum.text = [NSString stringWithFormat:@"%ld人",meetModel.signAry.count];
 }
 -(void)addFirstCOntentViewWithClassModel:(ClassModel *)classModel{
     _classImageWide.constant -= (APPLICATION_WIDTH/2-40);
@@ -89,7 +144,9 @@
             [self.contentView addSubview:_signCode];
         }
     }
+    _peopleNum.text = [NSString stringWithFormat:@"%d人",classModel.n+classModel.m];
     
+    [_peopleListView addContentView:classModel.signAry];
 
 }
 
@@ -117,7 +174,7 @@
                   ];
     }
     //水平间距
-    int marginWidth = (APPLICATION_WIDTH - buttonWH * columns) / (columns + 1);
+    int marginWidth = (APPLICATION_WIDTH - buttonW * columns) / (columns + 1);
     //起始XY坐标
     int oneX = marginWidth;
     int oneY = marginHeight;
@@ -129,10 +186,10 @@
         //列
         int column = i % columns;
         
-        int x = oneX + (buttonWH + marginWidth) * column;
-        int y = oneY + (buttonWH + marginWidth) * row;
+        int x = oneX + (buttonW + marginWidth) * column;
+        int y = oneY + (buttonH + marginWidth) * row;
         
-        ShareButton * button = [[ShareButton alloc] initWithFrame:CGRectMake(x, y, buttonWH, buttonWH) andType:array[i]];
+        DetailsButton * button = [[DetailsButton alloc] initWithFrame:CGRectMake(x, y, buttonW, buttonH) andType:array[i]];
         [button addTarget:self action:@selector(shareButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:button];
     }
@@ -149,7 +206,7 @@
                               ];
     
     //水平间距
-    int marginWidth = (APPLICATION_WIDTH - buttonWH * columns) / (columns + 1);
+    int marginWidth = (APPLICATION_WIDTH - buttonW * columns) / (columns + 1);
     //起始XY坐标
     int oneX = marginWidth;
     int oneY = marginHeight;
@@ -161,10 +218,11 @@
         //列
         int column = i % columns;
         
-        int x = oneX + (buttonWH + marginWidth) * column;
-        int y = oneY + (buttonWH + marginWidth) * row;
+        int x = oneX + (buttonW + marginWidth) * column;
+        int y = oneY + (buttonH + marginWidth) * row;
         
-        ShareButton * button = [[ShareButton alloc] initWithFrame:CGRectMake(x, y, buttonWH, buttonWH) andType:array[i]];
+        DetailsButton * button = [[DetailsButton alloc] initWithFrame:CGRectMake(x, y, buttonW, buttonH) andType:array[i]];
+        
         [button addTarget:self action:@selector(shareButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:button];
     }

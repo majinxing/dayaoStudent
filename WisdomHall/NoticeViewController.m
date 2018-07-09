@@ -39,7 +39,7 @@
     
 //    self.navigationController.navigationBarHidden = NO; //设置隐藏
     
-    [self.navigationController setNavigationBarHidden:YES];
+//    [self.navigationController setNavigationBarHidden:YES];
 
 }
 -(void)addTableView{

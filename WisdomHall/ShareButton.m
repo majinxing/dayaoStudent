@@ -18,7 +18,7 @@
     if (self)
     {
         [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
-        [self.titleLabel setFont:[UIFont systemFontOfSize:12]];
+        [self.titleLabel setFont:[UIFont systemFontOfSize:10]];
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         
         [self setContentWithType:type];
@@ -175,12 +175,12 @@
 
 - (CGRect)imageRectForContentRect:(CGRect)contentRect
 {
-    return CGRectMake((self.bounds.size.width - IMAGE_WH) / 2, 0, IMAGE_WH, IMAGE_WH);
+    return CGRectMake((self.bounds.size.width - IMAGE_WH) / 2, 10, IMAGE_WH, IMAGE_WH);
 }
 
 - (CGRect)titleRectForContentRect:(CGRect)contentRect
 {
-    return CGRectMake(0, IMAGE_WH, self.bounds.size.width, self.bounds.size.height - IMAGE_WH);
+    return CGRectMake(0, IMAGE_WH+5, self.bounds.size.width, self.bounds.size.height - IMAGE_WH);
 }
 
 

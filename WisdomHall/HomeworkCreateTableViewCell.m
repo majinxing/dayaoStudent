@@ -45,6 +45,8 @@
         UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(btn.frame.origin.x, btn.frame.origin.y, btn.frame.size.width, btn.frame.size.height)];
         [_imageAry addObject:image];
     }
+    _textFile.font = [UIFont fontWithName:@"PingFangSC-Regular" size:12];
+    _textFile.textColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1/1.0];
     // Initialization code
 }
 -(void)textViewDidChange:(UITextView *)textView{

@@ -15,8 +15,10 @@
 -(void)changeHeadImageDelegate:(UIButton *)btn;
 @end
 @interface PersonalDataTableViewCell : UITableViewCell
+
 @property (strong, nonatomic) IBOutlet UILabel *dataLabel;
 @property (weak, nonatomic) IBOutlet UITextField *textFilePh;
+
 @property (nonatomic,weak)id<PersonalDataTableViewCellDelegate>delegate;
 @property (nonatomic,strong)NSArray * placeholder;
 @property (nonatomic,strong)NSArray * labelAry;

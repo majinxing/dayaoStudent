@@ -26,6 +26,9 @@
 #import "MainViewController.h"
 #import "MessageListViewController.h"
 #import "GroupLoginViewController.h"
+
+#import "HomePageViewController.h"
+
 static dispatch_once_t predicate;
 
 @interface DYTabBarViewController ()<UIAlertViewDelegate>
@@ -50,9 +53,11 @@ static dispatch_once_t predicate;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self addChildViewControllerWithClassname:[OfficeViewController description] imagename:@"办公_normal" title:@"首页" withSelectImageName:@"办公"];
-    
-    [self addChildViewControllerWithClassname:[SignInViewController description] imagename:@"课程(1)" title:@"课程" withSelectImageName:@"课程"];
+//    [self addChildViewControllerWithClassname:[OfficeViewController description] imagename:@"办公_normal" title:@"首页" withSelectImageName:@"办公"];
+//    HomePageViewController
+    [self addChildViewControllerWithClassname:[HomePageViewController description] imagename:@"办公_normal" title:@"首页" withSelectImageName:@"办公"];
+
+//    [self addChildViewControllerWithClassname:[SignInViewController description] imagename:@"课程(1)" title:@"课程" withSelectImageName:@"课程"];
     
     [self addChildViewControllerWithClassname:[MessageListViewController description] imagename:@"消息(1)" title:@"消息" withSelectImageName:@"消息"];
     

@@ -23,6 +23,8 @@
     [super awakeFromNib];
     UIImage * image = [[Appsetting sharedInstance] grayscale:[UIImage imageNamed:@"作业"]];
     _homeworkImage.image = image;
+    _timeLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:12];
+    _timeLabel.textColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1/1.0];
     // Initialization code
 }
 -(void)addContentViewWith:(Homework *)homework{
@@ -34,7 +36,7 @@
     if (![UIUtils isBlankString:[NSString stringWithFormat:@"%@",homework.endTime]]) {
         NSArray * ary = [[NSString stringWithFormat:@"%@",homework.endTime] componentsSeparatedByString:@" "];
         if (ary.count>0) {
-            _timeLabel.text = [NSString stringWithFormat:@"截止时间：%@",ary[0]];
+            _timeLabel.text = [NSString stringWithFormat:@"%@",ary[0]];
         }
     }
     

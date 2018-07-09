@@ -40,6 +40,8 @@
 
 #import "PictureQuizViewController.h"
 
+#import "TestAllViewController.h"
+
 @interface CourseDetailsViewController ()<UIActionSheetDelegate,ShareViewDelegate,UIAlertViewDelegate,UITableViewDelegate,UITableViewDataSource,MeetingTableViewCellDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIDocumentInteractionControllerDelegate,AlterViewDelegate>
 
 @property (nonatomic,strong) InteractiveView * interactiveView;
@@ -134,9 +136,17 @@
     [[NetworkRequest sharedInstance] GET:QueryCourseMemBer dict:dict succeed:^(id data) {
         //        NSLog(@"成功%@",data);
         NSArray *ary = [data objectForKey:@"body"];
+        
+        [_c.signAry removeAllObjects];
+        
         for (int i = 0; i<ary.count;i++) {
+            
             SignPeople * s = [[SignPeople alloc] init];
+            
             [s setInfoWithDict:ary[i]];
+        
+            [_c.signAry addObject:s];
+            
             if ([[NSString stringWithFormat:@"%@",s.signStatus] isEqualToString:@"1"]||[[NSString stringWithFormat:@"%@",s.signStatus] isEqualToString:@"3"]) {
                 _m = _m + 1;
                 [_notSignAry addObject:s];
@@ -168,10 +178,10 @@
             }
             [_signAry addObject:s];
         }
-        if ([[NSString stringWithFormat:@"%@",_c.teacherWorkNo] isEqualToString:[NSString stringWithFormat:@"%@",_user.studentId]]) {
+//        if ([[NSString stringWithFormat:@"%@",_c.teacherWorkNo] isEqualToString:[NSString stringWithFormat:@"%@",_user.studentId]]) {
             _c.n = (int)_n;
             _c.m = (int)_m;
-        }
+//        }
         [self hideHud];
         [_tableView reloadData];
     } failure:^(NSError *error) {
@@ -451,7 +461,7 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"MeetingTableViewCell" owner:self options:nil] objectAtIndex:0];
         }
         [cell addFirstCOntentViewWithClassModel:_c];
-    }else if (indexPath.section == 1){
+    }else if (indexPath.section == 2){
         if ([[NSString stringWithFormat:@"%@",_user.peopleId] isEqualToString:[NSString stringWithFormat:@"%@",_c.teacherId]]) {
             cell = [tableView dequeueReusableCellWithIdentifier:@"MeetingTableViewCellSecond"];
             if (!cell) {
@@ -466,7 +476,7 @@
             [cell addThirdContentViewWithClassModel:_c isEnable:_isEnable];
         }
         
-    }else if (indexPath.section==2){
+    }else if (indexPath.section==1){
         cell = [tableView dequeueReusableCellWithIdentifier:@"MeetingTableViewCellFourth"];
         if (!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"MeetingTableViewCell" owner:self options:nil] objectAtIndex:3];
@@ -482,31 +492,31 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section==0) {
-        return 150;
+        return 300;
     }else if (indexPath.section==1){
-        return 60;
+        return 220;
     }else if (indexPath.section==2){
-        return 200;
+        return 60;
     }
     return 0;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 20;
 }
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView * view = [[UIView alloc] init];
-    view.backgroundColor = RGBA_COLOR(231, 231, 231, 1);
-    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(10, 2, 80, 20)];
-    label.font = [UIFont systemFontOfSize:14];
-    label.textColor = [UIColor blackColor];
-    [view addSubview:label];
-    if (section == 1) {
-        label.text = @"签到";
-    }else if(section == 2){
-        label.text = @"互动";
-    }
-    return view;
-}
+//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    UIView * view = [[UIView alloc] init];
+//    view.backgroundColor = RGBA_COLOR(231, 231, 231, 1);
+//    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(10, 2, 80, 20)];
+//    label.font = [UIFont systemFontOfSize:14];
+//    label.textColor = [UIColor blackColor];
+//    [view addSubview:label];
+//    if (section == 1) {
+//        label.text = @"签到";
+//    }else if(section == 2){
+//        label.text = @"互动";
+//    }
+//    return view;
+//}
 #pragma mark MeetingCellDelegate
 -(void)shareButtonClickedDelegate:(NSString *)platform{
     
@@ -568,7 +578,7 @@
     else if ([platform isEqualToString:InteractionType_Test]){
         NSLog(@"测试");
         self.hidesBottomBarWhenPushed = YES;
-        AllTestViewController * textVC = [[AllTestViewController alloc] init];
+        TestAllViewController * textVC = [[TestAllViewController alloc] init];
         textVC.classModel = _c;
         [self.navigationController pushViewController:textVC animated:YES];
     }else if ([platform isEqualToString:InteractionType_Discuss]){

@@ -39,6 +39,7 @@ static dispatch_once_t onceToken;
     return sharedDYTabBarViewControllerInstance;
 }
 -(void)getData{
+    //轮播
     NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"start",@"5",@"length", nil];
     
     [[NetworkRequest sharedInstance] GET:QueryNotice dict:dict succeed:^(id data) {

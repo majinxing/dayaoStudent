@@ -67,7 +67,7 @@
 }
 -(void)addTableView{
     
-    _labelAry = [[NSMutableArray alloc] initWithObjects:@"姓名",@"学号",@"学校",@"院系",@"专业",@"电话",@"邮箱",@"住址",@"性别",@"生日",@"个性签名", nil];
+    _labelAry = [[NSMutableArray alloc] initWithObjects:@"姓名",@"学号",@"学校",@"院系",@"专业",@"电话",@"邮箱",@"住址",@"性别",@"生日",@"签名", nil];
     _textAry = [NSMutableArray arrayWithCapacity:1];
     for (int i = 0; i<11; i++) {
         [_textAry addObject:@""];
@@ -269,6 +269,9 @@
     [self.view endEditing:YES];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section==0) {
+        return 150;
+    }
     return 50;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

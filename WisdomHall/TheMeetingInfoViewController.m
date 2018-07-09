@@ -106,14 +106,17 @@
     [[NetworkRequest sharedInstance] GET:QueryMeetingPeople dict:dict succeed:^(id data) {
         //        NSLog(@"%@",data);
         NSArray * ary = [data objectForKey:@"body"];
+        
         [_meetingModel setSignPeopleWithNSArray:ary];
+        
         [_tableView reloadData];
+        
     } failure:^(NSError *error) {
 //        [UIUtils showInfoMessage:@"获取数据失败，请检查网络"];
     }];
 }
 -(void)addTableView{
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, APPLICATION_WIDTH, APPLICATION_HEIGHT) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, APPLICATION_WIDTH, APPLICATION_HEIGHT-64) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -277,7 +280,7 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"MeetingTableViewCell" owner:self options:nil] objectAtIndex:0];
         }
         [cell addFirstContentView:_meetingModel];
-    }else if (indexPath.section == 1){
+    }else if (indexPath.section == 2){
         if ([[NSString stringWithFormat:@"%@",_user.peopleId] isEqualToString:[NSString stringWithFormat:@"%@",_meetingModel.meetingHostId]]) {
             cell = [tableView dequeueReusableCellWithIdentifier:@"MeetingTableViewCellSecond"];
             if (!cell) {
@@ -292,7 +295,7 @@
             [cell addThirdContentView:_meetingModel isEnable:_isEnabel];
         }
         
-    }else if (indexPath.section == 2){
+    }else if (indexPath.section == 1){
         cell = [tableView dequeueReusableCellWithIdentifier:@"MeetingTableViewCellFourth"];
         if (!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"MeetingTableViewCell" owner:self options:nil] objectAtIndex:3];
@@ -308,36 +311,36 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section ==0) {
-        return 150;
+        return 320;
     }else if (indexPath.section ==1){
-        return 60;
+        return 170;
     }else if (indexPath.section == 2){
-        return 200;
+        return 60;
     }
     return 0;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section == 1) {
-        return 25;
-    }else if(section == 2){
-        return 25;
-    }
+//    if (section == 1) {
+//        return 25;
+//    }else if(section == 2){
+//        return 25;
+//    }
     return 10;
 }
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView * view = [[UIView alloc] init];
-    view.backgroundColor = RGBA_COLOR(231, 231, 231, 1);
-    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(10, 2, 80, 20)];
-    label.font = [UIFont systemFontOfSize:14];
-    label.textColor = [UIColor blackColor];
-    [view addSubview:label];
-    if (section == 1) {
-        label.text = @"签到";
-    }else if(section == 2){
-        label.text = @"互动";
-    }
-    return view;
-}
+//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    UIView * view = [[UIView alloc] init];
+//    view.backgroundColor = RGBA_COLOR(231, 231, 231, 1);
+//    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(10, 2, 80, 20)];
+//    label.font = [UIFont systemFontOfSize:14];
+//    label.textColor = [UIColor blackColor];
+//    [view addSubview:label];
+//    if (section == 1) {
+//        label.text = @"签到";
+//    }else if(section == 2){
+//        label.text = @"互动";
+//    }
+//    return view;
+//}
 #pragma mark MeetingCellDelegate
 -(void)shareButtonClickedDelegate:(NSString *)platform{
     if ([platform isEqualToString:InteractionType_Responder]){

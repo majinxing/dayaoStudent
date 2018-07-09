@@ -114,6 +114,8 @@
     }else if (string == NULL)
     {
         return YES;
+    }else if (![string isKindOfClass:[NSString class]]){
+        return YES;
     }else if ([string isEqualToString:@"(null)"]) {
         return YES;
     }else if ([string isKindOfClass:[NSNull class]]) {

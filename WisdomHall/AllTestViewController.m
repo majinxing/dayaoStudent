@@ -30,6 +30,7 @@
 @property (nonatomic,strong)ShareView * vote;
 @property (nonatomic,strong)TextModel * t;
 
+
 @end
 
 @implementation AllTestViewController
@@ -37,7 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#FAFAFA"];
     
     _userModel = [[Appsetting sharedInstance] getUsetInfo];
     
@@ -62,7 +63,6 @@
         UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"创建测试" style:UIBarButtonItemStylePlain target:self action:@selector(createText)];
         self.navigationItem.rightBarButtonItem = myButton;
     }
-    
 }
 -(void)createText{
     CreateTestViewController * c = [[CreateTestViewController alloc] init];
@@ -72,7 +72,7 @@
 }
 -(void)addTableView{
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,64, APPLICATION_WIDTH, APPLICATION_HEIGHT-64) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0, APPLICATION_WIDTH, APPLICATION_HEIGHT-64-50) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -107,8 +107,14 @@
             
             if ([text.title rangeOfString:@"【拍照问答】"].location!=NSNotFound) {
                 //  [_dataAry addObject:text];
+            }else if ([_typeText isEqualToString:@"HaveTest"]){
+                if ([text.statusName isEqualToString:@"已完成"]) {
+                    [_dataAry addObject:text];
+                }
             }else{
-                [_dataAry addObject:text];
+                if (![text.statusName isEqualToString:@"已完成"]) {
+                    [_dataAry addObject:text];
+                }
             }
         }
         [_tableView reloadData];
@@ -286,7 +292,7 @@
     return 65;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 10;
+    return 0;
 }
 
 /*

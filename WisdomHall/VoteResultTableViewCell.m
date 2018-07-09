@@ -24,31 +24,43 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    _garyView.backgroundColor = RGBA_COLOR(218, 218, 218, 1) ;
+    _garyView.backgroundColor = [UIColor colorWithHexString:@"#F1F1F1"];
     
     _redView = [[UIView alloc] init];
     
-    _redView.backgroundColor = RGBA_COLOR(96, 195, 216, 1);
+    _redView.backgroundColor = [UIColor colorWithHexString:@"#0071FD"];
     
     [_garyView addSubview:_redView];
     
+    _garyView.layer.masksToBounds = YES;
+    
+    _garyView.layer.cornerRadius = 5;
+    
+    _percentage.textColor = [UIColor colorWithRed:0/255.0 green:118/255.0 blue:253/255.0 alpha:1/1.0];
+    
+    _percentage.font = [UIFont fontWithName:@"PingFangSC-Semibold" size:14];
     // Initialization code
 }
 -(void)addContentViewWith:(VoteOption *)voteOption withAllVotes:(NSString *)allNumber withIndex:(int)n{
     
     _optionList.text = [NSString stringWithFormat:@"选项%d: %@",n,voteOption.content];
     
-    _votes.text = voteOption.count;
+//    _votes.text = voteOption.count;
     
     double a = [voteOption.count doubleValue]/[allNumber doubleValue];
     
-    CGFloat b = _garyView.frame.size.width;
+    CGFloat b = APPLICATION_WIDTH-50;
     
     
     _redView.frame = CGRectMake(0,0, a*b, 10);
  
+    _redView.layer.masksToBounds = YES;
+    
+    _redView.layer.cornerRadius = 5;
     
     _percentage.text = [NSString stringWithFormat:@"%.0f%%",a*100];
+    
+
 }
 -(void)addSecondContentView:(NSString *)n{
     _voteNumber.text = [NSString stringWithFormat:@"%@人提交",n];

@@ -327,7 +327,9 @@ static NSString * cellIdentifier = @"cellIdentifier";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CourseCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    
     cell.backgroundColor = [UIColor whiteColor];
+    
     if (indexPath.row<_meetingModelAry.count) {
         [cell setInfoForContentView:_meetingModelAry[indexPath.row]];
     }

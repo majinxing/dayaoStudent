@@ -101,7 +101,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 }
 
 -(void)addTableView{
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, APPLICATION_WIDTH, APPLICATION_HEIGHT-64-44) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, APPLICATION_WIDTH, APPLICATION_HEIGHT-64) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -281,9 +281,9 @@ static NSString *cellIdentifier = @"cellIdentifier";
     UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"加入课程" style:UIBarButtonItemStylePlain target:self action:@selector(joinCourse)];
     self.navigationItem.rightBarButtonItem = myButton;
     
-    
-    UIBarButtonItem * selection = [[UIBarButtonItem alloc] initWithTitle:@"搜索" style:UIBarButtonItemStylePlain target:self action:@selector(selectionBtnPressed)];
-    self.navigationItem.leftBarButtonItem = selection;
+//    
+//    UIBarButtonItem * selection = [[UIBarButtonItem alloc] initWithTitle:@"搜索" style:UIBarButtonItemStylePlain target:self action:@selector(selectionBtnPressed)];
+//    self.navigationItem.leftBarButtonItem = selection;
 }
 /**
  * 搜索
@@ -458,31 +458,35 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
     NSMutableArray * ary = [NSMutableArray arrayWithCapacity:1];;
     if (day.count==7) {
-        NSArray *  a = @[month,@"周一",@"周二",@"周三",@"周四",@"周五",@"周六",@"周日"];
+        NSArray *  a = @[month,@"M",@"T",@"W",@"T",@"F",@"S",@"S"];
         for (int i = 0; i<8; i++) {
             if (i == 0) {
                 [ary addObject:month];
             }else
-                [ary addObject: [NSString stringWithFormat:@"%@", [NSString stringWithFormat:@"%@\n%@",day[i-1],a[i]]]];
+                [ary addObject: [NSString stringWithFormat:@"%@", [NSString stringWithFormat:@"%@\n%@",a[i],day[i-1]]]];
         }
     }else{
-        ary = [[NSMutableArray alloc] initWithArray:@[month,@"周一",@"周二",@"周三",@"周四",@"周五",@"周六",@"周日"]];
+        ary = [[NSMutableArray alloc] initWithArray:@[month,@"M",@"T",@"W",@"T",@"F",@"S",@"S"]];
     }
     for (int i =0; i<8; i++) {
         UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(i*APPLICATION_WIDTH/8, 0, APPLICATION_WIDTH/8, 50)];
         label.backgroundColor = [UIColor clearColor];
-        label.textColor = RGBA_COLOR(57, 114, 172, 1);
+        
+        label.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1/1.0];;
+        
         label.text = ary[i];
-        label.font = [UIFont systemFontOfSize:14];
+        label.font = [UIFont systemFontOfSize:12];
         label.textAlignment = NSTextAlignmentCenter;
         label.numberOfLines = 0;
         [view addSubview:label];
         UIView * v = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label.frame)-1, 0, 1, 50)];
-        v.backgroundColor = RGBA_COLOR(184, 216, 248, 1);
+        
+        v.backgroundColor = RGBA_COLOR(241, 241, 241, 1);
+        
         [view addSubview:v];
     }
     UIView * v = [[UIView alloc] initWithFrame:CGRectMake(0, 49, APPLICATION_WIDTH, 1)];
-    v.backgroundColor = RGBA_COLOR(184, 216, 248, 1);
+    v.backgroundColor = RGBA_COLOR(241, 241, 241, 1);
     [view addSubview:v];
     return view;
 }
@@ -500,7 +504,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
         
         [self.navigationController pushViewController:cdetailVC animated:YES];
         
-        self.hidesBottomBarWhenPushed=NO;
+        self.hidesBottomBarWhenPushed=YES;
         
     }else{
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"有重复课程请选择要查看的课" message:nil preferredStyle:  UIAlertControllerStyleActionSheet];

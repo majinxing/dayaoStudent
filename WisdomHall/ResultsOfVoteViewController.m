@@ -85,29 +85,29 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (_dataAry.count>0) {
-        return _dataAry.count+1;
+        return _dataAry.count;
     }
     return 0;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     VoteResultTableViewCell * cell;
-    if (indexPath.row==0) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"VoteResultTableViewCellSecond"];
-        if (!cell) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"VoteResultTableViewCell" owner:nil options:nil] objectAtIndex:1];;
-        }
-        [cell addSecondContentView:[NSString stringWithFormat:@"%d",_n]];
-    }else{
+//    if (indexPath.row==0) {
+//        cell = [tableView dequeueReusableCellWithIdentifier:@"VoteResultTableViewCellSecond"];
+//        if (!cell) {
+//            cell = [[[NSBundle mainBundle] loadNibNamed:@"VoteResultTableViewCell" owner:nil options:nil] objectAtIndex:1];;
+//        }
+//        [cell addSecondContentView:[NSString stringWithFormat:@"%d",_n]];
+//    }else{
         cell = [tableView dequeueReusableCellWithIdentifier:@"VoteResultTableViewCellFirst"];
         if (!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"VoteResultTableViewCell" owner:nil options:nil] objectAtIndex:0];;
         }
-        VoteOption * v = _dataAry[indexPath.row-1];
+        VoteOption * v = _dataAry[indexPath.row];
         
         [cell addContentViewWith:v withAllVotes:[NSString stringWithFormat:@"%d",_n] withIndex:(int)indexPath.row];
         
-    }
+//    }
    
     
   

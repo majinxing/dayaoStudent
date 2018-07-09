@@ -50,6 +50,7 @@
 
 @property (nonatomic,assign) int textTemp;//标志位，标明是否有文字编辑未保存就提交
 @property (nonatomic,strong)UIButton *myButton;//提交按钮
+
 @end
 
 @implementation AnswerTestQuestionsViewController

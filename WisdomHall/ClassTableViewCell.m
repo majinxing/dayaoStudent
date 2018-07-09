@@ -41,11 +41,22 @@
     _friday.tag = 5;
     _saturday.tag = 6;
     _sunday.tag = 7;
-    _h.backgroundColor = RGBA_COLOR(184, 216, 248, 1);
-    _s.backgroundColor = RGBA_COLOR(184, 216, 248, 1);
-    _weekDay.textColor = RGBA_COLOR(57, 114, 172, 1);
-    _sclass.textColor = RGBA_COLOR(57, 114, 172, 1);
+    
+    self.contentView.backgroundColor = RGBA_COLOR(241, 241, 241, 1);
+    
+//    _h.backgroundColor = RGBA_COLOR(184, 216, 248, 1);
+//    _s.backgroundColor = RGBA_COLOR(184, 216, 248, 1);
+    
+    _weekDay.textColor = RGBA_COLOR(51, 51, 51, 1);
+    
+    _sclass.textColor = RGBA_COLOR(51, 51, 51, 1);
+    
+    _weekDay.backgroundColor = [UIColor whiteColor];
+    
+    _sclass.backgroundColor = [UIColor whiteColor];
+    
     _dictAry = [[NSMutableDictionary alloc] init];
+    
     for (int i = 1; i<=7; i++) {
         NSMutableArray *ary = [NSMutableArray arrayWithCapacity:1];
         [_dictAry setObject:ary forKey:[NSString stringWithFormat:@"%d",i]];
@@ -80,7 +91,7 @@
         if ([UIUtils isBlankString:ss]) {
             [btn setEnabled:NO];
             [btn setTitle:@"" forState:UIControlStateNormal];
-            btn.backgroundColor = [UIColor clearColor];
+//            btn.backgroundColor = [UIColor clearColor];
         }else{
             NSMutableArray * ary = [_dictAry objectForKey:[NSString stringWithFormat:@"%ld",(long)btn.tag]];
             int n = 0;
@@ -89,9 +100,9 @@
             }
             ClassModel * c = classAry[n];
             [btn setTitle:ss forState:UIControlStateNormal];
-            [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [btn setEnabled:YES];
-            btn.backgroundColor  = c.backColock;//YELLOW;//RGBA_COLOR(80, 172, 224, 1);
+            btn.backgroundColor  = [UIColor whiteColor];// c.backColock;//YELLOW;//RGBA_COLOR(80, 172, 224, 1);
             btn.layer.masksToBounds = YES;
             btn.layer.cornerRadius = 5;
             btn.titleLabel.lineBreakMode = 0;//这句话很重要，不加这句话加上换行符也没用
