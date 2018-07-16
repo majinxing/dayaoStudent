@@ -21,7 +21,10 @@
 
 #import "SignInViewController.h"
 
-@interface HomePageViewController ()<HomeButtonViewDelegate>
+#import "TheMeetingInfoViewController.h"
+
+
+@interface HomePageViewController ()<HomeButtonViewDelegate,NewMeetingViewDelegate>
 @property (nonatomic,strong)UIScrollView * bottomScrollView;
 @property (nonatomic,strong)BananerView * bannerView;
 @property (nonatomic,strong)NoticeView * noticeView;
@@ -130,6 +133,7 @@
     [_bottomScrollView addSubview:_homeButtonView];
     
     _meetingView = [[NewMeetingView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_homeButtonView.frame), APPLICATION_WIDTH, APPLICATION_HEIGHT/4)];
+    _meetingView.delegate = self;
     
     [_bottomScrollView addSubview:_meetingView];
     
@@ -140,6 +144,13 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+#pragma mark NewMeetingDelegate
+-(void)intoMeetingBtnPressedDelegate:(MeetingModel *)meetingModel{
+    TheMeetingInfoViewController * mInfo = [[TheMeetingInfoViewController alloc] init];
+    self.hidesBottomBarWhenPushed = YES;
+    mInfo.meetingModel = meetingModel;
+    [self.navigationController pushViewController:mInfo animated:YES];
+}
 #pragma mark OfficeTableViewCellDelegate
 -(void)shareButtonClickedDelegate:(NSString *)str{
     if ([str isEqualToString:Meeting]) {
@@ -147,11 +158,13 @@
         AllTheMeetingViewController * s = [[AllTheMeetingViewController alloc] init];
         [self.navigationController pushViewController:s animated:YES];
         self.hidesBottomBarWhenPushed = NO;
-    }else if ([str isEqualToString:Announcement]){
+    }else if ([str isEqualToString:Classroom]){
+        
         SignInViewController * noticeVC = [[SignInViewController alloc] init];
         self.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:noticeVC animated:YES];
         self.hidesBottomBarWhenPushed = NO;
+        
     }else if ([str isEqualToString:Group]){
 //        GroupListViewController * g = [[GroupListViewController alloc] init];
 //        self.hidesBottomBarWhenPushed = YES;

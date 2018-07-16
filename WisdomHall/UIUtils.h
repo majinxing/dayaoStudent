@@ -142,5 +142,9 @@
  */
 
 +(NSString *)dateTimeDifferenceWithStartTime:(NSString *)startTime;
+/**
+ * 返回文件类型对应的图片
+ **/
++(NSString *)returnFileType:(NSString *)typeStr;
 @end
 

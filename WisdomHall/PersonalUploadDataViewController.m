@@ -167,7 +167,7 @@
  *  显示navigation的标题
  **/
 -(void)setNavigationTitle{
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     if ([UIUtils isBlankString:_function]) {
         self.title = @"文件";

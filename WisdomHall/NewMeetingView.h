@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "MeetingModel.h"
 
+
+@protocol NewMeetingViewDelegate<NSObject>
+-(void)intoMeetingBtnPressedDelegate:(MeetingModel *)meetingModel;
+@end
 @interface NewMeetingView : UIView
+
+@property (nonatomic,weak)id<NewMeetingViewDelegate>delegate;
+
 -(void)addContentView:(MeetingModel *)meetingModel;
 @end

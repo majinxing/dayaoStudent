@@ -43,7 +43,7 @@
  *  显示navigation的标题
  **/
 -(void)setNavigationTitle{
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 
     self.title = @"群组成员";
     UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"加入群组" style:UIBarButtonItemStylePlain target:self action:@selector(joinGroup)];

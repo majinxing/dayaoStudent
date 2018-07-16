@@ -18,7 +18,7 @@
 #define  ZFSmallMargin 10 //默认最小间距
 #define  ZFAppLogoW 100 //applogo的宽度
 #define  ZFHallLogoW 200 //halllogo的宽度
-#define  ZFSeatBtnScale 0.95 //按钮内图标占按钮大小的比例
+#define  ZFSeatBtnScale 0.7 //按钮内图标占按钮大小的比例 0.95
 
 
 

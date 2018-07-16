@@ -55,13 +55,13 @@ static dispatch_once_t predicate;
     
 //    [self addChildViewControllerWithClassname:[OfficeViewController description] imagename:@"办公_normal" title:@"首页" withSelectImageName:@"办公"];
 //    HomePageViewController
-    [self addChildViewControllerWithClassname:[HomePageViewController description] imagename:@"办公_normal" title:@"首页" withSelectImageName:@"办公"];
+    [self addChildViewControllerWithClassname:[HomePageViewController description] imagename:@"home2" title:@"首页" withSelectImageName:@"home"];
 
 //    [self addChildViewControllerWithClassname:[SignInViewController description] imagename:@"课程(1)" title:@"课程" withSelectImageName:@"课程"];
     
-    [self addChildViewControllerWithClassname:[MessageListViewController description] imagename:@"消息(1)" title:@"消息" withSelectImageName:@"消息"];
+    [self addChildViewControllerWithClassname:[MessageListViewController description] imagename:@"chat" title:@"消息" withSelectImageName:@"chat2"];
     
-    [self addChildViewControllerWithClassname:[PersonalCenterViewController description] imagename:@"我的(1)" title:@"我的" withSelectImageName:@"我的"];
+    [self addChildViewControllerWithClassname:[PersonalCenterViewController description] imagename:@"my" title:@"我的" withSelectImageName:@"my2"];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:InApp object:nil];
 //    // 1.注册通知
@@ -139,7 +139,7 @@ static dispatch_once_t predicate;
     UIImage * i = [[Appsetting sharedInstance] grayscale:[UIImage imageNamed:selectName]];
   
     nav.tabBarItem.selectedImage = [i imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIColor * selectColor = [[Appsetting sharedInstance] getThemeColor];
+    UIColor * selectColor = [UIColor blackColor];//[[Appsetting sharedInstance] getThemeColor];
     //设置字体颜色（选中类型）
     [nav.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:selectColor} forState:UIControlStateSelected];
     //设置字体颜色（普通类型）

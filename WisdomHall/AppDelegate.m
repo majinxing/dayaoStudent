@@ -172,19 +172,22 @@
         UITableView.appearance.estimatedSectionFooterHeight = 0;
         UITableView.appearance.estimatedSectionHeaderHeight = 0;
     }
-    [IMTool IMLogin:@"11"];
+    [IMTool IMLogin:@"4165"];
     
     return YES;
     
     
 }
 -(void)IM:(UIApplication *)application{
+    
+//    course-im/auth/grant
+    
     //app可以单独部署服务器，给予第三方应用更多的灵活性
-    [IMHttpAPI instance].apiURL = @"http://192.168.1.100:8010/course-im";
-    [IMService instance].host = @"192.168.1.100";
+//    [IMHttpAPI instance].apiURL = @"http://192.168.1.100:8010/course-im";
+//    [IMService instance].host = @"192.168.1.100";
     //    //app可以单独部署服务器，给予第三方应用更多的灵活性
-    //    [IMHttpAPI instance].apiURL = @"http://api.gobelieve.io";
-    //    [IMService instance].host = @"imnode2.gobelieve.io";
+        [IMHttpAPI instance].apiURL = @"http://api.gobelieve.io";
+        [IMService instance].host = @"imnode2.gobelieve.io";
     
     //
     

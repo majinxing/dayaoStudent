@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewAnswerViewController">
             <connections>
+                <outlet property="OnQuestion" destination="63T-rW-3pd" id="BZA-dr-7ht"/>
+                <outlet property="nextQuestion" destination="oBg-U9-1bh" id="FAC-wR-3Uw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -25,15 +27,27 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="YWV-GJ-qDI"/>
                     </constraints>
-                    <state key="normal" title="提交"/>
+                    <state key="normal" title="下一题"/>
+                    <connections>
+                        <action selector="NextQuestionBtnPressed:" destination="-1" eventType="touchUpInside" id="V2V-Od-qjQ"/>
+                    </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JRp-FL-LYk">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="切换" translatesAutoresizingMaskIntoConstraints="NO" id="9B8-A6-PAF">
+                    <rect key="frame" x="10" y="636" width="17" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="NQx-II-HBM"/>
+                        <constraint firstAttribute="width" constant="17" id="xu4-x9-Unu"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JRp-FL-LYk">
                     <rect key="frame" x="0.0" y="623" width="39" height="44"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="39" id="Tmz-ZD-ukL"/>
                         <constraint firstAttribute="height" constant="44" id="mgu-HF-vaZ"/>
                     </constraints>
-                    <state key="normal" title="三"/>
+                    <connections>
+                        <action selector="AllQuestionBtnPressed:" destination="-1" eventType="touchUpInside" id="Btt-u6-Ho1"/>
+                    </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vlC-gw-f2E">
                     <rect key="frame" x="39" y="631" width="1" height="29"/>
@@ -48,7 +62,10 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="QYm-PM-2rW"/>
                     </constraints>
-                    <state key="normal" title="Button"/>
+                    <state key="normal" title="上一题"/>
+                    <connections>
+                        <action selector="OnQuestionBtnPressed:" destination="-1" eventType="touchUpInside" id="emq-Sv-wcY"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -57,13 +74,18 @@
                 <constraint firstItem="oBg-U9-1bh" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="1/2" id="AvN-4x-JeM"/>
                 <constraint firstItem="vlC-gw-f2E" firstAttribute="leading" secondItem="JRp-FL-LYk" secondAttribute="trailing" id="JD0-Bu-pI1"/>
                 <constraint firstItem="oBg-U9-1bh" firstAttribute="leading" secondItem="63T-rW-3pd" secondAttribute="trailing" id="Jyv-vW-WXn"/>
+                <constraint firstItem="9B8-A6-PAF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="P2R-gV-E3U"/>
                 <constraint firstAttribute="trailing" secondItem="oBg-U9-1bh" secondAttribute="trailing" id="bOx-Td-goV"/>
                 <constraint firstItem="JRp-FL-LYk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="be9-R8-FwI"/>
                 <constraint firstAttribute="bottom" secondItem="vlC-gw-f2E" secondAttribute="bottom" constant="7" id="fl1-Mw-5sy"/>
                 <constraint firstAttribute="bottom" secondItem="JRp-FL-LYk" secondAttribute="bottom" id="gQx-vO-LEe"/>
+                <constraint firstAttribute="bottom" secondItem="9B8-A6-PAF" secondAttribute="bottom" constant="14" id="mzI-Nx-KSD"/>
                 <constraint firstItem="63T-rW-3pd" firstAttribute="leading" secondItem="vlC-gw-f2E" secondAttribute="trailing" id="xjm-9F-xwJ"/>
                 <constraint firstAttribute="bottom" secondItem="63T-rW-3pd" secondAttribute="bottom" id="ycR-UI-usO"/>
             </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="切换" width="34" height="32"/>
+    </resources>
 </document>

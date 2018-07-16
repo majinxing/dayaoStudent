@@ -51,6 +51,7 @@
 -(void)addScrollView{
     _vcAry = [NSMutableArray arrayWithCapacity:2];
     NSArray * ary = [NSArray arrayWithObjects:@"NOTest",@"HaveTest", nil];
+    
     for (int i = 0; i<2; i++) {
         AllTestViewController  * vc =  [[AllTestViewController alloc] init];
         vc.classModel = _classModel;

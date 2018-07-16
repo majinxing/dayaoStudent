@@ -25,12 +25,14 @@
 -(void)addContentView{
     NSArray * array = @[
                         Meeting,
-                        Announcement,
+                        Classroom,
+                        LostANDFound,
                         SchoolCommunity,
                         CampusLife,
                         Community,
                         SchoolRun
                         ];
+    NSArray * imageAry = @[@"会议圆图",@"课堂圆图",@"失物圆图",@"校圈圆图",@"生活圆图",@"社团圆图",@"校办圆图"];
     
     //水平间距
     int marginWidth = (APPLICATION_WIDTH/columns - buttonWH) / 2;
@@ -51,13 +53,24 @@
         int y = oneY + 80 * row;
         
       
-        ShareButton * button = [[ShareButton alloc] initWithFrame:CGRectMake(x, y, buttonWH, buttonWH) andType:array[i]];
+//        ShareButton * button = [[ShareButton alloc] initWithFrame:CGRectMake(x, y, buttonWH, buttonWH) andType:array[i]];
+        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        [button setBackgroundImage:[UIImage imageNamed:imageAry[i]] forState:UIControlStateNormal];
+        
+        [button setTitle:array[i] forState:UIControlStateNormal];
+        
+        [button setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+        
+        button.frame = CGRectMake(x, y, buttonWH, buttonWH);
+        
         button.backgroundColor = [UIColor whiteColor];
         
         [button addTarget:self action:@selector(shareButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         
-        button.backgroundColor = [UIColor colorWithHexString:@"#FAFAFA"];//RGBA_COLOR(249, 249, 249, 1);
+//        button.backgroundColor = [UIColor colorWithHexString:@"#FAFAFA"];//RGBA_COLOR(249, 249, 249, 1);
         button.layer.masksToBounds = YES;
+        
         button.layer.cornerRadius = buttonWH/2;
         
         [self addSubview:button];

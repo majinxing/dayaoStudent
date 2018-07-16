@@ -42,7 +42,8 @@
     _saturday.tag = 6;
     _sunday.tag = 7;
     
-    self.contentView.backgroundColor = RGBA_COLOR(241, 241, 241, 1);
+    self.contentView.backgroundColor = [UIColor clearColor];// [UIColor colorWithHexString:@"#fafafa"];
+    self.backgroundColor = [UIColor colorWithHexString:@"#fafafa"];
     
 //    _h.backgroundColor = RGBA_COLOR(184, 216, 248, 1);
 //    _s.backgroundColor = RGBA_COLOR(184, 216, 248, 1);

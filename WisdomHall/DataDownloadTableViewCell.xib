@@ -1,39 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DataDownloadTableViewCellFirst" rowHeight="79" id="KGk-i7-Jjw" customClass="DataDownloadTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="692" height="79"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DataDownloadTableViewCellFirst" rowHeight="89" id="KGk-i7-Jjw" customClass="DataDownloadTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="686" height="89"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="692" height="78.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="686" height="89"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="资料 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DFG-w4-DYM">
-                        <rect key="frame" x="20" y="5" width="622" height="48.5"/>
+                        <rect key="frame" x="70" y="15" width="566" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="wr4-lR-l25"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="download_bu" translatesAutoresizingMaskIntoConstraints="NO" id="V9a-1G-pcC">
-                        <rect key="frame" x="652" y="20" width="20" height="20"/>
+                        <rect key="frame" x="646" y="20" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="IX1-Iw-aAH"/>
                             <constraint firstAttribute="width" constant="20" id="gct-56-trZ"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hhd-yG-cby">
-                        <rect key="frame" x="642" y="0.0" width="50" height="50"/>
+                        <rect key="frame" x="636" y="0.0" width="50" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="1jg-jG-ALx"/>
                             <constraint firstAttribute="width" constant="50" id="p3O-u8-BkJ"/>
@@ -43,27 +46,35 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i2J-3u-iE2">
-                        <rect key="frame" x="20" y="58.5" width="200" height="20"/>
+                        <rect key="frame" x="70" y="37" width="200" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="isG-01-zAy"/>
-                            <constraint firstAttribute="width" constant="200" id="ldh-gM-kNr"/>
+                            <constraint firstAttribute="height" constant="20" id="8j8-n5-Yif"/>
+                            <constraint firstAttribute="width" constant="200" id="rkn-Ly-VkY"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jmh-DX-3g5">
+                        <rect key="frame" x="24" y="27.5" width="34" height="34"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="34" id="T4x-Nf-UvM"/>
+                            <constraint firstAttribute="height" constant="34" id="f8r-pk-FEm"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="DFG-w4-DYM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="6Ps-Fl-YWE"/>
+                    <constraint firstItem="i2J-3u-iE2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="70" id="3m5-hS-25P"/>
                     <constraint firstItem="V9a-1G-pcC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="7F9-2a-dzh"/>
+                    <constraint firstItem="Hhd-yG-cby" firstAttribute="leading" secondItem="DFG-w4-DYM" secondAttribute="trailing" id="PLo-PV-VAW"/>
                     <constraint firstAttribute="trailing" secondItem="V9a-1G-pcC" secondAttribute="trailing" constant="20" id="QDH-BN-1Vo"/>
+                    <constraint firstItem="Jmh-DX-3g5" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="TW1-IW-IP0"/>
                     <constraint firstItem="Hhd-yG-cby" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="W3k-2V-DZf"/>
-                    <constraint firstItem="Hhd-yG-cby" firstAttribute="leading" secondItem="DFG-w4-DYM" secondAttribute="trailing" id="Z7h-lw-3U6"/>
-                    <constraint firstItem="i2J-3u-iE2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="ajd-HA-MbQ"/>
                     <constraint firstAttribute="trailing" secondItem="Hhd-yG-cby" secondAttribute="trailing" id="gQt-Jj-jae"/>
-                    <constraint firstAttribute="bottom" secondItem="DFG-w4-DYM" secondAttribute="bottom" constant="25" id="mKQ-uj-gYc"/>
-                    <constraint firstItem="DFG-w4-DYM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="shy-1L-JhU"/>
-                    <constraint firstItem="i2J-3u-iE2" firstAttribute="top" secondItem="DFG-w4-DYM" secondAttribute="bottom" constant="5" id="wEo-oT-NBb"/>
+                    <constraint firstItem="DFG-w4-DYM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="70" id="hNu-RV-UpU"/>
+                    <constraint firstItem="DFG-w4-DYM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="p54-9Q-C7H"/>
+                    <constraint firstItem="Jmh-DX-3g5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="uV6-Y2-0k6"/>
+                    <constraint firstItem="i2J-3u-iE2" firstAttribute="top" secondItem="DFG-w4-DYM" secondAttribute="bottom" constant="2" id="ySv-Y3-u91"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -71,8 +82,9 @@
                 <outlet property="downloadBtn" destination="Hhd-yG-cby" id="wPg-OB-qbC"/>
                 <outlet property="downloadImage" destination="V9a-1G-pcC" id="ygC-G4-ks2"/>
                 <outlet property="fileName" destination="DFG-w4-DYM" id="ddR-Zm-LW4"/>
+                <outlet property="fileType" destination="Jmh-DX-3g5" id="7Q8-an-teb"/>
             </connections>
-            <point key="canvasLocation" x="115" y="-101.5"/>
+            <point key="canvasLocation" x="107" y="-156.5"/>
         </tableViewCell>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DataDownloadTableViewCellSecond" rowHeight="75" id="Lwa-IY-uwc" customClass="DataDownloadTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="721" height="75"/>
@@ -82,20 +94,20 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JpR-Tg-TSb">
-                        <rect key="frame" x="23" y="18" width="20" height="20"/>
+                        <rect key="frame" x="35" y="21" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="hZg-O8-hob"/>
                             <constraint firstAttribute="height" constant="20" id="yr0-yQ-3IS"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVo-FQ-wrG">
-                        <rect key="frame" x="63" y="18" width="630" height="38.5"/>
+                        <rect key="frame" x="75" y="21" width="606" height="33"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LEd-RQ-xAa">
-                        <rect key="frame" x="0.0" y="0.0" width="63" height="74.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="75" height="74.5"/>
                         <connections>
                             <action selector="secondDownloadBtn:" destination="Lwa-IY-uwc" eventType="touchUpInside" id="Xf1-ci-eE4"/>
                         </connections>

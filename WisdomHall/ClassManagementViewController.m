@@ -47,7 +47,7 @@ static NSString *cellIdentifier = @"cellIdentifierPersonal";
  *  显示navigation的标题
  **/
 -(void)setNavigationTitle{
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     self.title = @"人员管理";
 }

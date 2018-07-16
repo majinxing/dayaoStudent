@@ -61,7 +61,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
     [super viewDidLoad];
     self.page = 0;
     self.temp = 0;
-    self.view.backgroundColor = [UIColor whiteColor];//RGBA_COLOR(231, 231, 231, 1);
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#fafafa"];//RGBA_COLOR(231, 231, 231, 1);
     
     _synCourseView = [[SynchronousCourseView alloc] initWithFrame: CGRectMake(0, 0, APPLICATION_WIDTH, 0)];
     
@@ -89,7 +89,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
     [UIUtils getInternetDate];
     
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     //NSString *homeDir = NSHomeDirectory();沙盒路径
     // Do any additional setup after loading the view from its nib.
 }
@@ -105,7 +105,9 @@ static NSString *cellIdentifier = @"cellIdentifier";
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _tableView.backgroundColor = [UIColor clearColor];
+    
+    _tableView.backgroundColor = [UIColor colorWithHexString:@"#fafafa"];
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     __weak SignInViewController * weakSelf = self;
@@ -274,7 +276,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
  *  显示navigation的标题
  **/
 -(void)setNavigationTitle{
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
 
     
@@ -434,7 +436,9 @@ static NSString *cellIdentifier = @"cellIdentifier";
     [cell addFirstContentViewWith:(int)indexPath.row withClass:ary];
     //    }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.backgroundColor = [UIColor clearColor];
+    
+    cell.backgroundColor = [UIColor colorWithHexString:@"#fafafa"];
+    
     cell.delegate = self;
     return cell;
 }

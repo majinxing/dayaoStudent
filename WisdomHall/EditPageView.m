@@ -63,7 +63,7 @@
     
 //    CGRect keyBoardRect=[note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
 
-    _textView.frame = CGRectMake(10, 0, APPLICATION_WIDTH-20, APPLICATION_HEIGHT/2-80-20);
+    _textView.frame = CGRectMake(10, 64, APPLICATION_WIDTH-20, APPLICATION_HEIGHT-290-100);
     
     _cancle = [UIButton buttonWithType:UIButtonTypeSystem];
     

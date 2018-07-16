@@ -77,7 +77,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="place" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZ5-zI-QCc">
-                        <rect key="frame" x="20" y="104" width="335" height="20"/>
+                        <rect key="frame" x="35" y="104" width="320" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="mKA-15-ZCi"/>
                         </constraints>
@@ -123,6 +123,13 @@
                             <constraint firstAttribute="height" constant="1" id="hTw-du-P3u"/>
                         </constraints>
                     </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="位置" translatesAutoresizingMaskIntoConstraints="NO" id="Uog-mR-UCr">
+                        <rect key="frame" x="20" y="110" width="10" height="10"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="HYC-W7-MRm"/>
+                            <constraint firstAttribute="width" constant="10" id="TXu-8f-kqF"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="rvo-iO-d1e" firstAttribute="leading" secondItem="zrA-dA-7E1" secondAttribute="trailing" id="0Rq-mc-Gzh"/>
@@ -138,13 +145,15 @@
                     <constraint firstItem="zrA-dA-7E1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="L1a-8y-mL1"/>
                     <constraint firstItem="FeB-U2-bTJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="QoJ-w6-3eY"/>
                     <constraint firstAttribute="trailing" secondItem="TBZ-Dw-Nwm" secondAttribute="trailing" constant="20" id="V9y-X6-zIC"/>
+                    <constraint firstItem="Uog-mR-UCr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="VxJ-6A-a5V"/>
                     <constraint firstItem="zrA-dA-7E1" firstAttribute="top" secondItem="FeB-U2-bTJ" secondAttribute="bottom" constant="20" id="WNK-Ul-lhF"/>
-                    <constraint firstItem="rZ5-zI-QCc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="X4L-gs-GPF"/>
+                    <constraint firstItem="rZ5-zI-QCc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="X4L-gs-GPF"/>
                     <constraint firstAttribute="trailing" secondItem="XVl-Cz-S5S" secondAttribute="trailing" constant="20" id="Y2g-hM-tfY"/>
                     <constraint firstAttribute="trailing" secondItem="3o6-vb-S5O" secondAttribute="trailing" constant="20" id="ZYQ-aR-TXN"/>
                     <constraint firstItem="TBZ-Dw-Nwm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="aLX-4B-ohr"/>
                     <constraint firstAttribute="trailing" secondItem="o3J-v4-eya" secondAttribute="trailing" constant="20" id="cU9-6P-PCi"/>
                     <constraint firstItem="3o6-vb-S5O" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="duk-wA-hR9"/>
+                    <constraint firstItem="Uog-mR-UCr" firstAttribute="top" secondItem="Vrs-g7-bzp" secondAttribute="bottom" constant="16" id="fFI-sq-L1e"/>
                     <constraint firstAttribute="trailing" secondItem="Vrs-g7-bzp" secondAttribute="trailing" constant="20" id="hHh-PK-RXB"/>
                     <constraint firstItem="XVl-Cz-S5S" firstAttribute="top" secondItem="FeB-U2-bTJ" secondAttribute="bottom" constant="10" id="iXS-63-eoJ"/>
                     <constraint firstItem="y7T-Vk-Abt" firstAttribute="top" secondItem="rZ5-zI-QCc" secondAttribute="bottom" constant="10" id="j0A-1Z-800"/>
@@ -281,4 +290,7 @@
             <point key="canvasLocation" x="61.5" y="749.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="位置" width="16" height="18"/>
+    </resources>
 </document>

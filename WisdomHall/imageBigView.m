@@ -26,6 +26,7 @@
         _imageview = [[UIImageView alloc] init];
         
         self.imageview.userInteractionEnabled = YES;
+        
         _backView.userInteractionEnabled = YES;
         
         UIPinchGestureRecognizer *pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchView:)];
@@ -124,12 +125,13 @@
     [_imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",baseUrl,FileDownload,str]] placeholderImage:[UIImage imageNamed:@"addImage"]];
     
     double n = (double)_imageview.image.size.height/(double)_imageview.image.size.width;
+    
     if (n<1) {
         _imageview.frame = CGRectMake(10, _backView.frame.size.height/2-(APPLICATION_WIDTH-20)*n/2, APPLICATION_WIDTH-20, (APPLICATION_WIDTH-20)*n);
     }else if (n == 1){
-        _imageview.frame = CGRectMake(10, 40, APPLICATION_WIDTH-20, APPLICATION_WIDTH-20);
+        _imageview.frame = CGRectMake(10, 100, APPLICATION_WIDTH-20, APPLICATION_WIDTH-20);
     }else{
-        _imageview.frame = CGRectMake(APPLICATION_WIDTH/2-(self.frame.size.height- 140)/n/2, 20, (self.frame.size.height- 140)/n, self.frame.size.height- 140);
+        _imageview.frame = CGRectMake(APPLICATION_WIDTH/2-(self.frame.size.height- 140)/n/2, 100, (self.frame.size.height- 140)/n, self.frame.size.height- 140);
     }
 //    _imageview.frame = CGRectMake(10, _backView.frame.size.height/2-(APPLICATION_WIDTH-20)*n/2, APPLICATION_WIDTH-20, (APPLICATION_WIDTH-20)*n);
     

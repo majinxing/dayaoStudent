@@ -69,7 +69,7 @@
         
     }
     if ([type isEqualToString:InteractionType_Vote]) {
-        UIImage * i = [[Appsetting sharedInstance] grayscale:[UIImage imageNamed:@"Vote"]];
+        UIImage * i = [[Appsetting sharedInstance] grayscale:[UIImage imageNamed:@"投票"]];
         [self setImage:i forState:UIControlStateNormal];
         
     }
@@ -78,7 +78,7 @@
         [self setImage:i forState:UIControlStateNormal];
     }
     if ([type isEqualToString:InteractionType_Responder]) {
-        UIImage * i = [[Appsetting sharedInstance] grayscale:[UIImage imageNamed:@"answer"]];
+        UIImage * i = [[Appsetting sharedInstance] grayscale:[UIImage imageNamed:@"抢答"]];
         [self setImage:i forState:UIControlStateNormal];
     }
     if ([type isEqualToString:InteractionType_Add]) {
@@ -87,7 +87,7 @@
         [self setImage:i forState:UIControlStateNormal];
     }
     if ([type isEqualToString:InteractionType_Data]) {
-        UIImage * i = [[Appsetting sharedInstance] grayscale:[UIImage imageNamed:@"form"]];
+        UIImage * i = [[Appsetting sharedInstance] grayscale:[UIImage imageNamed:@"文件"]];
         
         [self setImage:i forState:UIControlStateNormal];
     }
@@ -145,17 +145,17 @@
     }
     if ([type isEqualToString:SchoolRun]) {
 //        UIImage * i = [[Appsetting sharedInstance] grayscale:[UIImage imageNamed:@"校办"]];
-        [self setImage:[UIImage imageNamed:@"校办"] forState:UIControlStateNormal];
+        [self setImage:[UIImage imageNamed:@"办公"] forState:UIControlStateNormal];
     }
     if ([type isEqualToString:CampusLife]) {
 //        UIImage * i = [[Appsetting sharedInstance] grayscale:[UIImage imageNamed:@"生活"]];
-        [self setImage:[UIImage imageNamed:@"生活"] forState:UIControlStateNormal];
+        [self setImage:[UIImage imageNamed:@"bed"] forState:UIControlStateNormal];
     }
     if ([type isEqualToString:SchoolCommunity]) {
-        [self setImage:[UIImage imageNamed:@"ic_school_circle"] forState:UIControlStateNormal];
+        [self setImage:[UIImage imageNamed:@"好房拓 400 iconfont_朋友圈"] forState:UIControlStateNormal];
     }
     if ([type isEqualToString:Community]) {
-        [self setImage:[UIImage imageNamed:@"ic_social_activity"] forState:UIControlStateNormal];
+        [self setImage:[UIImage imageNamed:@"社团"] forState:UIControlStateNormal];
     }
     if ([type isEqualToString:AroundSchool]) {
         
@@ -168,6 +168,12 @@
     if ([type isEqualToString:InteractionType_Homework]) {
         UIImage * i = [[Appsetting sharedInstance] grayscale:[UIImage imageNamed:@"作业"]];
         [self setImage:i forState:UIControlStateNormal];
+    }
+    if ([type isEqualToString:Classroom]) {
+        [self setImage:[UIImage imageNamed:@"班级&课堂"] forState:UIControlStateNormal];
+    }
+    if ([type isEqualToString:LostANDFound]) {
+        [self setImage:[UIImage imageNamed:@"代付款"] forState:UIControlStateNormal];
     }
     
     [self setTitle:type forState:UIControlStateNormal];

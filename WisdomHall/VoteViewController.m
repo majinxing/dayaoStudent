@@ -126,7 +126,7 @@
  *  显示navigation的标题
  **/
 -(void)setNavigationTitle{
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     self.title = @"投票";
     if ([[NSString stringWithFormat:@"%@",_meetModel.meetingHostId] isEqualToString:[NSString stringWithFormat:@"%@",_user.peopleId]]) {

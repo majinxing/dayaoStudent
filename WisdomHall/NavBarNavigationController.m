@@ -25,16 +25,16 @@
     return sharedDYTabBarViewControllerInstance;
 }
 -(void)setColor{
-    self.navigationBar.barTintColor = [[ThemeTool shareInstance] getThemeColor];
+    self.navigationBar.barTintColor = [UIColor whiteColor];// [[ThemeTool shareInstance] getThemeColor];
 }
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 - (void)viewDidLoad {
-    self.navigationBar.barTintColor = [[ThemeTool shareInstance] getThemeColor];
-    self.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationBar.barTintColor = [UIColor whiteColor]; //[[ThemeTool shareInstance] getThemeColor];
+    self.navigationBar.tintColor = [UIColor blackColor];
     
-    [self.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17],NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    [self.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17],NSForegroundColorAttributeName:[UIColor blackColor]}];
     
     [[NSNotificationCenter defaultCenter]
      addObserver:self

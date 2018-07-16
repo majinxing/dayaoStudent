@@ -78,8 +78,11 @@
             if ([seatModel.st isEqualToString:@"N"]) {
                 
                 [seatBtn setImage:[UIImage imageNamed:@"kexuan"] forState:UIControlStateNormal];//这里更改座位图标
+                
                 [seatBtn setImage:[UIImage imageNamed:@"xuanzhong"] forState:UIControlStateSelected];
+                
                 seatBtn.seatIndex = seatIndex;
+                
                 [self.allAvailableSeats setObject:seatBtn forKey:[@(seatIndex) stringValue]];
             }else if ([seatModel.st isEqualToString:@"E"]){
                 

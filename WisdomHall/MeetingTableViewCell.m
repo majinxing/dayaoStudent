@@ -124,8 +124,8 @@
     _meetName.text = [NSString stringWithFormat:@"课程名：%@",classModel.name];
     NSMutableString *strUrl = [NSMutableString stringWithFormat:@"%@",classModel.time];
     [strUrl deleteCharactersInRange:NSMakeRange(strUrl.length-3, 3)];
-    _meetTime.text = [NSString stringWithFormat:@"时间：%@",strUrl];
-    _meetPlace.text = [NSString stringWithFormat:@"教室：%@",classModel.typeRoom];
+    _meetTime.text = [NSString stringWithFormat:@"%@",strUrl];
+    _meetPlace.text = [NSString stringWithFormat:@"%@",classModel.typeRoom];
     _meetHost.text = [NSString stringWithFormat:@"老师：%@",classModel.teacherName];
     _meetCode.text = [NSString stringWithFormat:@"邀请码：%@",classModel.sclassId];
     if (![UIUtils isBlankString:classModel.teacherPictureId]) {
@@ -197,12 +197,14 @@
 -(void)addFourthContentViewWithClassModel:(ClassModel *)classModel{
     NSArray * array = @[
                         InteractionType_Data,
-                        InteractionType_Test,
-                        InteractionType_Picture,
                         InteractionType_Vote,
                         InteractionType_Responder,
                         InteractionType_Sit,
-                        InteractionType_Homework
+                        InteractionType_Homework,
+                        InteractionType_Picture,
+                        InteractionType_Test,
+                        Leave,
+                        InteractionType_Discuss,
                               ];
     
     //水平间距

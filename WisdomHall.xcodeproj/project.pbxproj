@@ -709,6 +709,12 @@
 		8BFB946C1EE7F7F1004BB963 /* ResultsOfVoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BFB946A1EE7F7F1004BB963 /* ResultsOfVoteViewController.xib */; };
 		8BFB947A1EE94948004BB963 /* VoteDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB94791EE94948004BB963 /* VoteDrawView.m */; };
 		8BFC79741F457E760052C088 /* JoinCours.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFC79731F457E760052C088 /* JoinCours.m */; };
+		8BFF7E0420F844E4003AB37B /* FileSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFF7E0220F844E4003AB37B /* FileSizeViewController.m */; };
+		8BFF7E0520F844E4003AB37B /* FileSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BFF7E0320F844E4003AB37B /* FileSizeViewController.xib */; };
+		8BFF7E0920F874CA003AB37B /* SelfAnswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFF7E0720F874CA003AB37B /* SelfAnswerViewController.m */; };
+		8BFF7E0A20F874CA003AB37B /* SelfAnswerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BFF7E0820F874CA003AB37B /* SelfAnswerViewController.xib */; };
+		8BFF7E0E20F8753C003AB37B /* CorrectAnswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFF7E0C20F8753C003AB37B /* CorrectAnswerViewController.m */; };
+		8BFF7E0F20F8753C003AB37B /* CorrectAnswerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BFF7E0D20F8753C003AB37B /* CorrectAnswerViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1700,6 +1706,15 @@
 		8BFB94791EE94948004BB963 /* VoteDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoteDrawView.m; sourceTree = "<group>"; };
 		8BFC79721F457E760052C088 /* JoinCours.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JoinCours.h; sourceTree = "<group>"; };
 		8BFC79731F457E760052C088 /* JoinCours.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JoinCours.m; sourceTree = "<group>"; };
+		8BFF7E0120F844E4003AB37B /* FileSizeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileSizeViewController.h; sourceTree = "<group>"; };
+		8BFF7E0220F844E4003AB37B /* FileSizeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileSizeViewController.m; sourceTree = "<group>"; };
+		8BFF7E0320F844E4003AB37B /* FileSizeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileSizeViewController.xib; sourceTree = "<group>"; };
+		8BFF7E0620F874CA003AB37B /* SelfAnswerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelfAnswerViewController.h; sourceTree = "<group>"; };
+		8BFF7E0720F874CA003AB37B /* SelfAnswerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelfAnswerViewController.m; sourceTree = "<group>"; };
+		8BFF7E0820F874CA003AB37B /* SelfAnswerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelfAnswerViewController.xib; sourceTree = "<group>"; };
+		8BFF7E0B20F8753C003AB37B /* CorrectAnswerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CorrectAnswerViewController.h; sourceTree = "<group>"; };
+		8BFF7E0C20F8753C003AB37B /* CorrectAnswerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CorrectAnswerViewController.m; sourceTree = "<group>"; };
+		8BFF7E0D20F8753C003AB37B /* CorrectAnswerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CorrectAnswerViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1850,6 +1865,9 @@
 				8B0502F62021A8AC0030CF75 /* PersonalUploadDataViewController.h */,
 				8B0502F72021A8B00030CF75 /* PersonalUploadDataViewController.m */,
 				8B0502F82021A8B30030CF75 /* PersonalUploadDataViewController.xib */,
+				8BFF7E0120F844E4003AB37B /* FileSizeViewController.h */,
+				8BFF7E0220F844E4003AB37B /* FileSizeViewController.m */,
+				8BFF7E0320F844E4003AB37B /* FileSizeViewController.xib */,
 			);
 			name = DataDownload;
 			sourceTree = "<group>";
@@ -2803,6 +2821,12 @@
 				8BA0468B20F35D07004571D1 /* NewAnswerViewController.h */,
 				8BA0468C20F35D07004571D1 /* NewAnswerViewController.m */,
 				8BA0468D20F35D07004571D1 /* NewAnswerViewController.xib */,
+				8BFF7E0620F874CA003AB37B /* SelfAnswerViewController.h */,
+				8BFF7E0720F874CA003AB37B /* SelfAnswerViewController.m */,
+				8BFF7E0820F874CA003AB37B /* SelfAnswerViewController.xib */,
+				8BFF7E0B20F8753C003AB37B /* CorrectAnswerViewController.h */,
+				8BFF7E0C20F8753C003AB37B /* CorrectAnswerViewController.m */,
+				8BFF7E0D20F8753C003AB37B /* CorrectAnswerViewController.xib */,
 			);
 			name = NewAnswer;
 			sourceTree = "<group>";
@@ -3796,6 +3820,7 @@
 				8B0857981F7E3A30009D5AC9 /* WorkingLoginViewController.xib in Resources */,
 				8B05CB7C1EC2ABFD0063EC20 /* PersonalInfoViewController.xib in Resources */,
 				8B10422D20E475E5008CFB97 /* messageSent.aiff in Resources */,
+				8BFF7E0F20F8753C003AB37B /* CorrectAnswerViewController.xib in Resources */,
 				8B0AF75F1F511AA2003858A4 /* VoteResultTableViewCell.xib in Resources */,
 				8B2E16E31EBACAD7008B7C57 /* PersonalCollectionViewCell.xib in Resources */,
 				8B17370A1EC2BE2B00BE3C8F /* PersonalDataTableViewCell.xib in Resources */,
@@ -3812,6 +3837,7 @@
 				8B01483720666A220037A107 /* StatisticalResultTableViewCell.xib in Resources */,
 				8B0DB13C1ED6CA4E0042DF0D /* ImportTextViewController.xib in Resources */,
 				8B396B0D208B134600F20060 /* sc_qrcode_scan_light_green@2x.png in Resources */,
+				8BFF7E0520F844E4003AB37B /* FileSizeViewController.xib in Resources */,
 				8B10428320E47681008CFB97 /* LICENSE in Resources */,
 				8BB47BA82088945E005407D9 /* call.mp3 in Resources */,
 				8BA224D51EAF25DC00627A1B /* RegisterViewController.xib in Resources */,
@@ -3864,6 +3890,7 @@
 				8BF82D871EE1573200D33473 /* CreateVoteViewController.xib in Resources */,
 				8B0E5383209FD93E00327823 /* AnswerEssayQuestionViewController.xib in Resources */,
 				8B087E531FEA665800649094 /* NoticeTableViewCell.xib in Resources */,
+				8BFF7E0A20F874CA003AB37B /* SelfAnswerViewController.xib in Resources */,
 				8BB221D81FA7088E00EC6478 /* SGQRCode.bundle in Resources */,
 				8B2E16E91EBAD9AF008B7C57 /* AllTheMeetingViewController.xib in Resources */,
 				8B6E61CC1EE292B10040FDC1 /* CreateVoteTableViewCell.xib in Resources */,
@@ -4115,6 +4142,7 @@
 				8BCE7CCE1F04F07600FE261B /* AFSecurityPolicy.m in Sources */,
 				8B10421320E475E5008CFB97 /* wavreader.c in Sources */,
 				8B48004020A2A68200038B47 /* DAYIndicatorView.m in Sources */,
+				8BFF7E0920F874CA003AB37B /* SelfAnswerViewController.m in Sources */,
 				8BE877761EBC2D6B00866A34 /* AllTestViewController.m in Sources */,
 				8B0E5394209FE0D200327823 /* StatisticalConditionsViewController.m in Sources */,
 				8BB221EA1FA708A300EC6478 /* ScanSuccessJumpVC.m in Sources */,
@@ -4151,6 +4179,7 @@
 				8B10421B20E475E5008CFB97 /* GroupMessageViewController.m in Sources */,
 				8B081DFB1F06524000493B81 /* HanyuPinyinOutputFormat.m in Sources */,
 				8BA0468E20F35D07004571D1 /* NewAnswerViewController.m in Sources */,
+				8BFF7E0E20F8753C003AB37B /* CorrectAnswerViewController.m in Sources */,
 				8B064E541F00D8D80004C3D4 /* MJXChatCellTableViewCell.m in Sources */,
 				8B2E16ED1EBAD9F3008B7C57 /* InTheMeetingViewController.m in Sources */,
 				8BA224D41EAF25DC00627A1B /* RegisterViewController.m in Sources */,
@@ -4222,6 +4251,7 @@
 				8B045B771F3458820021699B /* NSObject+MJKeyValue.m in Sources */,
 				8BF82D771EDFB32500D33473 /* CollectionHeadView.m in Sources */,
 				8B10429520E5BB86008CFB97 /* IMTool.m in Sources */,
+				8BFF7E0420F844E4003AB37B /* FileSizeViewController.m in Sources */,
 				8B396B06208B134600F20060 /* RHScanLineAnimation.m in Sources */,
 				8B10BBB120EDEE6F00F057C9 /* DetailsButton.m in Sources */,
 				8B014E44206670700037A107 /* HomeworkListTableViewCell.m in Sources */,

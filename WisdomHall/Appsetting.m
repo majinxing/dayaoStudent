@@ -217,6 +217,8 @@
     if (!anImage) {
         return nil;
     }
+    return anImage;
+    //一下是更换UI切图的颜色
     CGImageRef  imageRef;
     imageRef = anImage.CGImage;
     

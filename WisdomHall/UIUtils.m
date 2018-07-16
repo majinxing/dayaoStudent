@@ -1776,6 +1776,43 @@
     return NO;
     
 }
++(NSString *)returnFileType:(NSString *)typeStr{
+    //    [string rangeOfString:opt.index].location == NSNotFound
+    
+    NSString * str = @"xls,xlsx,xlsm,xlt,xltx,xltm";
+    NSString * wordStr = @"doc,docx";
+    NSString * pngStr = @"png,jpg";
+    if ([str rangeOfString:typeStr].location != NSNotFound) {
+        return @"excel";
+    }else if ([typeStr isEqualToString:@"ai"]){
+        return @"ai";
+    }else if([wordStr rangeOfString:typeStr].location != NSNotFound){
+        return @"word";
+    }else if ([typeStr isEqualToString:@"fla"]){
+        return @"fla";
+    }else if ([typeStr isEqualToString:@"html"]){
+        return @"html";
+    }else if ([typeStr isEqualToString:@"mp3"]){
+        return @"mp3";
+    }else if ([typeStr isEqualToString:@"pdf"]){
+        return @"pdf";
+    }else if ([pngStr rangeOfString:typeStr].location != NSNotFound){
+        return @"png";
+    }else if ([typeStr isEqualToString:@"ppt"]){
+        return @"ppt";
+    }else if ([typeStr isEqualToString:@"psd"]){
+        return @"psd";
+    }else if ([typeStr isEqualToString:@"txt"]){
+        return @"txt";
+    }else if ([typeStr isEqualToString:@"xd"]){
+        return @"xd";
+    }else if ([typeStr isEqualToString:@"zip"]){
+        return @"zip";
+    }else{
+        return @"other";
+    }
+    return @"s";
+}
 @end
 
 

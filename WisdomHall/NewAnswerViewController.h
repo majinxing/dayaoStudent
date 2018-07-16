@@ -23,4 +23,5 @@
 
 @property (nonatomic,copy) NSString * titleStr;//标题名称
 
+@property (nonatomic,assign)BOOL isAbleAnswer;
 @end

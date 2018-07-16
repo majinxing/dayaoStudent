@@ -33,4 +33,22 @@
 -(void)addOptionWithModel:(optionsModel *)optionsModel withEdit:(BOOL)edit withIndexRow:(int)row withISelected:(BOOL)isSelected;
 
 -(void)addSeventhTextViewWithStr:(NSString *)str;
+
+-(void)eigthTitleType:(NSString *)titleType withScore:(NSString *)score isSelect:(BOOL)select btnTag:(int)index;
+
+-(void)addOptionWithModel:(optionsModel *)optionsM withIndexRow:(int)row withISelected:(BOOL)isSelected;//题库
+
+-(void)addSeventhTextViewWithStrEndEditor:(NSString *)str;
+
+-(void)addSeventhTextViewWithStr:(NSString *)str withIndexRow:(int)row;//带序号
+
+-(void)addFirstTitleTextView:(NSString *)textStr withImageAry:(NSMutableArray *)ary withIsEdit:(BOOL)edit withIndexRow:(int)indexRow;//标记哪一题（all）
+
+-(void)addCorrectImage:(NSString *)str;//cell的正错image
+
+-(void)setThirdImagee:(NSString *)str;//改变选框颜色
+
+-(void)changeSeventhTextColor;//改变文字颜色
+
+-(void)changeFirstTitleTextColor;
 @end

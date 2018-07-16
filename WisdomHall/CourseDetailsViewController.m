@@ -129,6 +129,8 @@
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.automaticallyAdjustsScrollViewInsets = NO;
+    [self.tableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
+//    [self.tableView reloadData];
     [self.view addSubview:_tableView];
 }
 -(void)getData{
@@ -194,7 +196,7 @@
  *  显示navigation的标题
  **/
 -(void)setNavigationTitle{
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
    
     self.title = @"课程详情";
     

@@ -22,6 +22,10 @@
 
 #import "AnswerTestQuestionsViewController.h"
 
+#import "NewAnswerViewController.h"
+
+#import "SelfAnswerViewController.h"
+
 @interface AllTestViewController ()<UITableViewDelegate,UITableViewDataSource,TextsTableViewCellDelegate,ShareViewDelegate>
 @property (nonatomic,strong)UITableView * tableView;
 @property (nonatomic,strong)FMDatabase *db;
@@ -55,7 +59,7 @@
  *  显示navigation的标题
  **/
 -(void)setNavigationTitle{
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     self.title = @"测验";
     _userModel = [[Appsetting sharedInstance] getUsetInfo];
@@ -260,33 +264,46 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    
-    AnswerTestQuestionsViewController * vc= [[AnswerTestQuestionsViewController alloc] init];
-    vc.t = _dataAry[indexPath.row];
-    vc.editable = NO;
-    vc.titleStr = @"试题";
-    
-    if ([vc.t.statusName isEqualToString:@"未进行"]) {
-        [UIUtils showInfoMessage:@"考试未进行，不能查看" withVC:self];
-    }else{
-        self.hidesBottomBarWhenPushed = YES;
+    TextModel * text = _dataAry[indexPath.row];
+    if ([text.statusName isEqualToString:@"进行中"]) {
+        NewAnswerViewController * vc= [[NewAnswerViewController alloc] init];
         
-        [self.navigationController pushViewController:vc animated:YES];
+        vc.t = _dataAry[indexPath.row];
+        if ([vc.t.statusName isEqualToString:@"已完成"]) {
+            vc.isAbleAnswer = NO;
+        }
+        vc.editable = NO;
+        
+        vc.titleStr = @"试题";
+        
+        if ([vc.t.statusName isEqualToString:@"未进行"]) {
+            [UIUtils showInfoMessage:@"考试未进行，不能查看" withVC:self];
+        }else{
+            self.hidesBottomBarWhenPushed = YES;
+            
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }else{
+        SelfAnswerViewController * vc= [[SelfAnswerViewController alloc] init];
+        
+        vc.t = _dataAry[indexPath.row];
+        if ([vc.t.statusName isEqualToString:@"已完成"]) {
+            vc.isAbleAnswer = NO;
+        }
+        vc.editable = NO;
+        
+        vc.titleStr = @"试题";
+        
+        if ([vc.t.statusName isEqualToString:@"未进行"]) {
+            [UIUtils showInfoMessage:@"考试未进行，不能查看" withVC:self];
+        }else{
+            self.hidesBottomBarWhenPushed = YES;
+            
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
     
     
-    
-//    if ([vc.t.statusName isEqualToString:@"进行中"]) {
-//        self.hidesBottomBarWhenPushed = YES;
-//        [self.navigationController pushViewController:vc animated:YES];
-//    }else{
-//        if([vc.t.resultStatus isEqualToString:@"2"]){
-//            self.hidesBottomBarWhenPushed = YES;
-//            [self.navigationController pushViewController:vc animated:YES];
-//        }else {
-//            [UIUtils showInfoMessage:@"考试已经结束，试卷批阅后才可以查看" withVC:self];
-//        }
-//    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 65;

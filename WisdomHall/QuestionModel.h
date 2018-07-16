@@ -15,6 +15,8 @@
 
 @property (nonatomic,strong)NSMutableArray * questionTitleImageIdAry;//题目图片id
 
+@property (nonatomic,copy) NSString * titleTypeName;
+
 @property (nonatomic,copy) NSString * qustionScore;//分值
 
 @property (nonatomic,copy)NSString * getScore;
@@ -53,5 +55,7 @@
 -(float)returnOptionHeight:(int)index;//返回选项高度
 
 -(float)returnAnswerHeight;
+
+-(float)returnAnswerHeightZone;//答案真实高度
 
 @end

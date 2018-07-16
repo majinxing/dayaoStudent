@@ -61,6 +61,13 @@
 
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *firstDelBtnAHeight;
+@property (weak, nonatomic) IBOutlet UILabel *titleType;
+@property (weak, nonatomic) IBOutlet UILabel *titleScore;
+@property (weak, nonatomic) IBOutlet UIImageView *eighthImage;
+@property (weak, nonatomic) IBOutlet UIButton *eigthSelectBtn;
+@property (strong, nonatomic) IBOutlet UIView *firstBackView;
+@property (strong, nonatomic) IBOutlet UIView *seventhBackView;
+@property (strong, nonatomic) IBOutlet UIImageView *correctImage;
 
 @property (nonatomic,strong) NSMutableArray * deleImageAry;
 
@@ -108,13 +115,31 @@
         [_optionsImageAry addObject:image];
     }
     // Initialization code
+    
+    self.backgroundColor = [UIColor colorWithHexString:@"#fafafa"];
+    
+    _firstBackView.layer.masksToBounds = YES;
+    
+    _firstBackView.layer.cornerRadius = 10;
+    
+    _seventhBackView.layer.masksToBounds = YES;
+    
+    _seventhBackView.layer.cornerRadius = 10;
+    
 }
-
--(void)addFirstTitleTextView:(NSString *)textStr withImageAry:(NSMutableArray *)ary withIsEdit:(BOOL)edit{
+-(void)addCorrectImage:(NSString *)str{
+    _correctImage.image = [UIImage imageNamed:str];
+}
+-(void)changeFirstTitleTextColor{
+    _firstTitleTextView.textColor = [UIColor colorWithRed:16/255.0 green:157/255.0 blue:73/255.0 alpha:1/1.0];
+}
+-(void)addFirstTitleTextView:(NSString *)textStr withImageAry:(NSMutableArray *)ary withIsEdit:(BOOL)edit withIndexRow:(int)indexRow{
     
     _firstTitleTextView.text = textStr;
-    
-    _firstLabel.text = @"";
+    if (![UIUtils isBlankString:textStr]) {
+        _firstLabel.text = @"";
+
+    }
     
     if (!edit) {
         
@@ -148,20 +173,23 @@
             [btn1 setEnabled:YES];
             
             [btn1 addSubview:image];
+            
+            [btn1 setTitle:[NSString stringWithFormat:@"%d",indexRow] forState:UIControlStateNormal];
 
+            [btn1 setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
         }
     }else{
-//        if (_firstBtnEWith.constant <= 0) {
-//
-//            _firstBtnEWith.constant += (APPLICATION_WIDTH/3-20);
-//
-//        }
+
         for (int i = 0; i<ary.count; i++) {
             UIButton *btn = (UIButton *)[self.contentView viewWithTag:i+101];
             
             [btn setBackgroundImage:ary[i] forState:UIControlStateNormal];
             
             [btn setEnabled:YES];
+            
+            [btn setTitle:[NSString stringWithFormat:@"%d",indexRow] forState:UIControlStateNormal];
+            [btn setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+
             
             UIImageView * im = (UIImageView *)[self.contentView viewWithTag:i+2001];
             
@@ -171,6 +199,9 @@
             
             [btn1 setEnabled:YES];
             
+            [btn1 setTitle:[NSString stringWithFormat:@"%d",indexRow] forState:UIControlStateNormal];
+            [btn1 setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+
         }
         
         if (ary.count<6) {
@@ -180,6 +211,10 @@
             [btn1 setEnabled:YES];
             
             [btn1 setBackgroundImage:[UIImage imageNamed:@"addImage"] forState:UIControlStateNormal];
+            
+            [btn1 setTitle:[NSString stringWithFormat:@"%d",indexRow] forState:UIControlStateNormal];
+            [btn1 setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+
         }
     }
 }
@@ -206,18 +241,21 @@
 
     // Configure the view for the selected state
 }
+-(void)setThirdImagee:(NSString *)str{
+    _thirdImage.image = [UIImage imageNamed:str];
 
+}
 -(void)addOptionWithModel:(optionsModel *) optionsM withEdit:(BOOL)edit withIndexRow:(int)row withISelected:(BOOL)isSelected{
     
-    _orderNumber.text = [NSString stringWithFormat:@"%c、",65+row];
+    _orderNumber.text = [NSString stringWithFormat:@"%c、",65+(row%1000)];
     
     
     _thirdOptionText.text = optionsM.optionsTitle;
     
     if (isSelected) {
-        _thirdImage.image = [UIImage imageNamed:@"方形选中-fill"];
+        _thirdImage.image = [UIImage imageNamed:@"Oval"];
     }else{
-        _thirdImage.image = [UIImage imageNamed:@"方形未选中"];
+        _thirdImage.image = [UIImage imageNamed:@"Oval3"];
     }
 //    _thirdImage.backgroundColor = [UIColor redColor];
     
@@ -259,26 +297,15 @@
 
         }
     }
-//    else{
-//        
-//        for (int i = 0; i<optionsM.optionsImageAry.count; i++) {
-//            UIButton *btn = (UIButton *)[self.contentView viewWithTag:i+(row+1)*1000+1];
-//            
-//            [btn setBackgroundImage:optionsM.optionsImageAry[i] forState:UIControlStateNormal];
-//            
-//            [btn setEnabled:YES];
-//        }
-//        
-//        if (optionsM.optionsImageAry.count<3) {
-//            UIButton *btn1 = [self viewWithTag:optionsM.optionsImageAry.count+(row+1)*1000+1];
-//            
-//            [btn1 setEnabled:YES];
-//            
-//            [btn1 setBackgroundImage:[UIImage imageNamed:@"addImage"] forState:UIControlStateNormal];
-//        }
-//    }
+
 }
--(void)addSeventhTextViewWithStr:(NSString *)str{
+-(void)changeSeventhTextColor{
+    _seventhTextView.textColor = [UIColor colorWithRed:16/255.0 green:157/255.0 blue:73/255.0 alpha:1/1.0];
+;
+}
+-(void)addSeventhTextViewWithStr:(NSString *)str withIndexRow:(int)row{
+    _seventhTextView.tag = row;
+    
     if (![UIUtils isBlankString:str]) {
         _seventhTextView.text = str;
         _seventhApllabel.text = @"";
@@ -322,6 +349,78 @@
     if (self.delegate&&[self.delegate respondsToSelector:@selector(thirthSelectOptionDelegate:)]) {
         [self.delegate thirthSelectOptionDelegate:sender];
     }
+}
+-(void)eigthTitleType:(NSString *)titleType withScore:(NSString *)score isSelect:(BOOL)select btnTag:(int)index{
+    _titleType.text = titleType;
+    _titleScore.text = score;
+    
+    _eigthSelectBtn.tag = index;
+    
+    if (select) {
+        _eighthImage.image = [UIImage imageNamed:@"方形选中-fill"];
+    }else{
+        _eighthImage.image = [UIImage imageNamed:@"方形未选中"];
+    }
+}
+-(void)addOptionWithModel:(optionsModel *)optionsM withIndexRow:(int)row withISelected:(BOOL)isSelected{
+    
+    _orderNumber.text = [NSString stringWithFormat:@"%c、",65+row];
+    
+    
+    _thirdOptionText.text = optionsM.optionsTitle;
+    
+    [_thirdImage removeFromSuperview];
+    
+    if (isSelected) {
+        _orderNumber.textColor = RGBA_COLOR(0, 113, 113, 1);
+        
+        _thirdOptionText.textColor = RGBA_COLOR(0, 113, 113, 1);
+    }
+    
+    _thirdSelectEdBtn.tag = 65+row;//选中按钮的tag
+    
+    
+    _thirdBtnA.tag = (row+1)*1000+1;
+    _thirdBtnB.tag = (row+1)*1000+2;
+    _thirdBtnC.tag = (row+1)*1000+3;
+    
+    
+    [_thirdOptionText setEditable:NO];
+    
+    
+    if (optionsM.optionsImageIdAry.count>0) {
+        
+    }else{
+        [_thirdBtnA removeFromSuperview];
+    }
+    
+    for (int i=0; i<optionsM.optionsImageIdAry.count; i++) {
+        UIImageView * image = _optionsImageAry[i];
+        
+        UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
+        
+        NSString * baseUrl = user.host;
+        
+        [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",baseUrl,FileDownload,optionsM.optionsImageIdAry[i]]] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+        
+        
+        UIButton *btn1 = [self viewWithTag:i+(row+1)*1000+1];
+        
+        [btn1 setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+        
+        [btn1 setEnabled:YES];
+        
+        [btn1 addSubview:image];
+    }
+}
+-(void)addSeventhTextViewWithStrEndEditor:(NSString *)str{
+    if (![UIUtils isBlankString:str]) {
+        _seventhTextView.text = str;
+        _seventhApllabel.text = @"";
+    }else{
+        
+    }
+    [_seventhTextView setEditable: NO];
 }
 #pragma mark UITextViewDelegate
 -(void)textViewDidChange:(UITextView *)textView{

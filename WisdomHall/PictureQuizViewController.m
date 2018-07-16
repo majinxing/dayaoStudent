@@ -23,6 +23,11 @@
 
 #import "AnswerTestQuestionsViewController.h"
 
+#import "NewAnswerViewController.h"
+
+#import "VoteTableViewCell.h"
+
+
 @interface PictureQuizViewController ()<UITableViewDelegate,UITableViewDataSource,TextsTableViewCellDelegate,ShareViewDelegate>
 
 @property (nonatomic,strong)UITableView * tableView;
@@ -39,7 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#FAFAFA"];
     
     _userModel = [[Appsetting sharedInstance] getUsetInfo];
     
@@ -56,13 +61,13 @@
  *  显示navigation的标题
  **/
 -(void)setNavigationTitle{
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     self.title = @"问答";
     _userModel = [[Appsetting sharedInstance] getUsetInfo];
     if ([[NSString stringWithFormat:@"%@",_classModel.teacherId] isEqualToString:[NSString stringWithFormat:@"%@",_userModel.peopleId]]) {
-//        UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"创建测试" style:UIBarButtonItemStylePlain target:self action:@selector(createText)];
-//        self.navigationItem.rightBarButtonItem = myButton;
+        //        UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"创建测试" style:UIBarButtonItemStylePlain target:self action:@selector(createText)];
+        //        self.navigationItem.rightBarButtonItem = myButton;
     }
     
 }
@@ -108,7 +113,7 @@
         for (int i = 0; i<ary.count; i++) {
             TextModel * text = [[TextModel alloc] init];
             [text setSelfInfoWithDict:ary[i]];
-           
+            
             if ([text.title rangeOfString:@"【拍照问答】"].location!=NSNotFound) {
                 [_dataAry addObject:text];
             }
@@ -238,35 +243,63 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     //TextTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
-    TextsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"TextsTableViewCell"];
-    if (!cell)
-    {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"TextsTableViewCell" owner:nil options:nil] objectAtIndex:0];
-    }
-    TextModel * t = _dataAry[indexPath.row];
     
-    [cell addContentView:t withIndex:(int)indexPath.row+1];
+    //    TextsTableViewCell * cell1 = [tableView dequeueReusableCellWithIdentifier:@"TextsTableViewCell"];
+    //    if (!cell1)
+    //    {
+    //        cell1 = [[[NSBundle mainBundle] loadNibNamed:@"TextsTableViewCell" owner:nil options:nil] objectAtIndex:0];
+    //    }
+    //    TextModel * t = _dataAry[indexPath.row];
+    //
+    //    [cell1 addContentView:t withIndex:(int)indexPath.row+1];
+    //    if (![[NSString stringWithFormat:@"%@",_classModel.teacherId] isEqualToString:[NSString stringWithFormat:@"%@",_userModel.peopleId]]) {
+    //        cell1.moreImage.image = [UIImage imageNamed:@""];
+    //        [cell1.moreBtn setEnabled:NO];
+    //    }
+    //    cell1.delegate = self;
+    //    return cell1;
+    
+    VoteTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"VoteTableViewCell"];
+    if (!cell) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"VoteTableViewCell" owner:nil options:nil] objectAtIndex:0];
+    }
+    
+    TextModel * v = _dataAry[indexPath.row];
+    
+    [cell voteTitle:v.title withCreateTime:v.timeLimit withState:@"" withIndex:(int)indexPath.row+1 withVoteStatus:v.statusName];
+    
+//    cell.delegate = self;
+    
     
     if (![[NSString stringWithFormat:@"%@",_classModel.teacherId] isEqualToString:[NSString stringWithFormat:@"%@",_userModel.peopleId]]) {
-        
         cell.moreImage.image = [UIImage imageNamed:@""];
         [cell.moreBtn setEnabled:NO];
-        
     }
-    cell.delegate = self;
     return cell;
     
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    AnswerTestQuestionsViewController * vc= [[AnswerTestQuestionsViewController alloc] init];
-    vc.t = _dataAry[indexPath.row];
-    vc.editable = NO;
-    vc.titleStr = @"问答";
-    self.hidesBottomBarWhenPushed = YES;
+    NewAnswerViewController * vc= [[NewAnswerViewController alloc] init];
     
-    [self.navigationController pushViewController:vc animated:YES];
+    vc.t = _dataAry[indexPath.row];
+    if ([vc.t.statusName isEqualToString:@"已完成"]) {
+        vc.isAbleAnswer = NO;
+    }else{
+        vc.isAbleAnswer = YES;
+    }
+    vc.editable = NO;
+    
+    vc.titleStr = @"试题";
+    
+    if ([vc.t.statusName isEqualToString:@"未进行"]) {
+        [UIUtils showInfoMessage:@"考试未进行，不能查看" withVC:self];
+    }else{
+        self.hidesBottomBarWhenPushed = YES;
+        
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     
     //    if ([vc.t.statusName isEqualToString:@"进行中"]) {
     //        self.hidesBottomBarWhenPushed = YES;
@@ -287,13 +320,13 @@
     return 10;
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

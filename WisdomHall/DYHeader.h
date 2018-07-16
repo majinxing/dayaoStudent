@@ -113,6 +113,8 @@
 #define Lotus                       @"审批"
 #define Group                       @"群组"
 #define Statistical                 @"统计"
+#define Classroom                   @"课堂"
+#define LostANDFound                @"失物"
 
 #define CourseCloud                 @"课程云"
 #define SecondHand                  @"二手市场"

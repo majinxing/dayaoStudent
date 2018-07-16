@@ -124,16 +124,7 @@
             NSDictionary * d = [[NSDictionary alloc] initWithObjectsAndKeys:aa,@"columns",[NSString stringWithFormat:@"%d",j+1],@"rowId",[NSString stringWithFormat:@"%d",j+1],@"rowNum",nil];//与实际数值可能不符
             [a addObject:d];
         }
-        _seatLable = [[UILabel alloc] initWithFrame:CGRectMake(APPLICATION_WIDTH/2-50, 30, 100, 25)];
-        if (![UIUtils isBlankString:_seat]) {
-            _seatLable.text = [NSString stringWithFormat:@"座次:%@",_seat];
-        }else{
-            _seatLable.text = [NSString stringWithFormat:@"座次:未选座"];
-        }
-        _seatLable.font = [UIFont systemFontOfSize:15];
-        _seatLable.textColor = [UIColor blackColor];
-        _seatLable.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:_seatLable];
+        
         
         __block  NSMutableArray *  seatsArray = a;//seatsDic[@"seats"];
         
@@ -163,9 +154,9 @@
     if ([UIUtils isBlankString:_type]) {
         
     }else{
-        UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"确定选座" style:UIBarButtonItemStylePlain target:self action:@selector(sureBtnAction)];
-        
-        self.navigationItem.rightBarButtonItem = myButton;
+//        UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"确定选座" style:UIBarButtonItemStylePlain target:self action:@selector(sureBtnAction)];
+//
+//        self.navigationItem.rightBarButtonItem = myButton;
         
     }
     
@@ -204,17 +195,48 @@
     NSArray * aryImage = @[@"kexuan",@"ss",@"yishou",@"xuanzhong"];
     
     for (int i = 0; i<4; i++) {
-        UILabel * lable = [[UILabel alloc] initWithFrame:CGRectMake(20+(i%2)*140, APPLICATION_HEIGHT-150+(i/2)*25, 65, 20)];
-        lable.text = ary[i];
-        lable.font = [UIFont systemFontOfSize:14];
         
-        UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(lable.frame), APPLICATION_HEIGHT-150+(i/2)*25, 20, 20)];
+        UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(50+(i%2)*140, APPLICATION_HEIGHT-180+(i/2)*25, 20, 20)];
         image.image = [UIImage imageNamed:aryImage[i]];
+        
+        UILabel * lable = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame)+10, APPLICATION_HEIGHT-180+(i/2)*25, 65, 20)];
+        lable.text = ary[i];
+        lable.font = [UIFont systemFontOfSize:15];
+        
+        
         
         [self.view addSubview:lable];
         
         [self.view addSubview:image];
     }
+    
+    UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    btn.frame = CGRectMake(APPLICATION_WIDTH/2, APPLICATION_HEIGHT-64-44, APPLICATION_WIDTH/2, 44);
+    
+    [btn setBackgroundImage:[UIImage imageNamed:@"Rectangle3"] forState:UIControlStateNormal];
+    
+    [btn setTitle:@"确定" forState:UIControlStateNormal];
+    
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    [btn addTarget:self action:@selector(sureBtnAction) forControlEvents:UIControlEventTouchUpInside];
+
+    [self.view addSubview:btn];
+    
+    
+    _seatLable = [[UILabel alloc] initWithFrame:CGRectMake(0, APPLICATION_HEIGHT-64-44, APPLICATION_WIDTH/2, 44)];
+    if (![UIUtils isBlankString:_seat]) {
+        _seatLable.text = [NSString stringWithFormat:@"座次:%@",_seat];
+    }else{
+        _seatLable.text = [NSString stringWithFormat:@"座次:未选座"];
+    }
+    _seatLable.font = [UIFont systemFontOfSize:15];
+    _seatLable.textColor = [UIColor blackColor];
+    _seatLable.textAlignment = NSTextAlignmentCenter;
+    
+    [self.view addSubview:_seatLable];
+    
 }
 
 -(void)sureBtnAction{

@@ -40,7 +40,7 @@
     _tableview.separatorStyle = NO;
     [self.view addSubview:_tableview];
     
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 
 //    [self getWANIPAddress];
     // Do any additional setup after loading the view from its nib.
@@ -49,7 +49,7 @@
  *  显示navigation的标题
  **/
 -(void)setNavigationTitle{
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
    
     self.title = @"我的";
 }
