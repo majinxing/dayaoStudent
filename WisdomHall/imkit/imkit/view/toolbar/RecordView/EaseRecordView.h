@@ -11,7 +11,7 @@
   */
 
 #import <UIKit/UIKit.h>
-
+//语音音频界面
 typedef enum{
     EaseRecordViewTypeTouchDown,
     EaseRecordViewTypeTouchUpInside,

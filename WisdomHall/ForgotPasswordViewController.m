@@ -29,7 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#fafafa"];
     [self setNavigationTitle];
     
     // Do any additional setup after loading the view from its nib.

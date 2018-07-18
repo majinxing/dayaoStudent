@@ -14,8 +14,8 @@
 #import "EaseChatBarMoreView.h"
 #import "EaseChatToolbarItem.h"
 
-#define kTouchToRecord NSLocalizedString(@"message.toolBar.record.touch", @"hold down to talk")
-#define kTouchToFinish NSLocalizedString(@"message.toolBar.record.send", @"loosen to send")
+#define kTouchToRecord NSLocalizedString(@"message.toolBar.record.touch", @"按住抢答")
+#define kTouchToFinish NSLocalizedString(@"message.toolBar.record.send", @"上滑取消")
 
 
 
@@ -35,6 +35,8 @@
 @property (nonatomic, readonly) CGFloat horizontalPadding;
 
 @property (nonatomic, readonly) CGFloat verticalPadding;
+
+@property (strong, nonatomic) UIButton *recordButton;//移除来了
 
 /**
  *  输入框左侧的按钮列表：EMChatToolbarItem类型

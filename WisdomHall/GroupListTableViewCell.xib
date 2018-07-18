@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,11 +16,11 @@
             <rect key="frame" x="0.0" y="0.0" width="352" height="91"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="352" height="91"/>
+                <rect key="frame" x="0.0" y="0.0" width="352" height="90.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Obd-QL-Qaa">
-                        <rect key="frame" x="28" y="13" width="200" height="64.5"/>
+                        <rect key="frame" x="28" y="16" width="200" height="59"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="200" id="dtx-sa-YUX"/>
                         </constraints>
@@ -28,10 +28,10 @@
                         <color key="textColor" red="0.0063722040288368741" green="0.0068735062710670617" blue="0.006880552030456899" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5e-Wu-yvK">
-                        <rect key="frame" x="244" y="13" width="80" height="64.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5e-Wu-yvK">
+                        <rect key="frame" x="204" y="16" width="120" height="59"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="80" id="Bkw-72-fRj"/>
+                            <constraint firstAttribute="width" constant="120" id="Bkw-72-fRj"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.29631889649999998" green="0.64504138749999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -39,12 +39,12 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Obd-QL-Qaa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="SHT-mg-WQ4"/>
+                    <constraint firstItem="Obd-QL-Qaa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="12" id="SHT-mg-WQ4"/>
                     <constraint firstAttribute="bottomMargin" secondItem="X5e-Wu-yvK" secondAttribute="bottom" constant="5" id="T6g-Hy-QNE"/>
                     <constraint firstItem="X5e-Wu-yvK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="VjP-tx-pt0"/>
                     <constraint firstItem="Obd-QL-Qaa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="ZyY-Lq-nnp"/>
                     <constraint firstAttribute="bottomMargin" secondItem="Obd-QL-Qaa" secondAttribute="bottom" constant="5" id="aHU-9Y-jwQ"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="X5e-Wu-yvK" secondAttribute="trailing" constant="20" id="dkI-ts-HPa"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="X5e-Wu-yvK" secondAttribute="trailing" constant="12" id="dkI-ts-HPa"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

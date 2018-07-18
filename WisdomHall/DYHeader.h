@@ -147,6 +147,16 @@
 //接口 192.168.1.81:8080 api.dayaokeji.com xtu.api.dayaokeji.com
 //#define BaseURL                 @"http://192.168.1.103:8080/"
 
+#define IMAPIURL                @"http://192.168.1.100:8010/course-im"//IMAPI
+
+#define IMHOSt                  @"192.168.1.100"                     //IM服务器
+
+#define IMToken                 @"auth/grant"                        //IM token
+
+#define IMImages                @"images"                            //IM图片上传
+
+#define IMAudios                @"audios"                            //IM 音频上传
+
 #define Login                   @"course/user/login"                //登录
 
 #define SchoolList              @"http://www.dayaokeji.com/ldxy_serverlist.html" //   获取学校数据

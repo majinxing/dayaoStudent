@@ -34,7 +34,6 @@
  *  按钮、toolbarView
  */
 @property (strong, nonatomic) UIView *toolbarView;
-@property (strong, nonatomic) UIButton *recordButton;
 @property (strong, nonatomic) UIButton *moreButton;
 @property (strong, nonatomic) UIButton *faceButton;
 
@@ -160,6 +159,7 @@
     [self.recordButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     [self.recordButton setBackgroundImage:[[UIImage imageNamed:@"chatBar_recordBg"] stretchableImageWithLeftCapWidth:10 topCapHeight:10] forState:UIControlStateNormal];
     [self.recordButton setBackgroundImage:[[UIImage imageNamed:@"chatBar_recordSelectedBg"] stretchableImageWithLeftCapWidth:10 topCapHeight:10] forState:UIControlStateHighlighted];
+    //文字语音
     [self.recordButton setTitle:kTouchToRecord forState:UIControlStateNormal];
     [self.recordButton setTitle:kTouchToFinish forState:UIControlStateHighlighted];
     self.recordButton.hidden = YES;

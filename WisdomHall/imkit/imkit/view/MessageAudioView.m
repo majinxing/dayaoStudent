@@ -27,7 +27,7 @@
 #define kProgressViewHeight 3
 
 @implementation MessageAudioView
-
+//语音视图
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -35,20 +35,38 @@
         self.backgroundColor = [UIColor clearColor];
 
         self.playBtn = [[UIButton alloc] init];
+//        self.playBtn.backgroundColor = [UIColor whiteColor];
+        
         [self.playBtn setImage:[UIImage imageNamed:@"Play"] forState:UIControlStateNormal];
         [self.playBtn setImage:[UIImage imageNamed:@"PlayPressed"] forState:UIControlStateSelected];
-        [self addSubview:self.playBtn];
 
         self.progressView = [[UIProgressView alloc] init];
+        
         [self.progressView setProgressViewStyle:UIProgressViewStyleDefault];
         [self.progressView setBackgroundColor:[UIColor greenColor]];
         self.progressView.progress = 0.0f;
         [self.progressView setTrackTintColor:RGBACOLOR(179, 179, 179, 1.0)];
         [self.progressView setTintColor:RGBACOLOR(43, 11, 207, 1.0)];
+        
+        
         [self addSubview:self.progressView];
+        
+        [self addSubview:self.playBtn];
 
+        
+        self.audioImage = [[UIImageView alloc] init];
+        
+        
+        self.audioImage.image = [UIImage imageNamed:@"Audio track"];
+
+        [self addSubview:self.audioImage];
+        
         self.timeLengthLabel = [[UILabel alloc] init];
+        
         [self.timeLengthLabel setFont:[UIFont systemFontOfSize:12.0f]];
+        
+        self.timeLengthLabel.textAlignment = NSTextAlignmentRight;
+        
         [self addSubview:self.timeLengthLabel];
         
         self.unreadImageView = [[UIImageView alloc] init];
@@ -208,14 +226,19 @@
     self.playBtn.frame = rect;
     
     rect = self.progressView.frame;
-    rect.origin.x = self.playBtn.frame.origin.x + self.playBtn.frame.size.width;
+    rect.origin.x = 0;//self.playBtn.frame.origin.x + self.playBtn.frame.size.width;
     rect.origin.y = bubbleFrame.origin.y + (kAudioHeight - kProgressViewHeight )/2;
-    rect.size.width = bubbleFrame.size.width - 8 - kPlayBtnWidth;
+    rect.size.width = 0;//bubbleFrame.size.width - 8 - kPlayBtnWidth;
     self.progressView.frame = rect;
     
+    self.audioImage.frame = CGRectMake(CGRectGetMaxX(self.playBtn.frame)+10, self.frame.size.height/2-kPlayBtnHeight/2, self.frame.size.width-kPlayBtnWidth-10-50, kPlayBtnHeight);
+    
     rect = self.timeLengthLabel.frame;
-    rect.origin.x = self.progressView.frame.origin.x ;
-    rect.origin.y = bubbleFrame.origin.y + kAudioHeight - ktimeLabelHeight;
+    
+    rect.origin.x = self.frame.size.width-rect.size.width;//self.progressView.frame.origin.x ;
+    
+    rect.origin.y = self.frame.size.height/2-rect.size.height/2;//bubbleFrame.origin.y + kAudioHeight - ktimeLabelHeight;
+    
     self.timeLengthLabel.frame = rect;
 
     //右上角

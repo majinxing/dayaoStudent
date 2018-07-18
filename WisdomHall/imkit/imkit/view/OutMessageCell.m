@@ -47,7 +47,7 @@
         [self.contentView addSubview:self.sendingIndicatorView];
         
         self.containerView = [[UIView alloc] init];
-        self.containerView.backgroundColor = RGBCOLOR(165, 227, 105);
+        self.containerView.backgroundColor = RGBCOLOR(224, 226, 231);//RGBCOLOR(165, 227, 105);
         CALayer *imageLayer = [self.containerView layer];
         [imageLayer setMasksToBounds:YES];
         [imageLayer setCornerRadius:4];
@@ -55,7 +55,7 @@
         
         
         self.triangleView = [[TriangleView alloc] init];
-        self.triangleView.fillColor = RGBCOLOR(165, 227, 105);
+        self.triangleView.fillColor = RGBCOLOR(224, 226, 231);//RGBCOLOR(165, 227, 105);
         self.triangleView.backgroundColor = [UIColor clearColor];
         self.triangleView.right = YES;
         [self.contentView addSubview:self.triangleView];

@@ -58,43 +58,44 @@
     if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
         [self setEdgesForExtendedLayout:UIRectEdgeNone];
     }
+    
     UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     bgImageView.image = [UIImage imageNamed:@"bg"];
     [self.view addSubview:bgImageView];
-
+    
     float startHeight = [[UIScreen mainScreen] bounds].size.height >= 568.0 ? 180 : 100;
     UIImageView *headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(15, startHeight + 12, 17, 21)];
     headerImageView.image = [UIImage imageNamed:@"ic_man"];
     [self.view addSubview:headerImageView];
-
+    
     tfSender = [[UITextField alloc] initWithFrame:CGRectMake(52, startHeight + 4, 180, 37)];
     tfSender.textColor = [UIColor whiteColor];
     tfSender.font = [UIFont systemFontOfSize:18];
     tfSender.placeholder = @"发送用户id";
     tfSender.keyboardType = UIKeyboardTypeNumberPad;
     [self.view addSubview:tfSender];
-
+    
     UIView *whiteLine = [[UIView alloc] initWithFrame:CGRectMake(15, startHeight + 45, 290, 1)];
     whiteLine.backgroundColor = [UIColor colorWithRed:255 / 255.0 green:255 / 255.0 blue:255 / 255.0 alpha:0.4];
     [self.view addSubview:whiteLine];
-
+    
     startHeight += 45;
     headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(15, startHeight + 12, 17, 21)];
     headerImageView.image = [UIImage imageNamed:@"ic_man"];
     [self.view addSubview:headerImageView];
-
+    
     tfReceiver = [[UITextField alloc] initWithFrame:CGRectMake(52, startHeight + 4, 180, 37)];
     tfReceiver.textColor = [UIColor whiteColor];
     tfReceiver.font = [UIFont systemFontOfSize:18];
     tfReceiver.placeholder = @"接收用户id";
     tfReceiver.keyboardType = UIKeyboardTypeNumberPad;
     [self.view addSubview:tfReceiver];
-
+    
     whiteLine = [[UIView alloc] initWithFrame:CGRectMake(15, startHeight + 45, 290, 1)];
     whiteLine.backgroundColor = [UIColor colorWithRed:255 / 255.0 green:255 / 255.0 blue:255 / 255.0 alpha:0.4];
     [self.view addSubview:whiteLine];
     startHeight += 45 + ([[UIScreen mainScreen] bounds].size.height >= 568.0 ? 20 : 15);
-
+    
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(15, startHeight, self.view.frame.size.width - 30, 48);
     [btn setTitle:@"登录" forState:UIControlStateNormal];
@@ -103,11 +104,9 @@
     btn.titleLabel.font = [UIFont systemFontOfSize:17];
     [btn addTarget:self action:@selector(actionChat) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
-
+    
     self.chatButton = btn;
     
-//        [self actionChat];
-
     self.navigationController.delegate = self;
 
 }
@@ -140,9 +139,6 @@
 }
 
 - (void)actionChat {
-    
-//    tfSender.text = @"1";
-    
     if (!tfSender.text.length) {
         NSLog(@"invalid input");
         return;
@@ -150,14 +146,11 @@
     [self.view endEditing:YES];
     
     self.chatButton.userInteractionEnabled = NO;
-    
     long long sender = [tfSender.text longLongValue];
-    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *token = [self login:sender];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            
             self.chatButton.userInteractionEnabled = YES;
             
             if (token.length == 0) {
@@ -256,16 +249,18 @@
                 msgController.peerName = @"测试";
                 msgController.userDelegate = self;
                 self.navigationController.navigationBarHidden = NO;
+                self.hidesBottomBarWhenPushed = YES;
+
                 [self.navigationController pushViewController:msgController animated:YES];
+                self.hidesBottomBarWhenPushed = NO;
+
             } else {
                 MessageListViewController *ctrl = [[MessageListViewController alloc] init];
                 ctrl.currentUID = [tfSender.text longLongValue];
                 ctrl.userDelegate = self;
                 ctrl.groupDelegate = self;
                 self.navigationController.navigationBarHidden = NO;
-                self.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:ctrl animated:YES];
-                self.hidesBottomBarWhenPushed = NO;
             }
         });
     });
@@ -273,8 +268,8 @@
 //生成token
 -(NSString*)login:(long long)uid {
     //调用app自身的服务器获取连接im服务必须的access token
-    NSString *url = @"http://demo.gobelieve.io/auth/token";
-//    NSString * url = @"http://192.168.1.100:8010/course-im/auth/grant";
+//    NSString *url = @"http://demo.gobelieve.io/auth/token";
+    NSString * url = [NSString stringWithFormat:@"%@/%@",IMAPIURL,IMToken];//@"http://192.168.1.100:8010/course-im/auth/grant";
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]
                                                               cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                           timeoutInterval:60];

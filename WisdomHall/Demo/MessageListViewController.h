@@ -21,6 +21,9 @@
 @end
 
 @interface MessageListViewController : UIViewController
+
+@property(nonatomic) NSString *deviceToken;
+
 @property(nonatomic, assign) int64_t currentUID;
 
 @property(nonatomic, weak) id<MessageViewControllerUserDelegate> userDelegate;

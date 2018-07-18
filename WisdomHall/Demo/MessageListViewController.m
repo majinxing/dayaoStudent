@@ -25,8 +25,18 @@
 //#import <gobelieve/CustomerMessageViewController.h>
 #import "CustomerMessageViewController.h"
 
+#import "PeerMessageHandler.h"
+#import "GroupMessageHandler.h"
+#import "CustomerMessageHandler.h"
+#import "IMHttpAPI.h"
+#import "SyncKeyHandler.h"
+
 #import "MessageConversationCell.h"
 #import "Conversation.h"
+
+#import "NoticeViewController.h"
+
+#import "GroupListViewController.h"
 
 //RGB颜色
 #define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
@@ -41,10 +51,10 @@ alpha:(a)]
 
 @interface MessageListViewController()<UITableViewDelegate, UITableViewDataSource,
     TCPConnectionObserver, PeerMessageObserver, GroupMessageObserver,
-SystemMessageObserver, RTMessageObserver,MessageViewControllerUserDelegate
-,MessageListViewControllerGroupDelegate>
+    SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,MessageListViewControllerGroupDelegate>
 @property (strong , nonatomic) NSMutableArray *conversations;
 @property (strong , nonatomic) UITableView *tableview;
+@property (nonatomic,strong)UserModel * user;
 @end
 
 @implementation MessageListViewController
@@ -64,11 +74,17 @@ SystemMessageObserver, RTMessageObserver,MessageViewControllerUserDelegate
 //聊天列表
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    NSString * a = @"1";
-//    self.currentUID = [a longLongValue];
-    self.userDelegate = self;
-    self.groupDelegate = self;
     
+    _user = [[Appsetting sharedInstance] getUsetInfo];//i++
+    
+    NSString * str = [NSString stringWithFormat:@"%@%@",_user.school,_user.studentId];
+    
+    _currentUID = [str longLongValue];
+    
+    _groupDelegate = self;
+
+    _userDelegate = self;
+
 //    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(home:)];
 //    self.navigationItem.leftBarButtonItem=newBackButton;
     
@@ -103,7 +119,9 @@ SystemMessageObserver, RTMessageObserver,MessageViewControllerUserDelegate
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillResignActive) name:UIApplicationWillResignActiveNotification object:nil];
 
     id<ConversationIterator> iterator =  [[PeerMessageDB instance] newConversationIterator];
+    
     IMessage * msg = [iterator next];
+    
     while (msg) {
         Conversation *c = [[Conversation alloc] init];
         c.message = msg;
@@ -160,9 +178,18 @@ SystemMessageObserver, RTMessageObserver,MessageViewControllerUserDelegate
     conv.message = msg;
     conv.cid = ((ICustomerMessage*)msg).storeID;
     conv.type = CONVERSATION_CUSTOMER_SERVICE;
-    conv.name = @"客服";
+    conv.name = @"通知";
+    
     [self updateConversationDetail:conv];
-    [self.conversations addObject:conv];
+    
+    Conversation *conv1 = [[Conversation alloc] init];
+    conv1.message = msg;
+    conv1.cid = ((ICustomerMessage*)msg).storeID;
+    conv1.type = CONVERSATION_CUSTOMER_SERVICE;
+    conv1.name = @"群组";
+    
+    [self updateConversationDetail:conv1];
+//    [self.conversations addObject:conv];
     
     //todo 从本地数据库加载最新的系统消息
     NSArray *sortedArray = [self.conversations sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
@@ -183,14 +210,38 @@ SystemMessageObserver, RTMessageObserver,MessageViewControllerUserDelegate
     
     self.conversations = [NSMutableArray arrayWithArray:sortedArray];
     
+    [self.conversations insertObject:conv1 atIndex:0];
+
+    [self.conversations insertObject:conv atIndex:1];
 
 
     self.navigationItem.title = @"对话";
     if ([[IMService instance] connectState] == STATE_CONNECTING) {
         self.navigationItem.title = @"连接中...";
     }
+    [self setNavigationTitle];
 }
 
+-(void)setNavigationTitle{
+    //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
+    
+    
+    UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"创建群组" style:UIBarButtonItemStylePlain target:self action:@selector(createGroup)];
+    self.navigationItem.rightBarButtonItem = myButton;
+    
+    //
+    //    UIBarButtonItem * selection = [[UIBarButtonItem alloc] initWithTitle:@"搜索" style:UIBarButtonItemStylePlain target:self action:@selector(selectionBtnPressed)];
+    //    self.navigationItem.leftBarButtonItem = selection;
+}
+-(void)createGroup{
+    [IMHttpAPI createGroup:@"群" master:501112233 members:@[@"5012012551321",@"5012012551319",@"5012012551322",@"501112233",@"5012012551320"] success:^(NSDictionary *groupId) {
+        NSLog(@"");
+        [_tableview reloadData];
+    } fail:^(NSString *error) {
+        NSLog(@"%@",error);
+    }];
+}
 - (void)updateConversationDetail:(Conversation*)conv {
     conv.timestamp = conv.message.timestamp;
     if (conv.message.type == MESSAGE_IMAGE) {
@@ -373,6 +424,7 @@ SystemMessageObserver, RTMessageObserver,MessageViewControllerUserDelegate
         cell = [[[NSBundle mainBundle]loadNibNamed:@"MessageConversationCell" owner:self options:nil] lastObject];
     }
     Conversation * conv = nil;
+    
     conv = (Conversation*)[self.conversations objectAtIndex:(indexPath.row)];
     
     [cell setConversation:conv];
@@ -418,6 +470,22 @@ SystemMessageObserver, RTMessageObserver,MessageViewControllerUserDelegate
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    if (indexPath.row==1) {
+        NoticeViewController * noticeVC = [[NoticeViewController alloc] init];
+        self.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:noticeVC animated:YES];
+        self.hidesBottomBarWhenPushed = NO;
+        return;
+    }else if (indexPath.row == 0){
+        GroupListViewController * g = [[GroupListViewController alloc] init];
+        self.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:g animated:YES];
+        self.hidesBottomBarWhenPushed = NO;
+        return;
+    }
     Conversation *con = [self.conversations objectAtIndex:indexPath.row];
     if (con.type == CONVERSATION_PEER) {
         PeerMessageViewController* msgController = [[PeerMessageViewController alloc] init];
@@ -453,7 +521,6 @@ SystemMessageObserver, RTMessageObserver,MessageViewControllerUserDelegate
         [self.navigationController pushViewController:msgController animated:YES];
     }
     
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 
@@ -524,7 +591,12 @@ SystemMessageObserver, RTMessageObserver,MessageViewControllerUserDelegate
         if (index != 0) {
             //置顶
             [self.conversations removeObjectAtIndex:index];
-            [self.conversations insertObject:con atIndex:0];
+            if (self.conversations.count>=2) {
+                [self.conversations insertObject:con atIndex:2];
+            }else{
+                [self.conversations insertObject:con atIndex:0];
+            }
+//            [self.conversations insertObject:con atIndex:0];
             [self.tableview reloadData];
         }
     } else {
@@ -540,8 +612,14 @@ SystemMessageObserver, RTMessageObserver,MessageViewControllerUserDelegate
         con.type = CONVERSATION_GROUP;
         con.cid = cid;
         [self updateConversationName:con];
-        [self.conversations insertObject:con atIndex:0];
-        NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
+        
+        if (self.conversations.count>=2) {
+            [self.conversations insertObject:con atIndex:2];
+        }else{
+            [self.conversations insertObject:con atIndex:0];
+        }
+//        [self.conversations insertObject:con atIndex:0];
+        NSIndexPath *path = [NSIndexPath indexPathForRow:2 inSection:0];
         NSArray *array = [NSArray arrayWithObject:path];
         [self.tableview insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationMiddle];
     }
@@ -570,9 +648,13 @@ SystemMessageObserver, RTMessageObserver,MessageViewControllerUserDelegate
         }
         
         if (index != 0) {
-            //置顶
+            //置顶 修改位置chat
             [self.conversations removeObjectAtIndex:index];
-            [self.conversations insertObject:con atIndex:0];
+            if (self.conversations.count>=2) {
+                [self.conversations insertObject:con atIndex:2];
+            }else{
+                [self.conversations insertObject:con atIndex:0];
+            }
             [self.tableview reloadData];
         }
     } else {
@@ -588,9 +670,14 @@ SystemMessageObserver, RTMessageObserver,MessageViewControllerUserDelegate
             con.newMsgCount += 1;
             [self setNewOnTabBar];
         }
+        if (self.conversations.count>=2) {
+            [self.conversations insertObject:con atIndex:2];
+        }else{
+            [self.conversations insertObject:con atIndex:0];
+        }
 
-        [self.conversations insertObject:con atIndex:0];
-        NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
+//        [self.conversations insertObject:con atIndex:0];
+        NSIndexPath *path = [NSIndexPath indexPathForRow:2 inSection:0];
         NSArray *array = [NSArray arrayWithObject:path];
         [self.tableview insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationMiddle];
     }
@@ -620,8 +707,14 @@ SystemMessageObserver, RTMessageObserver,MessageViewControllerUserDelegate
         
         if (index != 0) {
             //置顶
+            
             [self.conversations removeObjectAtIndex:index];
-            [self.conversations insertObject:con atIndex:0];
+            if (self.conversations.count>=2) {
+                [self.conversations insertObject:con atIndex:2];
+            }else{
+                [self.conversations insertObject:con atIndex:0];
+            }
+//            [self.conversations insertObject:con atIndex:0];
             [self.tableview reloadData];
         }
     } else {
@@ -637,9 +730,13 @@ SystemMessageObserver, RTMessageObserver,MessageViewControllerUserDelegate
             con.newMsgCount += 1;
             [self setNewOnTabBar];
         }
-        
-        [self.conversations insertObject:con atIndex:0];
-        NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
+        if (self.conversations.count>=2) {
+            [self.conversations insertObject:con atIndex:2];
+        }else{
+            [self.conversations insertObject:con atIndex:0];
+        }
+//        [self.conversations insertObject:con atIndex:0];
+        NSIndexPath *path = [NSIndexPath indexPathForRow:2 inSection:0];
         NSArray *array = [NSArray arrayWithObject:path];
         [self.tableview insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationMiddle];
     }
@@ -723,10 +820,14 @@ SystemMessageObserver, RTMessageObserver,MessageViewControllerUserDelegate
         
         conv.type = CONVERSATION_SYSTEM;
         conv.cid = 0;
+        if (self.conversations.count>=2) {
+            [self.conversations insertObject:conv atIndex:2];
+        }else{
+            [self.conversations insertObject:conv atIndex:0];
+        }
+//        [self.conversations insertObject:conv atIndex:0];
         
-        [self.conversations insertObject:conv atIndex:0];
-        
-        NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
+        NSIndexPath *path = [NSIndexPath indexPathForRow:2 inSection:0];
         NSArray *array = [NSArray arrayWithObject:path];
         [self.tableview insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationMiddle];
     } else {
@@ -738,7 +839,12 @@ SystemMessageObserver, RTMessageObserver,MessageViewControllerUserDelegate
         if (index != 0) {
             //置顶
             [self.conversations removeObjectAtIndex:index];
-            [self.conversations insertObject:conv atIndex:0];
+            if (self.conversations.count>=2) {
+                [self.conversations insertObject:conv atIndex:2];
+            }else{
+                [self.conversations insertObject:conv atIndex:0];
+            }
+//            [self.conversations insertObject:conv atIndex:0];
             [self.tableview reloadData];
         }
     }
@@ -747,6 +853,230 @@ SystemMessageObserver, RTMessageObserver,MessageViewControllerUserDelegate
 -(void)onRTMessage:(RTMessage*)rt {
     NSLog(@"rt message:%lld %lld %@", rt.sender, rt.receiver, rt.content);
 }
+
+-(NSString*)getDocumentPath {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    return basePath;
+}
+
+
+-(BOOL)mkdir:(NSString*)path {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:path]) {
+        NSError *err;
+        BOOL r = [fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&err];
+        
+        if (!r) {
+            NSLog(@"mkdir err:%@", err);
+        }
+        return r;
+    }
+    
+    return YES;
+}
+
+- (void)actionChat {
+//    if (!tfSender.text.length) {
+//        NSLog(@"invalid input");
+//        return;
+//    }
+    [self.view endEditing:YES];
+    
+//    self.chatButton.userInteractionEnabled = NO;
+//    long long sender = [tfSender.text longLongValue];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *token = [self login:1];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+//            self.chatButton.userInteractionEnabled = YES;
+            
+            if (token.length == 0) {
+                NSLog(@"login fail");
+                return;
+            }
+            
+            NSLog(@"login success");
+            
+            
+            
+#ifdef FILE_ENGINE_DB
+            NSString *path = [self getDocumentPath];
+            NSString *dbPath = [NSString stringWithFormat:@"%@/%lld", path, [@"1" longLongValue]];
+            [self mkdir:dbPath];
+            
+#elif defined SQL_ENGINE_DB
+            NSString *path = [self getDocumentPath];
+            NSString *dbPath = [NSString stringWithFormat:@"%@/gobelieve_%lld.db", path, [tfSender.text longLongValue]];
+            
+            //检查数据库文件是否已经存在
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            if (![fileManager fileExistsAtPath:dbPath]) {
+                NSString *p = [[NSBundle mainBundle] pathForResource:@"gobelieve" ofType:@"db"];
+                [fileManager copyItemAtPath:p toPath:dbPath error:nil];
+            }
+            FMDatabase *db = [[FMDatabase alloc] initWithPath:dbPath];
+            BOOL r = [db openWithFlags:SQLITE_OPEN_READWRITE|SQLITE_OPEN_WAL vfs:nil];
+            if (!r) {
+                NSLog(@"open database error:%@", [db lastError]);
+                db = nil;
+                NSAssert(NO, @"");
+            }
+#else
+#error dd
+#endif
+            
+            
+            
+#ifdef FILE_ENGINE_DB
+            [PeerMessageDB instance].dbPath = [NSString stringWithFormat:@"%@/peer", dbPath];
+            [GroupMessageDB instance].dbPath = [NSString stringWithFormat:@"%@/group", dbPath];
+            [CustomerMessageDB instance].dbPath = [NSString stringWithFormat:@"%@/customer", dbPath];
+#elif defined SQL_ENGINE_DB
+            [PeerMessageDB instance].db = db;
+            [GroupMessageDB instance].db = db;
+            [CustomerMessageDB instance].db = db;
+#else
+            
+#endif
+            
+            [PeerMessageHandler instance].uid = [@"1" longLongValue];
+            [GroupMessageHandler instance].uid = [@"1" longLongValue];
+            [CustomerMessageHandler instance].uid = [@"1" longLongValue];
+            
+            [IMHttpAPI instance].accessToken = token;
+            [IMService instance].token = token;
+            
+            
+            path = [self getDocumentPath];
+            dbPath = [NSString stringWithFormat:@"%@/%lld", path, [@"1" longLongValue]];
+            [self mkdir:dbPath];
+            
+            NSString *fileName = [NSString stringWithFormat:@"%@/synckey", dbPath];
+            
+            SyncKeyHandler *handler = [[SyncKeyHandler alloc] initWithFileName:fileName];
+            [IMService instance].syncKeyHandler = handler;
+            
+            [IMService instance].syncKey = [handler syncKey];
+            NSLog(@"sync key:%lld", [handler syncKey]);
+            
+            [[IMService instance] clearSuperGroupSyncKey];
+            NSDictionary *groups = [handler superGroupSyncKeys];
+            for (NSNumber *k in groups) {
+                NSNumber *v = [groups objectForKey:k];
+                NSLog(@"group id:%@ sync key:%@", k, v);
+                [[IMService instance] addSuperGroupSyncKey:[v longLongValue] gid:[k longLongValue]];
+            }
+            
+            [[IMService instance] start];
+            
+            if (self.deviceToken.length > 0) {
+                
+                [IMHttpAPI bindDeviceToken:self.deviceToken
+                                   success:^{
+                                       NSLog(@"bind device token success");
+                                   }
+                                      fail:^{
+                                          NSLog(@"bind device token fail");
+                                      }];
+            }
+            
+//            if (tfReceiver.text.length > 0) {
+//                PeerMessageViewController *msgController = [[PeerMessageViewController alloc] init];
+//                msgController.currentUID = [tfSender.text longLongValue];
+//                msgController.peerUID = [tfReceiver.text longLongValue];
+//                msgController.peerName = @"测试";
+//                msgController.userDelegate = self;
+//                self.navigationController.navigationBarHidden = NO;
+//                [self.navigationController pushViewController:msgController animated:YES];
+//            } else {
+//                MessageListViewController *ctrl = [[MessageListViewController alloc] init];
+//                ctrl.currentUID = [tfSender.text longLongValue];
+//                ctrl.userDelegate = self;
+//                ctrl.groupDelegate = self;
+//                self.navigationController.navigationBarHidden = NO;
+//                [self.navigationController pushViewController:ctrl animated:YES];
+//            }
+        });
+    });
+}
+//生成token
+-(NSString*)login:(long long)uid {
+    //调用app自身的服务器获取连接im服务必须的access token
+    //    NSString *url = @"http://demo.gobelieve.io/auth/token";
+    NSString * url = [NSString stringWithFormat:@"%@/%@",IMAPIURL,IMToken];//@"http://192.168.1.100:8010/course-im/auth/grant";
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]
+                                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                          timeoutInterval:60];
+    
+    
+    [urlRequest setHTTPMethod:@"POST"];
+    
+    NSMutableDictionary *headers = [NSMutableDictionary dictionaryWithObject:@"application/json" forKey:@"Content-Type"];
+    
+    NSString * auth = [NSString stringWithFormat:@"Basic Nzo0NDk3NjBiMTIwNjEwYWMwYjNhYmRiZDk1NTI1NGVlMA=="];
+    
+    [headers setObject:auth forKey:@"Authorization"];
+    
+    [urlRequest setAllHTTPHeaderFields:headers];
+    
+    
+    
+#if TARGET_IPHONE_SIMULATOR
+    NSString *deviceID = @"7C8A8F5B-E5F4-4797-8758-05367D2A4D61";
+    NSLog(@"device id:%@", @"7C8A8F5B-E5F4-4797-8758-05367D2A4D61");
+#else
+    NSString *deviceID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    NSLog(@"device id:%@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]);
+#endif
+    
+    
+    NSMutableDictionary *obj = [NSMutableDictionary dictionary];
+    [obj setObject:[NSNumber numberWithLongLong:uid] forKey:@"uid"];
+    [obj setObject:[NSString stringWithFormat:@"测试用户%lld", uid] forKey:@"user_name"];
+    [obj setObject:[NSNumber numberWithInt:PLATFORM_IOS] forKey:@"platform_id"];
+    [obj setObject:deviceID forKey:@"device_id"];
+    
+    NSData *postBody = [NSJSONSerialization dataWithJSONObject:obj options:0 error:nil];
+    
+    [urlRequest setHTTPBody:postBody];
+    
+    NSURLResponse *response = nil;
+    
+    NSError *error = nil;
+    
+    NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
+    if (error != nil) {
+        NSLog(@"error:%@", error);
+        return nil;
+    }
+    NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*)response;
+    if (httpResp.statusCode != 200) {
+        return nil;
+    }
+    NSDictionary *e = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+    return [NSString stringWithFormat:@"%@", [e objectForKey:@"token"]];
+    //    return [NSString stringWithFormat:@"%@",[[e objectForKey:@"body"] objectForKey:@"token"]];
+}
+
+
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if (viewController == self) {
+        [[IMService instance] stop];
+        
+        if (self.deviceToken.length > 0) {
+            
+            [IMHttpAPI unbindDeviceToken:self.deviceToken
+                                 success:^{
+                                     NSLog(@"unbind device token success");
+                                 }
+                                    fail:^{
+                                        NSLog(@"unbind device token fail");
+                                    }];
+        }
+    }
+}
+
 #pragma mark - MessageViewControllerUserDelegate
 //从本地获取用户信息, IUser的name字段为空时，显示identifier字段
 - (IUser*)getUser:(int64_t)uid {
@@ -780,6 +1110,7 @@ SystemMessageObserver, RTMessageObserver,MessageViewControllerUserDelegate
     g.identifier = [NSString stringWithFormat:@"gid:%lld", gid];
     return g;
 }
+
 //从服务器获取用户信息
 - (void)asyncGetGroup:(int64_t)gid cb:(void(^)(IGroup*))cb {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

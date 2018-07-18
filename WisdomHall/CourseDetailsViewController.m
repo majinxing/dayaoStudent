@@ -42,7 +42,12 @@
 
 #import "TestAllViewController.h"
 
-@interface CourseDetailsViewController ()<UIActionSheetDelegate,ShareViewDelegate,UIAlertViewDelegate,UITableViewDelegate,UITableViewDataSource,MeetingTableViewCellDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIDocumentInteractionControllerDelegate,AlterViewDelegate>
+#import "MessageListViewController.h"
+
+#import "VoiceViewController.h"
+
+
+@interface CourseDetailsViewController ()<UIActionSheetDelegate,ShareViewDelegate,UIAlertViewDelegate,UITableViewDelegate,UITableViewDataSource,MeetingTableViewCellDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIDocumentInteractionControllerDelegate,AlterViewDelegate,MessageViewControllerUserDelegate>
 
 @property (nonatomic,strong) InteractiveView * interactiveView;
 @property (nonatomic,strong) ShareView * shareView;
@@ -519,6 +524,29 @@
 //    }
 //    return view;
 //}
+#pragma mark - MessageViewControllerUserDelegate
+//从本地获取用户信息, IUser的name字段为空时，显示identifier字段
+- (IUser*)getUser:(int64_t)uid {
+    IUser *u = [[IUser alloc] init];
+    u.uid = uid;
+    u.name = @"";
+    u.avatarURL = @"http://api.gobelieve.io/images/e837c4c84f706a7988d43d62d190e2a1.png";
+    u.identifier = [NSString stringWithFormat:@"uid:%lld", uid];
+    return u;
+}
+//从服务器获取用户信息
+- (void)asyncGetUser:(int64_t)uid cb:(void(^)(IUser*))cb {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        IUser *u = [[IUser alloc] init];
+        u.uid = uid;
+        u.name = [NSString stringWithFormat:@"name:%lld", uid];
+        u.avatarURL = @"http://api.gobelieve.io/images/e837c4c84f706a7988d43d62d190e2a1.png";
+        u.identifier = [NSString stringWithFormat:@"uid:%lld", uid];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            cb(u);
+        });
+    });
+}
 #pragma mark MeetingCellDelegate
 -(void)shareButtonClickedDelegate:(NSString *)platform{
     
@@ -544,37 +572,57 @@
         [self.navigationController pushViewController: d animated:YES];
     }else if ([platform isEqualToString:InteractionType_Responder]){
         NSLog(@"抢答");
-        ConversationVC * c =[[ConversationVC alloc] init];
-        self.hidesBottomBarWhenPushed = YES;
-        UserModel * s = [[Appsetting sharedInstance] getUsetInfo];
-        c.HyNumaber = [NSString stringWithFormat:@"%@%@",s.school,_c.teacherWorkNo];
-        c.call = CALLING;
-        c.teacherName = _c.teacherName;
-        c.c = _c;
         
-        [self presentViewController:c animated:YES completion:^{
-            
-        }];
-        [c returnReason:^(EMCallEndReason reason) {
-            
-            if (reason == EMCallEndReasonRemoteOffline) {
-                
-                [UIUtils showInfoMessage:@"抢答还没开始呢，不要太心急哦~" withVC:self];
-                
-            }else if (reason == EMCallEndReasonBusy){
-                
-                [UIUtils showInfoMessage:@"已有人抢答成功，下次手速要更快哦~" withVC:self];
-                
-                [self sentNumberResponder];
-                
-            }else if (reason == EMCallEndReasonHangup){
-                
-            }else {
-                [UIUtils showInfoMessage:@"抢答貌似失败了呢~" withVC:self];
-            }
-            
-        }];
+        VoiceViewController* msgController = [[VoiceViewController alloc] init];
         
+//        msgController.view.frame = CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);
+        
+        msgController.userDelegate = self;
+        
+        NSString * str = [NSString stringWithFormat:@"%@%@",_user.school,_c.teacherWorkNo];
+        NSString * str1 = [NSString stringWithFormat:@"%@%@",_user.school,_user.studentId];
+
+        msgController.peerUID = [str integerValue];//con.cid;
+        
+        msgController.peerName = _c.teacherName;//con.name;
+        
+        msgController.currentUID = [str1 integerValue];
+        
+        msgController.hidesBottomBarWhenPushed = YES;
+        
+        [self.navigationController pushViewController:msgController animated:YES];
+        
+//        ConversationVC * c =[[ConversationVC alloc] init];
+//        self.hidesBottomBarWhenPushed = YES;
+//        UserModel * s = [[Appsetting sharedInstance] getUsetInfo];
+//        c.HyNumaber = [NSString stringWithFormat:@"%@%@",s.school,_c.teacherWorkNo];
+//        c.call = CALLING;
+//        c.teacherName = _c.teacherName;
+//        c.c = _c;
+//
+//        [self presentViewController:c animated:YES completion:^{
+//
+//        }];
+//        [c returnReason:^(EMCallEndReason reason) {
+//
+//            if (reason == EMCallEndReasonRemoteOffline) {
+//
+//                [UIUtils showInfoMessage:@"抢答还没开始呢，不要太心急哦~" withVC:self];
+//
+//            }else if (reason == EMCallEndReasonBusy){
+//
+//                [UIUtils showInfoMessage:@"已有人抢答成功，下次手速要更快哦~" withVC:self];
+//
+//                [self sentNumberResponder];
+//
+//            }else if (reason == EMCallEndReasonHangup){
+//
+//            }else {
+//                [UIUtils showInfoMessage:@"抢答貌似失败了呢~" withVC:self];
+//            }
+//
+//        }];
+//
 //        [self.navigationController pushViewController:c animated:YES];
     }
     else if ([platform isEqualToString:InteractionType_Test]){
@@ -584,7 +632,7 @@
         textVC.classModel = _c;
         [self.navigationController pushViewController:textVC animated:YES];
     }else if ([platform isEqualToString:InteractionType_Discuss]){
-        DiscussViewController * d = [[DiscussViewController alloc] init];
+        MessageListViewController * d = [[MessageListViewController alloc] init];
         self.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:d animated:YES];
         NSLog(@"讨论");

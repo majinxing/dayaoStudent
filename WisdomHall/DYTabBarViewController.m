@@ -29,11 +29,14 @@
 
 #import "HomePageViewController.h"
 
+#import "IMTool.h"
+
 static dispatch_once_t predicate;
 
 @interface DYTabBarViewController ()<UIAlertViewDelegate>
 @property (nonatomic,copy)NSString * url;
 @property (nonatomic,strong) ChatHelper * chat;
+@property (nonatomic,strong)UserModel *user;
 @end
 
 @implementation DYTabBarViewController
@@ -59,6 +62,8 @@ static dispatch_once_t predicate;
 
 //    [self addChildViewControllerWithClassname:[SignInViewController description] imagename:@"课程(1)" title:@"课程" withSelectImageName:@"课程"];
     
+//    [self addChildViewControllerWithClassname:[MainViewController description] imagename:@"chat" title:@"消息" withSelectImageName:@"chat2"];
+
     [self addChildViewControllerWithClassname:[MessageListViewController description] imagename:@"chat" title:@"消息" withSelectImageName:@"chat2"];
     
     [self addChildViewControllerWithClassname:[PersonalCenterViewController description] imagename:@"my" title:@"我的" withSelectImageName:@"my2"];
@@ -70,7 +75,10 @@ static dispatch_once_t predicate;
 
     [self selectApp];
     
+    _user = [[Appsetting sharedInstance] getUsetInfo];
     
+    [IMTool IMLogin:[NSString stringWithFormat:@"%@%@",_user.school,_user.studentId]];
+
 
     // Do any additional setup after loading the view from its nib.
 }

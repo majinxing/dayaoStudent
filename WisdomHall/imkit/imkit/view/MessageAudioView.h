@@ -16,6 +16,7 @@
 @interface MessageAudioView : BubbleView <AVAudioPlayerDelegate>
 @property (nonatomic, strong) UIButton *playBtn;
 @property (nonatomic, strong) UIImageView *unreadImageView;
+@property (nonatomic, strong) UIImageView * audioImage;
 @property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, strong) UILabel *timeLengthLabel;
 @property (nonatomic, strong) UILabel *createTimeLabel;

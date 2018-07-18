@@ -12,6 +12,7 @@
 #import "IMService.h"
 #import "BaseMessageViewController.h"
 #import "AudioDownloader.h"
+#import "EaseChatToolbar.h"
 
 
 @protocol MessageViewControllerUserDelegate <NSObject>
@@ -30,6 +31,8 @@
 
 @property(nonatomic, weak) id<MessageViewControllerUserDelegate> userDelegate;
 @property(nonatomic) BOOL isShowUserName;
+
+@property(strong, nonatomic) EaseChatToolbar *chatToolbar;
 
 @property(nonatomic)UIView *inputBar;
 

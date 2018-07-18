@@ -35,6 +35,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *selectSchoolBtn;
 @property (strong, nonatomic) IBOutlet UIImageView *selectImage;
 @property (strong, nonatomic) IBOutlet UIButton *registerBtn;
+@property (strong, nonatomic) IBOutlet UIButton *loginBtn;
 
 @property (nonatomic,strong)BindPhone * bindPhone;
 @property (nonatomic,copy)NSString * phone;
@@ -70,10 +71,13 @@
     
     _password.text = _user.userPassword;
     
+    _loginBtn.layer.masksToBounds = YES;
+    _loginBtn.layer.cornerRadius = 22;
+    
     if (![UIUtils isBlankString:_user.schoolName]&&![UIUtils isBlankString:_user.host]) {
         [_selectSchoolBtn setTitle:_user.schoolName forState:UIControlStateNormal];
     }
-    _password.textColor = [UIColor blackColor];
+    _password.textColor = [UIColor whiteColor];
 
     [self setTableView];
     

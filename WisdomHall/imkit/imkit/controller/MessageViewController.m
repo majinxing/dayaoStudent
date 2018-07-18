@@ -39,7 +39,6 @@
 #import "WebViewController.h"
 #import "OverlayViewController.h"
 
-#import "EaseChatToolbar.h"
 #import "EaseEmoji.h"
 #import "EaseEmotionManager.h"
 
@@ -52,7 +51,6 @@ static int uptime = 0;
 
 @interface MessageViewController()<LocationPickerControllerDelegate, EMChatToolbarDelegate>
 
-@property(strong, nonatomic) EaseChatToolbar *chatToolbar;
 
 @property(strong, nonatomic) EaseChatBarMoreView *chatBarMoreView;
 
@@ -197,7 +195,7 @@ static int uptime = 0;
 
     CGRect tableFrame = CGRectMake(0.0f, 0, w, h - [EaseChatToolbar defaultHeight]);
     
-    self.view.backgroundColor = RGBACOLOR(235, 235, 235, 1);
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#fafafa"];// RGBACOLOR(235, 235, 235, 1);
 
 	self.tableView = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStylePlain];
 	self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -219,7 +217,9 @@ static int uptime = 0;
     //初始化页面
     CGFloat chatbarHeight = [EaseChatToolbar defaultHeight];
     EMChatToolbarType barType = EMChatToolbarTypeChat;
+    
     self.chatToolbar = [[EaseChatToolbar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - chatbarHeight, self.view.frame.size.width, chatbarHeight) type:barType];
+    
     [(EaseChatToolbar *)self.chatToolbar setDelegate:self];
     self.chatBarMoreView = (EaseChatBarMoreView*)[(EaseChatToolbar *)self.chatToolbar moreView];
     self.faceView = (EaseFaceView*)[(EaseChatToolbar *)self.chatToolbar faceView];
@@ -880,16 +880,21 @@ static int uptime = 0;
     
     NSInteger tag = indexPath.section<<16 | indexPath.row;
     if (message.type == MESSAGE_AUDIO) {
+        
         MessageAudioView *audioView = (MessageAudioView*)cell.bubbleView;
         audioView.playBtn.tag = tag;
+        
     } else if (message.type == MESSAGE_TEXT) {
+        
         MessageTextView *textView = (MessageTextView*)cell.bubbleView;
         textView.label.tag = tag;
+        
     }
 
     cell.containerView.tag = tag;
     cell.bubbleView.tag = tag;
     cell.tag = tag;
+    
     return cell;
 }
 
@@ -1259,7 +1264,7 @@ static int uptime = 0;
     msg.senderInfo = [self getUser:msg.sender];
     if (msg.senderInfo.name.length == 0) {
         [self asyncGetUser:msg.sender cb:^(IUser *u) {
-            msg.senderInfo = u;
+//            msg.senderInfo = u;//mjx
         }];
     }
 }

@@ -109,6 +109,7 @@
 
 
 - (void)setConversation:(Conversation *)conversation {
+    
     [self.conversation removeObserver:self forKeyPath:@"name"];
     [self.conversation removeObserver:self forKeyPath:@"detail"];
     [self.conversation removeObserver:self forKeyPath:@"newMsgCount"];
@@ -132,9 +133,29 @@
     self.messageContent.text = self.conversation.detail;
     
     NSDate *date = [NSDate dateWithTimeIntervalSince1970: conv.timestamp];
-    NSString *str = [[self class] getConversationTimeString:date ];
+    NSString *str = [[self class] getConversationTimeString:date ];//
     self.timelabel.text = str;
+    
     self.namelabel.text = conv.name;
+    
+    if ([[NSString stringWithFormat:@"%@",conv.name] isEqualToString:@"通知"]) {
+        
+        self.timelabel.text = @"";
+        
+        self.messageContent.text = @"";
+        
+//        self.namelabel.frame = CGRectMake(self.namelabel.frame.origin.x, self.frame.size.height/2-self.namelabel.frame.size.height/2, self.namelabel.frame.size.height);
+        self.namelabel.frame = CGRectMake(self.namelabel.frame.origin.x, self.frame.size.height/2-self.namelabel.frame.size.height/2, self.namelabel.frame.size.width, self.namelabel.frame.size.height);
+        self.headView.image = [UIImage imageNamed:@"通知"];
+    }else if ([[NSString stringWithFormat:@"%@",conv.name] isEqualToString:@"群组"]){
+        self.timelabel.text = @"";
+        
+        self.messageContent.text = @"";
+        
+        //        self.namelabel.frame = CGRectMake(self.namelabel.frame.origin.x, self.frame.size.height/2-self.namelabel.frame.size.height/2, self.namelabel.frame.size.height);
+        self.namelabel.frame = CGRectMake(self.namelabel.frame.origin.x, self.frame.size.height/2-self.namelabel.frame.size.height/2, self.namelabel.frame.size.width, self.namelabel.frame.size.height);
+        self.headView.image = [UIImage imageNamed:@"群组"];
+    }
     
     if (conv.newMsgCount > 0) {
         [self showNewMessage:conv.newMsgCount];
@@ -168,7 +189,11 @@
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if([keyPath isEqualToString:@"name"]) {
-        self.namelabel.text = self.conversation.name;
+        NSMutableString * str1 = [NSMutableString stringWithFormat:@"%@",self.conversation.name];
+        if (str1.length>5) {
+            [str1 deleteCharactersInRange:NSMakeRange(0, 5)];
+        }
+        self.namelabel.text = str1;//self.conversation.name;
     } else if ([keyPath isEqualToString:@"detail"]) {
         self.messageContent.text = self.conversation.detail;
     } else if ([keyPath isEqualToString:@"newMsgCount"]) {

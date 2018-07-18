@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#fafafa"];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     // 定义一个可变属性字符串对象
@@ -41,7 +41,7 @@
     _aboutCompany.attributedText = [atbs copy];
     _aboutCompany.editable = NO;
     _aboutCompany.delegate = self;
-
+    _aboutCompany.backgroundColor = [UIColor whiteColor];
     //       [atbs addAttribute: NSLinkAttributeNamevalue:@"www.baidu.com" range: range];
     
         // Do any additional setup after loading the view from its nib.
