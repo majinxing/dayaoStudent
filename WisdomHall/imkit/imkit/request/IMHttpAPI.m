@@ -256,10 +256,16 @@
 //语音上传
 +(NSOperation*)uploadAudio:(NSData*)data success:(void (^)(NSString *url))success fail:(void (^)())fail {
     [IMHttpAPI POSTfile:[NSString stringWithFormat:@"%@/%@",IMAPIURL,IMAudios] image:data dict:@{@"key":@"v"} succeed:^(id data) {
+        
         NSDictionary * dict = [IMHttpAPI returnDictionaryWithDataPath:data];
-        NSString * str =  [NSString stringWithFormat:@"%@/%@/%@",IMAPIURL,IMAudios,[dict objectForKey:@"src"]];
-        NSLog(@"2");
-        success(str);
+        if ([UIUtils isBlankString:[dict objectForKey:@"src"]]) {
+            fail();
+        }else{
+            NSString * str =  [NSString stringWithFormat:@"%@/%@/%@",IMAPIURL,IMAudios,[dict objectForKey:@"src"]];
+            NSLog(@"2");
+            success(str);
+        }
+        
     } failure:^(NSError *error) {
         NSLog(@"2");
     }];

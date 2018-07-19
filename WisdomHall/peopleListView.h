@@ -10,4 +10,5 @@
 
 @interface peopleListView : UIView
 -(void)addContentView:(NSArray *)peopleListAry;
+-(void)addGroupContentView:(NSArray *)peopleListAry;
 @end

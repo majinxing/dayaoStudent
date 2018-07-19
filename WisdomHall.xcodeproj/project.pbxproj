@@ -248,6 +248,8 @@
 		8B51AAA31F3EE71900AE034E /* MeetingChooseSeatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B51AAA11F3EE71900AE034E /* MeetingChooseSeatViewController.m */; };
 		8B51AAA41F3EE71900AE034E /* MeetingChooseSeatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B51AAA21F3EE71900AE034E /* MeetingChooseSeatViewController.xib */; };
 		8B5CAF6420FF314B00E9950F /* CreateChatGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5CAF6320FF314B00E9950F /* CreateChatGroupView.m */; };
+		8B5CAF6821006DEB00E9950F /* SelectGroupPeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5CAF6621006DEA00E9950F /* SelectGroupPeopleViewController.m */; };
+		8B5CAF6921006DEB00E9950F /* SelectGroupPeopleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B5CAF6721006DEA00E9950F /* SelectGroupPeopleViewController.xib */; };
 		8B63EFF41F58F3F500888425 /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B63EFF31F58F3F500888425 /* Bugly.framework */; };
 		8B64EB561F1A162F00BF7D0F /* CreateTemporaryCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B64EB541F1A162F00BF7D0F /* CreateTemporaryCourseViewController.m */; };
 		8B64EB571F1A162F00BF7D0F /* CreateTemporaryCourseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B64EB551F1A162F00BF7D0F /* CreateTemporaryCourseViewController.xib */; };
@@ -265,6 +267,7 @@
 		8B7D5D8C1EB96C430068058E /* CollectionFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7D5D8B1EB96C430068058E /* CollectionFlowLayout.m */; };
 		8B7D5D901EB9782C0068058E /* CourseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7D5D8E1EB9782C0068058E /* CourseCollectionViewCell.m */; };
 		8B7D5D911EB9782C0068058E /* CourseCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B7D5D8F1EB9782C0068058E /* CourseCollectionViewCell.xib */; };
+		8B8947062100949900C0AB4B /* IMGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8947052100949900C0AB4B /* IMGroupModel.m */; };
 		8B8C3D111ECC336500E9FB56 /* ConversationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8C3D101ECC336500E9FB56 /* ConversationVC.m */; };
 		8B8C3D141ECD300C00E9FB56 /* ChatHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8C3D131ECD300C00E9FB56 /* ChatHelper.m */; };
 		8B8C3D171ECD7A6700E9FB56 /* TextModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8C3D161ECD7A6700E9FB56 /* TextModel.m */; };
@@ -1155,6 +1158,9 @@
 		8B51AAA21F3EE71900AE034E /* MeetingChooseSeatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MeetingChooseSeatViewController.xib; path = Model/MeetingChooseSeatViewController.xib; sourceTree = "<group>"; };
 		8B5CAF6220FF314B00E9950F /* CreateChatGroupView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateChatGroupView.h; sourceTree = "<group>"; };
 		8B5CAF6320FF314B00E9950F /* CreateChatGroupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateChatGroupView.m; sourceTree = "<group>"; };
+		8B5CAF6521006DEA00E9950F /* SelectGroupPeopleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectGroupPeopleViewController.h; sourceTree = "<group>"; };
+		8B5CAF6621006DEA00E9950F /* SelectGroupPeopleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectGroupPeopleViewController.m; sourceTree = "<group>"; };
+		8B5CAF6721006DEA00E9950F /* SelectGroupPeopleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectGroupPeopleViewController.xib; sourceTree = "<group>"; };
 		8B63EFF31F58F3F500888425 /* Bugly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bugly.framework; sourceTree = "<group>"; };
 		8B64EB531F1A162F00BF7D0F /* CreateTemporaryCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateTemporaryCourseViewController.h; sourceTree = "<group>"; };
 		8B64EB541F1A162F00BF7D0F /* CreateTemporaryCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateTemporaryCourseViewController.m; sourceTree = "<group>"; };
@@ -1181,6 +1187,8 @@
 		8B7D5D8D1EB9782C0068058E /* CourseCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseCollectionViewCell.h; sourceTree = "<group>"; };
 		8B7D5D8E1EB9782C0068058E /* CourseCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseCollectionViewCell.m; sourceTree = "<group>"; };
 		8B7D5D8F1EB9782C0068058E /* CourseCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CourseCollectionViewCell.xib; sourceTree = "<group>"; };
+		8B8947042100949900C0AB4B /* IMGroupModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMGroupModel.h; sourceTree = "<group>"; };
+		8B8947052100949900C0AB4B /* IMGroupModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMGroupModel.m; sourceTree = "<group>"; };
 		8B8C3D0F1ECC336500E9FB56 /* ConversationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationVC.h; sourceTree = "<group>"; };
 		8B8C3D101ECC336500E9FB56 /* ConversationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationVC.m; sourceTree = "<group>"; };
 		8B8C3D121ECD300C00E9FB56 /* ChatHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatHelper.h; sourceTree = "<group>"; };
@@ -2130,6 +2138,9 @@
 				8BCCCD1920FC322B0090E27A /* IM_integration-prefix.pch */,
 				8B5CAF6220FF314B00E9950F /* CreateChatGroupView.h */,
 				8B5CAF6320FF314B00E9950F /* CreateChatGroupView.m */,
+				8B5CAF6521006DEA00E9950F /* SelectGroupPeopleViewController.h */,
+				8B5CAF6621006DEA00E9950F /* SelectGroupPeopleViewController.m */,
+				8B5CAF6721006DEA00E9950F /* SelectGroupPeopleViewController.xib */,
 			);
 			name = IM;
 			sourceTree = "<group>";
@@ -2679,6 +2690,8 @@
 				8B0E536E209FD8D800327823 /* optionsModel.m */,
 				8B0E536C209FD8D800327823 /* QuestionModel.h */,
 				8B0E536B209FD8D800327823 /* QuestionModel.m */,
+				8B8947042100949900C0AB4B /* IMGroupModel.h */,
+				8B8947052100949900C0AB4B /* IMGroupModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -3947,6 +3960,7 @@
 				8B1A50331F75F85C00A11CB2 /* OfficeTableViewCell.xib in Resources */,
 				8BB47BA6208872CD005407D9 /* called.mp3 in Resources */,
 				8B081E0F1F0B766D00493B81 /* SelectMeetingOrClassViewController.xib in Resources */,
+				8B5CAF6921006DEB00E9950F /* SelectGroupPeopleViewController.xib in Resources */,
 				8B05CB6C1EC0056B0063EC20 /* TextsTableViewCell.xib in Resources */,
 				8B014E4D206670900037A107 /* CreateHomeworkViewController.xib in Resources */,
 				8BFB946C1EE7F7F1004BB963 /* ResultsOfVoteViewController.xib in Resources */,
@@ -4343,6 +4357,7 @@
 				8BCCD1C920FD78B20090E27A /* EaseTextView.m in Sources */,
 				8BCCD1C520FD78B20090E27A /* OverlayLabel.m in Sources */,
 				8B014E52206671100037A107 /* Homework.m in Sources */,
+				8B5CAF6821006DEB00E9950F /* SelectGroupPeopleViewController.m in Sources */,
 				8BCCD19C20FD78B20090E27A /* DraftDB.m in Sources */,
 				8BCCD19520FD78B20090E27A /* EaseEmotionManager.m in Sources */,
 				8BF864721ECACAE800B7EED4 /* FMResultSet.m in Sources */,
@@ -4391,6 +4406,7 @@
 				8BCCD1AB20FD78B20090E27A /* SQLPeerMessageDB.m in Sources */,
 				8BCCD1BD20FD78B20090E27A /* MessageLocationView.m in Sources */,
 				8BB56D6A1EB037410023DAFF /* UIUtils.m in Sources */,
+				8B8947062100949900C0AB4B /* IMGroupModel.m in Sources */,
 				8BCCD1B520FD78B20090E27A /* ESModalImageViewAnimationController.m in Sources */,
 				8B0E536F209FD8D900327823 /* QuestionModel.m in Sources */,
 				8B37267A20EC64AE00C4344F /* HomeButtonView.m in Sources */,

@@ -38,6 +38,9 @@
 
 #import "GroupListViewController.h"
 
+#import "CreateChatGroupView.h"
+
+#import "SelectGroupPeopleViewController.h"
 //RGB颜色
 #define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
 //RGB颜色和不透明度
@@ -51,10 +54,11 @@ alpha:(a)]
 
 @interface MessageListViewController()<UITableViewDelegate, UITableViewDataSource,
     TCPConnectionObserver, PeerMessageObserver, GroupMessageObserver,
-    SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,MessageListViewControllerGroupDelegate>
+    SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,MessageListViewControllerGroupDelegate,CreateChatGroupViewDelegate>
 @property (strong , nonatomic) NSMutableArray *conversations;
 @property (strong , nonatomic) UITableView *tableview;
 @property (nonatomic,strong)UserModel * user;
+@property (nonatomic,strong)CreateChatGroupView * v;
 @end
 
 @implementation MessageListViewController
@@ -225,22 +229,31 @@ alpha:(a)]
 -(void)setNavigationTitle{
     //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
+    if ([_type isEqualToString:@"enableCreate"]) {
+        UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"创建群组" style:UIBarButtonItemStylePlain target:self action:@selector(createGroup)];
+        self.navigationItem.rightBarButtonItem = myButton;
+    }
     
     
-    UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"创建群组" style:UIBarButtonItemStylePlain target:self action:@selector(createGroup)];
-    self.navigationItem.rightBarButtonItem = myButton;
     
     //
     //    UIBarButtonItem * selection = [[UIBarButtonItem alloc] initWithTitle:@"搜索" style:UIBarButtonItemStylePlain target:self action:@selector(selectionBtnPressed)];
     //    self.navigationItem.leftBarButtonItem = selection;
 }
 -(void)createGroup{
-    [IMHttpAPI createGroup:@"群" master:501112233 members:@[@"5012012551321",@"5012012551319",@"5012012551322",@"501112233",@"5012012551320"] success:^(NSDictionary *groupId) {
-        NSLog(@"");
-        [_tableview reloadData];
-    } fail:^(NSString *error) {
-        NSLog(@"%@",error);
-    }];
+    if (!_v) {
+        _v = [[CreateChatGroupView alloc] initWithFrame:CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT)];
+        [_v addContentViewWithAry:nil];
+        _v.delegate = self;
+        [self.view addSubview:_v];
+    }
+    
+//    [IMHttpAPI createGroup:@"群" master:501112233 members:@[@"5012012551321",@"5012012551319",@"5012012551322",@"501112233",@"5012012551320"] success:^(NSDictionary *groupId) {
+//        NSLog(@"");
+//        [_tableview reloadData];
+//    } fail:^(NSString *error) {
+//        NSLog(@"%@",error);
+//    }];
 }
 - (void)updateConversationDetail:(Conversation*)conv {
     conv.timestamp = conv.message.timestamp;
@@ -401,7 +414,26 @@ alpha:(a)]
         return [formatter stringFromDate:date];
     }
 }
-
+#pragma mark - CreateChatGroupViewDelegate
+-(void)addPeopleBtnPressedDelegae{
+    SelectGroupPeopleViewController * vc = [[SelectGroupPeopleViewController alloc] init];
+    vc.dataAry = [NSMutableArray arrayWithArray:_peopleAry];
+    self.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+//    __weak SelectGroupPeopleViewController * weakSelf = vc;
+    [vc returnSelectPeopleAry:^(NSMutableArray *selectAry) {
+        NSLog(@"%@",selectAry);
+        [_v.peopleListView addGroupContentView:selectAry];
+//        [_v addContentViewWithAry:selectAry];
+    }];
+}
+-(void)outSelfViewDelegate{
+    [_v removeFromSuperview];
+    _v = nil;
+}
+-(void)endEditeDelegate{
+    [self.view endEditing:YES];
+}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

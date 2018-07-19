@@ -236,8 +236,8 @@
 "message.toolBar.inputPlaceHolder" = "input a new message";
 "message.toolBar.record.upCancel" = "slide up to cancel sending";
 "message.toolBar.record.loosenCancel" = "release the fingers, to cancel sending";
-"message.toolBar.record.touch" = "hold down to talk";
-"message.toolBar.record.send" = "loosen to send";
+"message.toolBar.record.touch" = "按住说话";//"hold down to talk";
+"message.toolBar.record.send" = "上滑取消";//"loosen to send";
 "DXMessageToolBarDelegate.record" = "hold down to talk";
 "DXMessageToolBarDelegate.send" = "loosen to send";
 

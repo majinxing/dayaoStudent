@@ -12,6 +12,8 @@
 #import "UIImageView+WebCache.h"
 
 #define imageWH 35
+#define groupImageWH 50
+
 @interface peopleListView ()
 @property (nonatomic,strong)UserModel * user;
 @end
@@ -43,6 +45,32 @@
         }
         imageView.layer.masksToBounds = YES;
         imageView.layer.cornerRadius = (imageWH-10)/2;
+        
+        [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",baseURL,FileDownload,s.pictureId]] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+        
+        [self addSubview:imageView];
+    }
+    
+}
+-(void)addGroupContentView:(NSArray *)peopleListAry{
+    
+    _user = [[Appsetting sharedInstance] getUsetInfo];
+    
+    for (int i = 0; i<peopleListAry.count; i++) {
+        SignPeople * s = peopleListAry[i];
+        
+        NSString * baseURL = _user.host;
+        
+        if ([UIUtils isBlankString:s.pictureId]) {
+            s.pictureId = _user.userHeadImageId;
+        }
+        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(groupImageWH*i, 0, groupImageWH-10, groupImageWH-10)];
+        
+        if ((groupImageWH*(i+1))>APPLICATION_WIDTH-85) {
+            break;
+        }
+        imageView.layer.masksToBounds = YES;
+        imageView.layer.cornerRadius = (groupImageWH-10)/2;
         
         [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",baseURL,FileDownload,s.pictureId]] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
         

@@ -634,6 +634,8 @@
     }else if ([platform isEqualToString:InteractionType_Discuss]){
         MessageListViewController * d = [[MessageListViewController alloc] init];
         self.hidesBottomBarWhenPushed = YES;
+        d.type = @"enableCreate";
+        d.peopleAry = [NSMutableArray arrayWithArray:_c.signAry];
         [self.navigationController pushViewController:d animated:YES];
         NSLog(@"讨论");
     }else if ([platform isEqualToString:InteractionType_Picture]){

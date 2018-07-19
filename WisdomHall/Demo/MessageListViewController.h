@@ -28,4 +28,8 @@
 
 @property(nonatomic, weak) id<MessageViewControllerUserDelegate> userDelegate;
 @property(nonatomic, weak) id<MessageListViewControllerGroupDelegate> groupDelegate;
+
+@property(nonatomic,strong)NSString * type;
+
+@property(nonatomic,strong)NSMutableArray * peopleAry;
 @end
