@@ -13,6 +13,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *noticeTitle;
 @property (strong, nonatomic) IBOutlet UITextView *noticeInfo;
 @property (strong, nonatomic) IBOutlet UIImageView *revetImage;
+@property (strong, nonatomic) IBOutlet UILabel *timeLabel;
 @property (nonatomic,copy) void (^actionBlock)(NSString *);
 @end
 
@@ -42,11 +43,17 @@
     [self addContentView];
     [self sendRevert];
     [self setNavigationTitle];
+    _timeLabel.textColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1/1.0];
     // Do any additional setup after loading the view from its nib.
 }
 -(void)addContentView{
     _noticeTitle.text = _notice.noticeTitle;
     _noticeInfo.text = _notice.noticeContent;
+    NSMutableString * str = [NSMutableString stringWithFormat:@"%@",_notice.noticeTime];
+    if (![UIUtils isBlankString:str]) {
+        [str deleteCharactersInRange:NSMakeRange(0, 5)];
+        _timeLabel.text = str;
+    }
 }
 -(void)sendRevert{
     if ([[NSString stringWithFormat:@"%@",_notice.revert] isEqualToString:@"2"]) {

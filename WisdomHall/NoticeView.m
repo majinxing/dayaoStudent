@@ -12,6 +12,7 @@
 @interface NoticeView()
 @property (nonatomic,strong) UILabel * nMessage;
 @property (nonatomic,strong) UIView * lineView;
+@property (nonatomic,strong)CollectionHeadView *collectionHeadView;
 @end
 @implementation NoticeView
 -(instancetype)init{
@@ -38,6 +39,11 @@
     
     [self addSubview:_lineView];
     
+    _collectionHeadView.frame = CGRectMake(10,APPLICATION_HEIGHT-20-100-140-100, ScrollViewW,ScrollViewH);
+    
+    [_collectionHeadView getData];
+    
+    [self addSubview:_collectionHeadView];
     
 }
 /*

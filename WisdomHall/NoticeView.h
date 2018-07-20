@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "NoticeModel.h"
+#import "CollectionHeadView.h"
 
 @protocol NoticeViewDelegate<NSObject>
 -(void)shareButtonClickedDelegate:(NSString *)str;

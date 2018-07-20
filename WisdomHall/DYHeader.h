@@ -321,7 +321,7 @@
 
 #define SmsValidate             @"course/sms/validate"               //验证短信
 
-
+#define StudentGointo           @"course/communication/gointo"       //学生发起抢答
 
 
 

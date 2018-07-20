@@ -12,4 +12,5 @@
 @property (nonatomic,copy)NSString * groupName;
 @property (nonatomic,copy)NSString * groupIntroduction;
 @property (nonatomic,strong)NSMutableArray * groupPeople;
+-(BOOL)isEmptyInfo;
 @end

@@ -88,6 +88,7 @@
 //    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
     
     NSString * baseUrl = user.host;
+    
     //发送网络请求(请求方式为POST)
     URLString = [NSString stringWithFormat:@"%@/%@",baseUrl,URLString];
     

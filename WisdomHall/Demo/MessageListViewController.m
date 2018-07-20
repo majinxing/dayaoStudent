@@ -247,13 +247,6 @@ alpha:(a)]
         _v.delegate = self;
         [self.view addSubview:_v];
     }
-    
-//    [IMHttpAPI createGroup:@"群" master:501112233 members:@[@"5012012551321",@"5012012551319",@"5012012551322",@"501112233",@"5012012551320"] success:^(NSDictionary *groupId) {
-//        NSLog(@"");
-//        [_tableview reloadData];
-//    } fail:^(NSString *error) {
-//        NSLog(@"%@",error);
-//    }];
 }
 - (void)updateConversationDetail:(Conversation*)conv {
     conv.timestamp = conv.message.timestamp;
@@ -415,6 +408,29 @@ alpha:(a)]
     }
 }
 #pragma mark - CreateChatGroupViewDelegate
+-(void)createGroupBtnPressedDelegate:(IMGroupModel *)imGroupModel{
+    NSLog(@"%@",imGroupModel);
+    if ([imGroupModel isEmptyInfo]) {
+        NSString * mas = [NSString stringWithFormat:@"%@%@",_user.school,_user.studentId];
+            [IMHttpAPI createGroup:imGroupModel.groupName master:[mas intValue] members:imGroupModel.groupPeople success:^(NSDictionary *groupId) {
+                NSLog(@"");
+                NSString * g = [NSString stringWithFormat:@"%@",[groupId objectForKey:@"group_id"]];
+                if (![UIUtils isBlankString:g]) {
+                    [_tableview reloadData];
+                    [self outSelfViewDelegate];
+                }else{
+                    [UIUtils showInfoMessage:@"创建失败" withVC:self];
+                }
+            } fail:^(NSString *error) {
+                [UIUtils showInfoMessage:@"创建失败" withVC:self];
+
+            }];
+        
+    }else{
+        [UIUtils showInfoMessage:@"请填写信息完整" withVC:self];
+    }
+    
+}
 -(void)addPeopleBtnPressedDelegae{
     SelectGroupPeopleViewController * vc = [[SelectGroupPeopleViewController alloc] init];
     vc.dataAry = [NSMutableArray arrayWithArray:_peopleAry];

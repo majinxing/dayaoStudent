@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface peopleListView : UIView
+
+@property (nonatomic,strong)NSMutableArray * peopleAry;
+
 -(void)addContentView:(NSArray *)peopleListAry;
 -(void)addGroupContentView:(NSArray *)peopleListAry;
 @end

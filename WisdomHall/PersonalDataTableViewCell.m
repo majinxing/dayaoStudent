@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *headImage;
 @property (strong, nonatomic) IBOutlet UILabel *userName;
 @property (strong, nonatomic) IBOutlet UILabel *workNum;
+@property (strong, nonatomic) IBOutlet UIImageView *pictureImage;
 
 @property (nonatomic,strong)UserModel * userl;
 @end
@@ -98,8 +99,11 @@
 -(void)changeImageIsBool:(BOOL)edictor withImage:(UIImage *)image{
     if (edictor) {
         _changeImage.enabled = YES;
+        _pictureImage.image = [UIImage imageNamed:@"Add Photo"];
     }else{
         _changeImage.enabled = NO;
+        _pictureImage.image = [UIImage imageNamed:@""];
+
     }
     if (image.size.height>0) {
         _headImage.image = image;

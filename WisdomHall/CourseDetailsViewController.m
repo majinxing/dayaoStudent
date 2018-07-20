@@ -549,12 +549,7 @@
 }
 #pragma mark MeetingCellDelegate
 -(void)shareButtonClickedDelegate:(NSString *)platform{
-    
-    //    if (![platform isEqualToString:InteractionType_Responder]||![platform isEqualToString:InteractionType_Data]) {
-    //        UIAlertView * later = [[UIAlertView alloc] initWithTitle:nil message:@"未完待续" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-    //        [later show];
-    //        return;
-    //    }
+
     [_interaction hide];
     if ([platform isEqualToString:InteractionType_Vote]){
         VoteViewController * v = [[VoteViewController alloc] init];
@@ -572,26 +567,33 @@
         [self.navigationController pushViewController: d animated:YES];
     }else if ([platform isEqualToString:InteractionType_Responder]){
         NSLog(@"抢答");
-        
-        VoiceViewController* msgController = [[VoiceViewController alloc] init];
-        
-//        msgController.view.frame = CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);
-        
-        msgController.userDelegate = self;
-        
-        NSString * str = [NSString stringWithFormat:@"%@%@",_user.school,_c.teacherWorkNo];
-        NSString * str1 = [NSString stringWithFormat:@"%@%@",_user.school,_user.studentId];
-
-        msgController.peerUID = [str integerValue];//con.cid;
-        
-        msgController.peerName = _c.teacherName;//con.name;
-        
-        msgController.currentUID = [str1 integerValue];
-        
-        msgController.hidesBottomBarWhenPushed = YES;
-        
-        [self.navigationController pushViewController:msgController animated:YES];
-        
+        NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"relType", [NSString stringWithFormat:@"%@",_c.courseDetailId],@"relDetailId",nil];
+        [[NetworkRequest sharedInstance] POST:StudentGointo dict:dict succeed:^(id data) {
+            NSString * code = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+            if ([code isEqualToString:@"成功"]) {
+                VoiceViewController* msgController = [[VoiceViewController alloc] init];
+                msgController.userDelegate = self;
+                
+                NSString * str = [NSString stringWithFormat:@"%@%@",_user.school,_c.teacherWorkNo];
+                NSString * str1 = [NSString stringWithFormat:@"%@%@",_user.school,_user.studentId];
+                
+                msgController.peerUID = [str integerValue];//con.cid;
+                
+                msgController.peerName = _c.teacherName;//con.name;
+                
+                msgController.currentUID = [str1 integerValue];
+                
+                msgController.hidesBottomBarWhenPushed = YES;
+                
+                [self.navigationController pushViewController:msgController animated:YES];
+            }else{
+                [UIUtils showInfoMessage:code withVC:self];
+            }
+            
+        } failure:^(NSError *error) {
+            
+        }];
+       
 //        ConversationVC * c =[[ConversationVC alloc] init];
 //        self.hidesBottomBarWhenPushed = YES;
 //        UserModel * s = [[Appsetting sharedInstance] getUsetInfo];

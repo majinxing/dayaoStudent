@@ -139,9 +139,9 @@
     IMGroupModel * imGM = [[IMGroupModel alloc] init];
     imGM.groupName = _inputName.text;
     imGM.groupIntroduction = _introductionView.text;
-    
+    imGM.groupPeople = [NSMutableArray arrayWithArray:_peopleListView.peopleAry];
     if (self.delegate&&[self.delegate respondsToSelector:@selector(createGroupBtnPressedDelegate:)]) {
-        
+        [self.delegate createGroupBtnPressedDelegate:imGM];
     }
 }
 /*

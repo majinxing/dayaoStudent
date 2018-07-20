@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="441" height="142"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="441" height="142"/>
+                <rect key="frame" x="0.0" y="0.0" width="441" height="141.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headImage" translatesAutoresizingMaskIntoConstraints="NO" id="0bS-p4-Bf6">
@@ -53,23 +53,33 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oDZ-OP-T0S">
+                        <rect key="frame" x="60" y="81" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="Sq7-yt-oM7"/>
+                            <constraint firstAttribute="height" constant="25" id="YYu-oh-On4"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="0bS-p4-Bf6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="3r3-EG-EDO"/>
                     <constraint firstItem="Yz5-bG-9kU" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="DQu-Dk-TTj"/>
                     <constraint firstItem="0bS-p4-Bf6" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Qgd-FU-hje"/>
+                    <constraint firstItem="oDZ-OP-T0S" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="60" id="TUQ-IH-Qxb"/>
                     <constraint firstItem="0Tu-eL-5Aq" firstAttribute="leading" secondItem="0bS-p4-Bf6" secondAttribute="trailing" constant="32" id="W5x-DD-p0K"/>
                     <constraint firstItem="0Tu-eL-5Aq" firstAttribute="top" secondItem="505-9P-CxA" secondAttribute="bottom" id="a2H-oN-VjP"/>
                     <constraint firstItem="Yz5-bG-9kU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="dRn-LG-9jE"/>
                     <constraint firstAttribute="trailing" secondItem="505-9P-CxA" secondAttribute="trailing" constant="20" id="dWo-z7-4yB"/>
                     <constraint firstItem="505-9P-CxA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="54" id="h5t-tW-TAf"/>
                     <constraint firstItem="505-9P-CxA" firstAttribute="leading" secondItem="0bS-p4-Bf6" secondAttribute="trailing" constant="32" id="ovp-Nr-tSe"/>
+                    <constraint firstItem="oDZ-OP-T0S" firstAttribute="top" secondItem="Yz5-bG-9kU" secondAttribute="top" constant="40" id="pmc-EC-CYu"/>
                     <constraint firstAttribute="trailing" secondItem="0Tu-eL-5Aq" secondAttribute="trailing" constant="20" id="tY7-eU-lFB"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="changeImage" destination="Yz5-bG-9kU" id="guW-Rk-Knn"/>
                 <outlet property="headImage" destination="0bS-p4-Bf6" id="Y2k-fZ-eXg"/>
+                <outlet property="pictureImage" destination="oDZ-OP-T0S" id="o6i-u1-mI7"/>
                 <outlet property="userName" destination="505-9P-CxA" id="SB0-WU-SHB"/>
                 <outlet property="workNum" destination="0Tu-eL-5Aq" id="Bsn-6E-mhG"/>
             </connections>
@@ -79,7 +89,7 @@
             <rect key="frame" x="0.0" y="0.0" width="350" height="60"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Cg7-m7-r2X" id="dsj-4B-2Rd">
-                <rect key="frame" x="0.0" y="0.0" width="350" height="60"/>
+                <rect key="frame" x="0.0" y="0.0" width="350" height="59.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SAA-C2-Ndv">

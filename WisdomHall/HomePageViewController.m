@@ -23,14 +23,20 @@
 
 #import "TheMeetingInfoViewController.h"
 
+#import "CollectionHeadView.h"
 
-@interface HomePageViewController ()<HomeButtonViewDelegate,NewMeetingViewDelegate>
+#import "NoticeDetailsViewController.h"
+
+@interface HomePageViewController ()<HomeButtonViewDelegate,NewMeetingViewDelegate,CollectionHeadViewDelegate>
 @property (nonatomic,strong)UIScrollView * bottomScrollView;
 @property (nonatomic,strong)BananerView * bannerView;
 @property (nonatomic,strong)NoticeView * noticeView;
 @property (nonatomic,strong)HomeButtonView * homeButtonView;
 @property (nonatomic,strong)NewMeetingView * meetingView;
 @property (nonatomic,strong)UserModel * userModel;
+
+@property (nonatomic,strong)CollectionHeadView *collectionHeadView;
+
 @end
 
 @implementation HomePageViewController
@@ -49,6 +55,9 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [self getNewMeeting];
+    if (_collectionHeadView) {
+        [_collectionHeadView getData];
+    }
 }
 -(void)getNewMeeting{
     _userModel = [[Appsetting sharedInstance] getUsetInfo];
@@ -80,35 +89,7 @@
        
     }];
 }
--(void)getNotice{
-    //轮播
-    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"start",@"5",@"length", nil];
-    
-    [[NetworkRequest sharedInstance] GET:QueryNotice dict:dict succeed:^(id data) {
-        
-        NSString * str = [[data objectForKey:@"header"] objectForKey:@"code"];
-        if ([str isEqualToString:@"0000"]) {
-            NSArray * ary = [[data objectForKey:@"body"] objectForKey:@"list"];
-            
-            for (int i = 0; i<ary.count; i++) {
-                NoticeModel * notice = [[NoticeModel alloc] init];
-                notice.noticeTime = [UIUtils timeWithTimeIntervalString:[ary[i] objectForKey:@"time"]];
-                notice.noticeContent = [ary[i] objectForKey:@"inform"];
-                notice.noticeTitle = [ary[i] objectForKey:@"title"];
-                notice.revert = [ary[i] objectForKey:@"revert"];
-                notice.noticeId = [ary[i] objectForKey:@"id"];
-                notice.messageStatus = [ary[i] objectForKey:@"status"];
-                [_noticeView addContentView:notice];
-                break;
-            }
-        }else if([str isEqualToString:@"401"]){
-           
-        }
-        
-    } failure:^(NSError *error) {
-        
-    }];
-}
+
 -(void)addScrollView{
     _bottomScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64,APPLICATION_WIDTH, APPLICATION_HEIGHT-64-44)];
     _bottomScrollView.bounces  = YES;//弹簧效果
@@ -124,6 +105,12 @@
     _noticeView = [[NoticeView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_bannerView.frame), APPLICATION_WIDTH, 56)];
 
     [_bottomScrollView addSubview:_noticeView];
+    
+    _collectionHeadView = [[CollectionHeadView alloc] init];
+    
+    _collectionHeadView.frame = CGRectMake(10,CGRectGetMaxY(_bannerView.frame), ScrollViewW,ScrollViewH);
+    _collectionHeadView.delegate = self;
+    [_bottomScrollView addSubview:_collectionHeadView];
     
     _homeButtonView = [[HomeButtonView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_noticeView.frame), APPLICATION_WIDTH, 148)];
     _homeButtonView.backgroundColor = [UIColor whiteColor];
@@ -143,6 +130,16 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+-(void)noticeBtnPressedDelegate:(NoticeModel *)notice{
+    NoticeDetailsViewController * notice1 = [[NoticeDetailsViewController alloc] initWithActionBlock:^(NSString *str) {
+        
+    }];
+    notice1.notice = notice;
+    self.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:notice1 animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
+    
 }
 #pragma mark NewMeetingDelegate
 -(void)intoMeetingBtnPressedDelegate:(MeetingModel *)meetingModel{

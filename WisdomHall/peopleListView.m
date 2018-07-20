@@ -16,6 +16,7 @@
 
 @interface peopleListView ()
 @property (nonatomic,strong)UserModel * user;
+
 @end
 @implementation peopleListView
 
@@ -23,6 +24,7 @@
 -(instancetype)init{
     self = [super init];
     if (self) {
+        _peopleAry = [NSMutableArray arrayWithCapacity:1];
     }
     return self;
 }
@@ -55,6 +57,8 @@
 -(void)addGroupContentView:(NSArray *)peopleListAry{
     
     _user = [[Appsetting sharedInstance] getUsetInfo];
+    
+    _peopleAry = [NSMutableArray arrayWithArray:peopleListAry];
     
     for (int i = 0; i<peopleListAry.count; i++) {
         SignPeople * s = peopleListAry[i];

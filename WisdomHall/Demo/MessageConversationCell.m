@@ -133,7 +133,9 @@
     self.messageContent.text = self.conversation.detail;
     
     NSDate *date = [NSDate dateWithTimeIntervalSince1970: conv.timestamp];
+    
     NSString *str = [[self class] getConversationTimeString:date ];//
+    
     self.timelabel.text = str;
     
     self.namelabel.text = conv.name;
