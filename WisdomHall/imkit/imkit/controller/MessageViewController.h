@@ -30,6 +30,7 @@
                                                                 OutboxObserver, AudioDownloaderObserver>
 
 @property(nonatomic, weak) id<MessageViewControllerUserDelegate> userDelegate;
+
 @property(nonatomic) BOOL isShowUserName;
 
 @property(strong, nonatomic) EaseChatToolbar *chatToolbar;

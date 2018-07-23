@@ -21,7 +21,9 @@
     return self;
 }
 -(void)addContentView{
-    
+    UIImageView * image = [[UIImageView alloc] initWithFrame:self.frame];
+    image.image = [UIImage imageNamed:@"banner"];
+    [self addSubview:image];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

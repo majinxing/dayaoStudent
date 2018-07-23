@@ -163,7 +163,6 @@
                 }else{
                     [[Appsetting sharedInstance] sevaUserInfoWithDict:dict withStr:_password.text];
                     
-                    ChatHelper * c =[ChatHelper shareHelper];
                     
                     [self saveInfo];
                     
@@ -348,7 +347,7 @@
     [_selectSchoolBtn setTitle:s.schoolName forState:UIControlStateNormal];
     
     if (indexPath.row == 1) {
-        s.schoolHost = @"http://192.168.1.109:8080";
+        s.schoolHost = @"http://192.168.1.81:8080";
     }else if (indexPath.row == 0){
         s.schoolHost = @"http://api.dayaokeji.com";
     }

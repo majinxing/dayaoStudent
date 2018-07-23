@@ -1,15 +1,16 @@
+////
+////  OfficeViewController.h
+////  WisdomHall
+////
+////  Created by XTU-TI on 2017/9/22.
+////  Copyright © 2017年 majinxing. All rights reserved.
+////
 //
-//  OfficeViewController.h
-//  WisdomHall
+//#import <UIKit/UIKit.h>
+//#import "NoticeModel.h"
 //
-//  Created by XTU-TI on 2017/9/22.
-//  Copyright © 2017年 majinxing. All rights reserved.
 //
+//@interface OfficeViewController : UIViewController
+//
+//@end
 
-#import <UIKit/UIKit.h>
-#import "NoticeModel.h"
-
-
-@interface OfficeViewController : UIViewController
-
-@end

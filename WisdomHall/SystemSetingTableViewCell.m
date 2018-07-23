@@ -103,8 +103,7 @@
         
         DYTabBarViewController *rootVC = [DYTabBarViewController sharedInstance];
         rootVC = nil;
-        ChatHelper * c =[ChatHelper shareHelper];
-        [c getOut];
+        
         
         WorkingLoginViewController * userLogin = [[WorkingLoginViewController alloc] init];
         //    TheLoginViewController * userLogin = [[TheLoginViewController alloc] init];

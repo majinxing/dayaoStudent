@@ -133,15 +133,18 @@ static dispatch_once_t onceToken;
     line.backgroundColor = [UIColor colorWithHexString:@"#f1f1f1"];
     [v addSubview:line];
     
-    UILabel * textLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 10, APPLICATION_WIDTH-80-20, 50)];
+    UILabel * textLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 0, APPLICATION_WIDTH-80-20, 50)];
     
     textLabel.numberOfLines = 0;
     
-    textLabel.font = [UIFont systemFontOfSize:14];
+    textLabel.font = [UIFont systemFontOfSize:12];
+    
+    textLabel.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1/1.0];
     
     NoticeModel * notice = _ary[0];
     
     textLabel.text = [NSString stringWithFormat:@"通知:%@",notice.noticeContent];
+    
     [v addSubview:textLabel];
     
     textLabel.textColor = [UIColor blackColor];
@@ -197,8 +200,8 @@ static dispatch_once_t onceToken;
     
     UILabel * textLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 0, APPLICATION_WIDTH-80-20, 50)];
     textLabel.numberOfLines = 0;
-    textLabel.font = [UIFont systemFontOfSize:14];
-    
+    textLabel.font = [UIFont systemFontOfSize:12];
+    textLabel.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1/1.0];
     NoticeModel * notice = _ary[i];
     textLabel.text = [NSString stringWithFormat:@"通知:%@",notice.noticeContent];
     [v addSubview:textLabel];

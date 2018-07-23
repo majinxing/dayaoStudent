@@ -21,6 +21,7 @@
 #import "NSDate+Format.h"
 
 #import "EaseRecordView.h"
+#import "DYTabBarViewController.h"
 
 @interface VoiceViewController ()
 @property(strong, nonatomic) EaseRecordView *recordView;
@@ -63,76 +64,109 @@
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btn setTitle:@"按住抢答" forState:UIControlStateNormal];
     [btn setTitle:@"上滑取消" forState:UIControlStateHighlighted];
-    btn.frame = CGRectMake(0, APPLICATION_HEIGHT-45, APPLICATION_WIDTH, 45);
+    btn.frame = CGRectMake(0, APPLICATION_HEIGHT-50, APPLICATION_WIDTH, 50);
     [btn setBackgroundImage:[UIImage imageNamed:@"Rectangle3"] forState:UIControlStateNormal];
     [self.view addSubview:btn];
-//    [btn addTarget:self action:@selector(recordButtonTouchDown) forControlEvents:UIControlEventTouchDown];
-//    [btn addTarget:self action:@selector(recordButtonTouchUpOutside) forControlEvents:UIControlEventTouchUpOutside];
-//    [btn addTarget:self action:@selector(recordButtonTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
-//    [btn addTarget:self action:@selector(recordDragOutside) forControlEvents:UIControlEventTouchDragExit];
-//    [btn addTarget:self action:@selector(recordDragInside) forControlEvents:UIControlEventTouchDragEnter];
+
+    [self setNavigationTitle];
 }
-//- (void)recordButtonTouchDown
-//{
-//
-//}
-//
-//- (void)recordButtonTouchUpOutside
-//{
-//
-//}
-//
-//- (void)recordButtonTouchUpInside
-//{
-//
-//}
-//
-//- (void)recordDragOutside
-//{
-//
-//}
-//- (void)recordDragInside
-//{
-//
-//}
--(void)initTableViewData {
-    NSMutableArray *newMessages = [NSMutableArray array];
-    NSDate *lastDate = nil;
+-(void)viewWillAppear:(BOOL)animated{
+        self.navigationController.navigationBarHidden = YES; //设置隐藏
+}
+-(void)viewWillDisappear:(BOOL)animated{
+        self.navigationController.navigationBarHidden = NO; //设置隐藏
+
+}
+/**
+ *  显示navigation的标题
+ **/
+-(void)setNavigationTitle{
     
-    NSInteger count = [self.messages count];
-    if (count == 0) {
-        return;
-    }
+        UIView * navigationBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, APPLICATION_WIDTH, 64)];
+    navigationBar.backgroundColor = [UIColor whiteColor];//[[Appsetting sharedInstance] getThemeColor];
     
-    for (NSInteger i = 0; i < count; i++) {
-        IMessage *msg = [self.messages objectAtIndex:i];
-        if (msg.type == MESSAGE_TIME_BASE) {
-            continue;
-        }
+        [self.view addSubview:navigationBar];
+    
+        UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(APPLICATION_WIDTH/2-40, 30, 80, 20)];
+        titleLabel.text = _peerName;
+        titleLabel.textAlignment = NSTextAlignmentCenter;
+        titleLabel.textColor = [UIColor blackColor];
+        titleLabel.font = [UIFont systemFontOfSize:18];
+        [self.view addSubview:titleLabel];
+    
+    
+        UIImageView * b = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ic_arrow_left"]];
+        b.frame = CGRectMake(3, 30, 25, 20);
+        [self.view addSubview:b];
+    
+        UIButton * backBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+        backBtn.frame = CGRectMake(13,18, 60, 44);
+        [backBtn setTitle:@"返回" forState:UIControlStateNormal];
+        [backBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+        backBtn.titleLabel.font = [UIFont systemFontOfSize:17];//[UIFont fontWithName:@"Helvetica-Bold" size:17];
+    
+        backBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
+        [self.view addSubview:backBtn];
+        [backBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
+//        self.title = @"通知";
+    //    UIBarButtonItem * myButton = [[UIBarButtonItem alloc] initWithTitle:@"<返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    //
+    //    self.navigationItem.leftBarButtonItem = myButton;
+}
+-(void)back{
+    if ([_backType isEqualToString:@"TabBar"]) {
         
-        if (lastDate == nil || msg.timestamp - lastDate.timeIntervalSince1970 > 1*60) {
-            MessageTimeBaseContent *tb = [[MessageTimeBaseContent alloc] initWithTimestamp:msg.timestamp];
-            
-            tb.notificationDesc = [[NSDate dateWithTimeIntervalSince1970:tb.timestamp] formatSectionTime];
-            
-            IMessage *m = [[IMessage alloc] init];
-            
-            m.content = tb;
-            //剔除其他数据保留语音
-            if (msg.type == MESSAGE_AUDIO) {
-                [newMessages addObject:m];
-                
-                lastDate = [NSDate dateWithTimeIntervalSince1970:msg.timestamp];
-            }
-            
-        }
-        if (msg.type == MESSAGE_AUDIO) {
-            [newMessages addObject:msg];
-        }
+        
+        
+        DYTabBarViewController *rootVC = [[DYTabBarViewController alloc] init];
+        
+        [UIApplication sharedApplication].keyWindow.rootViewController = rootVC;
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
     }
     
-    self.messages = newMessages;
 }
+//-(void)initTableViewData {
+//    NSMutableArray *newMessages = [NSMutableArray array];
+//    NSDate *lastDate = nil;
+//
+//    NSInteger count = [self.messages count];
+//    if (count == 0) {
+//        return;
+//    }
+//
+//    for (NSInteger i = 0; i < count; i++) {
+//        IMessage *msg = [self.messages objectAtIndex:i];
+//        if (msg.type == MESSAGE_TIME_BASE) {
+//            continue;
+//        }
+//
+//        if (lastDate == nil || msg.timestamp - lastDate.timeIntervalSince1970 > 1*60) {
+//            MessageTimeBaseContent *tb = [[MessageTimeBaseContent alloc] initWithTimestamp:msg.timestamp];
+//
+//            tb.notificationDesc = [[NSDate dateWithTimeIntervalSince1970:tb.timestamp] formatSectionTime];
+//
+//            IMessage *m = [[IMessage alloc] init];
+//
+//            m.content = tb;
+//            //剔除其他数据保留语音
+//            if (msg.type == MESSAGE_AUDIO) {
+//                [newMessages addObject:m];
+//
+//                lastDate = [NSDate dateWithTimeIntervalSince1970:msg.timestamp];
+//            }
+//
+//        }
+//        if (msg.type == MESSAGE_AUDIO) {
+//            [newMessages addObject:msg];
+//        }
+//    }
+//
+//    self.messages = newMessages;
+//}
 -(void)addObserver {
     [super addObserver];
     [[PeerOutbox instance] addBoxObserver:self];

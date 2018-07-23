@@ -15,8 +15,6 @@
 #import "DYHeader.h"
 #import "CourseDetailsViewController.h"
 
-#import <Hyphenate/Hyphenate.h>
-
 #import "CollectionHeadView.h"
 #import "UserModel.h"
 #import "ClassModel.h"

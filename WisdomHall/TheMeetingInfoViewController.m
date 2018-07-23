@@ -11,8 +11,8 @@
 #import "DYHeader.h"
 #import "ShareView.h"
 #import "VoteViewController.h"
-#import "ConversationVC.h"
-#import "DiscussViewController.h"
+//#import "ConversationVC.h"
+//#import "DiscussViewController.h"
 #import "ClassManagementViewController.h"
 #import "SignListViewController.h"
 #import "DataDownloadViewController.h"
@@ -30,14 +30,14 @@
 #import "QrCodeViewController.h"
 #import "PhotoPromptBox.h"
 #import "AlterView.h"
-
+#import "VoiceViewController.h"
 
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 #define RGBA_COLOR(R, G, B, A) [UIColor colorWithRed:((R) / 255.0f) green:((G) / 255.0f) blue:((B) / 255.0f) alpha:A]
 
-@interface TheMeetingInfoViewController ()<UINavigationControllerDelegate, UIVideoEditorControllerDelegate,UIAlertViewDelegate,UITableViewDelegate,UITableViewDataSource,MeetingTableViewCellDelegate,UIImagePickerControllerDelegate,UIDocumentInteractionControllerDelegate,AlterViewDelegate>
+@interface TheMeetingInfoViewController ()<UINavigationControllerDelegate, UIVideoEditorControllerDelegate,UIAlertViewDelegate,UITableViewDelegate,UITableViewDataSource,MeetingTableViewCellDelegate,UIImagePickerControllerDelegate,UIDocumentInteractionControllerDelegate,AlterViewDelegate,MessageViewControllerUserDelegate>
 @property (nonatomic,strong) ShareView * interaction;
 @property (nonatomic,strong)UserModel * user;
 @property (nonatomic,assign)int temp;
@@ -87,16 +87,16 @@
     // Do any additional setup after loading the view from its nib.
 }
 -(void)voiceCalls:(NSNotification *)dict{
-    EMCallSession * aSession = [dict.userInfo objectForKey:@"session"];
-    ConversationVC * c  = [[ConversationVC alloc] init];
-    c.callSession = aSession;
-    int n = (int)[NSString stringWithFormat:@"%@",_user.school].length;
-    NSMutableString * str = [NSMutableString stringWithFormat:@"%@",aSession.remoteName];
-    [str deleteCharactersInRange:NSMakeRange(0,n)];
-    c.teacherName = str;
-    c.call = CALLED;
-    self.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:c animated:YES];
+//    EMCallSession * aSession = [dict.userInfo objectForKey:@"session"];
+//    ConversationVC * c  = [[ConversationVC alloc] init];
+//    c.callSession = aSession;
+//    int n = (int)[NSString stringWithFormat:@"%@",_user.school].length;
+//    NSMutableString * str = [NSMutableString stringWithFormat:@"%@",aSession.remoteName];
+//    [str deleteCharactersInRange:NSMakeRange(0,n)];
+//    c.teacherName = str;
+//    c.call = CALLED;
+//    self.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:c animated:YES];
 }
 -(void)getData{
     _seatModel = [[SeatIngModel alloc] init];
@@ -341,38 +341,64 @@
 //    }
 //    return view;
 //}
+#pragma mark - MessageViewControllerUserDelegate
+//从本地获取用户信息, IUser的name字段为空时，显示identifier字段
+- (IUser*)getUser:(int64_t)uid {
+    IUser *u = [[IUser alloc] init];
+    u.uid = uid;
+    u.name = @"";
+    u.avatarURL = @"http://api.gobelieve.io/images/e837c4c84f706a7988d43d62d190e2a1.png";
+    u.identifier = [NSString stringWithFormat:@"uid:%lld", uid];
+    return u;
+}
+//从服务器获取用户信息
+- (void)asyncGetUser:(int64_t)uid cb:(void(^)(IUser*))cb {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        IUser *u = [[IUser alloc] init];
+        u.uid = uid;
+        u.name = [NSString stringWithFormat:@"name:%lld", uid];
+        u.avatarURL = @"http://api.gobelieve.io/images/e837c4c84f706a7988d43d62d190e2a1.png";
+        u.identifier = [NSString stringWithFormat:@"uid:%lld", uid];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            cb(u);
+        });
+    });
+}
 #pragma mark MeetingCellDelegate
 -(void)shareButtonClickedDelegate:(NSString *)platform{
     if ([platform isEqualToString:InteractionType_Responder]){
         NSLog(@"抢答");
         if (_meetingModel.workNo.length>0) {
             
-            ConversationVC * c =[[ConversationVC alloc] init];
+            NSLog(@"抢答");
+            [self showHudInView:self.view hint:NSLocalizedString(@"正在加载数据", @"Load data...")];
             
-            c.HyNumaber = [NSString stringWithFormat:@"%@%@",_user.school,_meetingModel.workNo];
-            
-            c.call = CALLING;
-            
-            c.meetingModel = _meetingModel;
-            
-            c.teacherName = _meetingModel.meetingHost;
-
-            self.hidesBottomBarWhenPushed = YES;
-            
-            [self presentViewController:c animated:YES completion:^{
-                
-            }];
-            [c returnReason:^(EMCallEndReason reason) {
-                if (reason == EMCallEndReasonRemoteOffline) {
-                    [UIUtils showInfoMessage:@"抢答还没开始呢，不要太心急哦~" withVC:self];
-                }else if (reason == EMCallEndReasonBusy){
-                    [UIUtils showInfoMessage:@"已有人抢答成功，下次手速要更快哦~" withVC:self];
-                    [self sentNumberResponder];
-                }else if (reason == EMCallEndReasonHangup){
+            NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"relType", [NSString stringWithFormat:@"%@",_meetingModel.meetingDetailId],@"relDetailId",nil];
+            [[NetworkRequest sharedInstance] POST:StudentGointo dict:dict succeed:^(id data) {
+                NSString * code = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+                if ([code isEqualToString:@"成功"]||[code isEqualToString:@"该用户已经进入互动"]) {
+                    VoiceViewController* msgController = [[VoiceViewController alloc] init];
+                    msgController.userDelegate = self;
                     
-                }else {
-                    [UIUtils showInfoMessage:@"抢答貌似失败了呢~" withVC:self];
+                    NSString * str = [NSString stringWithFormat:@"%@%@",_user.school,_meetingModel.workNo];
+                    NSString * str1 = [NSString stringWithFormat:@"%@%@",_user.school,_user.studentId];
+                    
+                    msgController.peerUID = [str integerValue];//con.cid;
+                    
+                    msgController.peerName = _meetingModel.meetingName;//con.name;
+                    
+                    msgController.currentUID = [str1 integerValue];
+                    
+                    msgController.hidesBottomBarWhenPushed = YES;
+                    
+                    [self.navigationController pushViewController:msgController animated:YES];
+                }else{
+                    [UIUtils showInfoMessage:code withVC:self];
                 }
+                [self hideHud];
+            } failure:^(NSError *error) {
+                [UIUtils showInfoMessage:@"抢答失败" withVC:self];
+                [self hideHud];
             }];
             
         }else{
@@ -394,10 +420,7 @@
         self.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController: d animated:YES];
     }else if ([platform isEqualToString:InteractionType_Discuss]){
-        DiscussViewController * d = [[DiscussViewController alloc] init];
-        self.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:d animated:YES];
-        NSLog(@"讨论");
+        
     }else if([platform isEqualToString:InteractionType_Sit]){
         if (![UIUtils isBlankString:_seatModel.seatTable]) {
             ZFSeatViewController * z = [[ZFSeatViewController alloc] init];

@@ -42,7 +42,9 @@
 @end
 
 @protocol PeerMessageObserver <NSObject>
+
 @optional
+
 -(void)onPeerMessage:(IMMessage*)msg;
 
 //服务器ack

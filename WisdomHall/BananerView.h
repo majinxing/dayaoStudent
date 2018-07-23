@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface BananerView : UIView
-
+-(void)addContentView;
 @end

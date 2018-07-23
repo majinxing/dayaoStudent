@@ -323,7 +323,7 @@
 
 #define StudentGointo           @"course/communication/gointo"       //学生发起抢答
 
-
+#define StudentReply            @"course/call/reply"                 //学生响应抢答
 
 
 

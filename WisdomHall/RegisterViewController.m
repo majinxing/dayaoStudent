@@ -198,7 +198,7 @@
             }else{
                 [[Appsetting sharedInstance] sevaUserInfoWithDict:dict withStr:_password];
                 
-                ChatHelper * c =[ChatHelper shareHelper];
+//                ChatHelper * c =[ChatHelper shareHelper];
                 
                 [self saveInfo];
                 

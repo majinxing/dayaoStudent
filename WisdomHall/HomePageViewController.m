@@ -27,6 +27,8 @@
 
 #import "NoticeDetailsViewController.h"
 
+#import "JPUSHService.h"
+
 @interface HomePageViewController ()<HomeButtonViewDelegate,NewMeetingViewDelegate,CollectionHeadViewDelegate>
 @property (nonatomic,strong)UIScrollView * bottomScrollView;
 @property (nonatomic,strong)BananerView * bannerView;
@@ -51,7 +53,21 @@
     [self addScrollView];
     
     _userModel = [[Appsetting sharedInstance] getUsetInfo];
+    
+    [self setAlias];//i++
     // Do any additional setup after loading the view from its nib.
+}
+-(void)setAlias{
+#pragma mark - 推送别名设置
+    UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [JPUSHService setAlias:[NSString stringWithFormat:@"%@%@",user.school,user.studentId] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+            
+        } seq:1];
+        
+    });
+    //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 -(void)viewWillAppear:(BOOL)animated{
     [self getNewMeeting];
@@ -99,7 +115,7 @@
     
     _bannerView = [[BananerView alloc] initWithFrame:CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT/4)];
     _bannerView.backgroundColor = [UIColor grayColor];
-    
+    [_bannerView addContentView];
     [_bottomScrollView addSubview:_bannerView];
     
     _noticeView = [[NoticeView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_bannerView.frame), APPLICATION_WIDTH, 56)];
@@ -110,6 +126,7 @@
     
     _collectionHeadView.frame = CGRectMake(10,CGRectGetMaxY(_bannerView.frame), ScrollViewW,ScrollViewH);
     _collectionHeadView.delegate = self;
+    
     [_bottomScrollView addSubview:_collectionHeadView];
     
     _homeButtonView = [[HomeButtonView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_noticeView.frame), APPLICATION_WIDTH, 148)];

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Hyphenate/Hyphenate.h>
+
 @interface MJXChatViewController : UIViewController
-@property (nonatomic,strong)EMGroup * chatroom;
+
 @end

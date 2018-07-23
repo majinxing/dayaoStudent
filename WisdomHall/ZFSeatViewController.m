@@ -189,6 +189,19 @@
 
 -(void)setupSureBtn{
     if ([UIUtils isBlankString:_type]) {
+        _seatLable = [[UILabel alloc] initWithFrame:CGRectMake(0, APPLICATION_HEIGHT-64-44, APPLICATION_WIDTH/2, 44)];
+
+        if (![UIUtils isBlankString:_seat]) {
+            _seatLable.text = [NSString stringWithFormat:@"座次:%@",_seat];
+        }else{
+            _seatLable.text = [NSString stringWithFormat:@"座次:未选座"];
+        }
+        _seatLable.font = [UIFont systemFontOfSize:15];
+        _seatLable.textColor = [UIColor blackColor];
+        _seatLable.textAlignment = NSTextAlignmentCenter;
+        
+        [self.view addSubview:_seatLable];
+        
         return;
     }
     NSArray * ary = @[@"可选座次",@"不 可 选",@"当前已选",@"正 在 选"];

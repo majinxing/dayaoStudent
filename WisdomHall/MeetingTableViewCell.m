@@ -139,7 +139,7 @@
     }
     if (![UIUtils isBlankString:[NSString stringWithFormat:@"%@",classModel.signStatus]]) {
         if (![[NSString stringWithFormat:@"%@",classModel.signStatus] isEqualToString:@"1"]) {
-            _signCode.frame = CGRectMake(APPLICATION_WIDTH/2, 20, 80, 80);
+            _signCode.frame = CGRectMake(APPLICATION_WIDTH/2+40, 100, 80, 80);
             _signCode.image = [UIImage imageNamed:@"ic_sgin_success"];
             [self.contentView addSubview:_signCode];
         }

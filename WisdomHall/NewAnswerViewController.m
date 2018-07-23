@@ -758,6 +758,50 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    QuestionModel * q;
+//    if ([_testType isEqualToString:@"single"]) {
+//        q = _allQuestionAry[_temp];
+//    }else{
+//        q = _allQuestionAry[indexPath.section];
+//    }
+//
+//    if ([q.titleType isEqualToString:@"1"]) {
+//
+//        NSString * s = [NSString stringWithFormat:@"%c",65+(int)indexPath.row];//[NSString stringWithFormat:@"%c",(int)sender.tag%1000];
+//
+//        if ([[NSString stringWithFormat:@"%@",q.questionAnswer] isEqualToString:s]) {
+//            q.questionAnswer = @"";
+//        }else{
+//            q.questionAnswer = [NSString stringWithFormat:@"%c",65+(int)indexPath.row];;
+//        }
+//    }else{
+//        NSString *string = [NSString stringWithFormat:@"%@",q.questionAnswer];
+//
+//        NSString * s = [NSString stringWithFormat:@"%c",65+(int)indexPath.row];;
+//        //字条串是否包含有某字符串
+//        if ([string rangeOfString:s].location == NSNotFound) {
+//            if ([UIUtils isBlankString:string]) {
+//                q.questionAnswer = [NSString stringWithFormat:@"%c",65+(int)indexPath.row];
+//            }else{
+//                q.questionAnswer = [q.questionAnswer stringByAppendingString:[NSString stringWithFormat:@",%c",65+(int)indexPath.row]];
+//            }
+//        } else {
+//            NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[string componentsSeparatedByString:@","]];
+//            [array removeObject:s];
+//            q.questionAnswer = @"";
+//            for (int i = 0; i<array.count; i++) {
+//                if (i == 0) {
+//                    q.questionAnswer = [NSString stringWithFormat:@"%@",array[0]];
+//                }else{
+//                    q.questionAnswer = [q.questionAnswer stringByAppendingString:[NSString stringWithFormat:@",%@",array[i]]];
+//                }
+//
+//            }
+//            NSLog(@"string 包含 martin");
+//        }
+//    }
+//    [_tableView reloadData];
+    
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (_allQuestionAry.count>0) {

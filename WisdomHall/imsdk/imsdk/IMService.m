@@ -333,7 +333,9 @@
 
 -(void)publishPeerMessage:(IMMessage*)msg {
     for (NSValue *value in self.peerObservers) {
+        
         id<PeerMessageObserver> ob = [value nonretainedObjectValue];
+        
         if ([ob respondsToSelector:@selector(onPeerMessage:)]) {
             [ob onPeerMessage:msg];
         }

@@ -9,9 +9,9 @@
 #import "AppDelegate.h"
 #import "DYTabBarViewController.h"
 #import "TheLoginViewController.h"
-#import <Hyphenate/Hyphenate.h>
+
 #import "ChatHelper.h"
-#import "ConversationVC.h"
+//#import "ConversationVC.h"
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import "DYHeader.h"
 #import "NoticeViewController.h"
@@ -68,8 +68,9 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 
+#import "VoiceViewController.h"
 
-@interface AppDelegate ()<EMCallManagerDelegate,EMChatManagerDelegate,EMChatroomManagerDelegate,JPUSHRegisterDelegate>
+@interface AppDelegate ()<JPUSHRegisterDelegate,MessageViewControllerUserDelegate>
 @property(nonatomic,strong)ChatHelper * chat;
 @property (nonatomic,strong)FMDatabase * db;
 
@@ -87,7 +88,6 @@
 -(void)dealloc{
     
     //移除消息回调
-    [[EMClient sharedClient].chatManager removeDelegate:self];
 }
 
 +(AppDelegate*)instance {
@@ -112,7 +112,7 @@
     
     if ([[Appsetting sharedInstance] isLogin]) {
         
-        _chat = [ChatHelper shareHelper];
+        
         
         DYTabBarViewController * tab = [[DYTabBarViewController alloc] init];
         
@@ -153,7 +153,7 @@
     // 如需继续使用pushConfig.plist文件声明appKey等配置内容，请依旧使用[JPUSHService setupWithOption:launchOptions]方式初始化。
     [JPUSHService setupWithOption:launchOptions appKey:@"c8372310b33f2ddd74fcaead"
                           channel:@"App Store"
-                 apsForProduction:1
+                 apsForProduction:NO
             advertisingIdentifier:advertisingId];
     
     [JSMSSDK registerWithAppKey:@"c8372310b33f2ddd74fcaead"];//极光短信注册
@@ -173,10 +173,68 @@
         UITableView.appearance.estimatedSectionHeaderHeight = 0;
     }
     
+    
+//    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+//
+//
+//    [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
+//
+
     return YES;
-    
-    
 }
+//- (void)networkDidReceiveMessage:(NSNotification *)notification {
+//    NSDictionary * userInfo = [notification userInfo];
+//    NSString * strIM = [userInfo objectForKey:@"content_type"];
+//
+////    if ([strIM isEqualToString:@"im"]) {
+//
+//        NSError * err;
+//
+//        NSString *content = [userInfo valueForKey:@"content"];
+//
+//        NSData *jsonData = [content dataUsingEncoding:NSUTF8StringEncoding];
+//
+//        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
+//
+//        UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
+//
+//        VoiceViewController* msgController = [[VoiceViewController alloc] init];
+//
+//        msgController.userDelegate = self;
+//
+//        NSString * str = [NSString stringWithFormat:@"%@",[dic objectForKey:@"teacherIM"]];
+//
+//        NSString * str1 = [NSString stringWithFormat:@"%@%@",user.school,user.studentId];
+//
+//        msgController.peerUID = @"5012012551319";//[str integerValue];//con.cid;
+//
+//        msgController.peerName = [NSString stringWithFormat:@"%@",[dic objectForKey:@"teacherName"]];//con.name;
+//
+//        msgController.currentUID = [str1 integerValue];
+//
+//        msgController.backType = @"TabBar";
+//
+//        msgController.hidesBottomBarWhenPushed = YES;
+//
+//         self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:msgController];
+//
+//        NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",[dic objectForKey:@"relObjectDetailID"]],@"relDetailId",[NSString stringWithFormat:@"%@",[dic objectForKey:@"relObjectType"]],@"relType",nil];
+//
+//        [[NetworkRequest sharedInstance] POST:StudentReply dict:dict succeed:^(id data) {
+//            NSLog(@"%@",data);
+//        } failure:^(NSError *error) {
+//
+//        }];
+////    }
+//
+//
+////    [self.navigationController pushViewController:msgController animated:YES];
+////    NSString *messageID = [userInfo valueForKey:@"_j_msgid"];
+////    NSDictionary *extras = [userInfo valueForKey:@"extras"];
+////    NSString *customizeField1 = [extras valueForKey:@"customizeField1"]; //服务端传递的Extras附加字段，key是自己定义的
+//
+//}
+
 -(void)IM:(UIApplication *)application{
     
 //    course-im/auth/grant
@@ -261,11 +319,11 @@
     
     NoticeViewController * n = [[NoticeViewController alloc] init];
     
-    _chat = [ChatHelper shareHelper];
+    
     
     n.backType = @"TabBar";
     
-    self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:n];
+//    self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:n];
     
         NSLog(@"%s",__func__);
     
@@ -292,7 +350,7 @@
     
     [[IMService instance] enterBackground];
 
-    [_chat getOut];
+    
     
     [[CollectionHeadView sharedInstance] onceSetNil];
     
@@ -393,11 +451,9 @@
     
     [self refreshHost];
     
-    [[EMClient sharedClient] applicationWillEnterForeground:application];
     
-    [_chat getOut];
     
-    _chat = [ChatHelper shareHelper];
+    
     
     CollectionHeadView *view = [CollectionHeadView sharedInstance];
     
@@ -444,9 +500,9 @@
         NSLog(@"iOS10 前台收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
     }
     NoticeViewController * n = [[NoticeViewController alloc] init];
-    _chat = [ChatHelper shareHelper];
+    
     n.backType = @"TabBar";
-    self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:n];
+//    self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:n];
     
     completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以设置
 }

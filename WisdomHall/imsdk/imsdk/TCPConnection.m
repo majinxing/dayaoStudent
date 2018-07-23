@@ -395,12 +395,16 @@
     [self.connectionObservers removeObject:value];
 }
 
+//接受消息崩溃
 
 -(void)publishConnectState:(int)state {
     for (NSValue *value in self.connectionObservers) {
-        id<TCPConnectionObserver> ob = [value nonretainedObjectValue];
-        if ([ob respondsToSelector:@selector(onConnectState:)]) {
-            [ob onConnectState:state];
+        NSString * strq = [NSString stringWithUTF8String:object_getClassName([value nonretainedObjectValue])];
+        if ([strq isEqualToString:@"TCPConnectionObserver"]) {
+            id<TCPConnectionObserver> ob = [value nonretainedObjectValue];///<>
+            if ([ob respondsToSelector:@selector(onConnectState:)]) {
+                [ob onConnectState:state];
+            }
         }
     }
 }

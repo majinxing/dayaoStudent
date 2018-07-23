@@ -9,15 +9,17 @@
 #import "NavBarNavigationController.h"
 #import "DYHeader.h"
 #import <CoreLocation/CoreLocation.h>
+#import "JPUSHService.h"
+#import "VoiceViewController.h"
 
-@interface NavBarNavigationController ()
+@interface NavBarNavigationController ()<MessageViewControllerUserDelegate>
 @property (nonatomic,strong)NSDictionary * dict;
 @end
 @implementation NavBarNavigationController
 
 +(NavBarNavigationController *)sharedInstance{
     static dispatch_once_t predicate;
-
+    
     static NavBarNavigationController * sharedDYTabBarViewControllerInstance = nil;
     dispatch_once(&predicate, ^{
         sharedDYTabBarViewControllerInstance = [[self alloc] init];
@@ -55,13 +57,93 @@
      addObserver:self
      selector:@selector(stopTime)
      name:@"stopTime" object:nil];
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(networkDidReceiveMessage:)
+     name:kJPFNetworkDidReceiveMessageNotification object:nil];
+}
+- (void)networkDidReceiveMessage:(NSNotification *)notification {
+    
+    NSDictionary * userInfo = [notification userInfo];
+    
+    NSString * strIM = [userInfo objectForKey:@"content_type"];
+    
+    if ([strIM isEqualToString:@"im"]) {
+        
+        NSError * err;
+        
+        NSString *content = [userInfo valueForKey:@"content"];
+        
+        NSData *jsonData = [content dataUsingEncoding:NSUTF8StringEncoding];
+        
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
+        
+        UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
+        
+        VoiceViewController* msgController = [[VoiceViewController alloc] init];
+        
+//        NSString * strq = [NSString stringWithUTF8String:object_getClassName(msgController)];
+//        if( strq == @"VoiceViewController"){
+//                NSLog(@"%s",__func__);
+//        }
+
+        msgController.userDelegate = self;
+        
+        NSString * str = [NSString stringWithFormat:@"%@",[dic objectForKey:@"teacherIM"]];
+        
+        NSString * str1 = [NSString stringWithFormat:@"%@%@",user.school,user.studentId];
+        
+        msgController.peerUID = [str integerValue];//con.cid;@"5012012551319";//
+        
+        msgController.peerName = [NSString stringWithFormat:@"%@",[dic objectForKey:@"teacherName"]];//con.name;
+        
+        msgController.currentUID = [str1 integerValue];
+        
+        msgController.backType = @"TabBar";
+        
+        msgController.hidesBottomBarWhenPushed = YES;
+        
+        [UIApplication sharedApplication].keyWindow.rootViewController = [[UINavigationController alloc]initWithRootViewController:msgController];
+        
+        NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",[dic objectForKey:@"relObjectDetailID"]],@"relDetailId",[NSString stringWithFormat:@"%@",[dic objectForKey:@"relObjectType"]],@"relType",nil];
+        
+        [[NetworkRequest sharedInstance] POST:StudentReply dict:dict succeed:^(id data) {
+            
+        } failure:^(NSError *error) {
+            
+        }];
+    }
+}
+#pragma mark - MessageViewControllerUserDelegate
+//从本地获取用户信息, IUser的name字段为空时，显示identifier字段
+- (IUser*)getUser:(int64_t)uid {
+    IUser *u = [[IUser alloc] init];
+    u.uid = uid;
+    u.name = @"";
+    u.avatarURL = @"http://api.gobelieve.io/images/e837c4c84f706a7988d43d62d190e2a1.png";
+    u.identifier = [NSString stringWithFormat:@"uid:%lld", uid];
+    return u;
+}
+//从服务器获取用户信息
+- (void)asyncGetUser:(int64_t)uid cb:(void(^)(IUser*))cb {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        IUser *u = [[IUser alloc] init];
+        u.uid = uid;
+        u.name = [NSString stringWithFormat:@"name:%lld", uid];
+        u.avatarURL = @"http://api.gobelieve.io/images/e837c4c84f706a7988d43d62d190e2a1.png";
+        u.identifier = [NSString stringWithFormat:@"uid:%lld", uid];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            cb(u);
+        });
+    });
 }
 -(void)stopTime{
     
     [[NavBarNavigationController sharedInstance].showTimer invalidate];
     
     [NavBarNavigationController sharedInstance].showTimer = nil;
-
+    
 }
 -(void)inApp{
     //时间间隔
@@ -69,12 +151,12 @@
     if (![NavBarNavigationController sharedInstance].showTimer) {
         //定时器
         [NavBarNavigationController sharedInstance].showTimer = [NSTimer scheduledTimerWithTimeInterval:timeInterval
-                                                      target:self
-                                                    selector:@selector(handleMaxShowTimer:)
-                                                    userInfo:nil
-                                                     repeats:YES];
+                                                                                                 target:self
+                                                                                               selector:@selector(handleMaxShowTimer:)
+                                                                                               userInfo:nil
+                                                                                                repeats:YES];
     }
-   
+    
     
     [[NavBarNavigationController sharedInstance].showTimer fire];
 }
@@ -83,14 +165,14 @@
     UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
     
     if (![UIUtils isBlankString:user.peopleId]) {
-    
+        
         NSDictionary * dict = @{@"appState":@"1",@"id":[NSString stringWithFormat:@"%@",user.peopleId]};
-    
+        
         [[NetworkRequest sharedInstance] POST:ChangeAppState dict:dict succeed:^(id data) {
             //            NSLog(@"%@",data);
             NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
             if ([str isEqualToString:@"401"]) {
-//                [[NavBarNavigationController sharedInstance].showTimer invalidate];
+                //                [[NavBarNavigationController sharedInstance].showTimer invalidate];
             }
         } failure:^(NSError *error) {
             

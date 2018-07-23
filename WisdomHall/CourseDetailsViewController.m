@@ -13,9 +13,9 @@
 #import "ShareView.h"
 #import "TextViewController.h"
 #import "SignListViewController.h"
-#import <Hyphenate/Hyphenate.h>
-#import "ConversationVC.h"
-#import "DiscussViewController.h"
+
+//#import "ConversationVC.h"
+//#import "DiscussViewController.h"
 #import "VoteViewController.h"
 #import "DataDownloadViewController.h"
 #import "SignPeople.h"
@@ -45,15 +45,16 @@
 #import "MessageListViewController.h"
 
 #import "VoiceViewController.h"
+#import "AskForLeaveView.h"
 
 
-@interface CourseDetailsViewController ()<UIActionSheetDelegate,ShareViewDelegate,UIAlertViewDelegate,UITableViewDelegate,UITableViewDataSource,MeetingTableViewCellDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIDocumentInteractionControllerDelegate,AlterViewDelegate,MessageViewControllerUserDelegate>
+@interface CourseDetailsViewController ()<UIActionSheetDelegate,ShareViewDelegate,UIAlertViewDelegate,UITableViewDelegate,UITableViewDataSource,MeetingTableViewCellDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIDocumentInteractionControllerDelegate,AlterViewDelegate,MessageViewControllerUserDelegate,AskForLeaveViewDelegate>
 
 @property (nonatomic,strong) InteractiveView * interactiveView;
 @property (nonatomic,strong) ShareView * shareView;
 @property (nonatomic,strong) ShareView * interaction;
 
-@property (strong, nonatomic, readonly) EMCallSession *callSession;
+//@property (strong, nonatomic, readonly) EMCallSession *callSession;
 @property (nonatomic,assign)BOOL isEnable;
 
 
@@ -80,6 +81,8 @@
 @property (nonatomic,strong)AlterView * alterView;
 
 @property (nonatomic,strong) NSTimer * t;
+
+@property (nonatomic,strong)AskForLeaveView * askLeaveView;
 
 @end
 
@@ -116,16 +119,7 @@
     // Do any additional setup after loading the view from its nib.
 }
 -(void)voiceCalls:(NSNotification *)dict{
-    EMCallSession * aSession = [dict.userInfo objectForKey:@"session"];
-    ConversationVC * c  = [[ConversationVC alloc] init];
-    c.callSession = aSession;
-    int n = (int)[NSString stringWithFormat:@"%@",_user.school].length;
-    NSMutableString * str = [NSMutableString stringWithFormat:@"%@",aSession.remoteName];
-    [str deleteCharactersInRange:NSMakeRange(0,n)];
-    c.teacherName = str;
-    c.call = CALLED;
-    self.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:c animated:YES];
+    
     //    调用:
 }
 -(void)addTableView{
@@ -547,6 +541,56 @@
         });
     });
 }
+#pragma mark - AskForLeaveViewDelegate
+-(void)askForLeaveWithReationDelegate:(NSString *)reasionStr{
+    NSString *idfv = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_c.sclassId,@"Id",_c.courseDetailId,@"courseDetailId",_user.peopleId,@"userId" ,idfv,@"mck",@"6",@"status",[NSString stringWithFormat:@"%@",reasionStr],@"reason",nil];
+    
+    [[NetworkRequest sharedInstance] POST:ClassSign dict:dict succeed:^(id data) {
+        [self outSelfViewDelegate];
+        //        [self alter:[[data objectForKey:@"header"] objectForKey:@"code"]];
+        
+        //        NSString * code = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
+        
+        NSString *message = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+        [UIUtils showInfoMessage:message withVC:self];
+
+//
+//        _c.signStatus = [NSString stringWithFormat:@"%@",[[data objectForKey:@"body"] objectForKey:@"status"]];
+//
+//        _c.courseSignId = [NSString stringWithFormat:@"%@",[[data objectForKey:@"body"] objectForKey:@"id"]];
+//
+//        if (![_c.signStatus isEqualToString:@"1"]&&![UIUtils isBlankString:_c.signStatus]) {
+//            [self signPictureUpdate];
+//            // 2.创建通知
+//            NSNotification *notification =[NSNotification notificationWithName:@"UpdateTheClassPage" object:nil userInfo:nil];
+//            // 3.通过 通知中心 发送 通知
+//
+//            [[NSNotificationCenter defaultCenter] postNotification:notification];
+//        }else{
+//            _c.signStatus = @"1";
+//            [UIUtils showInfoMessage:message withVC:self];
+//        }
+//
+//        [self hideHud];
+//
+//        [_tableView reloadData];
+        
+    } failure:^(NSError *error) {
+        
+        [UIUtils showInfoMessage:@"请假失败,服务器异常" withVC:self];
+        
+    }];
+}
+
+-(void)outSelfViewDelegate{
+    [_askLeaveView removeFromSuperview];
+    _askLeaveView = nil;
+}
+-(void)endEditeDelegate{
+    [self.view endEditing:YES];
+}
 #pragma mark MeetingCellDelegate
 -(void)shareButtonClickedDelegate:(NSString *)platform{
 
@@ -567,10 +611,12 @@
         [self.navigationController pushViewController: d animated:YES];
     }else if ([platform isEqualToString:InteractionType_Responder]){
         NSLog(@"抢答");
+        [self showHudInView:self.view hint:NSLocalizedString(@"正在加载数据", @"Load data...")];
+
         NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"relType", [NSString stringWithFormat:@"%@",_c.courseDetailId],@"relDetailId",nil];
         [[NetworkRequest sharedInstance] POST:StudentGointo dict:dict succeed:^(id data) {
             NSString * code = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
-            if ([code isEqualToString:@"成功"]) {
+            if ([code isEqualToString:@"成功"]||[code isEqualToString:@"该用户已经进入互动"]) {
                 VoiceViewController* msgController = [[VoiceViewController alloc] init];
                 msgController.userDelegate = self;
                 
@@ -589,43 +635,11 @@
             }else{
                 [UIUtils showInfoMessage:code withVC:self];
             }
-            
+            [self hideHud];
         } failure:^(NSError *error) {
-            
+            [UIUtils showInfoMessage:@"抢答失败" withVC:self];
+            [self hideHud];
         }];
-       
-//        ConversationVC * c =[[ConversationVC alloc] init];
-//        self.hidesBottomBarWhenPushed = YES;
-//        UserModel * s = [[Appsetting sharedInstance] getUsetInfo];
-//        c.HyNumaber = [NSString stringWithFormat:@"%@%@",s.school,_c.teacherWorkNo];
-//        c.call = CALLING;
-//        c.teacherName = _c.teacherName;
-//        c.c = _c;
-//
-//        [self presentViewController:c animated:YES completion:^{
-//
-//        }];
-//        [c returnReason:^(EMCallEndReason reason) {
-//
-//            if (reason == EMCallEndReasonRemoteOffline) {
-//
-//                [UIUtils showInfoMessage:@"抢答还没开始呢，不要太心急哦~" withVC:self];
-//
-//            }else if (reason == EMCallEndReasonBusy){
-//
-//                [UIUtils showInfoMessage:@"已有人抢答成功，下次手速要更快哦~" withVC:self];
-//
-//                [self sentNumberResponder];
-//
-//            }else if (reason == EMCallEndReasonHangup){
-//
-//            }else {
-//                [UIUtils showInfoMessage:@"抢答貌似失败了呢~" withVC:self];
-//            }
-//
-//        }];
-//
-//        [self.navigationController pushViewController:c animated:YES];
     }
     else if ([platform isEqualToString:InteractionType_Test]){
         NSLog(@"测试");
@@ -653,11 +667,19 @@
         self.hidesBottomBarWhenPushed = YES;
         vc.c = _c;
         [self.navigationController pushViewController:vc animated:YES];
+    }else if ([platform isEqualToString:Leave]){
+        if (!_askLeaveView) {
+            _askLeaveView = [[AskForLeaveView alloc] initWithFrame:CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT)];
+        }
+        [_askLeaveView addContentViewWithAry:nil];
+        _askLeaveView.delegate = self;
+        [self.view addSubview:_askLeaveView];
     }
     else if ([platform isEqualToString:InteractionType_Add]){
         NSLog(@"更多");
     }
 }
+
 //课程抢答收集
 -(void)sentNumberResponder{
     NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_c.courseDetailId,@"detailId",_user.peopleId,@"userId",@"1",@"type",@"0",@"successNum",nil];

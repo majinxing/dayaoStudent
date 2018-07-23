@@ -12,7 +12,7 @@
 #import "FMDBTool.h"
 #import "NoticeModel.h"
 #import "DYTabBarViewController.h"
-#import "ChatHelper.h"
+
 #import "MJRefresh.h"
 #import "NoticeDetailsViewController.h"
 
@@ -109,7 +109,7 @@
 -(void)back{
     if ([_backType isEqualToString:@"TabBar"]) {
         
-        ChatHelper * c =[ChatHelper shareHelper];
+        
         
         DYTabBarViewController *rootVC = [[DYTabBarViewController alloc] init];
         

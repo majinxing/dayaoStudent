@@ -207,10 +207,10 @@
                 }
                 StatisticalSelfUIViewController * vc = [[StatisticalSelfUIViewController alloc] init];
                 vc.dataAry = [NSMutableArray arrayWithArray:_dataAry];
-                
+                self.hidesBottomBarWhenPushed = YES;
+
                 [self.navigationController pushViewController:vc animated:YES];
                 
-                self.hidesBottomBarWhenPushed = YES;
             }else{
                 NSString * message = [[data objectForKey:@"header"] objectForKey:@"message"];
                 [UIUtils showInfoMessage:message withVC:self];

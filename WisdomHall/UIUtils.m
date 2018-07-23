@@ -820,8 +820,8 @@
                 [[Appsetting sharedInstance] getOut];
                 DYTabBarViewController *rootVC = [DYTabBarViewController sharedInstance];
                 rootVC = nil;
-                ChatHelper * c =[ChatHelper shareHelper];
-                [c getOut];
+//                ChatHelper * c =[ChatHelper shareHelper];
+//                [c getOut];
                 WorkingLoginViewController * userLogin = [[WorkingLoginViewController alloc] init];
                 [UIApplication sharedApplication].keyWindow.rootViewController =[[UINavigationController alloc] initWithRootViewController:userLogin];
                 UIAlertView * alter = [[UIAlertView alloc] initWithTitle:nil message:@"登录过期请重新登录" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
@@ -837,8 +837,8 @@
     [[Appsetting sharedInstance] getOut];
     DYTabBarViewController *rootVC = [DYTabBarViewController sharedInstance];
     rootVC = nil;
-    ChatHelper * c =[ChatHelper shareHelper];
-    [c getOut];
+//    ChatHelper * c =[ChatHelper shareHelper];
+//    [c getOut];
     WorkingLoginViewController * userLogin = [[WorkingLoginViewController alloc] init];
     [UIApplication sharedApplication].keyWindow.rootViewController =[[UINavigationController alloc] initWithRootViewController:userLogin];
     [UIUtils showInfoMessage:@"账号在另一台设备登录，请重新登录或修改密码" withVC:userLogin];
@@ -940,7 +940,7 @@
     
     NSMutableArray * seatAry = [dict objectForKey:@"seatPeople"];
     
-    ChatHelper * c = [ChatHelper shareHelper];
+//    ChatHelper * c = [ChatHelper shareHelper];
     
     UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
     
@@ -950,7 +950,7 @@
         
         NSString * str = [NSString stringWithFormat:@"{\"Project\":\"LvDongKeTang\",\"MessageType\":\"Notification\",\"From\":\"Admin\",\"Content\":\"会议通知：主题：%@，地址：%@，时间：%@，您的座次：%@\"}",[dict objectForKey:@"name"],[dict objectForKey:@"address"],[dict objectForKey:@"time"],s.seat];
         
-        [c sendTextMessageToPeople:str withReceiver:[NSString stringWithFormat:@"%@%@",user.school,s.workNo]];
+//        [c sendTextMessageToPeople:str withReceiver:[NSString stringWithFormat:@"%@%@",user.school,s.workNo]];
     }
     
 }
