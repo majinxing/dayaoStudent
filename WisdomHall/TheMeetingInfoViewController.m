@@ -123,7 +123,12 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self.view addSubview:_tableView];
 }
-
+-(void)viewDidAppear:(BOOL)animated{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:2];
+    
+    
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
 /**
  *  显示navigation的标题
  **/

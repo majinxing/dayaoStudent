@@ -11,6 +11,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "JPUSHService.h"
 #import "VoiceViewController.h"
+#import "DYTabBarViewController.h"
 
 @interface NavBarNavigationController ()<MessageViewControllerUserDelegate>
 @property (nonatomic,strong)NSDictionary * dict;
@@ -23,6 +24,31 @@
     static NavBarNavigationController * sharedDYTabBarViewControllerInstance = nil;
     dispatch_once(&predicate, ^{
         sharedDYTabBarViewControllerInstance = [[self alloc] init];
+        
+        [[NSNotificationCenter defaultCenter]
+         addObserver:sharedDYTabBarViewControllerInstance
+         selector:@selector(networkDidReceiveMessage:)
+         name:kJPFNetworkDidReceiveMessageNotification object:nil];
+        
+        [[NSNotificationCenter defaultCenter]
+         addObserver:sharedDYTabBarViewControllerInstance
+         selector:@selector(setColor)
+         name:ThemeColorChangeNotification object:nil];
+        
+        [[NSNotificationCenter defaultCenter]
+         addObserver:sharedDYTabBarViewControllerInstance
+         selector:@selector(inApp)
+         name:InApp object:nil];
+        
+        [[NSNotificationCenter defaultCenter]
+         addObserver:sharedDYTabBarViewControllerInstance
+         selector:@selector(outApp)
+         name:OutApp object:nil];
+        
+        [[NSNotificationCenter defaultCenter]
+         addObserver:sharedDYTabBarViewControllerInstance
+         selector:@selector(stopTime)
+         name:@"stopTime" object:nil];
     });
     return sharedDYTabBarViewControllerInstance;
 }
@@ -38,30 +64,7 @@
     
     [self.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17],NSForegroundColorAttributeName:[UIColor blackColor]}];
     
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(setColor)
-     name:ThemeColorChangeNotification object:nil];
     
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(inApp)
-     name:InApp object:nil];
-    
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(outApp)
-     name:OutApp object:nil];
-    
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(stopTime)
-     name:@"stopTime" object:nil];
-    
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(networkDidReceiveMessage:)
-     name:kJPFNetworkDidReceiveMessageNotification object:nil];
 }
 - (void)networkDidReceiveMessage:(NSNotification *)notification {
     
@@ -83,11 +86,11 @@
         
         VoiceViewController* msgController = [[VoiceViewController alloc] init];
         
-//        NSString * strq = [NSString stringWithUTF8String:object_getClassName(msgController)];
-//        if( strq == @"VoiceViewController"){
-//                NSLog(@"%s",__func__);
-//        }
-
+        //        NSString * strq = [NSString stringWithUTF8String:object_getClassName(msgController)];
+        //        if( strq == @"VoiceViewController"){
+        //                NSLog(@"%s",__func__);
+        //        }
+        
         msgController.userDelegate = self;
         
         NSString * str = [NSString stringWithFormat:@"%@",[dic objectForKey:@"teacherIM"]];
@@ -100,11 +103,22 @@
         
         msgController.currentUID = [str1 integerValue];
         
-        msgController.backType = @"TabBar";
+        //        msgController.backType = @"TabBar";
         
         msgController.hidesBottomBarWhenPushed = YES;
         
-        [UIApplication sharedApplication].keyWindow.rootViewController = [[UINavigationController alloc]initWithRootViewController:msgController];
+        DYTabBarViewController * root = (DYTabBarViewController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+        
+        if ([root isKindOfClass:[UITabBarController class]]) {//判断是否是当前根视图
+            
+            UINavigationController *nav = root.selectedViewController;//获取到当前视图的导航视图
+            
+            [nav.topViewController.navigationController pushViewController:msgController animated:YES];//获取当前跟视图push到的最高视图层,然后进行push到目的页面
+            
+        }
+        //        [self.navigationController pushViewController:msgController animated:ye];
+        
+        //        [UIApplication sharedApplication].keyWindow.rootViewController = [[UINavigationController alloc]initWithRootViewController:msgController];
         
         NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",[dic objectForKey:@"relObjectDetailID"]],@"relDetailId",[NSString stringWithFormat:@"%@",[dic objectForKey:@"relObjectType"]],@"relType",nil];
         

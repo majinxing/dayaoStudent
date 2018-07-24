@@ -87,6 +87,18 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
     [UIUtils getInternetDate];
     
+    UIButton * addcourse = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    addcourse.frame = CGRectMake(APPLICATION_WIDTH-80, APPLICATION_HEIGHT-100, 70, 70);
+    
+//    [addcourse setBackgroundImage:[UIImage imageNamed:@"加入"] forState:UIControlStateNormal];
+    
+    [addcourse setImage:[UIImage imageNamed:@"加入"] forState:UIControlStateNormal];
+    
+    [addcourse addTarget:self action:@selector(joinCourse) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:addcourse];
+    
 //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     //NSString *homeDir = NSHomeDirectory();沙盒路径
     // Do any additional setup after loading the view from its nib.
@@ -278,7 +290,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
 
     
-    UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"加入课程" style:UIBarButtonItemStylePlain target:self action:@selector(joinCourse)];
+    UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"..." style:UIBarButtonItemStylePlain target:self action:@selector(selectionBtnPressed)];
     self.navigationItem.rightBarButtonItem = myButton;
     
 //    
@@ -302,6 +314,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
  *
  **/
 -(void)joinCourse{
+//    return;
     if (_join==nil) {
         _join = [[JoinCours alloc] init];
         _join.delegate = self;

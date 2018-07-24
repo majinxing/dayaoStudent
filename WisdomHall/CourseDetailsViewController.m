@@ -127,10 +127,20 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    [self.tableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
-//    [self.tableView reloadData];
+    
+//    self.automaticallyAdjustsScrollViewInsets = NO;
+    
+//    [self.tableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
+    
+    
+    
     [self.view addSubview:_tableView];
+}
+-(void)viewDidAppear:(BOOL)animated{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:2];
+    
+    
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 -(void)getData{
     NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_c.sclassId,@"id",_c.courseDetailId,@"courseDetailId", nil];
@@ -583,7 +593,9 @@
         
     }];
 }
-
+-(void)picturebtnPressedDelegate:(UIButton *)btn{
+    [self selectImage];
+}
 -(void)outSelfViewDelegate{
     [_askLeaveView removeFromSuperview];
     _askLeaveView = nil;

@@ -13,6 +13,7 @@
 #import "FileModel.h"
 #import "UploadFileViewController.h"
 #import "MJRefresh.h"
+#import "FileSizeViewController.h"
 
 @interface DataDownloadViewController ()<UITableViewDelegate,UITableViewDataSource,UIDocumentInteractionControllerDelegate,DataDownloadTableViewCellDelegate,NSURLSessionDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
@@ -474,6 +475,7 @@
     
     if (![fileManager fileExistsAtPath:filePath]) {
         if (![UIUtils isBlankString:f.fileName]) {
+            
             UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
             
             NSString * baseUrl = user.host;
@@ -482,7 +484,15 @@
             
             urlString = [urlString stringByAppendingString:[NSString stringWithFormat:@"resourceId=%@",f.fileId]];
             
-            [self downloadFileWithURL:urlString];
+            
+            FileSizeViewController * vc = [[FileSizeViewController alloc] init];
+            vc.fileModel = f;
+            vc.urlStr = urlString;
+            
+            self.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+//            [self downloadFileWithURL:urlString];
             
         }else{
             [UIUtils showInfoMessage:@"请先确定文件的准确性" withVC:self];

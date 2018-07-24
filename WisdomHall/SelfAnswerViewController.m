@@ -536,7 +536,7 @@
     if ([_testType isEqualToString:@"single"]) {
         _questionModel = _allQuestionAry[_temp];
     }else{
-        _questionModel = _allQuestionAry[[sender.titleLabel.text intValue]];
+        _questionModel = _allQuestionAry[[sender.titleLabel.text intValue]/10];
     }
     if (!_v) {
         _v = [[imageBigView alloc] initWithFrame:CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT)];
@@ -560,7 +560,15 @@
             [self selectPicture];
         }
     }else{
-        
+        if ([sender.titleLabel.text intValue]%10==1) {
+            if((sender.tag-101)<_questionModel.questionAnswerImageIdAry.count&&_questionModel.questionAnswerImageIdAry.count>0) {
+                
+                [_v addImageView:_questionModel.questionAnswerImageIdAry[sender.tag-101]];
+                
+                [self.view addSubview:_v];
+                
+            }
+        }
         if (((sender.tag-101)<_questionModel.questionTitleImageIdAry.count)&&_questionModel.questionTitleImageIdAry.count>0) {
             
             [_v addImageView:_questionModel.questionTitleImageIdAry[sender.tag-101]];
@@ -763,7 +771,7 @@
             if (_isAbleAnswer) {
                 [cell addFirstTitleTextView:q.questionAnswer withImageAry:q.questionAnswerImageAry withIsEdit:YES withIndexRow:(int)indexPath.section];
             }else{
-                [cell addFirstTitleTextView:q.questionAnswer withImageAry:q.questionAnswerImageIdAry withIsEdit:NO withIndexRow:(int)indexPath.section];
+                [cell addFirstTitleTextView:q.questionAnswer withImageAry:q.questionAnswerImageIdAry withIsEdit:NO withIndexRow:(int)indexPath.section*10+1];//余数为1是为了区分题干和答案id图片，都走的一个方法无法区分对象归属，耦合性不好
             }
             //
         }else{
@@ -842,13 +850,13 @@
     return @"";
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

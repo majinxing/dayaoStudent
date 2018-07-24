@@ -11,6 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FileSizeViewController">
             <connections>
+                <outlet property="fileDownload" destination="gVh-B9-ctS" id="MlA-0P-r6H"/>
+                <outlet property="fileImage" destination="Yza-WE-iI8" id="FSv-ZO-5gb"/>
+                <outlet property="fileName" destination="7hR-Ui-e2F" id="PEy-DN-Z3b"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,7 +21,50 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yza-WE-iI8">
+                    <rect key="frame" x="155" y="142" width="64" height="64"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="64" id="JF0-ym-zJq"/>
+                        <constraint firstAttribute="height" constant="64" id="ME0-mg-gEX"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7hR-Ui-e2F">
+                    <rect key="frame" x="0.0" y="221" width="375" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="k4H-ai-NOB"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gVh-B9-ctS">
+                    <rect key="frame" x="87" y="272" width="200" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="MU7-RJ-DtB"/>
+                        <constraint firstAttribute="height" constant="40" id="aNx-uB-LIp"/>
+                    </constraints>
+                    <state key="normal" title=" 下载" backgroundImage="Rectangle3">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="fileDownLoadBtn:" destination="-1" eventType="touchUpInside" id="bwt-1G-oFK"/>
+                    </connections>
+                </button>
+            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="7hR-Ui-e2F" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="HBl-xa-sGv"/>
+                <constraint firstItem="Yza-WE-iI8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="142" id="Mfi-3i-hAE"/>
+                <constraint firstItem="gVh-B9-ctS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="QvL-4O-P8L"/>
+                <constraint firstItem="gVh-B9-ctS" firstAttribute="top" secondItem="7hR-Ui-e2F" secondAttribute="bottom" constant="30" id="a5u-qz-0Jw"/>
+                <constraint firstItem="Yza-WE-iI8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="fKB-26-Ef9"/>
+                <constraint firstItem="7hR-Ui-e2F" firstAttribute="top" secondItem="Yza-WE-iI8" secondAttribute="bottom" constant="15" id="mMJ-5T-dw0"/>
+                <constraint firstAttribute="trailing" secondItem="7hR-Ui-e2F" secondAttribute="trailing" id="wgZ-MC-qh1"/>
+            </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="Rectangle3" width="238" height="76"/>
+    </resources>
 </document>

@@ -25,6 +25,7 @@
 #define BottomHeight Is_Iphone_X ? 34 : 0
 
 #define ScrollViewW [[UIScreen mainScreen] bounds].size.width - 20
+
 #define ScrollViewH 70
 //屏幕
 #define APPLICATION_WIDTH [UIScreen mainScreen].bounds.size.width

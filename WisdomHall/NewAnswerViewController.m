@@ -73,7 +73,9 @@
     if ((_temp+1) == _allQuestionAry.count) {
         [_nextQuestion setTitle:@"提交" forState:UIControlStateNormal];
     }
-   
+    
+    [_OnQuestion setEnabled:NO];
+
     // Do any additional setup after loading the view from its nib.
 }
 -(void)addTableView{
@@ -184,22 +186,35 @@
     if ([_testType isEqualToString:@"single"]) {
         _testType = @"All";
         [_nextQuestion setTitle:@"提交" forState:UIControlStateNormal];
-
+        [_OnQuestion setEnabled:NO];
     }else{
         _testType = @"single";
         _temp = 0;
         [_nextQuestion setTitle:@"下一题" forState:UIControlStateNormal];
+        [_OnQuestion setEnabled:YES];
 
     }
     [_tableView reloadData];
 }
 - (IBAction)OnQuestionBtnPressed:(id)sender {
- 
+    if ((_temp+1)>1) {
+        _temp = _temp - 1;
+        [_tableView reloadData];
+    }else{
+        [_OnQuestion setEnabled:NO];
+    }
+   
+    
+    
 }
 - (IBAction)NextQuestionBtnPressed:(id)sender {
     if ((_temp+1)<_allQuestionAry.count) {
         _temp = _temp + 1;
+        
+        [_OnQuestion setEnabled:YES];
+
         [_tableView reloadData];
+        
     }
     if (_temp+1 ==_allQuestionAry.count){
         [_nextQuestion setTitle:@"提交" forState:UIControlStateNormal];
@@ -547,6 +562,7 @@
         }
     }
 }
+
 -(void)textViewDidChangeDelegate:(UITextView *)textView{
     if (!_editPageView) {
         _editPageView = [[EditPageView alloc] init];
@@ -735,7 +751,9 @@
             if (_isAbleAnswer) {
                 [cell addFirstTitleTextView:q.questionAnswer withImageAry:q.questionAnswerImageAry withIsEdit:YES withIndexRow:(int)indexPath.section];
             }else{
+                
                 [cell addFirstTitleTextView:q.questionAnswer withImageAry:q.questionAnswerImageIdAry withIsEdit:NO withIndexRow:(int)indexPath.section];
+                
             }
 //
         }else{

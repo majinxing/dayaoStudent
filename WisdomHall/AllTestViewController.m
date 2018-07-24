@@ -271,6 +271,8 @@
         vc.t = _dataAry[indexPath.row];
         if ([vc.t.statusName isEqualToString:@"已完成"]) {
             vc.isAbleAnswer = NO;
+        }else{
+            vc.isAbleAnswer = YES;
         }
         vc.editable = NO;
         
@@ -289,6 +291,8 @@
         vc.t = _dataAry[indexPath.row];
         if ([vc.t.statusName isEqualToString:@"已完成"]) {
             vc.isAbleAnswer = NO;
+        }else{
+            vc.isAbleAnswer = YES;
         }
         vc.editable = NO;
         

@@ -333,12 +333,21 @@
 
 -(void)publishPeerMessage:(IMMessage*)msg {
     for (NSValue *value in self.peerObservers) {
-        
-        id<PeerMessageObserver> ob = [value nonretainedObjectValue];
-        
-        if ([ob respondsToSelector:@selector(onPeerMessage:)]) {
-            [ob onPeerMessage:msg];
+        if (value) {
+            id<PeerMessageObserver> ob = [value nonretainedObjectValue];
+            
+            if ([ob respondsToSelector:@selector(onPeerMessage:)]) {
+                [ob onPeerMessage:msg];
+            }
         }
+//        NSString * strq = [NSString stringWithUTF8String:object_getClassName([value nonretainedObjectValue])];//mjx
+//        if ([strq isEqualToString:@"PeerMessageObserver"]) {
+//            id<PeerMessageObserver> ob = [value nonretainedObjectValue];
+//
+//            if ([ob respondsToSelector:@selector(onPeerMessage:)]) {
+//                [ob onPeerMessage:msg];
+//            }
+//        }
     }
 }
 

@@ -219,7 +219,7 @@ alpha:(a)]
     [self.conversations insertObject:conv atIndex:1];
 
 
-    self.navigationItem.title = @"对话";
+    self.navigationItem.title = @"消息";
     if ([[IMService instance] connectState] == STATE_CONNECTING) {
         self.navigationItem.title = @"连接中...";
     }

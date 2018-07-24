@@ -27,7 +27,7 @@
     }
     return self;
 }
--(void)addContentViewWithAry:(NSMutableArray *)ary{
+-(void)addContentViewWithAry:(NSMutableArray *)ary {
     UIButton * blackView = [UIButton buttonWithType:UIButtonTypeCustom];
     
     blackView.frame =  CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);
@@ -94,6 +94,21 @@
     [whiteView addSubview:_introductionView];
     
 
+    UILabel * pictureLable = [[UILabel alloc] initWithFrame:CGRectMake(25, CGRectGetMaxY(_introductionView.frame)+10, 100, 20)];
+    pictureLable.text = @"照片证明";
+    pictureLable.font = [UIFont fontWithName:@"PingFangSC-Regular" size:15];
+
+    [whiteView addSubview:pictureLable];
+    
+    UIButton * picturebtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    picturebtn.frame = CGRectMake(25, CGRectGetMaxY(pictureLable.frame)+10, 70, 70);
+    
+    [picturebtn addTarget:self action:@selector(picturebtnPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [picturebtn setBackgroundImage:[UIImage imageNamed:@"相机"] forState:UIControlStateNormal];
+    
+    [whiteView addSubview:picturebtn];
     
     UIButton * createGroupBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     createGroupBtn.frame = CGRectMake(50,whiteView.frame.size.height-80, APPLICATION_WIDTH-100, 50);
@@ -104,6 +119,11 @@
     [createGroupBtn addTarget:self action:@selector(createGroupBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
     [whiteView addSubview:createGroupBtn];
     
+}
+-(void)picturebtnPressed:(UIButton *)btn{
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(picturebtnPressedDelegate:)]) {
+        [self.delegate picturebtnPressedDelegate:btn];
+    }
 }
 -(void)addPeopleBtnPressed{
     if (self.delegate&&[self.delegate respondsToSelector:@selector(addPeopleBtnPressedDelegae)]) {

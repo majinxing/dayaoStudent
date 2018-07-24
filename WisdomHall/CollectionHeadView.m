@@ -100,6 +100,7 @@ static dispatch_once_t onceToken;
     _s.showsVerticalScrollIndicator = NO;//水平方向的滚动条
     _s.showsHorizontalScrollIndicator = NO;
     _s.bounces = NO;
+    
     [self addSubview:_s];
 
     for (int i = 0; i<_temp; i++) {

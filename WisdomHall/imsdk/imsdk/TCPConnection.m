@@ -399,13 +399,20 @@
 
 -(void)publishConnectState:(int)state {
     for (NSValue *value in self.connectionObservers) {
-        NSString * strq = [NSString stringWithUTF8String:object_getClassName([value nonretainedObjectValue])];
-        if ([strq isEqualToString:@"TCPConnectionObserver"]) {
+        if (value) {
             id<TCPConnectionObserver> ob = [value nonretainedObjectValue];///<>
             if ([ob respondsToSelector:@selector(onConnectState:)]) {
                 [ob onConnectState:state];
             }
         }
+        
+//        NSString * strq = [NSString stringWithUTF8String:object_getClassName([value nonretainedObjectValue])];
+//        if ([strq isEqualToString:@"TCPConnectionObserver"]) {
+//            id<TCPConnectionObserver> ob = [value nonretainedObjectValue];///<>
+//            if ([ob respondsToSelector:@selector(onConnectState:)]) {
+//                [ob onConnectState:state];
+//            }
+//        }
     }
 }
 

@@ -33,6 +33,9 @@
 
 #import "IMTool.h"
 
+#import "VoiceViewController.h"
+#import "JPUSHService.h"
+
 static dispatch_once_t predicate;
 
 @interface DYTabBarViewController ()<UIAlertViewDelegate>
@@ -82,8 +85,10 @@ static dispatch_once_t predicate;
     [IMTool IMLogin:[NSString stringWithFormat:@"%@%@",_user.school,_user.studentId]];
 
 
+    
     // Do any additional setup after loading the view from its nib.
 }
+
 -(void)viewWillAppear:(BOOL)animated{
 
 }

@@ -133,7 +133,7 @@
 -(void)changeFirstTitleTextColor{
     _firstTitleTextView.textColor = [UIColor colorWithRed:16/255.0 green:157/255.0 blue:73/255.0 alpha:1/1.0];
 }
--(void)addFirstTitleTextView:(NSString *)textStr withImageAry:(NSMutableArray *)ary withIsEdit:(BOOL)edit withIndexRow:(int)indexRow{
+-(void)addFirstTitleTextView:(NSString *)textStr withImageAry:(NSMutableArray *)ary withIsEdit:(BOOL)edit withIndexRow:(int)indexRow {
     
     _firstTitleTextView.text = textStr;
     if (![UIUtils isBlankString:textStr]) {
@@ -188,6 +188,7 @@
             [btn setEnabled:YES];
             
             [btn setTitle:[NSString stringWithFormat:@"%d",indexRow] forState:UIControlStateNormal];
+            
             [btn setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
 
             
@@ -333,11 +334,13 @@
 }
 
 - (IBAction)firstSelectImageBtn:(UIButton *)sender {
+    
     if (self.delegate&&[self.delegate respondsToSelector:@selector(firstSelectImageBtnDelegate:)]) {
         
         [self.delegate firstSelectImageBtnDelegate:sender];
         
     }
+    
 }
 - (IBAction)thirthSelectOptionsImageBtn:(UIButton *)sender {
     if (self.delegate&&[self.delegate respondsToSelector:@selector(thirthSelectOptionsImageBtnDelegate:)]) {

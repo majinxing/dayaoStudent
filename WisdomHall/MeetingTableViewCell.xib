@@ -66,7 +66,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="参会人员：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zrA-dA-7E1">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="参加人员：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zrA-dA-7E1">
                         <rect key="frame" x="20" y="225" width="75" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="i1v-06-n7e"/>
@@ -245,7 +245,7 @@
                             <constraint firstAttribute="height" constant="40" id="Xhd-oY-KaH"/>
                         </constraints>
                         <state key="normal" title="二维码签到">
-                            <color key="titleColor" red="0.16138714551925659" green="0.64992117881774902" blue="0.87773621082305908" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
                         <connections>
                             <action selector="codePressed:" destination="iIk-f6-ygd" eventType="touchUpInside" id="VwW-Gv-1Lm"/>

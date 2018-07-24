@@ -11,6 +11,7 @@
 
 
 @protocol ChoiceQuestionTableViewCellDelegate <NSObject>
+
 -(void)firstSelectImageBtnDelegate:(UIButton *)sender;
 -(void)selectScoreDeleate:(UIButton *)sender;
 -(void)selectDifficultyDelegate:(UIButton *)sender;
@@ -20,6 +21,9 @@
 -(void)textViewDidChangeDelegate:(UITextView *)textView;
 
 -(void)deleAnswerImageDelegate:(UIButton *)sender;
+
+-(void)answerImageDelegate:(UIButton *)btn;
+
 @end
 
 @interface ChoiceQuestionTableViewCell : UITableViewCell
