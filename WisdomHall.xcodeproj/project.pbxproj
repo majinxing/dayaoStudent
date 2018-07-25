@@ -305,6 +305,13 @@
 		8BA224D51EAF25DC00627A1B /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BA224D31EAF25DC00627A1B /* RegisterViewController.xib */; };
 		8BA41B761F9F0D6B00B9886E /* MeetingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BA41B741F9F0D6B00B9886E /* MeetingTableViewCell.m */; };
 		8BA41B771F9F0D6B00B9886E /* MeetingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BA41B751F9F0D6B00B9886E /* MeetingTableViewCell.xib */; };
+		8BB1FC2221081C2B006BA422 /* JoinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1FC2021081C2B006BA422 /* JoinViewController.m */; };
+		8BB1FC2321081C2B006BA422 /* JoinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BB1FC2121081C2B006BA422 /* JoinViewController.xib */; };
+		8BB1FC2721084ED6006BA422 /* StatisticalCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1FC2521084ED6006BA422 /* StatisticalCourseViewController.m */; };
+		8BB1FC2821084ED6006BA422 /* StatisticalCourseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BB1FC2621084ED6006BA422 /* StatisticalCourseViewController.xib */; };
+		8BB1FC2B21085783006BA422 /* CourseStatisticalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1FC2A21085783006BA422 /* CourseStatisticalModel.m */; };
+		8BB1FC2F2108688B006BA422 /* StatisticalCourseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1FC2D2108688B006BA422 /* StatisticalCourseTableViewCell.m */; };
+		8BB1FC302108688B006BA422 /* StatisticalCourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BB1FC2E2108688B006BA422 /* StatisticalCourseTableViewCell.xib */; };
 		8BB221D71FA7088E00EC6478 /* UIImage+ImageSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB221CA1FA7088E00EC6478 /* UIImage+ImageSize.m */; };
 		8BB221D81FA7088E00EC6478 /* SGQRCode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8BB221CB1FA7088E00EC6478 /* SGQRCode.bundle */; };
 		8BB221D91FA7088E00EC6478 /* SGQRCodeAlbumManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB221CE1FA7088E00EC6478 /* SGQRCodeAlbumManager.m */; };
@@ -1231,6 +1238,17 @@
 		8BA41B731F9F0D6B00B9886E /* MeetingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetingTableViewCell.h; sourceTree = "<group>"; };
 		8BA41B741F9F0D6B00B9886E /* MeetingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetingTableViewCell.m; sourceTree = "<group>"; };
 		8BA41B751F9F0D6B00B9886E /* MeetingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeetingTableViewCell.xib; sourceTree = "<group>"; };
+		8BB1FC1F21081C2B006BA422 /* JoinViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JoinViewController.h; sourceTree = "<group>"; };
+		8BB1FC2021081C2B006BA422 /* JoinViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JoinViewController.m; sourceTree = "<group>"; };
+		8BB1FC2121081C2B006BA422 /* JoinViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JoinViewController.xib; sourceTree = "<group>"; };
+		8BB1FC2421084ED6006BA422 /* StatisticalCourseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StatisticalCourseViewController.h; sourceTree = "<group>"; };
+		8BB1FC2521084ED6006BA422 /* StatisticalCourseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StatisticalCourseViewController.m; sourceTree = "<group>"; };
+		8BB1FC2621084ED6006BA422 /* StatisticalCourseViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatisticalCourseViewController.xib; sourceTree = "<group>"; };
+		8BB1FC2921085783006BA422 /* CourseStatisticalModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CourseStatisticalModel.h; sourceTree = "<group>"; };
+		8BB1FC2A21085783006BA422 /* CourseStatisticalModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CourseStatisticalModel.m; sourceTree = "<group>"; };
+		8BB1FC2C2108688B006BA422 /* StatisticalCourseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StatisticalCourseTableViewCell.h; sourceTree = "<group>"; };
+		8BB1FC2D2108688B006BA422 /* StatisticalCourseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StatisticalCourseTableViewCell.m; sourceTree = "<group>"; };
+		8BB1FC2E2108688B006BA422 /* StatisticalCourseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatisticalCourseTableViewCell.xib; sourceTree = "<group>"; };
 		8BB221C91FA7088E00EC6478 /* UIImage+ImageSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageSize.h"; sourceTree = "<group>"; };
 		8BB221CA1FA7088E00EC6478 /* UIImage+ImageSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageSize.m"; sourceTree = "<group>"; };
 		8BB221CB1FA7088E00EC6478 /* SGQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SGQRCode.bundle; sourceTree = "<group>"; };
@@ -2124,6 +2142,9 @@
 				8B48F9E720A29F3F00038B47 /* StatisticalTableViewCell.h */,
 				8B48F9E620A29F3F00038B47 /* StatisticalTableViewCell.m */,
 				8B48F9E820A29F3F00038B47 /* StatisticalTableViewCell.xib */,
+				8BB1FC2C2108688B006BA422 /* StatisticalCourseTableViewCell.h */,
+				8BB1FC2D2108688B006BA422 /* StatisticalCourseTableViewCell.m */,
+				8BB1FC2E2108688B006BA422 /* StatisticalCourseTableViewCell.xib */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -2255,6 +2276,9 @@
 				8B48F9ED20A2A60E00038B47 /* CalendarViewController.h */,
 				8B48F9EB20A2A60D00038B47 /* CalendarViewController.m */,
 				8B48F9EC20A2A60D00038B47 /* CalendarViewController.xib */,
+				8BB1FC2421084ED6006BA422 /* StatisticalCourseViewController.h */,
+				8BB1FC2521084ED6006BA422 /* StatisticalCourseViewController.m */,
+				8BB1FC2621084ED6006BA422 /* StatisticalCourseViewController.xib */,
 			);
 			name = Office;
 			sourceTree = "<group>";
@@ -2519,6 +2543,9 @@
 				8B429BFD1FA8149000084A99 /* QrCodeViewController.h */,
 				8B429BFE1FA8149000084A99 /* QrCodeViewController.m */,
 				8B429BFF1FA8149000084A99 /* QrCodeViewController.xib */,
+				8BB1FC1F21081C2B006BA422 /* JoinViewController.h */,
+				8BB1FC2021081C2B006BA422 /* JoinViewController.m */,
+				8BB1FC2121081C2B006BA422 /* JoinViewController.xib */,
 				8BA224B91EAEE2E400627A1B /* View */,
 			);
 			name = Course;
@@ -2628,6 +2655,8 @@
 				8B0E536B209FD8D800327823 /* QuestionModel.m */,
 				8B8947042100949900C0AB4B /* IMGroupModel.h */,
 				8B8947052100949900C0AB4B /* IMGroupModel.m */,
+				8BB1FC2921085783006BA422 /* CourseStatisticalModel.h */,
+				8BB1FC2A21085783006BA422 /* CourseStatisticalModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -3776,6 +3805,7 @@
 				8B0AF75F1F511AA2003858A4 /* VoteResultTableViewCell.xib in Resources */,
 				8B2E16E31EBACAD7008B7C57 /* PersonalCollectionViewCell.xib in Resources */,
 				8B17370A1EC2BE2B00BE3C8F /* PersonalDataTableViewCell.xib in Resources */,
+				8BB1FC302108688B006BA422 /* StatisticalCourseTableViewCell.xib in Resources */,
 				8BE877811EBC2DE000866A34 /* InTheTestViewController.xib in Resources */,
 				8B2E16F81EBADA5D008B7C57 /* TheMeetingEndedViewController.xib in Resources */,
 				8B014E40206670700037A107 /* HomeworkListTableViewCell.xib in Resources */,
@@ -3823,6 +3853,7 @@
 				8B0333F41F8C50950021D495 /* GroupListTableViewCell.xib in Resources */,
 				8B3EBBD5205A1BF0009974B1 /* ChangeThemeInfoViewController.xib in Resources */,
 				8BFB94621EE6A381004BB963 /* JoinVoteViewController.xib in Resources */,
+				8BB1FC2821084ED6006BA422 /* StatisticalCourseViewController.xib in Resources */,
 				8B081DDD1F06013300493B81 /* collegedata.json in Resources */,
 				8BE24D691F8B6E2200621055 /* GroupPeopleViewController.xib in Resources */,
 				8BCCD0B620FD78630090E27A /* README.md in Resources */,
@@ -3879,6 +3910,7 @@
 				8BCCD19720FD78B20090E27A /* images.xcassets in Resources */,
 				8BA0468F20F35D07004571D1 /* NewAnswerViewController.xib in Resources */,
 				8BCCD1EE20FD79130090E27A /* MessageConversationCell.xib in Resources */,
+				8BB1FC2321081C2B006BA422 /* JoinViewController.xib in Resources */,
 				8B1A50331F75F85C00A11CB2 /* OfficeTableViewCell.xib in Resources */,
 				8BB47BA6208872CD005407D9 /* called.mp3 in Resources */,
 				8B081E0F1F0B766D00493B81 /* SelectMeetingOrClassViewController.xib in Resources */,
@@ -4055,6 +4087,7 @@
 				8BF864C91ECAD97300B7EED4 /* UIImageView+WebCache.m in Sources */,
 				8B3EBBCE205A1A4D009974B1 /* NavBarNavigationController.m in Sources */,
 				8BA224B81EAED53D00627A1B /* UIColor+HexString.m in Sources */,
+				8BB1FC2B21085783006BA422 /* CourseStatisticalModel.m in Sources */,
 				8B1509821F4E7A6F000127AF /* TFFileUploadManager.m in Sources */,
 				8B05CB6B1EC0056B0063EC20 /* TextsTableViewCell.m in Sources */,
 				8B47AB831F96DC6A00DB1B9A /* ClassTableViewCell.m in Sources */,
@@ -4183,6 +4216,7 @@
 				8B7D5D821EB961260068058E /* CreateCourseViewController.m in Sources */,
 				8BCE7CCF1F04F07600FE261B /* AFURLRequestSerialization.m in Sources */,
 				8BCCD1CF20FD78B20090E27A /* AsyncTCP.m in Sources */,
+				8BB1FC2221081C2B006BA422 /* JoinViewController.m in Sources */,
 				8BCCD18220FD78B20090E27A /* NSString+JSMessagesView.m in Sources */,
 				8BCCD1EA20FD79130090E27A /* GroupLoginViewController.m in Sources */,
 				8BCCD1AD20FD78B20090E27A /* AudioDownloader.m in Sources */,
@@ -4276,6 +4310,7 @@
 				8B5CAF6821006DEB00E9950F /* SelectGroupPeopleViewController.m in Sources */,
 				8BCCD19C20FD78B20090E27A /* DraftDB.m in Sources */,
 				8BCCD19520FD78B20090E27A /* EaseEmotionManager.m in Sources */,
+				8BB1FC2721084ED6006BA422 /* StatisticalCourseViewController.m in Sources */,
 				8BF864721ECACAE800B7EED4 /* FMResultSet.m in Sources */,
 				8BCCD1F120FD79130090E27A /* RoomViewController.m in Sources */,
 				8BCCD1CA20FD78B20090E27A /* EaseFaceView.m in Sources */,
@@ -4299,6 +4334,7 @@
 				8BCCD1A720FD78B20090E27A /* PeerMessageHandler.m in Sources */,
 				8BCCD0B320FD78630090E27A /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				8BCCD18020FD78B20090E27A /* wavwriter.c in Sources */,
+				8BB1FC2F2108688B006BA422 /* StatisticalCourseTableViewCell.m in Sources */,
 				8BF79F54205F41F60033CCC3 /* HKClipperVeiw.m in Sources */,
 				8B9171C71ED3D9D8009686FD /* contactTool.m in Sources */,
 				8B48F9E920A29F4000038B47 /* StatisticalTableViewCell.m in Sources */,
@@ -4557,7 +4593,7 @@
 				GCC_PREFIX_HEADER = "/Users/xtu-ti/Documents/IM_integration/IM_integration/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/WisdomHall/Bugly.framework";
 				INFOPLIST_FILE = WisdomHall/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4769,7 +4805,7 @@
 				GCC_PREFIX_HEADER = "/Users/xtu-ti/Documents/IM_integration/IM_integration/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/WisdomHall/Bugly.framework";
 				INFOPLIST_FILE = WisdomHall/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4828,7 +4864,7 @@
 				GCC_PREFIX_HEADER = "/Users/xtu-ti/Documents/IM_integration/IM_integration/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/WisdomHall/Bugly.framework";
 				INFOPLIST_FILE = WisdomHall/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

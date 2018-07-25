@@ -18,5 +18,7 @@
 
 @property (nonatomic,copy) NSString * leaveEarlyNum;//早退人数
 
+@property (nonatomic,copy) NSString * courseId;//课程id
+
 -(void)setValueWithDict:(NSDictionary *)dict;
 @end

@@ -18,6 +18,8 @@
 
 @property (nonatomic,strong)UITextView * introductionView;
 
+
+
 @end
 @implementation AskForLeaveView
 -(instancetype)init{
@@ -100,15 +102,15 @@
 
     [whiteView addSubview:pictureLable];
     
-    UIButton * picturebtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _picturebtn = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    picturebtn.frame = CGRectMake(25, CGRectGetMaxY(pictureLable.frame)+10, 70, 70);
+    _picturebtn.frame = CGRectMake(25, CGRectGetMaxY(pictureLable.frame)+10, 70, 70);
     
-    [picturebtn addTarget:self action:@selector(picturebtnPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [_picturebtn addTarget:self action:@selector(picturebtnPressed:) forControlEvents:UIControlEventTouchUpInside];
     
-    [picturebtn setBackgroundImage:[UIImage imageNamed:@"相机"] forState:UIControlStateNormal];
+    [_picturebtn setBackgroundImage:[UIImage imageNamed:@"相机"] forState:UIControlStateNormal];
     
-    [whiteView addSubview:picturebtn];
+    [whiteView addSubview:_picturebtn];
     
     UIButton * createGroupBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     createGroupBtn.frame = CGRectMake(50,whiteView.frame.size.height-80, APPLICATION_WIDTH-100, 50);

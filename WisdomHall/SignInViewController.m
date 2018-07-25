@@ -87,21 +87,23 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
     [UIUtils getInternetDate];
     
+    [self addCourseBtn];
+    
+
+}
+-(void)addCourseBtn{
+    
     UIButton * addcourse = [UIButton buttonWithType:UIButtonTypeCustom];
     
     addcourse.frame = CGRectMake(APPLICATION_WIDTH-80, APPLICATION_HEIGHT-100, 70, 70);
     
-//    [addcourse setBackgroundImage:[UIImage imageNamed:@"加入"] forState:UIControlStateNormal];
+    //    [addcourse setBackgroundImage:[UIImage imageNamed:@"加入"] forState:UIControlStateNormal];
     
     [addcourse setImage:[UIImage imageNamed:@"加入"] forState:UIControlStateNormal];
     
     [addcourse addTarget:self action:@selector(joinCourse) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:addcourse];
-    
-//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    //NSString *homeDir = NSHomeDirectory();沙盒路径
-    // Do any additional setup after loading the view from its nib.
 }
 -(void)UpdateTheClassPage{
     [self headerRereshing];

@@ -16,6 +16,6 @@
     _courseName = [dict objectForKey:@"courseName"];
     _lateNum = [NSString stringWithFormat:@"%@",[dict objectForKey:@"lateNum"]];
     _leaveEarlyNum = [NSString stringWithFormat:@"%@",[dict objectForKey:@"leaveEarlyNum"]];
-
+    _courseId = [NSString stringWithFormat:@"%@",[dict objectForKey:@"courseId"]];
 }
 @end

@@ -23,5 +23,8 @@
 
 @property (nonatomic,weak)id<AskForLeaveViewDelegate>delegate;
 
+@property (nonatomic,strong)UIButton * picturebtn;
+
 -(void)addContentViewWithAry:(NSMutableArray *)ary;
+
 @end

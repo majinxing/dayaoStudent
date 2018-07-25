@@ -23,7 +23,10 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    _selectBtn.backgroundColor = [[ThemeTool shareInstance] getThemeColor];
+    _selectBtn.layer.masksToBounds = YES;
+    _selectBtn.layer.cornerRadius = 20;
+    
+//    _selectBtn.backgroundColor = [[ThemeTool shareInstance] getThemeColor];
     // Initialization code
 }
 -(void)addContentView:(NSString *)titleStr withText:(NSString *)textStr{

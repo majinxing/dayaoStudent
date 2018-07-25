@@ -203,12 +203,14 @@
                     
                     [s setValueWithDict:ary[i]];
                     
+                    
                     [_dataAry addObject:s];
                 }
                 StatisticalSelfUIViewController * vc = [[StatisticalSelfUIViewController alloc] init];
                 vc.dataAry = [NSMutableArray arrayWithArray:_dataAry];
                 self.hidesBottomBarWhenPushed = YES;
-
+                vc.startTime = _textAry[1];
+                vc.endTime = _textAry[2];
                 [self.navigationController pushViewController:vc animated:YES];
                 
             }else{

@@ -11,5 +11,7 @@
 @interface StatisticalSelfUIViewController : UIViewController
 
 @property (nonatomic,strong) NSMutableArray * dataAry;
-
+@property (nonatomic,copy)NSString * startTime;
+@property (nonatomic,copy)NSString * endTime;
+@property (nonatomic,copy)NSString * courseId;
 @end

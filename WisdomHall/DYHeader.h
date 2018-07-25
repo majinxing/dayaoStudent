@@ -326,6 +326,6 @@
 
 #define StudentReply            @"course/call/reply"                 //学生响应抢答
 
+#define StudentLeave            @"course/course/leave"               //学生请假
 
-
-
+#define CourseStatistic         @"course/course/student/statistic/detail" //每一堂课的到课率

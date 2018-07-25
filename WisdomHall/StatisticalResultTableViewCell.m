@@ -11,6 +11,7 @@
 #import "DYHeader.h"
 
 @interface StatisticalResultTableViewCell()
+@property (strong, nonatomic) IBOutlet UIView *backView;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *totalLabel;
 @property (strong, nonatomic) IBOutlet UILabel *actLabel;
@@ -46,6 +47,8 @@
     _bSecView.layer.masksToBounds = YES;
     _bSecView.layer.borderColor = RGBA_COLOR(231, 231, 231, 0.7).CGColor;
     _bSecView.layer.borderWidth = 1;
+    _backView.layer.masksToBounds = YES;
+    _backView.layer.cornerRadius = 15;
     // Initialization code
 }
 -(void)addContentView:(StatisticalResultModel *)s{

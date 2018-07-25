@@ -46,6 +46,7 @@
 
 #import "VoiceViewController.h"
 #import "AskForLeaveView.h"
+#import "UIImageView+WebCache.h"
 
 
 @interface CourseDetailsViewController ()<UIActionSheetDelegate,ShareViewDelegate,UIAlertViewDelegate,UITableViewDelegate,UITableViewDataSource,MeetingTableViewCellDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIDocumentInteractionControllerDelegate,AlterViewDelegate,MessageViewControllerUserDelegate,AskForLeaveViewDelegate>
@@ -83,6 +84,8 @@
 @property (nonatomic,strong) NSTimer * t;
 
 @property (nonatomic,strong)AskForLeaveView * askLeaveView;
+
+@property (nonatomic,copy)NSString * laevePictureId;//请假图片id
 
 @end
 
@@ -297,52 +300,71 @@
     //    UIImagePickerControllerEditedImage//编辑过的图片
     //    UIImagePickerControllerOriginalImage//原图
     //刚才已经看了info中的键值对，可以从info中取出一个UIImage对象，将取出的对象赋给按钮的image
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    // 异步执行任务创建方法
-    dispatch_async(queue, ^{
-        UIImage *resultImage = [info objectForKey:@"UIImagePickerControllerEditedImage"];
-        
-        //    NSString * filePath = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
-        UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
-        
-        NSString * str = [NSString stringWithFormat:@"%@-%@-%@",user.userName,user.studentId,[UIUtils getTime]];
-        
-        if ([_pictureType isEqualToString:@"QAPicture"]) {
-            
-            NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",str,@"description",@"6",@"function",[NSString stringWithFormat:@"%@",_c.sclassId],@"relId",@"false",@"deleteOld",nil];
-            
-            [[NetworkRequest sharedInstance] POSTImage:FileUpload image:resultImage dict:dict1 succeed:^(id data) {
-                NSString * code = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
-                if ([code isEqualToString:@"0000"]) {
-                    [UIUtils showInfoMessage:@"上传成功" withVC:self];
-                }else{
-                    [UIUtils showInfoMessage:@"上传失败" withVC:self];
-                }
-            } failure:^(NSError *error) {
-                [UIUtils showInfoMessage:@"上传失败" withVC:self];
-            }];
-        }else if ([_pictureType isEqualToString:@"SignPicture"]){
-            
-            NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",str,@"description",@"10",@"function",[NSString stringWithFormat:@"%@",_c.courseSignId],@"relId",@"true",@"deleteOld",nil];
-            
-            UIImage * image = [UIUtils addWatemarkTextAfteriOS7_WithLogoImage:resultImage watemarkText:[NSString stringWithFormat:@"%@-%@-%@",_user.userName,_user.studentId,[UIUtils getCurrentDate]]];
-            
-            [[NetworkRequest sharedInstance] POSTImage:FileUpload image:image dict:dict1 succeed:^(id data) {
-                NSString * code = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
-                if ([code isEqualToString:@"0000"]) {
-                    [UIUtils showInfoMessage:@"上传成功" withVC:self];
-                }else{
-                    [UIUtils showInfoMessage:@"上传失败" withVC:self];
-                }
-            } failure:^(NSError *error) {
-                [UIUtils showInfoMessage:@"上传失败，请检查网络" withVC:self];
-            }];
-        }
-
-    });
+    
     
     //使用模态返回到软件界面
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+//        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+//        // 异步执行任务创建方法
+//        dispatch_async(queue, ^{
+            UIImage *resultImage = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+            
+            //    NSString * filePath = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
+            UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
+            
+            NSString * str = [NSString stringWithFormat:@"%@-%@-%@",user.userName,user.studentId,[UIUtils getTime]];
+            
+            if ([_pictureType isEqualToString:@"LeavePicture"]) {
+                
+                [self hideHud];
+                [self showHudInView:self.view hint:NSLocalizedString(@"正在加载数据", @"Load data...")];
+                
+                NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",str,@"description",@"25",@"function",[NSString stringWithFormat:@"%@",_c.sclassId],@"relId",@"false",@"deleteOld",nil];
+                
+                [[NetworkRequest sharedInstance] POSTImage:FileUpload image:resultImage dict:dict1 succeed:^(id data) {
+                    NSString * code = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
+                    if ([code isEqualToString:@"0000"]) {
+                        
+                        _laevePictureId = [NSString stringWithFormat:@"%@",[data objectForKey:@"body"][0]];
+                        
+                        UIImageView * image = [[UIImageView alloc] init];
+                        
+                        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",_user.host,FileDownload,_laevePictureId]]];
+                        
+                        image.image = [UIImage imageWithData:data];
+                        
+                        [_askLeaveView.picturebtn setBackgroundImage:image.image forState:UIControlStateNormal];
+                        
+                    }else{
+                        [UIUtils showInfoMessage:@"图片上传失败，请重新上传" withVC:self];
+                    }
+                    [self hideHud];
+                } failure:^(NSError *error) {
+                    [UIUtils showInfoMessage:@"上传失败,请检查网络" withVC:self];
+                    [self hideHud];
+                }];
+                
+                
+            }else if ([_pictureType isEqualToString:@"SignPicture"]){
+                
+                NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",str,@"description",@"10",@"function",[NSString stringWithFormat:@"%@",_c.courseSignId],@"relId",@"true",@"deleteOld",nil];
+                
+                UIImage * image = [UIUtils addWatemarkTextAfteriOS7_WithLogoImage:resultImage watemarkText:[NSString stringWithFormat:@"%@-%@-%@",_user.userName,_user.studentId,[UIUtils getCurrentDate]]];
+                
+                [[NetworkRequest sharedInstance] POSTImage:FileUpload image:image dict:dict1 succeed:^(id data) {
+                    NSString * code = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
+                    if ([code isEqualToString:@"0000"]) {
+                        [UIUtils showInfoMessage:@"上传成功" withVC:self];
+                    }else{
+                        [UIUtils showInfoMessage:@"上传失败" withVC:self];
+                    }
+                } failure:^(NSError *error) {
+                    [UIUtils showInfoMessage:@"上传失败，请检查网络" withVC:self];
+                }];
+            }
+            
+//        });
+    }];
 }
 - (IBAction)interactiveBtnPressed:(id)sender {
     if (!_interaction)
@@ -553,39 +575,18 @@
 }
 #pragma mark - AskForLeaveViewDelegate
 -(void)askForLeaveWithReationDelegate:(NSString *)reasionStr{
-    NSString *idfv = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
     
-    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_c.sclassId,@"Id",_c.courseDetailId,@"courseDetailId",_user.peopleId,@"userId" ,idfv,@"mck",@"6",@"status",[NSString stringWithFormat:@"%@",reasionStr],@"reason",nil];
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",reasionStr],@"reason",_laevePictureId,@"resourceId",[NSString stringWithFormat:@"%@",_c.courseDetailId],@"detailId",nil];
     
-    [[NetworkRequest sharedInstance] POST:ClassSign dict:dict succeed:^(id data) {
+    [[NetworkRequest sharedInstance] POST:StudentLeave dict:dict succeed:^(id data) {
         [self outSelfViewDelegate];
-        //        [self alter:[[data objectForKey:@"header"] objectForKey:@"code"]];
-        
-        //        NSString * code = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
+       
+        [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];
         
         NSString *message = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+        
         [UIUtils showInfoMessage:message withVC:self];
 
-//
-//        _c.signStatus = [NSString stringWithFormat:@"%@",[[data objectForKey:@"body"] objectForKey:@"status"]];
-//
-//        _c.courseSignId = [NSString stringWithFormat:@"%@",[[data objectForKey:@"body"] objectForKey:@"id"]];
-//
-//        if (![_c.signStatus isEqualToString:@"1"]&&![UIUtils isBlankString:_c.signStatus]) {
-//            [self signPictureUpdate];
-//            // 2.创建通知
-//            NSNotification *notification =[NSNotification notificationWithName:@"UpdateTheClassPage" object:nil userInfo:nil];
-//            // 3.通过 通知中心 发送 通知
-//
-//            [[NSNotificationCenter defaultCenter] postNotification:notification];
-//        }else{
-//            _c.signStatus = @"1";
-//            [UIUtils showInfoMessage:message withVC:self];
-//        }
-//
-//        [self hideHud];
-//
-//        [_tableView reloadData];
         
     } failure:^(NSError *error) {
         
@@ -594,7 +595,11 @@
     }];
 }
 -(void)picturebtnPressedDelegate:(UIButton *)btn{
+    
+    _pictureType = @"LeavePicture";
+    
     [self selectImage];
+    
 }
 -(void)outSelfViewDelegate{
     [_askLeaveView removeFromSuperview];
