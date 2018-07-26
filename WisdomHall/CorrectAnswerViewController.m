@@ -72,7 +72,7 @@
     if ((_temp+1) == _allQuestionAry.count) {
         [_nextQuestion setTitle:@"提交" forState:UIControlStateNormal];
     }
-    
+    self.title = @"测验详情";
     // Do any additional setup after loading the view from its nib.
 }
 -(void)addTableView{

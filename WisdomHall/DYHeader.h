@@ -298,7 +298,7 @@
 
 #define QuertyClass             @"course/course/statisticsByCourse" //按照课程查询
 
-#define StatisticsSelf          @"course/course/statistics/by/user" //查询学生自己信息
+#define StatisticsSelf          @"course/course/student/statistic" //查询学生自己信息
 
 #define SyncCourse              @"course/sync/course"               //同步课程信息
 

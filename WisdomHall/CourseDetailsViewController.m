@@ -8,14 +8,11 @@
 
 #import "CourseDetailsViewController.h"
 #import "ClassManagementViewController.h"
-#import "InteractiveView.h"
 #import "DYHeader.h"
 #import "ShareView.h"
 #import "TextViewController.h"
 #import "SignListViewController.h"
 
-//#import "ConversationVC.h"
-//#import "DiscussViewController.h"
 #import "VoteViewController.h"
 #import "DataDownloadViewController.h"
 #import "SignPeople.h"
@@ -51,11 +48,6 @@
 
 @interface CourseDetailsViewController ()<UIActionSheetDelegate,ShareViewDelegate,UIAlertViewDelegate,UITableViewDelegate,UITableViewDataSource,MeetingTableViewCellDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIDocumentInteractionControllerDelegate,AlterViewDelegate,MessageViewControllerUserDelegate,AskForLeaveViewDelegate>
 
-@property (nonatomic,strong) InteractiveView * interactiveView;
-@property (nonatomic,strong) ShareView * shareView;
-@property (nonatomic,strong) ShareView * interaction;
-
-//@property (strong, nonatomic, readonly) EMCallSession *callSession;
 @property (nonatomic,assign)BOOL isEnable;
 
 
@@ -121,21 +113,12 @@
     
     // Do any additional setup after loading the view from its nib.
 }
--(void)voiceCalls:(NSNotification *)dict{
-    
-    //    调用:
-}
+
 -(void)addTableView{
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, APPLICATION_WIDTH, APPLICATION_HEIGHT-64) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-//    self.automaticallyAdjustsScrollViewInsets = NO;
-    
-//    [self.tableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
-    
-    
     
     [self.view addSubview:_tableView];
 }
@@ -210,48 +193,9 @@
 -(void)setNavigationTitle{
 //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
    
-    self.title = @"课程详情";
+    self.title = @"课程";
     
-    UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"删除课程" style:UIBarButtonItemStylePlain target:self action:@selector(delecateCourse)];
-    
-    if ([[NSString stringWithFormat:@"%@",_c.teacherWorkNo] isEqualToString:[NSString stringWithFormat:@"%@",_user.studentId]]) {
-        self.navigationItem.rightBarButtonItem = myButton;
-    }
 }
--(void)delecateCourse{
-    if ([[NSString stringWithFormat:@"%@",_c.courseType] isEqualToString:@"1"]) {
-        
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:nil preferredStyle:  UIAlertControllerStyleActionSheet];
-        //分别按顺序放入每个按钮；
-        [alert addAction:[UIAlertAction actionWithTitle:@"删除周期课程" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"是否确定删除周期性课程" message:nil delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
-            alertView.delegate = self;
-            alertView.tag = 1002;
-            [alertView show];
-        }]];
-        
-        [alert addAction:[UIAlertAction actionWithTitle:@"删除当前课程" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"是否确定删除当前课程" message:nil delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
-            alertView.delegate = self;
-            alertView.tag = 1003;
-            [alertView show];
-        }]];
-        
-        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            //点击按钮的响应事件；
-        }]];
-        //弹出提示框；
-        [self presentViewController:alert animated:true completion:nil];
-        
-    }else if([[NSString stringWithFormat:@"%@",_c.courseType] isEqualToString:@"2"]){
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"是否确定删除临时性课程" message:nil delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
-        alertView.delegate = self;
-        alertView.tag = 1001;
-        [alertView show];
-    }
-}
-
 
 -(void)signPictureUpdate{
     if (![[NSString stringWithFormat:@"%@",_c.signWay] isEqualToString:@"9"]) {
@@ -262,7 +206,7 @@
         _photoView = [[PhotoPromptBox alloc] initWithBlack:^(NSString * str) {
             [_photoView removeFromSuperview];
         } WithTakePictureBlack:^(NSString *str) {
-            [self getPicture];
+            [self selectImage];
             [_photoView removeFromSuperview];
         }];
         _photoView.frame = CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);
@@ -270,27 +214,7 @@
     _pictureType = @"SignPicture";
     [self.view addSubview:_photoView];
 }
--(void)getPicture{
-    //实现button点事件的回调方法
-    //调用系统相册的类
-    UIImagePickerController *pickerController = [[UIImagePickerController alloc]init];
-                      
-    //设置选取的照片是否可编辑
-    pickerController.allowsEditing = YES;
-    //设置相册呈现的样式
-    
-    pickerController.sourceType =  UIImagePickerControllerSourceTypeCamera;//图片分组列表样式
-    pickerController.cameraDevice = UIImagePickerControllerCameraDeviceFront;
 
-    //选择完成图片或者点击取消按钮都是通过代理来操作我们所需要的逻辑过程
-    pickerController.delegate = self;
-    //使用模态呈现相册
-    [self.navigationController presentViewController:pickerController animated:YES completion:^{
-                          
-    }];
-    
-    
-}
 //选择照片完成之后的代理方法
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
@@ -366,95 +290,13 @@
 //        });
     }];
 }
-- (IBAction)interactiveBtnPressed:(id)sender {
-    if (!_interaction)
-    {
-        _interaction = [[ShareView alloc] initWithFrame:self.navigationController.view.bounds withType:@"interaction"];
-        _interaction.delegate = self;
-    }
-    [_interaction showInView:self.view];
-}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-#pragma mark ALter
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (alertView.tag == 1001){
-        if (buttonIndex == 1) {
-            
-            NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_c.courseDetailId,@"courseDetailId",_c.sclassId,@"id",@"2",@"courseType", nil];
-            
-            [[NetworkRequest sharedInstance] POST:DelecateCourse dict:dict succeed:^(id data) {
-                NSString * s = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
-                if ([s isEqualToString:@"成功"]) {
-                    // 2.创建通知
-                    NSNotification *notification =[NSNotification notificationWithName:@"UpdateTheClassPage" object:nil userInfo:nil];
-                    // 3.通过 通知中心 发送 通知
-                    
-                    [[NSNotificationCenter defaultCenter] postNotification:notification];
-                    
-                    [self.navigationController popViewControllerAnimated:YES];
-                }else{
-                    [UIUtils showInfoMessage:@"课程删除失败" withVC:self];
-                }
-                
-            } failure:^(NSError *error) {
-                [UIUtils showInfoMessage:@"课程删除失败，请检查网络" withVC:self];
-            }];
-        }
-    }else if (alertView.tag == 1002){
-        if (buttonIndex == 1) {
-            //点击按钮的响应事件；
-            NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_c.courseDetailId,@"courseDetailId",_c.sclassId,@"id",@"1",@"courseType", nil];
-            
-            [[NetworkRequest sharedInstance] POST:DelecateCourse dict:dict succeed:^(id data) {
-                NSString * s = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
-                if ([s isEqualToString:@"成功"]) {
-                    // 2.创建通知
-                    NSNotification *notification =[NSNotification notificationWithName:@"UpdateTheClassPage" object:nil userInfo:nil];
-                    // 3.通过 通知中心 发送 通知
-                    
-                    [[NSNotificationCenter defaultCenter] postNotification:notification];
-                    
-                    [self.navigationController popViewControllerAnimated:YES];
-                }else{
-                    [UIUtils showInfoMessage:@"课程删除失败" withVC:self];
-                }
-                
-            } failure:^(NSError *error) {
-                [UIUtils showInfoMessage:@"课程删除失败，请检查网络" withVC:self];
-                
-            }];
-        }
-    }else if (alertView.tag == 1003){
-        if (buttonIndex == 1) {
-            
-            //点击按钮的响应事件；
-            NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_c.courseDetailId,@"courseDetailId",@"1",@"courseType", nil];
-            
-            [[NetworkRequest sharedInstance] POST:DelecateCourse dict:dict succeed:^(id data) {
-                NSString * s = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
-                if ([s isEqualToString:@"成功"]) {
-                    // 2.创建通知
-                    NSNotification *notification =[NSNotification notificationWithName:@"UpdateTheClassPage" object:nil userInfo:nil];
-                    // 3.通过 通知中心 发送 通知
-                    
-                    [[NSNotificationCenter defaultCenter] postNotification:notification];
-                    
-                    [self.navigationController popViewControllerAnimated:YES];
-                }else{
-                    [UIUtils showInfoMessage:@"课程删除失败" withVC:self];
-                }
-                
-            } failure:^(NSError *error) {
-                [UIUtils showInfoMessage:@"课程删除失败，请检查网络" withVC:self];
-            }];
-            
-        }
-    }
-}
+
 #pragma mark AlterView
 -(void)alterViewDeleageRemove{
     
@@ -536,20 +378,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 20;
 }
-//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-//    UIView * view = [[UIView alloc] init];
-//    view.backgroundColor = RGBA_COLOR(231, 231, 231, 1);
-//    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(10, 2, 80, 20)];
-//    label.font = [UIFont systemFontOfSize:14];
-//    label.textColor = [UIColor blackColor];
-//    [view addSubview:label];
-//    if (section == 1) {
-//        label.text = @"签到";
-//    }else if(section == 2){
-//        label.text = @"互动";
-//    }
-//    return view;
-//}
+
 #pragma mark - MessageViewControllerUserDelegate
 //从本地获取用户信息, IUser的name字段为空时，显示identifier字段
 - (IUser*)getUser:(int64_t)uid {
@@ -611,7 +440,6 @@
 #pragma mark MeetingCellDelegate
 -(void)shareButtonClickedDelegate:(NSString *)platform{
 
-    [_interaction hide];
     if ([platform isEqualToString:InteractionType_Vote]){
         VoteViewController * v = [[VoteViewController alloc] init];
         self.hidesBottomBarWhenPushed = YES;
@@ -1107,14 +935,11 @@
         
     }];
    
-    
     //选择完成图片或者点击取消按钮都是通过代理来操作我们所需要的逻辑过程
     pickerController.delegate = self;
   
     
 }
-//选择照片完成之后的代理方法
-
 
 @end
 

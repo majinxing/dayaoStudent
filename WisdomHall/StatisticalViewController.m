@@ -186,11 +186,11 @@
     
     [self showHudInView:self.view hint:NSLocalizedString(@"正在加载数据", @"Load data...")];
     
-    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",user.peopleId],@"userId",[NSString stringWithFormat:@"%d",_temp+1],@"termId",_textAry[1],@"startTime",_textAry[2],@"endTime", nil];
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_textAry[1],@"startTime",_textAry[2],@"endTime", nil];
     
     [_dataAry removeAllObjects];
     
-    [[NetworkRequest sharedInstance] GET: StatisticsSelf dict:dict succeed:^(id data) {
+    [[NetworkRequest sharedInstance] POST: StatisticsSelf dict:dict succeed:^(id data) {
         NSString * str = [[data objectForKey:@"header"] objectForKey:@"code"];
         if (![UIUtils isBlankString:str]) {
             if ([str isEqualToString:@"0000"]) {

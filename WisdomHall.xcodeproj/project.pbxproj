@@ -312,6 +312,8 @@
 		8BB1FC2B21085783006BA422 /* CourseStatisticalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1FC2A21085783006BA422 /* CourseStatisticalModel.m */; };
 		8BB1FC2F2108688B006BA422 /* StatisticalCourseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1FC2D2108688B006BA422 /* StatisticalCourseTableViewCell.m */; };
 		8BB1FC302108688B006BA422 /* StatisticalCourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BB1FC2E2108688B006BA422 /* StatisticalCourseTableViewCell.xib */; };
+		8BB1FC3421099937006BA422 /* JoinMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1FC3221099937006BA422 /* JoinMeetingViewController.m */; };
+		8BB1FC3521099937006BA422 /* JoinMeetingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BB1FC3321099937006BA422 /* JoinMeetingViewController.xib */; };
 		8BB221D71FA7088E00EC6478 /* UIImage+ImageSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB221CA1FA7088E00EC6478 /* UIImage+ImageSize.m */; };
 		8BB221D81FA7088E00EC6478 /* SGQRCode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8BB221CB1FA7088E00EC6478 /* SGQRCode.bundle */; };
 		8BB221D91FA7088E00EC6478 /* SGQRCodeAlbumManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB221CE1FA7088E00EC6478 /* SGQRCodeAlbumManager.m */; };
@@ -1249,6 +1251,9 @@
 		8BB1FC2C2108688B006BA422 /* StatisticalCourseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StatisticalCourseTableViewCell.h; sourceTree = "<group>"; };
 		8BB1FC2D2108688B006BA422 /* StatisticalCourseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StatisticalCourseTableViewCell.m; sourceTree = "<group>"; };
 		8BB1FC2E2108688B006BA422 /* StatisticalCourseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatisticalCourseTableViewCell.xib; sourceTree = "<group>"; };
+		8BB1FC3121099937006BA422 /* JoinMeetingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JoinMeetingViewController.h; sourceTree = "<group>"; };
+		8BB1FC3221099937006BA422 /* JoinMeetingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JoinMeetingViewController.m; sourceTree = "<group>"; };
+		8BB1FC3321099937006BA422 /* JoinMeetingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JoinMeetingViewController.xib; sourceTree = "<group>"; };
 		8BB221C91FA7088E00EC6478 /* UIImage+ImageSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageSize.h"; sourceTree = "<group>"; };
 		8BB221CA1FA7088E00EC6478 /* UIImage+ImageSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageSize.m"; sourceTree = "<group>"; };
 		8BB221CB1FA7088E00EC6478 /* SGQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SGQRCode.bundle; sourceTree = "<group>"; };
@@ -2158,6 +2163,9 @@
 				8B027A111EF8F30100600E18 /* TheMeetingInfoViewController.h */,
 				8B027A121EF8F30100600E18 /* TheMeetingInfoViewController.m */,
 				8B027A131EF8F30100600E18 /* TheMeetingInfoViewController.xib */,
+				8BB1FC3121099937006BA422 /* JoinMeetingViewController.h */,
+				8BB1FC3221099937006BA422 /* JoinMeetingViewController.m */,
+				8BB1FC3321099937006BA422 /* JoinMeetingViewController.xib */,
 			);
 			name = TheMeetingType;
 			sourceTree = "<group>";
@@ -3841,6 +3849,7 @@
 				8B9CCC931F17204B001833FD /* SelectPeopleToClassViewController.xib in Resources */,
 				8BFB94671EE79745004BB963 /* JoinVoteTableViewCell.xib in Resources */,
 				8B014E43206670700037A107 /* HomeworkCreateTableViewCell.xib in Resources */,
+				8BB1FC3521099937006BA422 /* JoinMeetingViewController.xib in Resources */,
 				8B2F145B1F5E9D7200438374 /* StudentScoreViewController.xib in Resources */,
 				8B77250C1F302E6200D1B521 /* FeedBackTableViewCell.xib in Resources */,
 				8B0E537E209FD93E00327823 /* AnswerChoiceQuestionViewController.xib in Resources */,
@@ -4318,6 +4327,7 @@
 				8BE913A31EEFB80000000282 /* MBProgressHUD+Add.m in Sources */,
 				8B4825FB20EEF8080073E942 /* peopleListView.m in Sources */,
 				8B7D5D901EB9782C0068058E /* CourseCollectionViewCell.m in Sources */,
+				8BB1FC3421099937006BA422 /* JoinMeetingViewController.m in Sources */,
 				8BCCD1E820FD79130090E27A /* Conversation.m in Sources */,
 				8B081E051F09DC2F00493B81 /* Foundation+Log.m in Sources */,
 				8B027A241EFA5FF200600E18 /* DataDownloadViewController.m in Sources */,
@@ -4593,7 +4603,7 @@
 				GCC_PREFIX_HEADER = "/Users/xtu-ti/Documents/IM_integration/IM_integration/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/WisdomHall/Bugly.framework";
 				INFOPLIST_FILE = WisdomHall/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4805,7 +4815,7 @@
 				GCC_PREFIX_HEADER = "/Users/xtu-ti/Documents/IM_integration/IM_integration/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/WisdomHall/Bugly.framework";
 				INFOPLIST_FILE = WisdomHall/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4864,7 +4874,7 @@
 				GCC_PREFIX_HEADER = "/Users/xtu-ti/Documents/IM_integration/IM_integration/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/WisdomHall/Bugly.framework";
 				INFOPLIST_FILE = WisdomHall/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

@@ -17,6 +17,7 @@
 #import "AlterView.h"
 #import "CreateMeetingViewController.h"
 #import "JoinCours.h"
+#import "JoinMeetingViewController.h"
 
 static NSString * cellIdentifier = @"cellIdentifier";
 
@@ -90,12 +91,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
 
     
     [alert addAction:[UIAlertAction actionWithTitle:@"加入会议" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        if (_join==nil) {
-            _join = [[JoinCours alloc] init];
-            _join.delegate = self;
-            _join.frame = CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);
-            [self.view addSubview:_join];
-        }
+        [self jionMeeting];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"搜索会议" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self selectionBtnPressed];
@@ -109,11 +105,20 @@ static NSString * cellIdentifier = @"cellIdentifier";
     [self presentViewController:alert animated:true completion:nil];
     
 }
-
+-(void)jionMeeting{
+    JoinMeetingViewController * vc = [[JoinMeetingViewController alloc] init];
+    
+    self.hidesBottomBarWhenPushed = YES;
+    
+    [self.navigationController pushViewController:vc animated:YES];
+}
 -(void)selectionBtnPressed{
+    
+    
     SelectMeetingOrClassViewController * s = [[SelectMeetingOrClassViewController alloc] init];
     self.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:s animated:YES];
+    
 //    self.hidesBottomBarWhenPushed = NO;
 //    UIBarButtonItem * selection = [[UIBarButtonItem alloc] initWithTitle:@"搜索" style:UIBarButtonItemStylePlain target:self action:@selector(selectionBtnPressed)];
 //    self.navigationItem.leftBarButtonItem = selection;

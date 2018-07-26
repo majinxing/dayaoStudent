@@ -1,13 +1,20 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JoinViewController">
             <connections>
+                <outlet property="codeLable" destination="1Id-vz-qAa" id="nN0-kp-C1D"/>
+                <outlet property="searchBtn" destination="I8e-cQ-fuK" id="8jC-a8-ZMW"/>
+                <outlet property="textFile" destination="7td-7a-fM3" id="xxQ-Id-M4e"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,8 +22,55 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请输入邀请码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Id-vz-qAa">
+                    <rect key="frame" x="20" y="40" width="200" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="SWS-Jc-mZu"/>
+                        <constraint firstAttribute="height" constant="21" id="pKw-6K-uvn"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="例如：10001" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7td-7a-fM3">
+                    <rect key="frame" x="20" y="72" width="335" height="36"/>
+                    <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="36" id="kgQ-NA-Ep3"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I8e-cQ-fuK">
+                    <rect key="frame" x="87.5" y="128" width="200" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="0BO-Sy-Cvk"/>
+                        <constraint firstAttribute="height" constant="44" id="Xyw-xx-7uR"/>
+                    </constraints>
+                    <state key="normal" title="搜索" backgroundImage="Rectangle3">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="searchBtnPressed:" destination="-1" eventType="touchUpInside" id="hUa-wX-WhV"/>
+                    </connections>
+                </button>
+            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="7td-7a-fM3" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="1xs-Mk-J5J"/>
+                <constraint firstItem="I8e-cQ-fuK" firstAttribute="top" secondItem="7td-7a-fM3" secondAttribute="bottom" constant="20" id="3Ah-oy-Sac"/>
+                <constraint firstItem="1Id-vz-qAa" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="Oat-mL-xKQ"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="7td-7a-fM3" secondAttribute="trailing" constant="20" id="YeP-x5-i85"/>
+                <constraint firstItem="I8e-cQ-fuK" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="Ywx-Vy-KVo"/>
+                <constraint firstItem="1Id-vz-qAa" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="20" id="vus-WO-vox"/>
+                <constraint firstItem="7td-7a-fM3" firstAttribute="top" secondItem="1Id-vz-qAa" secondAttribute="bottom" constant="11" id="y13-Ym-Jmw"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
         </view>
     </objects>
+    <resources>
+        <image name="Rectangle3" width="238" height="76"/>
+    </resources>
 </document>

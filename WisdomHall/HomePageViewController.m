@@ -55,6 +55,9 @@
     _userModel = [[Appsetting sharedInstance] getUsetInfo];
     
     [self setAlias];//i++
+    
+    [UIUtils getInternetDate];
+
     // Do any additional setup after loading the view from its nib.
 }
 -(void)setAlias{
@@ -164,6 +167,7 @@
     self.hidesBottomBarWhenPushed = YES;
     mInfo.meetingModel = meetingModel;
     [self.navigationController pushViewController:mInfo animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
 }
 #pragma mark OfficeTableViewCellDelegate
 -(void)shareButtonClickedDelegate:(NSString *)str{

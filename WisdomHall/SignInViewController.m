@@ -29,6 +29,7 @@
 #import "WorkingLoginViewController.h"
 #import "ClassTableViewCell.h"
 #import "SynchronousCourseView.h"
+#import "JoinViewController.h"
 
 static NSString *cellIdentifier = @"cellIdentifier";
 
@@ -77,7 +78,6 @@ static NSString *cellIdentifier = @"cellIdentifier";
     [self setNavigationTitle];
     
     //    [self addCollection];
-    [self headerRereshing];
     
     
     [self addTableView];
@@ -85,9 +85,13 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UpdateTheClassPage) name:@"UpdateTheClassPage" object:nil];
     
-    [UIUtils getInternetDate];
     
     [self addCourseBtn];
+    
+    [self headerRereshing];
+
+}
+-(void)viewDidAppear:(BOOL)animated{
     
 
 }
@@ -129,7 +133,12 @@ static NSString *cellIdentifier = @"cellIdentifier";
     }];
     
     [self.view addSubview:_tableView];
-    
+    UISwipeGestureRecognizer * priv = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
+    [priv setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [_tableView addGestureRecognizer:priv];
+    UISwipeGestureRecognizer * recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    [_tableView addGestureRecognizer:recognizer];
 }
 -(void)addAlterView{
     _alterView = [[AlterView alloc] initWithFrame:CGRectMake(60, 200, APPLICATION_WIDTH-120, 120) withLabelText:@"暂无课程"];
@@ -171,6 +180,32 @@ static NSString *cellIdentifier = @"cellIdentifier";
         }
     });
 }
+
+-(void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
+    NSString *subtypeString;
+    
+    subtypeString = kCATransitionFromRight;
+    
+    [self transitionWithType:@"pageCurl" WithSubtype:subtypeString ForView:self.view];
+}
+- (void) transitionWithType:(NSString *) type WithSubtype:(NSString *) subtype ForView : (UIView *) view {
+    
+    CATransition *animation = [CATransition animation];
+    
+    animation.duration = 0.7f;
+    
+    animation.type = type;
+    
+    if (subtype != nil) {
+        animation.subtype = subtype;
+        
+    }
+    animation.timingFunction = UIViewAnimationOptionCurveEaseInOut;
+    
+    [view.layer addAnimation:animation forKey:@"animation"];
+    
+}
+
 #pragma mark 获取数据
 
 -(void)getSelfJoinClass:(NSInteger)page{
@@ -294,7 +329,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
     UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"..." style:UIBarButtonItemStylePlain target:self action:@selector(selectionBtnPressed)];
     self.navigationItem.rightBarButtonItem = myButton;
-    
+    self.title = @"课堂";
 //    
 //    UIBarButtonItem * selection = [[UIBarButtonItem alloc] initWithTitle:@"搜索" style:UIBarButtonItemStylePlain target:self action:@selector(selectionBtnPressed)];
 //    self.navigationItem.leftBarButtonItem = selection;
@@ -307,22 +342,26 @@ static NSString *cellIdentifier = @"cellIdentifier";
     SelectClassViewController * s = [[SelectClassViewController alloc] init];
     self.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:s animated:YES];
-    self.hidesBottomBarWhenPushed = NO;
+//    self.hidesBottomBarWhenPushed = NO;
     
-    UIBarButtonItem * selection = [[UIBarButtonItem alloc] initWithTitle:@"搜索" style:UIBarButtonItemStylePlain target:self action:@selector(selectionBtnPressed)];
-    self.navigationItem.leftBarButtonItem = selection;
+//    UIBarButtonItem * selection = [[UIBarButtonItem alloc] initWithTitle:@"搜索" style:UIBarButtonItemStylePlain target:self action:@selector(selectionBtnPressed)];
+//    self.navigationItem.leftBarButtonItem = selection;
 }
 /**
  *
  **/
 -(void)joinCourse{
-//    return;
-    if (_join==nil) {
-        _join = [[JoinCours alloc] init];
-        _join.delegate = self;
-        _join.frame = CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);
-        [self.view addSubview:_join];
-    }
+
+    JoinViewController * vc = [[JoinViewController alloc] init];
+    self.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+//    if (_join==nil) {
+//        _join = [[JoinCours alloc] init];
+//        _join.delegate = self;
+//        _join.frame = CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);
+//        [self.view addSubview:_join];
+//    }
 }
 /**
  *  创建课程

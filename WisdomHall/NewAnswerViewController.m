@@ -76,6 +76,7 @@
     
     [_OnQuestion setEnabled:NO];
 
+    self.title = @"测验详情";
     // Do any additional setup after loading the view from its nib.
 }
 -(void)addTableView{

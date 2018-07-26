@@ -94,7 +94,7 @@ static dispatch_once_t onceToken;
     
     _s.backgroundColor = [UIColor clearColor];
     
-    _s.contentSize = CGSizeMake(ScrollViewW*_temp, 70);
+    _s.contentSize = CGSizeMake(ScrollViewW, 70*_temp);
     _s.scrollEnabled = YES;//是否可以滚动
     _s.pagingEnabled = YES;//是否整页滚动
     _s.showsVerticalScrollIndicator = NO;//水平方向的滚动条
@@ -112,7 +112,7 @@ static dispatch_once_t onceToken;
     }
     
     
-    UIView * v = [[UIView alloc] initWithFrame:CGRectMake((APPLICATION_WIDTH-20)*_temp, 0, APPLICATION_WIDTH-20, 70)];
+    UIView * v = [[UIView alloc] initWithFrame:CGRectMake(0, 70*_temp, APPLICATION_WIDTH-20, 70)];
     
     v.backgroundColor = [UIColor clearColor];
     
@@ -180,7 +180,7 @@ static dispatch_once_t onceToken;
     _s.delegate = self;
 }
 -(UIView *)scrollViewWithInt:(int)i{
-    UIView * v = [[UIView alloc] initWithFrame:CGRectMake((APPLICATION_WIDTH-20)*i, 0, APPLICATION_WIDTH-20, 70)];
+    UIView * v = [[UIView alloc] initWithFrame:CGRectMake(0, 70*i, APPLICATION_WIDTH-20, 70)];
     v.backgroundColor = [UIColor clearColor];
     
     for (int i = 0; i<3; i++) {
@@ -229,29 +229,29 @@ static dispatch_once_t onceToken;
     //得到scrollView
     UIScrollView *scrollView = [self viewWithTag:1000];
     //通过改变contentOffset来切换滚动视图的子界面
-    float offset_X = scrollView.contentOffset.x;
+    float offset_Y = scrollView.contentOffset.y;
     //每次切换一个屏幕
-    offset_X += CGRectGetWidth(self.frame);
+    offset_Y += 70;//CGRectGetWidth(self.frame);
     
     //说明要从最右边的多余视图开始滚动了，最右边的多余视图实际上就是第一个视图。所以偏移量需要更改为第一个视图的偏移量。
-    if (offset_X > CGRectGetWidth(self.frame)*_temp) {
+    if (offset_Y > CGRectGetHeight(self.frame)*_temp) {
         scrollView.contentOffset = CGPointMake(0, 0);
         
     }
     //说明正在显示的就是最右边的多余视图，最右边的多余视图实际上就是第一个视图。所以pageControl的小白点需要在第一个视图的位置。
-    if (offset_X == CGRectGetWidth(self.frame)*_temp) {
+    if (offset_Y == CGRectGetHeight(self.frame)*_temp) {
         self.myPageControl.currentPage = 0;
     }else{
-        self.myPageControl.currentPage = offset_X/CGRectGetWidth(self.frame);
+        self.myPageControl.currentPage = offset_Y/CGRectGetHeight(self.frame);
     }
     
     //得到最终的偏移量
-    CGPoint resultPoint = CGPointMake(offset_X, 0);
+    CGPoint resultPoint = CGPointMake(0, offset_Y);
     //切换视图时带动画效果
     //最右边的多余视图实际上就是第一个视图，现在是要从第一个视图向第二个视图偏移，所以偏移量为一个屏幕宽度
-    if (offset_X >CGRectGetWidth(self.frame)*_temp) {
+    if (offset_Y >CGRectGetHeight(self.frame)*_temp) {
         self.myPageControl.currentPage = 1;
-        [scrollView setContentOffset:CGPointMake(CGRectGetWidth(self.frame), 0) animated:YES];
+        [scrollView setContentOffset:CGPointMake(0, CGRectGetHeight(self.frame)) animated:YES];
     }else{
         [scrollView setContentOffset:resultPoint animated:YES];
     }
@@ -274,12 +274,12 @@ static dispatch_once_t onceToken;
     [self.rotateTimer setFireDate:[NSDate dateWithTimeInterval:1.5 sinceDate:[NSDate date]]];
     
     //拖拽的时候改变白点的位置
-    float offset_X = scrollView.contentOffset.x;
+    float offset_Y = scrollView.contentOffset.y;
     
-    if (offset_X == CGRectGetWidth(self.frame)*2) {
+    if (offset_Y == CGRectGetHeight(self.frame)*2) {
         self.myPageControl.currentPage = 0;
     }else{
-        self.myPageControl.currentPage = offset_X/CGRectGetWidth(self.frame);
+        self.myPageControl.currentPage = offset_Y/CGRectGetHeight(self.frame);
     }
 }
 
