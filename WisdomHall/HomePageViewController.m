@@ -29,6 +29,8 @@
 
 #import "JPUSHService.h"
 
+#import "CourseListALLViewController.h"
+
 @interface HomePageViewController ()<HomeButtonViewDelegate,NewMeetingViewDelegate,CollectionHeadViewDelegate>
 @property (nonatomic,strong)UIScrollView * bottomScrollView;
 @property (nonatomic,strong)BananerView * bannerView;
@@ -178,7 +180,7 @@
         self.hidesBottomBarWhenPushed = NO;
     }else if ([str isEqualToString:Classroom]){
         
-        SignInViewController * noticeVC = [[SignInViewController alloc] init];
+        CourseListALLViewController * noticeVC = [[CourseListALLViewController alloc] init];
         self.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:noticeVC animated:YES];
         self.hidesBottomBarWhenPushed = NO;

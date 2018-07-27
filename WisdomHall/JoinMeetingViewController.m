@@ -283,22 +283,80 @@ static NSString * cellIdentifier = @"cellIdentifier";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-//    TheMeetingInfoViewController * mInfo = [[TheMeetingInfoViewController alloc] init];
-//    self.hidesBottomBarWhenPushed = YES;
-//    mInfo.meetingModel = _meetingModelAry[indexPath.row];
-//    [self.navigationController pushViewController:mInfo animated:YES];
-    // self.hidesBottomBarWhenPushed=NO;
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:nil preferredStyle:  UIAlertControllerStyleActionSheet];
+    
+    MeetingModel * meeting = _meetingModelAry[indexPath.row];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"加入会议" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",meeting.meetingId],@"id",_userModel.peopleId,@"userId", nil];
+        [self showHudInView:self.view hint:NSLocalizedString(@"正在加载数据", @"Load data...")];
+        
+        [[NetworkRequest sharedInstance] POST:JoinMeeting dict:dict succeed:^(id data) {
+            NSString * str = [[data objectForKey:@"header"] objectForKey:@"code"];
+            NSString * message = [[data objectForKey:@"header"] objectForKey:@"message"];
+            
+            if([[NSString stringWithFormat:@"%@",str] isEqualToString:@"0000"]){
+                [UIUtils showInfoMessage:@"加入成功" withVC:self];
+                [self headerRereshing];
+                
+            }else{
+                [UIUtils showInfoMessage:message withVC:self];
+            }
+            [self hideHud];
+            
+        } failure:^(NSError *error) {
+            [UIUtils showInfoMessage:@"加入失败，请检查网络" withVC:self];
+            [self hideHud];
+            
+        }];
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        //点击按钮的响应事件；
+    }]];
+    
+    //弹出提示框；
+    [self presentViewController:alert animated:true completion:nil];
     
 }
 //有了初次点击再走这个
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:nil preferredStyle:  UIAlertControllerStyleActionSheet];
+
     
-//    TheMeetingInfoViewController * mInfo = [[TheMeetingInfoViewController alloc] init];
-//    self.hidesBottomBarWhenPushed = YES;
-//    mInfo.meetingModel = _meetingModelAry[indexPath.row];
-//    [self.navigationController pushViewController:mInfo animated:YES];
-    // self.hidesBottomBarWhenPushed=NO;
+    MeetingModel * meeting = _meetingModelAry[indexPath.row];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"加入会议" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",meeting.meetingId],@"id",_userModel.peopleId,@"userId", nil];
+        [self showHudInView:self.view hint:NSLocalizedString(@"正在加载数据", @"Load data...")];
+        
+        [[NetworkRequest sharedInstance] POST:JoinMeeting dict:dict succeed:^(id data) {
+            NSString * str = [[data objectForKey:@"header"] objectForKey:@"code"];
+            NSString * message = [[data objectForKey:@"header"] objectForKey:@"message"];
+            
+            if([[NSString stringWithFormat:@"%@",str] isEqualToString:@"0000"]){
+                [UIUtils showInfoMessage:@"加入成功" withVC:self];
+                [self headerRereshing];
+                
+            }else{
+                [UIUtils showInfoMessage:message withVC:self];
+            }
+            [self hideHud];
+            
+        } failure:^(NSError *error) {
+            [UIUtils showInfoMessage:@"加入失败，请检查网络" withVC:self];
+            [self hideHud];
+            
+        }];
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        //点击按钮的响应事件；
+    }]];
+    
+    //弹出提示框；
+    [self presentViewController:alert animated:true completion:nil];
     
 }
 #pragma mark UICollectionViewDelegateFlowLayout

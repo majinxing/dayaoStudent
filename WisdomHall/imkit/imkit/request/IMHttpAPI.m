@@ -424,6 +424,7 @@
 }
 
 +(NSOperation*)createGroup:(NSString*)groupName master:(int64_t)master members:(NSArray*)members success:(void (^)(NSDictionary * groupId))success fail:(void (^)(NSString * error))fail {
+    
     IMHttpOperation *request = [IMHttpOperation httpOperationWithTimeoutInterval:60];
     request.targetURL = [[IMHttpAPI instance].apiURL stringByAppendingString:@"/groups/create"];//接口
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];

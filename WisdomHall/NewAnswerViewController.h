@@ -23,5 +23,7 @@
 
 @property (nonatomic,copy) NSString * titleStr;//标题名称
 
+@property (nonatomic,copy) NSString * typeStr;//判断是否是问答
+
 @property (nonatomic,assign)BOOL isAbleAnswer;
 @end

@@ -70,14 +70,27 @@
     
     [self addTableView];
     
-    if ((_temp+1) == _allQuestionAry.count) {
-        [_nextQuestion setTitle:@"提交" forState:UIControlStateNormal];
-    }
+    
     
     [_OnQuestion setEnabled:NO];
 
     self.title = @"测验详情";
+    
+    [self addSaveBtn];
+    
     // Do any additional setup after loading the view from its nib.
+}
+-(void)addSaveBtn{
+    UIButton * saveBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    saveBtn.frame = CGRectMake(0, APPLICATION_HEIGHT-44, APPLICATION_WIDTH, 44);
+    
+    [saveBtn setBackgroundImage:[UIImage imageNamed:@"Rectangle3"] forState:UIControlStateNormal];
+    
+    [saveBtn addTarget:self action:@selector(more) forControlEvents:UIControlEventTouchUpInside];
+    
+    [saveBtn setTitle:@"提交" forState:UIControlStateNormal];
+    
+    [self.view addSubview:saveBtn];
 }
 -(void)addTableView{
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, APPLICATION_WIDTH, APPLICATION_HEIGHT-64-44) style:UITableViewStylePlain];
@@ -110,6 +123,9 @@
                 [_tableView reloadData];
             }else{
                 [UIUtils showInfoMessage:[NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]] withVC:self];
+            }
+            if ((_temp+1) == _allQuestionAry.count) {
+                [_nextQuestion setTitle:@"提交" forState:UIControlStateNormal];
             }
             [self hideHud];
             

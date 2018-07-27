@@ -46,7 +46,10 @@
     
     _voteTitle.text = [NSString stringWithFormat:@"%@",title];
     
-    _voteCreateTime.text = [NSString stringWithFormat:@"%@",time];
+    if (![UIUtils isBlankString:time]) {
+        _voteCreateTime.text = [NSString stringWithFormat:@"%@",time];
+
+    }
     
     _voteState.text = [NSString stringWithFormat:@"%@:%@",voteStatus,state];
     

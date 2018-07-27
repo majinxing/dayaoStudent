@@ -314,6 +314,8 @@
 		8BB1FC302108688B006BA422 /* StatisticalCourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BB1FC2E2108688B006BA422 /* StatisticalCourseTableViewCell.xib */; };
 		8BB1FC3421099937006BA422 /* JoinMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1FC3221099937006BA422 /* JoinMeetingViewController.m */; };
 		8BB1FC3521099937006BA422 /* JoinMeetingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BB1FC3321099937006BA422 /* JoinMeetingViewController.xib */; };
+		8BB1FC39210AB38C006BA422 /* CourseListALLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1FC37210AB38C006BA422 /* CourseListALLViewController.m */; };
+		8BB1FC3A210AB38C006BA422 /* CourseListALLViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BB1FC38210AB38C006BA422 /* CourseListALLViewController.xib */; };
 		8BB221D71FA7088E00EC6478 /* UIImage+ImageSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB221CA1FA7088E00EC6478 /* UIImage+ImageSize.m */; };
 		8BB221D81FA7088E00EC6478 /* SGQRCode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8BB221CB1FA7088E00EC6478 /* SGQRCode.bundle */; };
 		8BB221D91FA7088E00EC6478 /* SGQRCodeAlbumManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB221CE1FA7088E00EC6478 /* SGQRCodeAlbumManager.m */; };
@@ -1254,6 +1256,9 @@
 		8BB1FC3121099937006BA422 /* JoinMeetingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JoinMeetingViewController.h; sourceTree = "<group>"; };
 		8BB1FC3221099937006BA422 /* JoinMeetingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JoinMeetingViewController.m; sourceTree = "<group>"; };
 		8BB1FC3321099937006BA422 /* JoinMeetingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JoinMeetingViewController.xib; sourceTree = "<group>"; };
+		8BB1FC36210AB38C006BA422 /* CourseListALLViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CourseListALLViewController.h; sourceTree = "<group>"; };
+		8BB1FC37210AB38C006BA422 /* CourseListALLViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CourseListALLViewController.m; sourceTree = "<group>"; };
+		8BB1FC38210AB38C006BA422 /* CourseListALLViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseListALLViewController.xib; sourceTree = "<group>"; };
 		8BB221C91FA7088E00EC6478 /* UIImage+ImageSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageSize.h"; sourceTree = "<group>"; };
 		8BB221CA1FA7088E00EC6478 /* UIImage+ImageSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageSize.m"; sourceTree = "<group>"; };
 		8BB221CB1FA7088E00EC6478 /* SGQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SGQRCode.bundle; sourceTree = "<group>"; };
@@ -2533,6 +2538,9 @@
 				8BF82D6E1EDEC4E800D33473 /* Discuss */,
 				8BE877721EBC1CB200866A34 /* TextViewController */,
 				8B7D5D841EB969B70068058E /* Collection */,
+				8BB1FC36210AB38C006BA422 /* CourseListALLViewController.h */,
+				8BB1FC37210AB38C006BA422 /* CourseListALLViewController.m */,
+				8BB1FC38210AB38C006BA422 /* CourseListALLViewController.xib */,
 				8BA2249A1EADFFA400627A1B /* SignInViewController.h */,
 				8BA2249B1EADFFA400627A1B /* SignInViewController.m */,
 				8BA2249C1EADFFA400627A1B /* SignInViewController.xib */,
@@ -3847,6 +3855,7 @@
 				8B0502FD2021A8BA0030CF75 /* PersonalUploadDataViewController.xib in Resources */,
 				8B51AAA41F3EE71900AE034E /* MeetingChooseSeatViewController.xib in Resources */,
 				8B9CCC931F17204B001833FD /* SelectPeopleToClassViewController.xib in Resources */,
+				8BB1FC3A210AB38C006BA422 /* CourseListALLViewController.xib in Resources */,
 				8BFB94671EE79745004BB963 /* JoinVoteTableViewCell.xib in Resources */,
 				8B014E43206670700037A107 /* HomeworkCreateTableViewCell.xib in Resources */,
 				8BB1FC3521099937006BA422 /* JoinMeetingViewController.xib in Resources */,
@@ -4348,6 +4357,7 @@
 				8BF79F54205F41F60033CCC3 /* HKClipperVeiw.m in Sources */,
 				8B9171C71ED3D9D8009686FD /* contactTool.m in Sources */,
 				8B48F9E920A29F4000038B47 /* StatisticalTableViewCell.m in Sources */,
+				8BB1FC39210AB38C006BA422 /* CourseListALLViewController.m in Sources */,
 				8BCCD1EF20FD79130090E27A /* MessageListViewController.m in Sources */,
 				8B0DB1331ED5188C0042DF0D /* ContactModel.m in Sources */,
 				8B081DE11F06238E00493B81 /* DefinitionPersonalTableViewCell.m in Sources */,

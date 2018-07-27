@@ -12,7 +12,7 @@
 #import "PersonalCenterViewController.h"
 #import "AllTheMeetingViewController.h"
 #import "DYHeader.h"
-
+#import "CourseListALLViewController.h"
 //#import "OfficeViewController.h"
 //#import "DiscussViewController.h"
 //#import "OfficeViewController.h"
@@ -61,7 +61,9 @@ static dispatch_once_t predicate;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    [self addChildViewControllerWithClassname:[OfficeViewController description] imagename:@"办公_normal" title:@"首页" withSelectImageName:@"办公"];
+    NavBarNavigationController * n = [NavBarNavigationController sharedInstance];
+    
+//    [self addChildViewControllerWithClassname:[CourseListALLViewController description] imagename:@"home2" title:@"首页" withSelectImageName:@"home"];
 //    HomePageViewController
     [self addChildViewControllerWithClassname:[HomePageViewController description] imagename:@"home2" title:@"首页" withSelectImageName:@"home"];
 

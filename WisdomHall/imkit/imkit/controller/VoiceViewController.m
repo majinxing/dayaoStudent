@@ -30,6 +30,8 @@
 @implementation VoiceViewController
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
     NSLog(@"peermessageviewcontroller dealloc");
 }
 

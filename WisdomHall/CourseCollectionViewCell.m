@@ -95,10 +95,10 @@
     
     _imageH.image = [UIImage imageNamed:@"index_user_left"];
     
-//    [strUrl deleteCharactersInRange:NSMakeRange(0,10)];
-//
-//    [strUrl deleteCharactersInRange:NSMakeRange(strUrl.length-3, 3)];
+    [strUrl deleteCharactersInRange:NSMakeRange(0,5)];
+
+    [strUrl deleteCharactersInRange:NSMakeRange(strUrl.length-3, 3)];
     
-    _time.text = [NSString stringWithFormat:@"时间：%@",strUrl];
+    _time.text = [NSString stringWithFormat:@"%@",strUrl];
 }
 @end

@@ -25,7 +25,11 @@
 
 @implementation PeerMessageViewController
 - (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
     NSLog(@"peermessageviewcontroller dealloc");
+    
 }
 
 - (void)viewDidLoad {

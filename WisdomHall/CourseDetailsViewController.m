@@ -901,7 +901,7 @@
                     [UIUtils showInfoMessage:[NSString stringWithFormat:@"二维码有误，请重新扫描或者连接指定WiFi签到(扫描的mac地址为%@，录入的mac为%@)",string1,string2] withVC:self];
                 }
             }else{
-                [UIUtils showInfoMessage:[NSString stringWithFormat:@"二维码失效，请重新扫描或者连接指定WiFi签到(扫码时间为%@，二维码生成时间为%@)",dateTime] withVC:self];
+                [UIUtils showInfoMessage:[NSString stringWithFormat:@"二维码失效，请重新扫描或者连接指定WiFi签到(扫码时间为%@，二维码生成时间为%@)",dateTime,[UIUtils getTime]] withVC:self];
             }
         }else{
             [UIUtils showInfoMessage:@"二维码无效，请重新扫描或者连接指定WiFi签到（MD5异常）" withVC:self];

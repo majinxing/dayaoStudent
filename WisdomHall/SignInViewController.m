@@ -133,12 +133,12 @@ static NSString *cellIdentifier = @"cellIdentifier";
     }];
     
     [self.view addSubview:_tableView];
-    UISwipeGestureRecognizer * priv = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
-    [priv setDirection:(UISwipeGestureRecognizerDirectionRight)];
-    [_tableView addGestureRecognizer:priv];
-    UISwipeGestureRecognizer * recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
-    [_tableView addGestureRecognizer:recognizer];
+//    UISwipeGestureRecognizer * priv = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
+//    [priv setDirection:(UISwipeGestureRecognizerDirectionRight)];
+//    [_tableView addGestureRecognizer:priv];
+//    UISwipeGestureRecognizer * recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+//    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+//    [_tableView addGestureRecognizer:recognizer];
 }
 -(void)addAlterView{
     _alterView = [[AlterView alloc] initWithFrame:CGRectMake(60, 200, APPLICATION_WIDTH-120, 120) withLabelText:@"暂无课程"];
@@ -234,28 +234,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
         
     }];
 }
-////临时
-//-(void)getSelfCreateClassType:(NSInteger)page{
-//
-//    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%ld",(long)page],@"start",_userModel.peopleId,@"teacherId",[NSString stringWithFormat:@"%@ 00:00:00",_dictDay[@"firstDay"]],@"actStartTime",[NSString stringWithFormat:@"%@ 23:59:59",_dictDay[@"lastDay"]],@"actEndTime",@"1000",@"length",_userModel.school,@"universityId",@"2",@"type",@"2",@"courseType",nil];
-//
-//    [[NetworkRequest sharedInstance] GET:QueryCourse dict:dict succeed:^(id data) {
-//        NSString * str = [[data objectForKey:@"header"] objectForKey:@"message"];
-//        if ([str isEqualToString:@"成功"]) {
-//            NSArray * ary = [[data objectForKey:@"body"] objectForKey:@"list"];
-//            for (int i = 0; i<ary.count; i++) {
-//                ClassModel * c = [[ClassModel alloc] init];
-//                [c setInfoWithDict:ary[i]];
-//                [_classAry addObject:c];
-//            }
-//        }
-//        [self getSelfJoinClassType:page];
-//    } failure:^(NSError *error) {
-//        [self hideHud];
-//        [UIUtils showInfoMessage:@"获取课表失败，请稍后再试" withVC:self];
-//
-//    }];
-//}
+
 //临时
 -(void)getSelfJoinClassType:(NSInteger)page{
     NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%ld",(long)page],@"start",_userModel.peopleId,@"studentId",[NSString stringWithFormat:@"%@ 00:00:00",_dictDay[@"firstDay"]],@"actStartTime",[NSString stringWithFormat:@"%@ 23:59:59",_dictDay[@"lastDay"]],@"actEndTime",@"1000",@"length",_userModel.school,@"universityId",@"1",@"type",@"2",@"courseType",nil];
@@ -340,8 +319,8 @@ static NSString *cellIdentifier = @"cellIdentifier";
 -(void)selectionBtnPressed{
     
     SelectClassViewController * s = [[SelectClassViewController alloc] init];
-    self.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:s animated:YES];
+    _selfNavigationVC.hidesBottomBarWhenPushed = YES;
+    [_selfNavigationVC.navigationController pushViewController:s animated:YES];
 //    self.hidesBottomBarWhenPushed = NO;
     
 //    UIBarButtonItem * selection = [[UIBarButtonItem alloc] initWithTitle:@"搜索" style:UIBarButtonItemStylePlain target:self action:@selector(selectionBtnPressed)];
@@ -353,81 +332,12 @@ static NSString *cellIdentifier = @"cellIdentifier";
 -(void)joinCourse{
 
     JoinViewController * vc = [[JoinViewController alloc] init];
-    self.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+    _selfNavigationVC.hidesBottomBarWhenPushed = YES;
+    [_selfNavigationVC.navigationController pushViewController:vc animated:YES];
     
-//    if (_join==nil) {
-//        _join = [[JoinCours alloc] init];
-//        _join.delegate = self;
-//        _join.frame = CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);
-//        [self.view addSubview:_join];
-//    }
 }
-/**
- *  创建课程
- **/
--(void)createAcourse{
-    [self setAlterAction];
-}
--(void)setAlterAction{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:nil preferredStyle:  UIAlertControllerStyleActionSheet];
-    //分别按顺序放入每个按钮；
-    [alert addAction:[UIAlertAction actionWithTitle:@"创建周期性课堂" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //点击按钮的响应事件；
-        CreateCourseViewController * cCourseVC = [[CreateCourseViewController alloc] init];
-        self.hidesBottomBarWhenPushed = YES;
-        //    self.tabBarController.tabBar.hidden=YES;
-        [self.navigationController pushViewController:cCourseVC animated:YES];
-        self.hidesBottomBarWhenPushed = NO;
-    }]];
-    
-    [alert addAction:[UIAlertAction actionWithTitle:@"创建临时性课堂" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //点击按钮的响应事件；
-        CreateTemporaryCourseViewController * c = [[CreateTemporaryCourseViewController alloc] init];
-        self.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:c animated:YES];
-        self.hidesBottomBarWhenPushed = NO;
-        
-    }]];
-    
-    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        //点击按钮的响应事件；
-    }]];
-    //弹出提示框；
-    [self presentViewController:alert animated:true completion:nil];
-}
-#pragma mark JoinCoursDelegate
--(void)joinCourseDelegete:(UIButton *)btn{
-    [self.view endEditing:YES];
-    if (btn.tag == 1) {
-        [_join removeFromSuperview];
-        _join = nil;
-    }else if (btn.tag == 2){
-        NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_join.courseNumber.text],@"id",_userModel.peopleId,@"studentId", nil];
-        [self showHudInView:self.view hint:NSLocalizedString(@"正在加载数据", @"Load data...")];
-        [[NetworkRequest sharedInstance] POST:JoinCourse dict:dict succeed:^(id data) {
-            NSString * str = [[data objectForKey:@"header"] objectForKey:@"code"];
-            if ([[NSString stringWithFormat:@"%@",str] isEqualToString:@"6680"]) {
-                [UIUtils showInfoMessage:@"该用户已经添加,不能重复添加" withVC:self];
-            }else if ([[NSString stringWithFormat:@"%@",str] isEqualToString:@"6676"]){
-                [UIUtils showInfoMessage:@"课堂已经被删除或者不存在" withVC:self];
-            }else if([[NSString stringWithFormat:@"%@",str] isEqualToString:@"0000"]){
-                [UIUtils showInfoMessage:@"加入成功" withVC:self];
-                [self headerRereshing];
-                [_join removeFromSuperview];
-                _join = nil;
-            }else{
-                [UIUtils showInfoMessage:@"加入失败" withVC:self];
-            }
-            [self hideHud];
-            
-        } failure:^(NSError *error) {
-            [UIUtils showInfoMessage:@"加入失败" withVC:self];
-            [self hideHud];
-            
-        }];
-    }
-}
+
+
 #pragma mark SynchronousCourseViewDelegate
 -(void)submitDelegateWithAccount:(NSString *)count withPassword:(NSString *)password{
     
@@ -473,12 +383,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ClassTableViewCell * cell ;
-    //    if (indexPath.row == 0) {
-    ////        cell = [tableView dequeueReusableCellWithIdentifier:@"ClassTableViewCellSecond"];
-    ////        if (!cell) {
-    ////            cell = [[[NSBundle mainBundle] loadNibNamed:@"ClassTableViewCell" owner:self options:nil] objectAtIndex:1];
-    ////        }
-    //    }else{
+
     cell = [tableView dequeueReusableCellWithIdentifier:@"ClassTableViewCellFirst"];
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"ClassTableViewCell" owner:self options:nil] objectAtIndex:0];
@@ -550,7 +455,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 -(void)intoTheCurriculumDelegate:(NSString *)str withNumber:(NSMutableArray *)btn{
     NSMutableArray * ary = [_dict objectForKey:str];
     if (btn.count == 1) {
-        self.hidesBottomBarWhenPushed = YES;
+        _selfNavigationVC.hidesBottomBarWhenPushed = YES;
         
         CourseDetailsViewController * cdetailVC = [[CourseDetailsViewController alloc] init];
         
@@ -558,9 +463,9 @@ static NSString *cellIdentifier = @"cellIdentifier";
         
         cdetailVC.c = ary[n];
         
-        [self.navigationController pushViewController:cdetailVC animated:YES];
+        [_selfNavigationVC.navigationController pushViewController:cdetailVC animated:YES];
         
-        self.hidesBottomBarWhenPushed=YES;
+//        self.hidesBottomBarWhenPushed=YES;
         
     }else{
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"有重复课程请选择要查看的课" message:nil preferredStyle:  UIAlertControllerStyleActionSheet];
@@ -571,12 +476,12 @@ static NSString *cellIdentifier = @"cellIdentifier";
             NSString * str = c.name;
             
             [alert addAction:[UIAlertAction actionWithTitle:str style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                self.hidesBottomBarWhenPushed = YES;
+                _selfNavigationVC.hidesBottomBarWhenPushed = YES;
                 CourseDetailsViewController * cdetailVC = [[CourseDetailsViewController alloc] init];
                 int n = [btn[i] intValue];
                 cdetailVC.c = ary[n];
-                [self.navigationController pushViewController:cdetailVC animated:YES];
-                self.hidesBottomBarWhenPushed=NO;
+                [_selfNavigationVC.navigationController pushViewController:cdetailVC animated:YES];
+//                self.hidesBottomBarWhenPushed=NO;
             }]];
             
         }

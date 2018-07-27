@@ -53,8 +53,8 @@ alpha:(a)]
 #define kConversationCellHeight         60
 
 @interface MessageListViewController()<UITableViewDelegate, UITableViewDataSource,
-    TCPConnectionObserver, PeerMessageObserver, GroupMessageObserver,
-    SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,MessageListViewControllerGroupDelegate,CreateChatGroupViewDelegate>
+TCPConnectionObserver, PeerMessageObserver, GroupMessageObserver,
+SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,MessageListViewControllerGroupDelegate,CreateChatGroupViewDelegate>
 @property (strong , nonatomic) NSMutableArray *conversations;
 @property (strong , nonatomic) UITableView *tableview;
 @property (nonatomic,strong)UserModel * user;
@@ -86,23 +86,22 @@ alpha:(a)]
     _currentUID = [str longLongValue];
     
     _groupDelegate = self;
-
-    _userDelegate = self;
-
-//    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(home:)];
-//    self.navigationItem.leftBarButtonItem=newBackButton;
     
-    CGRect rect = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    _userDelegate = self;
+    
+    
+    
+    CGRect rect = CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height-64);
     self.tableview = [[UITableView alloc]initWithFrame:rect style:UITableViewStylePlain];
-  	self.tableview.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-	self.tableview.delegate = self;
-	self.tableview.dataSource = self;
-	self.tableview.scrollEnabled = YES;
-	self.tableview.showsVerticalScrollIndicator = NO;
-	self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableview.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.tableview.delegate = self;
+    self.tableview.dataSource = self;
+    self.tableview.scrollEnabled = YES;
+    self.tableview.showsVerticalScrollIndicator = NO;
+    self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableview.backgroundColor = RGBACOLOR(235, 235, 237, 1);
     self.tableview.separatorColor = RGBCOLOR(208, 208, 208);
-	[self.view addSubview:self.tableview];
+    [self.view addSubview:self.tableview];
     
     [[IMService instance] addPeerMessageObserver:self];
     [[IMService instance] addGroupMessageObserver:self];
@@ -118,10 +117,10 @@ alpha:(a)]
     [[NSNotificationCenter defaultCenter] addObserver: self selector:@selector(clearSinglePeerNewState:) name:CLEAR_PEER_NEW_MESSAGE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver: self selector:@selector(clearSingleGroupNewState:) name:CLEAR_GROUP_NEW_MESSAGE object:nil];
     
-
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillResignActive) name:UIApplicationWillResignActiveNotification object:nil];
-
+    
     id<ConversationIterator> iterator =  [[PeerMessageDB instance] newConversationIterator];
     
     IMessage * msg = [iterator next];
@@ -145,7 +144,7 @@ alpha:(a)]
         [self.conversations addObject:c];
         msg = [iterator next];
     }
- 
+    
     for (Conversation *conv in self.conversations) {
         [self updateConversationName:conv];
         [self updateConversationDetail:conv];
@@ -177,7 +176,7 @@ alpha:(a)]
         m.rawContent = content.raw;
         m.timestamp = (int)time(NULL);
     }
-
+    
     Conversation *conv = [[Conversation alloc] init];
     conv.message = msg;
     conv.cid = ((ICustomerMessage*)msg).storeID;
@@ -193,7 +192,7 @@ alpha:(a)]
     conv1.name = @"群组";
     
     [self updateConversationDetail:conv1];
-//    [self.conversations addObject:conv];
+    //    [self.conversations addObject:conv];
     
     //todo 从本地数据库加载最新的系统消息
     NSArray *sortedArray = [self.conversations sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
@@ -215,23 +214,78 @@ alpha:(a)]
     self.conversations = [NSMutableArray arrayWithArray:sortedArray];
     
     [self.conversations insertObject:conv1 atIndex:0];
-
+    
     [self.conversations insertObject:conv atIndex:1];
-
-
+    
+    
     self.navigationItem.title = @"消息";
     if ([[IMService instance] connectState] == STATE_CONNECTING) {
         self.navigationItem.title = @"连接中...";
     }
     [self setNavigationTitle];
 }
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBarHidden = YES; //设置隐藏
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    self.navigationController.navigationBarHidden = NO; //设置隐藏
 
+}
 -(void)setNavigationTitle{
     //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    UIView * navigationBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, APPLICATION_WIDTH, 64)];
+    
+    navigationBar.backgroundColor = [UIColor whiteColor];
+    
+    [self.view addSubview:navigationBar];
+    
+    UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(APPLICATION_WIDTH/2-40, 30, 80, 20)];
+    titleLabel.text = @"消息";
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.textColor = [UIColor blackColor];
+    titleLabel.font = [UIFont systemFontOfSize:18];
+    [self.view addSubview:titleLabel];
     
     if ([_type isEqualToString:@"enableCreate"]) {
-        UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"创建群组" style:UIBarButtonItemStylePlain target:self action:@selector(createGroup)];
-        self.navigationItem.rightBarButtonItem = myButton;
+        
+        
+        
+        UIImageView * b = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ic_arrow_left"]];
+        b.frame = CGRectMake(3, 30, 25, 20);
+        [self.view addSubview:b];
+        
+        UIButton * backBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+        backBtn.frame = CGRectMake(13,18, 60, 44);
+        [backBtn setTitle:@"返回" forState:UIControlStateNormal];
+        [backBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        
+        backBtn.titleLabel.font = [UIFont systemFontOfSize:17];//[UIFont fontWithName:@"Helvetica-Bold" size:17];
+        
+        backBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
+        [self.view addSubview:backBtn];
+        [backBtn addTarget:self action:@selector(home) forControlEvents:UIControlEventTouchUpInside];
+        
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+        
+        UIButton * createBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+        
+        createBtn.frame = CGRectMake(APPLICATION_WIDTH-100,18, 100, 44);
+        
+        [createBtn setTitle:@"创建群组" forState:UIControlStateNormal];
+        
+        [createBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        
+        createBtn.titleLabel.font = [UIFont systemFontOfSize:17];//[UIFont fontWithName:@"Helvetica-Bold" size:17];
+        
+        createBtn.titleLabel.textAlignment = NSTextAlignmentRight;
+        
+        [self.view addSubview:createBtn];
+        
+        [createBtn addTarget:self action:@selector(createGroup) forControlEvents:UIControlEventTouchUpInside];
+        
+        //        UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"创建群组" style:UIBarButtonItemStylePlain target:self action:@selector(createGroup)];
+        //
+        //        self.navigationItem.rightBarButtonItem = myButton;
     }
     
     
@@ -296,7 +350,7 @@ alpha:(a)]
     }
 }
 
--(void)home:(UIBarButtonItem *)sender {
+-(void)home {
     [[IMService instance] removePeerMessageObserver:self];
     [[IMService instance] removeGroupMessageObserver:self];
     [[IMService instance] removeConnectionObserver:self];
@@ -412,19 +466,21 @@ alpha:(a)]
     NSLog(@"%@",imGroupModel);
     if ([imGroupModel isEmptyInfo]) {
         NSString * mas = [NSString stringWithFormat:@"%@%@",_user.school,_user.studentId];
-            [IMHttpAPI createGroup:imGroupModel.groupName master:[mas intValue] members:imGroupModel.groupPeople success:^(NSDictionary *groupId) {
-                NSLog(@"");
-                NSString * g = [NSString stringWithFormat:@"%@",[groupId objectForKey:@"group_id"]];
-                if (![UIUtils isBlankString:g]) {
-                    [_tableview reloadData];
-                    [self outSelfViewDelegate];
-                }else{
-                    [UIUtils showInfoMessage:@"创建失败" withVC:self];
-                }
-            } fail:^(NSString *error) {
+        
+        [IMHttpAPI createGroup:imGroupModel.groupName master:[mas intValue] members:imGroupModel.groupPeople success:^(NSDictionary *groupId) {
+            NSLog(@"");
+            NSString * g = [NSString stringWithFormat:@"%@",[groupId objectForKey:@"group_id"]];
+            if (![UIUtils isBlankString:g]) {
+                [_tableview reloadData];
+                [self outSelfViewDelegate];
+            }else{
                 [UIUtils showInfoMessage:@"创建失败" withVC:self];
-
-            }];
+            }
+        } fail:^(NSString *error) {
+            [UIUtils showInfoMessage:@"创建失败" withVC:self];
+            
+        }];
+        
         
     }else{
         [UIUtils showInfoMessage:@"请填写信息完整" withVC:self];
@@ -436,11 +492,11 @@ alpha:(a)]
     vc.dataAry = [NSMutableArray arrayWithArray:_peopleAry];
     self.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
-//    __weak SelectGroupPeopleViewController * weakSelf = vc;
+    //    __weak SelectGroupPeopleViewController * weakSelf = vc;
     [vc returnSelectPeopleAry:^(NSMutableArray *selectAry) {
         NSLog(@"%@",selectAry);
         [_v.peopleListView addGroupContentView:selectAry];
-//        [_v addContentViewWithAry:selectAry];
+        //        [_v addContentViewWithAry:selectAry];
     }];
 }
 -(void)outSelfViewDelegate{
@@ -476,7 +532,7 @@ alpha:(a)]
     conv = (Conversation*)[self.conversations objectAtIndex:(indexPath.row)];
     
     [cell setConversation:conv];
-
+    
     return cell;
     
 }
@@ -520,7 +576,7 @@ alpha:(a)]
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
+    
     if (indexPath.row==1) {
         NoticeViewController * noticeVC = [[NoticeViewController alloc] init];
         self.hidesBottomBarWhenPushed = YES;
@@ -556,7 +612,7 @@ alpha:(a)]
     } else if (con.type == CONVERSATION_CUSTOMER_SERVICE) {
         CustomerMessageViewController *msgController = [[CustomerMessageViewController alloc] init];
         msgController.userDelegate = self.userDelegate;
-
+        
         msgController.appID = APPID;
         if (con.cid == 0) {
             msgController.storeID = KEFU_ID;
@@ -644,7 +700,7 @@ alpha:(a)]
             }else{
                 [self.conversations insertObject:con atIndex:0];
             }
-//            [self.conversations insertObject:con atIndex:0];
+            //            [self.conversations insertObject:con atIndex:0];
             [self.tableview reloadData];
         }
     } else {
@@ -666,7 +722,7 @@ alpha:(a)]
         }else{
             [self.conversations insertObject:con atIndex:0];
         }
-//        [self.conversations insertObject:con atIndex:0];
+        //        [self.conversations insertObject:con atIndex:0];
         NSIndexPath *path = [NSIndexPath indexPathForRow:2 inSection:0];
         NSArray *array = [NSArray arrayWithObject:path];
         [self.tableview insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationMiddle];
@@ -723,8 +779,8 @@ alpha:(a)]
         }else{
             [self.conversations insertObject:con atIndex:0];
         }
-
-//        [self.conversations insertObject:con atIndex:0];
+        
+        //        [self.conversations insertObject:con atIndex:0];
         NSIndexPath *path = [NSIndexPath indexPathForRow:2 inSection:0];
         NSArray *array = [NSArray arrayWithObject:path];
         [self.tableview insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationMiddle];
@@ -762,7 +818,7 @@ alpha:(a)]
             }else{
                 [self.conversations insertObject:con atIndex:0];
             }
-//            [self.conversations insertObject:con atIndex:0];
+            //            [self.conversations insertObject:con atIndex:0];
             [self.tableview reloadData];
         }
     } else {
@@ -783,7 +839,7 @@ alpha:(a)]
         }else{
             [self.conversations insertObject:con atIndex:0];
         }
-//        [self.conversations insertObject:con atIndex:0];
+        //        [self.conversations insertObject:con atIndex:0];
         NSIndexPath *path = [NSIndexPath indexPathForRow:2 inSection:0];
         NSArray *array = [NSArray arrayWithObject:path];
         [self.tableview insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationMiddle];
@@ -798,7 +854,7 @@ alpha:(a)]
     m.msgLocalID = im.msgLocalID;
     m.rawContent = im.content;
     m.timestamp = im.timestamp;
-
+    
     int64_t cid;
     if (self.currentUID == m.sender) {
         cid = m.receiver;
@@ -816,7 +872,7 @@ alpha:(a)]
     m.msgLocalID = im.msgLocalID;
     m.rawContent = im.content;
     m.timestamp = im.timestamp;
-
+    
     [self onNewGroupMessage:m cid:m.receiver];
 }
 
@@ -873,7 +929,7 @@ alpha:(a)]
         }else{
             [self.conversations insertObject:conv atIndex:0];
         }
-//        [self.conversations insertObject:conv atIndex:0];
+        //        [self.conversations insertObject:conv atIndex:0];
         
         NSIndexPath *path = [NSIndexPath indexPathForRow:2 inSection:0];
         NSArray *array = [NSArray arrayWithObject:path];
@@ -892,7 +948,7 @@ alpha:(a)]
             }else{
                 [self.conversations insertObject:conv atIndex:0];
             }
-//            [self.conversations insertObject:conv atIndex:0];
+            //            [self.conversations insertObject:conv atIndex:0];
             [self.tableview reloadData];
         }
     }
@@ -925,19 +981,19 @@ alpha:(a)]
 }
 
 - (void)actionChat {
-//    if (!tfSender.text.length) {
-//        NSLog(@"invalid input");
-//        return;
-//    }
+    //    if (!tfSender.text.length) {
+    //        NSLog(@"invalid input");
+    //        return;
+    //    }
     [self.view endEditing:YES];
     
-//    self.chatButton.userInteractionEnabled = NO;
-//    long long sender = [tfSender.text longLongValue];
+    //    self.chatButton.userInteractionEnabled = NO;
+    //    long long sender = [tfSender.text longLongValue];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *token = [self login:1];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-//            self.chatButton.userInteractionEnabled = YES;
+            //            self.chatButton.userInteractionEnabled = YES;
             
             if (token.length == 0) {
                 NSLog(@"login fail");
@@ -1029,22 +1085,22 @@ alpha:(a)]
                                       }];
             }
             
-//            if (tfReceiver.text.length > 0) {
-//                PeerMessageViewController *msgController = [[PeerMessageViewController alloc] init];
-//                msgController.currentUID = [tfSender.text longLongValue];
-//                msgController.peerUID = [tfReceiver.text longLongValue];
-//                msgController.peerName = @"测试";
-//                msgController.userDelegate = self;
-//                self.navigationController.navigationBarHidden = NO;
-//                [self.navigationController pushViewController:msgController animated:YES];
-//            } else {
-//                MessageListViewController *ctrl = [[MessageListViewController alloc] init];
-//                ctrl.currentUID = [tfSender.text longLongValue];
-//                ctrl.userDelegate = self;
-//                ctrl.groupDelegate = self;
-//                self.navigationController.navigationBarHidden = NO;
-//                [self.navigationController pushViewController:ctrl animated:YES];
-//            }
+            //            if (tfReceiver.text.length > 0) {
+            //                PeerMessageViewController *msgController = [[PeerMessageViewController alloc] init];
+            //                msgController.currentUID = [tfSender.text longLongValue];
+            //                msgController.peerUID = [tfReceiver.text longLongValue];
+            //                msgController.peerName = @"测试";
+            //                msgController.userDelegate = self;
+            //                self.navigationController.navigationBarHidden = NO;
+            //                [self.navigationController pushViewController:msgController animated:YES];
+            //            } else {
+            //                MessageListViewController *ctrl = [[MessageListViewController alloc] init];
+            //                ctrl.currentUID = [tfSender.text longLongValue];
+            //                ctrl.userDelegate = self;
+            //                ctrl.groupDelegate = self;
+            //                self.navigationController.navigationBarHidden = NO;
+            //                [self.navigationController pushViewController:ctrl animated:YES];
+            //            }
         });
     });
 }
@@ -1185,15 +1241,15 @@ alpha:(a)]
     if (shouldClearNewCount) {
         [self clearNewOnTarBar];
     }
-
+    
 }
 
 - (void)setNewOnTabBar {
-
+    
 }
 
 - (void)clearNewOnTarBar {
-
+    
 }
 
 - (void)appWillResignActive {

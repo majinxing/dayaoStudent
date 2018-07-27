@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SignInViewController : UIViewController
-
+@property (nonatomic,strong)UIViewController * selfNavigationVC;
 @end

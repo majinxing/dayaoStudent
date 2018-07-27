@@ -47,6 +47,8 @@ static NSString * cellIdentifier = @"cellIdentifier";
     
     _userModel = [[Appsetting sharedInstance] getUsetInfo];
     
+    _classModelAry = [NSMutableArray arrayWithCapacity:1];
+    
     [self addTableView];
     
     self.title = @"搜索";
@@ -58,6 +60,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
 - (IBAction)searchBtnPressed:(id)sender {
     _searchStr = _textFile.text;
     [self headerRereshing];
+    [self.view endEditing:YES];
 }
 -(void)addTableView{
     CollectionFlowLayout * flowLayout = [[CollectionFlowLayout alloc] init];
@@ -109,7 +112,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
                 [_classModelAry removeAllObjects];
             }
             dispatch_async(dispatch_get_main_queue(), ^{
-                [strongSelf getSelfJoinClass:aPage];
+                [strongSelf getSelfJoinClassType:aPage];
             });
             
             if (aIsHeader) {
@@ -122,7 +125,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
 }
 
 -(void)getSelfJoinClass:(NSInteger)page{
-    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%ld",(long)page],@"start",_userModel.peopleId,@"studentId",@"2017-07-01",@"actStartTime",@"1000",@"length",_userModel.school,@"universityId",[NSString stringWithFormat:@"%d",[UIUtils getTermId]],@"termId",@"1",@"courseType",_searchStr,@"courseId",nil];
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%ld",(long)page],@"start",_userModel.peopleId,@"studentId",@"2017-07-01",@"actStartTime",@"1000",@"length",_userModel.school,@"universityId",[NSString stringWithFormat:@"%d",[UIUtils getTermId]],@"termId",@"1",@"courseType",_searchStr,@"courseId",@"1",@"type",nil];
     [[NetworkRequest sharedInstance] GET:QueryCourse dict:dict succeed:^(id data) {
         // NSLog(@"%@",data);
         NSString * str = [[data objectForKey:@"header"] objectForKey:@"message"];
@@ -146,7 +149,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
 
 //临时
 -(void)getSelfJoinClassType:(NSInteger)page{
-    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%ld",(long)page],@"start",_userModel.peopleId,@"studentId",@"2017-07-01",@"actStartTime",@"1000",@"length",_userModel.school,@"universityId",@"2",@"courseType",_searchStr,@"courseId",nil];
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%ld",(long)page],@"start",_userModel.peopleId,@"studentId",@"2017-07-01",@"actStartTime",@"1000",@"length",_userModel.school,@"universityId",_searchStr,@"courseId",@"1",@"type",nil];
     [[NetworkRequest sharedInstance] GET:QueryCourse dict:dict succeed:^(id data) {
         //NSLog(@"%@",data);
         NSString * str = [[data objectForKey:@"header"] objectForKey:@"message"];
@@ -212,21 +215,78 @@ static NSString * cellIdentifier = @"cellIdentifier";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    CourseDetailsViewController * mInfo = [[CourseDetailsViewController alloc] init];
-    self.hidesBottomBarWhenPushed = YES;
-    mInfo.c = _classModelAry[indexPath.row];
-    [self.navigationController pushViewController:mInfo animated:YES];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:nil preferredStyle:  UIAlertControllerStyleActionSheet];
+    
+    ClassModel * c = _classModelAry[indexPath.row];
+    [alert addAction:[UIAlertAction actionWithTitle:@"加入课程" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",c.sclassId],@"id",_userModel.peopleId,@"studentId", nil];
+        [self showHudInView:self.view hint:NSLocalizedString(@"正在加载数据", @"Load data...")];
+        [[NetworkRequest sharedInstance] POST:JoinCourse dict:dict succeed:^(id data) {
+            NSString * str = [[data objectForKey:@"header"] objectForKey:@"code"];
+            NSString * meessage = [[data objectForKey:@"header"] objectForKey:@"message"];
+            if([[NSString stringWithFormat:@"%@",str] isEqualToString:@"0000"]){
+                [UIUtils showInfoMessage:@"加入成功" withVC:self];
+                [self headerRereshing];
+               
+            }else{
+                [UIUtils showInfoMessage:meessage withVC:self];
+            }
+            [self hideHud];
+            
+        } failure:^(NSError *error) {
+            [UIUtils showInfoMessage:@"加入失败,请检查网络" withVC:self];
+            [self hideHud];
+            
+        }];
+    }]];
+
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        //点击按钮的响应事件；
+    }]];
+    
+    //弹出提示框；
+    [self presentViewController:alert animated:true completion:nil];
     // self.hidesBottomBarWhenPushed=NO;
     
 }
 //有了初次点击再走这个
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:nil preferredStyle:  UIAlertControllerStyleActionSheet];
     
-    CourseDetailsViewController * mInfo = [[CourseDetailsViewController alloc] init];
-    self.hidesBottomBarWhenPushed = YES;
-    mInfo.c = _classModelAry[indexPath.row];
-    [self.navigationController pushViewController:mInfo animated:YES];
+    ClassModel * c = _classModelAry[indexPath.row];
+
+    [alert addAction:[UIAlertAction actionWithTitle:@"加入课程" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",c.sclassId],@"id",_userModel.peopleId,@"studentId", nil];
+        [self showHudInView:self.view hint:NSLocalizedString(@"正在加载数据", @"Load data...")];
+        [[NetworkRequest sharedInstance] POST:JoinCourse dict:dict succeed:^(id data) {
+            NSString * str = [[data objectForKey:@"header"] objectForKey:@"code"];
+            NSString * meessage = [[data objectForKey:@"header"] objectForKey:@"message"];
+
+             if([[NSString stringWithFormat:@"%@",str] isEqualToString:@"0000"]){
+                [UIUtils showInfoMessage:@"加入成功" withVC:self];
+                [self headerRereshing];
+               
+            }else{
+                [UIUtils showInfoMessage:meessage withVC:self];
+            }
+            [self hideHud];
+            
+        } failure:^(NSError *error) {
+            [UIUtils showInfoMessage:@"加入失败，强检查网络" withVC:self];
+            [self hideHud];
+            
+        }];
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        //点击按钮的响应事件；
+    }]];
+    
+    //弹出提示框；
+    [self presentViewController:alert animated:true completion:nil];
     // self.hidesBottomBarWhenPushed=NO;
     
 }

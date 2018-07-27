@@ -321,7 +321,7 @@
                 <outlet property="rateSecLabel" destination="Amp-n7-G2t" id="3nf-th-xLK"/>
                 <outlet property="totalSecLabel" destination="GRk-aa-Ny9" id="TOX-Mj-l3W"/>
             </connections>
-            <point key="canvasLocation" x="6.5" y="16"/>
+            <point key="canvasLocation" x="7" y="140"/>
         </tableViewCell>
     </objects>
 </document>
