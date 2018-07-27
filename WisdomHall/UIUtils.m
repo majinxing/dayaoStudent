@@ -315,15 +315,15 @@
     
     expireTime = [NSString stringWithFormat:@"%@ %@:%@",ary[0],ary1[0],ary1[1]];
     
-//    NSDate *today = [UIUtils getInternetDate];
-//    if (today == nil) {
+    //    NSDate *today = [UIUtils getInternetDate];
+    //    if (today == nil) {
     
     NSDate * today = [NSDate date];
-
+    
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     // 时间格式,此处遇到过坑,建议时间HH大写,手机24小时进制和12小时禁止都可以完美格式化
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm"];
-//    dateFormat.timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];//东八区时间
+    //    dateFormat.timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];//东八区时间
     NSDate *start = [dateFormat dateFromString:startTime];// dateByAddingTimeInterval:60*60*8];
     NSDate *expire = [dateFormat dateFromString:expireTime];// dateByAddingTimeInterval:60*60*8];
     
@@ -462,7 +462,7 @@
 //获取网路时间与本地时间的差值
 +(NSDate *)getInternetDate
 {
-   
+    
     NSString *urlString = @"http://m.baidu.com";
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -496,11 +496,11 @@
     
     NSDate * localeDate1 = [endD dateByAddingTimeInterval:interval1];
     
-//    NSTimeInterval start = [localeDate timeIntervalSince1970]*1;
+    //    NSTimeInterval start = [localeDate timeIntervalSince1970]*1;
     
-//    NSTimeInterval end = [endD timeIntervalSince1970]*1;
+    //    NSTimeInterval end = [endD timeIntervalSince1970]*1;
     
-//    NSTimeInterval value = end - start;
+    //    NSTimeInterval value = end - start;
     // 当前日历
     NSCalendar *calendar = [NSCalendar currentCalendar];
     // 需要对比的时间数据
@@ -514,9 +514,9 @@
     [[Appsetting sharedInstance].mySettingData setValue:[NSString stringWithFormat:@"%ld",(long)dateCom.minute] forKey:@"minute"];
     [[Appsetting sharedInstance].mySettingData setValue:[NSString stringWithFormat:@"%ld",(long)dateCom.second] forKey:@"second"];
     [[Appsetting sharedInstance].mySettingData synchronize];
-
+    
     return localeDate;
-
+    
 }
 
 +(NSString *)compareTimeStartTime:(NSString *)startTime withExpireTime:(NSString *)expireTime {
@@ -820,8 +820,8 @@
                 [[Appsetting sharedInstance] getOut];
                 DYTabBarViewController *rootVC = [DYTabBarViewController sharedInstance];
                 rootVC = nil;
-//                ChatHelper * c =[ChatHelper shareHelper];
-//                [c getOut];
+                //                ChatHelper * c =[ChatHelper shareHelper];
+                //                [c getOut];
                 WorkingLoginViewController * userLogin = [[WorkingLoginViewController alloc] init];
                 [UIApplication sharedApplication].keyWindow.rootViewController =[[UINavigationController alloc] initWithRootViewController:userLogin];
                 UIAlertView * alter = [[UIAlertView alloc] initWithTitle:nil message:@"登录过期请重新登录" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
@@ -837,12 +837,12 @@
     [[Appsetting sharedInstance] getOut];
     DYTabBarViewController *rootVC = [DYTabBarViewController sharedInstance];
     rootVC = nil;
-//    ChatHelper * c =[ChatHelper shareHelper];
-//    [c getOut];
+    //    ChatHelper * c =[ChatHelper shareHelper];
+    //    [c getOut];
     WorkingLoginViewController * userLogin = [[WorkingLoginViewController alloc] init];
     [UIApplication sharedApplication].keyWindow.rootViewController =[[UINavigationController alloc] initWithRootViewController:userLogin];
     [UIUtils showInfoMessage:@"账号在另一台设备登录，请重新登录或修改密码" withVC:userLogin];
-
+    
     return ;
     
 }
@@ -940,7 +940,7 @@
     
     NSMutableArray * seatAry = [dict objectForKey:@"seatPeople"];
     
-//    ChatHelper * c = [ChatHelper shareHelper];
+    //    ChatHelper * c = [ChatHelper shareHelper];
     
     UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
     
@@ -950,7 +950,7 @@
         
         NSString * str = [NSString stringWithFormat:@"{\"Project\":\"LvDongKeTang\",\"MessageType\":\"Notification\",\"From\":\"Admin\",\"Content\":\"会议通知：主题：%@，地址：%@，时间：%@，您的座次：%@\"}",[dict objectForKey:@"name"],[dict objectForKey:@"address"],[dict objectForKey:@"time"],s.seat];
         
-//        [c sendTextMessageToPeople:str withReceiver:[NSString stringWithFormat:@"%@%@",user.school,s.workNo]];
+        //        [c sendTextMessageToPeople:str withReceiver:[NSString stringWithFormat:@"%@%@",user.school,s.workNo]];
     }
     
 }
@@ -1162,40 +1162,40 @@
  * 日常签到
  **/
 +(void)dailyCheck{
-//    [UIUtils creatDailyCheckTable:DAILYCHECK_TABLE_NAME];
-//    FMDatabase * db = [FMDBTool createDBWithName:SQLITE_NAME];
-//    if ([db open]) {
-//        NSString * sql = [NSString stringWithFormat:@"select * from %@",DAILYCHECK_TABLE_NAME];
-//        FMResultSet * rs = [FMDBTool queryWithDB:db withSqlStr:sql];
-//        int n = 0;
-//        int m = 0;
-//        while (rs.next) {
-//            NSString * date = [rs stringForColumn:@"date"];
-//            NSString * today = [UIUtils getTime];
-//            if ([today isEqualToString:date]) {
-//                n = 1;
-//                NSString * signIn = [rs stringForColumn:@"signIn"];
-//
-//                if ([UIUtils isBlankString:signIn]) {
-//                    m = 1;
-//                }
-//                NSString * signBack = [rs stringForColumn:@"signBack"];
-//                if ([UIUtils isBlankString:signBack]) {
-//                    m = 2;
-//                }
-//                break;
-//            }
-//        }
-//        [db close];
-//
-//        if (n == 0) {
-//            [UIUtils insertedDailyCheck];
-//        }else if(n == 1){
-//            if (m == 1||m == 2) {
-//                [UIUtils upadteDailyCheck:m];
-//            }
-//        }
-//    }
+    //    [UIUtils creatDailyCheckTable:DAILYCHECK_TABLE_NAME];
+    //    FMDatabase * db = [FMDBTool createDBWithName:SQLITE_NAME];
+    //    if ([db open]) {
+    //        NSString * sql = [NSString stringWithFormat:@"select * from %@",DAILYCHECK_TABLE_NAME];
+    //        FMResultSet * rs = [FMDBTool queryWithDB:db withSqlStr:sql];
+    //        int n = 0;
+    //        int m = 0;
+    //        while (rs.next) {
+    //            NSString * date = [rs stringForColumn:@"date"];
+    //            NSString * today = [UIUtils getTime];
+    //            if ([today isEqualToString:date]) {
+    //                n = 1;
+    //                NSString * signIn = [rs stringForColumn:@"signIn"];
+    //
+    //                if ([UIUtils isBlankString:signIn]) {
+    //                    m = 1;
+    //                }
+    //                NSString * signBack = [rs stringForColumn:@"signBack"];
+    //                if ([UIUtils isBlankString:signBack]) {
+    //                    m = 2;
+    //                }
+    //                break;
+    //            }
+    //        }
+    //        [db close];
+    //
+    //        if (n == 0) {
+    //            [UIUtils insertedDailyCheck];
+    //        }else if(n == 1){
+    //            if (m == 1||m == 2) {
+    //                [UIUtils upadteDailyCheck:m];
+    //            }
+    //        }
+    //    }
 }
 +(void)creatDailyCheckTable:(NSString *)tableName{
     FMDatabase * db = [FMDBTool createDBWithName:SQLITE_NAME];
@@ -1244,41 +1244,41 @@
     
 }
 +(void)insertedDailyCheck{
-//    FMDatabase * db = [FMDBTool createDBWithName:SQLITE_NAME];
-//    NSString * str  = [UIUtils signState];
-//    if ([db open]) {
-//        UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
-//        if ([str isEqualToString:@"签到正常"]) {
-//            NSString * sql = [NSString stringWithFormat:@"insert into %@ (userID,signIn,signInState,date) values ('%@','%@','%@','%@')",DAILYCHECK_TABLE_NAME,[NSString stringWithFormat:@"%@",user.peopleId],[UIUtils getCurrentDate],[NSString stringWithFormat:@"正常"],[UIUtils getTime]];
-//            BOOL rs = [FMDBTool insertWithDB:db tableName:DAILYCHECK_TABLE_NAME withSqlStr:sql];
-//            
-//            if (!rs) {
-//                NSLog(@"失败");
-//            }
-//        }else if([str isEqualToString:@"签到迟到"]){
-//            NSString * sql = [NSString stringWithFormat:@"insert into %@ (userID,signIn,signInState,date) values ('%@','%@','%@','%@')",DAILYCHECK_TABLE_NAME,[NSString stringWithFormat:@"%@",user.peopleId],[UIUtils getCurrentDate],[NSString stringWithFormat:@"迟到"],[UIUtils getTime]];
-//            BOOL rs = [FMDBTool insertWithDB:db tableName:DAILYCHECK_TABLE_NAME withSqlStr:sql];
-//            
-//            if (!rs) {
-//                NSLog(@"失败");
-//            }
-//        }else if ([str isEqualToString:@"签退正常"]) {
-//            NSString * sql = [NSString stringWithFormat:@"insert into %@ (userID,signBack,signBackState,date) values ('%@','%@','%@','%@')",DAILYCHECK_TABLE_NAME,[NSString stringWithFormat:@"%@",user.peopleId],[UIUtils getCurrentDate],[NSString stringWithFormat:@"正常"],[UIUtils getTime]];
-//            BOOL rs = [FMDBTool insertWithDB:db tableName:DAILYCHECK_TABLE_NAME withSqlStr:sql];
-//            
-//            if (!rs) {
-//                NSLog(@"失败");
-//            }
-//        }else if ([str isEqualToString:@"签退早退"]){
-//            NSString * sql = [NSString stringWithFormat:@"insert into %@ (userID,signBack,signBackState,date) values ('%@','%@','%@','%@')",DAILYCHECK_TABLE_NAME,[NSString stringWithFormat:@"%@",user.peopleId],[UIUtils getCurrentDate],[NSString stringWithFormat:@"早退"],[UIUtils getTime]];
-//            BOOL rs = [FMDBTool insertWithDB:db tableName:DAILYCHECK_TABLE_NAME withSqlStr:sql];
-//            
-//            if (!rs) {
-//                NSLog(@"失败");
-//            }
-//        }
-//    }
-//    [db close];
+    //    FMDatabase * db = [FMDBTool createDBWithName:SQLITE_NAME];
+    //    NSString * str  = [UIUtils signState];
+    //    if ([db open]) {
+    //        UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
+    //        if ([str isEqualToString:@"签到正常"]) {
+    //            NSString * sql = [NSString stringWithFormat:@"insert into %@ (userID,signIn,signInState,date) values ('%@','%@','%@','%@')",DAILYCHECK_TABLE_NAME,[NSString stringWithFormat:@"%@",user.peopleId],[UIUtils getCurrentDate],[NSString stringWithFormat:@"正常"],[UIUtils getTime]];
+    //            BOOL rs = [FMDBTool insertWithDB:db tableName:DAILYCHECK_TABLE_NAME withSqlStr:sql];
+    //
+    //            if (!rs) {
+    //                NSLog(@"失败");
+    //            }
+    //        }else if([str isEqualToString:@"签到迟到"]){
+    //            NSString * sql = [NSString stringWithFormat:@"insert into %@ (userID,signIn,signInState,date) values ('%@','%@','%@','%@')",DAILYCHECK_TABLE_NAME,[NSString stringWithFormat:@"%@",user.peopleId],[UIUtils getCurrentDate],[NSString stringWithFormat:@"迟到"],[UIUtils getTime]];
+    //            BOOL rs = [FMDBTool insertWithDB:db tableName:DAILYCHECK_TABLE_NAME withSqlStr:sql];
+    //
+    //            if (!rs) {
+    //                NSLog(@"失败");
+    //            }
+    //        }else if ([str isEqualToString:@"签退正常"]) {
+    //            NSString * sql = [NSString stringWithFormat:@"insert into %@ (userID,signBack,signBackState,date) values ('%@','%@','%@','%@')",DAILYCHECK_TABLE_NAME,[NSString stringWithFormat:@"%@",user.peopleId],[UIUtils getCurrentDate],[NSString stringWithFormat:@"正常"],[UIUtils getTime]];
+    //            BOOL rs = [FMDBTool insertWithDB:db tableName:DAILYCHECK_TABLE_NAME withSqlStr:sql];
+    //
+    //            if (!rs) {
+    //                NSLog(@"失败");
+    //            }
+    //        }else if ([str isEqualToString:@"签退早退"]){
+    //            NSString * sql = [NSString stringWithFormat:@"insert into %@ (userID,signBack,signBackState,date) values ('%@','%@','%@','%@')",DAILYCHECK_TABLE_NAME,[NSString stringWithFormat:@"%@",user.peopleId],[UIUtils getCurrentDate],[NSString stringWithFormat:@"早退"],[UIUtils getTime]];
+    //            BOOL rs = [FMDBTool insertWithDB:db tableName:DAILYCHECK_TABLE_NAME withSqlStr:sql];
+    //
+    //            if (!rs) {
+    //                NSLog(@"失败");
+    //            }
+    //        }
+    //    }
+    //    [db close];
 }
 +(void)upadteDailyCheck:(int)m{
     FMDatabase * db = [FMDBTool createDBWithName:SQLITE_NAME];
@@ -1325,14 +1325,23 @@
 }
 +(NSDictionary *)getWeekTimeWithType:(NSString *)type
 {
-    NSDate *nowDate = [NSDate date];
+    NSString *birthdayStr = type;
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:8]];//解决8小时时间差问题
+    
+    NSDate *nowDate = [dateFormatter dateFromString:birthdayStr];
+    
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *comp = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit | NSDayCalendarUnit fromDate:nowDate];
     // 获取今天是周几
     NSInteger weekDay = [comp weekday];
     // 获取几天是几号
     NSInteger day = [comp day];
-   // NSLog(@"%d----%d",weekDay,day);
+    // NSLog(@"%d----%d",weekDay,day);
     
     // 计算当前日期和本周的星期一和星期天相差天数
     long firstDiff,lastDiff;
@@ -1347,7 +1356,7 @@
         firstDiff = [calendar firstWeekday] - weekDay + 1;
         lastDiff = 8 - weekDay;
     }
-   // NSLog(@"firstDiff: %ld   lastDiff: %ld",firstDiff,lastDiff);
+    // NSLog(@"firstDiff: %ld   lastDiff: %ld",firstDiff,lastDiff);
     
     // 在当前日期(去掉时分秒)基础上加上差的天数
     NSDateComponents *firstDayComp = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit  fromDate:nowDate];
@@ -1368,15 +1377,28 @@
     NSString *lastDay = [formatter stringFromDate:lastDayOfWeek];
     NSLog(@"%@=======%@",firstDay,lastDay);
     
-//    NSString *dateStr = [NSString stringWithFormat:@"%@-%@",firstDay,lastDay];
+    //    NSString *dateStr = [NSString stringWithFormat:@"%@-%@",firstDay,lastDay];
     NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",firstDay],@"firstDay",[NSString stringWithFormat:@"%@",lastDay],@"lastDay", nil];
     return dict;
 }
 +(NSArray *)getWeekAllTimeWithType:(NSString *)type
 {
-    NSDate *nowDate = [NSDate date];
+    NSString *birthdayStr = type;
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:8]];//解决8小时时间差问题
+    
+    NSDate *nowDate = [dateFormatter dateFromString:birthdayStr];
+    
+//    NSDate *nowDate = [NSDate date];
+    
     NSCalendar *calendar = [NSCalendar currentCalendar];
+    
     NSDateComponents *comp = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit | NSDayCalendarUnit fromDate:nowDate];
+    
     // 获取今天是周几
     NSInteger weekDay = [comp weekday];
     // 获取几天是几号
@@ -1413,6 +1435,7 @@
     }
     for (int i = 0; i<=labs(lastDiff); i++) {
         NSDateComponents *lastDayComp = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit   fromDate:nowDate];
+        
         [lastDayComp setDay:day + i];
         
         NSDate *lastDayOfWeek = [calendar dateFromComponents:lastDayComp];
@@ -1421,8 +1444,52 @@
         [formatter setDateFormat:@"dd"];
         
         NSString *lastDay = [formatter stringFromDate:lastDayOfWeek];
+        
         [ary addObject:lastDay];
     }
+    
+    NSDateComponents *firstDayComp = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit  fromDate:nowDate];
+    
+    [firstDayComp setDay:day + firstDiff-1];
+    
+    NSDate *firstDayOfWeek = [calendar dateFromComponents:firstDayComp];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString *firstDay = [formatter stringFromDate:firstDayOfWeek];
+    
+    [ary addObject:firstDay];
+    
+    NSDateFormatter *formatterf = [[NSDateFormatter alloc] init];
+    [formatterf setDateFormat:@"MM"];//前面的月
+    
+    NSString *firstDayf = [formatterf stringFromDate:firstDayOfWeek];
+    
+    [ary addObject:firstDayf];
+    
+    NSDateComponents *lastDayComp = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit   fromDate:nowDate];
+
+    [lastDayComp setDay:day + labs(lastDiff)+1];
+    
+    NSDate *lastDayOfWeek = [calendar dateFromComponents:lastDayComp];
+    
+    NSDateFormatter *formatter1 = [[NSDateFormatter alloc] init];
+    
+    [formatter1 setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString *lastDay = [formatter1 stringFromDate:lastDayOfWeek];
+    
+    [ary addObject:lastDay];
+    
+    NSDateFormatter *formatterl = [[NSDateFormatter alloc] init];
+    
+    [formatterl setDateFormat:@"MM"];//前面的月
+    
+    NSString *firstDayl = [formatterl stringFromDate:firstDayOfWeek];
+    
+    [ary addObject:firstDayl];
+    
     return ary;
 }
 +(NSMutableDictionary *)CurriculumGroup:(NSMutableArray *)classAry{
@@ -1565,12 +1632,12 @@
     }
     NSDate*datenow = [NSDate date];
     
-//    NSString*timeSp = [NSString stringWithFormat:@"%ld", (long)[datenow timeIntervalSince1970]];
+    //    NSString*timeSp = [NSString stringWithFormat:@"%ld", (long)[datenow timeIntervalSince1970]];
     
     NSTimeZone*zone1 = [NSTimeZone timeZoneWithName:@"Asia/Beijing"];
     
     NSInteger interval1 = [zone1 secondsFromGMTForDate:datenow];
-
+    
     NSDate*localeDate1 = [datenow dateByAddingTimeInterval:interval1];
     
     NSString*timeSpp = [NSString stringWithFormat:@"%ld", (long)[localeDate1 timeIntervalSince1970]];
@@ -1607,16 +1674,16 @@
         return YES;
     }
     return NO;
-//    //获取屏幕亮度
-//    CGFloat oldBrightness = [UIScreen mainScreen].brightness;
-//    //以较小的数量改变屏幕亮度
-//    [UIScreen mainScreen].brightness = oldBrightness + (oldBrightness <= 0.01 ? (0.01) : (-0.01));
-//
-//    CGFloat newBrightness = [UIScreen mainScreen].brightness;
-//    //恢复屏幕亮度
-//    [UIScreen mainScreen].brightness = oldBrightness;
-//    //判断屏幕亮度是否能够被改变
-//    return oldBrightness != newBrightness;
+    //    //获取屏幕亮度
+    //    CGFloat oldBrightness = [UIScreen mainScreen].brightness;
+    //    //以较小的数量改变屏幕亮度
+    //    [UIScreen mainScreen].brightness = oldBrightness + (oldBrightness <= 0.01 ? (0.01) : (-0.01));
+    //
+    //    CGFloat newBrightness = [UIScreen mainScreen].brightness;
+    //    //恢复屏幕亮度
+    //    [UIScreen mainScreen].brightness = oldBrightness;
+    //    //判断屏幕亮度是否能够被改变
+    //    return oldBrightness != newBrightness;
     
 }
 +(NSString *)md5:(NSString *)str
@@ -1644,7 +1711,7 @@
     
     long n = [expireTime integerValue];
     long m = [mm integerValue];
-
+    
     
     if (m>=50) {
         if (n == 24) {
@@ -1751,7 +1818,7 @@
 }
 //对缓存wifi进行判断
 +(BOOL)determineWifiAndtimeCorrect:(NSMutableArray *)macAry{
- 
+    
     NSDictionary * dict = [[Appsetting sharedInstance] getWifiMacAndTime];
     NSString * mac = [dict objectForKey:@"WIFI_mac"];
     NSString * time = [dict objectForKey:@"WIFI_time"];

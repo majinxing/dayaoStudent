@@ -49,7 +49,6 @@ static NSString *cellIdentifier = @"cellIdentifier";
 @property (nonatomic,strong)UITableView * tableView;
 
 @property (nonatomic,strong)NSMutableDictionary * dict;
-@property (nonatomic,strong)NSDictionary * dictDay;
 @property (nonatomic,strong)SynchronousCourseView * synCourseView;
 
 @end
@@ -70,15 +69,12 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
     _userModel = [[Appsetting sharedInstance] getUsetInfo];
     
-    _dictDay = [UIUtils getWeekTimeWithType:nil];
+//    _dictDay = [UIUtils getWeekTimeWithType:nil];
     //    NSLog(@"%@",dict);
     
     [self addAlterView];
     
     [self setNavigationTitle];
-    
-    //    [self addCollection];
-    
     
     [self addTableView];
     // 1.注册通知
@@ -413,12 +409,12 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
     view.backgroundColor = [UIColor whiteColor];//RGBA_COLOR(201, 242, 253, 1);
     
-    NSString * month = [UIUtils getMonth];
+    NSString * month = _monthStr;//[UIUtils getMonth];
     
-    NSMutableArray * day = [UIUtils getWeekAllTimeWithType:nil];
+    NSMutableArray * day = [NSMutableArray arrayWithArray:_weekDayTime];//[UIUtils getWeekAllTimeWithType:nil];
     
     NSMutableArray * ary = [NSMutableArray arrayWithCapacity:1];;
-    if (day.count==7) {
+    if (day.count>=7) {
         NSArray *  a = @[month,@"M",@"T",@"W",@"T",@"F",@"S",@"S"];
         for (int i = 0; i<8; i++) {
             if (i == 0) {

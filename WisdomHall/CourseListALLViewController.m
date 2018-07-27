@@ -11,7 +11,9 @@
 #import "NavBarNavigationController.h"
 
 @interface CourseListALLViewController ()
-@property (nonatomic,strong)UIViewController * vc;
+@property (nonatomic,strong)SignInViewController * OldVC;
+@property (nonatomic,strong)SignInViewController * nVC;
+@property (nonatomic,strong)NSMutableArray * FLDayAry;
 @end
 
 @implementation CourseListALLViewController
@@ -42,34 +44,109 @@
     } if(recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
         NSLog(@"swipe left");
         
-        SignInViewController * vc = [[SignInViewController alloc] init];
+        _nVC = [[SignInViewController alloc] init];
         
-        [self addChildViewController:vc];
         
-        vc.view.frame = CGRectMake(APPLICATION_WIDTH, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);
+        _nVC.view.frame = CGRectMake(APPLICATION_WIDTH, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);
         
-        vc.selfNavigationVC = self;
+        _nVC.selfNavigationVC = self;
         
-        [self.view addSubview:vc.view];
-        
-        [UIView animateWithDuration:1 animations:^{
-            UIViewController * vc1  = self.childViewControllers[0];
-
-            vc1.view.transform = CGAffineTransformMakeTranslation(-APPLICATION_WIDTH, 0);
-            vc.view.transform = CGAffineTransformMakeTranslation(-APPLICATION_WIDTH, 0);
-        } completion:^(BOOL finished) {
-//            UIViewController * vc1 = self.childViewControllers.firstObject;
-            UIViewController * vc1 = self.childViewControllers[0];
-
-            [vc1 removeFromParentViewController];
+        if (_FLDayAry.count==4) {
+            _nVC.monthStr = _FLDayAry[3];
             
-            vc.view.frame = CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);
+            NSMutableArray * ary = [NSMutableArray arrayWithArray:[UIUtils getWeekAllTimeWithType:_FLDayAry[2]]];
+            
+            _nVC.dictDay = [UIUtils getWeekTimeWithType:_FLDayAry[2]];
+            
+            _nVC.weekDayTime = [NSMutableArray arrayWithArray:ary];
+            
+            if (ary.count>=10) {
+                [_FLDayAry removeAllObjects];
+                [_FLDayAry addObject:ary[7]];
+                [_FLDayAry addObject:ary[8]];
+                [_FLDayAry addObject:ary[9]];
+                [_FLDayAry addObject:ary[10]];
+                
+            }
+        }
+        
+        [self addChildViewController:_nVC];
+
+        
+        [self.view addSubview:_nVC.view];
+        
+        [UIView animateWithDuration:0.5 animations:^{
+
+            _OldVC.view.frame = CGRectMake(-APPLICATION_WIDTH, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);//CGAffineTransformMakeTranslation(-APPLICATION_WIDTH, 0);
+            
+            _nVC.view.transform = CGAffineTransformMakeTranslation(-APPLICATION_WIDTH, 0);
+        } completion:^(BOOL finished) {
+            
+            [_OldVC.view removeFromSuperview];
+            
+            [_OldVC removeFromParentViewController];
+            
+            _OldVC = _nVC;
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                _OldVC.view.frame = CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);
+
+            });
+            
 
         }];
         
         
     } if(recognizer.direction == UISwipeGestureRecognizerDirectionRight) {
         
+        _nVC = [[SignInViewController alloc] init];
+        
+        [self addChildViewController:_nVC];
+        
+        _nVC.view.frame = CGRectMake(-APPLICATION_WIDTH, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);
+        
+        _nVC.selfNavigationVC = self;
+        
+        if (_FLDayAry.count==4) {
+            _nVC.monthStr = _FLDayAry[1];
+            
+            NSMutableArray * ary = [NSMutableArray arrayWithArray:[UIUtils getWeekAllTimeWithType:_FLDayAry[0]]];
+            
+            _nVC.dictDay = [UIUtils getWeekTimeWithType:_FLDayAry[0]];
+            
+            _nVC.weekDayTime = [NSMutableArray arrayWithArray:ary];
+            
+            if (ary.count>=10) {
+                [_FLDayAry removeAllObjects];
+                [_FLDayAry addObject:ary[7]];
+                [_FLDayAry addObject:ary[8]];
+                [_FLDayAry addObject:ary[9]];
+                [_FLDayAry addObject:ary[10]];
+                
+            }
+        }
+        
+        
+        [self.view addSubview:_nVC.view];
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            
+            _OldVC.view.frame = CGRectMake(APPLICATION_WIDTH, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);//CGAffineTransformMakeTranslation(-APPLICATION_WIDTH, 0);
+            
+            _nVC.view.transform = CGAffineTransformMakeTranslation(APPLICATION_WIDTH, 0);
+        } completion:^(BOOL finished) {
+            
+            [_OldVC removeFromParentViewController];
+            
+            _OldVC = _nVC;
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                _OldVC.view.frame = CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);
+                
+            });
+            
+            
+        }];
         
     }
     
@@ -78,16 +155,35 @@
 
 
 -(void)addChildViewVC{
+    
+    NSDictionary * dictDay = [UIUtils getWeekTimeWithType:[UIUtils getTime]];
+
     self.view.frame = CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);
     
-    SignInViewController * vc = [[SignInViewController alloc] init];
+    _OldVC = [[SignInViewController alloc] init];
     
-    [self addChildViewController:vc];
+    _OldVC.dictDay = [NSDictionary dictionaryWithDictionary:dictDay];
     
-    vc.view.frame = CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);
-    vc.selfNavigationVC = self;
+    _OldVC.monthStr = [UIUtils getMonth];
     
-    [self.view addSubview:vc.view];
+    NSMutableArray * ary = [NSMutableArray arrayWithArray:[UIUtils getWeekAllTimeWithType:[_OldVC.dictDay objectForKey:@"firstDay"]]];
+    _FLDayAry = [NSMutableArray arrayWithCapacity:1];
+    if (ary.count>=10) {
+        [_FLDayAry addObject:ary[7]];
+        [_FLDayAry addObject:ary[8]];
+        [_FLDayAry addObject:ary[9]];
+        [_FLDayAry addObject:ary[10]];
+    }
+    _OldVC.weekDayTime = [NSMutableArray arrayWithArray:ary];
+    
+    
+    [self addChildViewController:_OldVC];
+    
+    _OldVC.view.frame = CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);
+    
+    _OldVC.selfNavigationVC = self;
+    
+    [self.view addSubview:_OldVC.view];
     
 }
 - (void)didReceiveMemoryWarning {
