@@ -114,7 +114,7 @@
         
         
         
-        DYTabBarViewController * tab = [[DYTabBarViewController alloc] init];
+        DYTabBarViewController * tab = [DYTabBarViewController sharedInstance];
         
         self.window.rootViewController = tab;
         
@@ -300,12 +300,12 @@
 #endif
 }
 -(void)setColor{
-    DYTabBarViewController * tab = [[DYTabBarViewController alloc] init];
+    DYTabBarViewController * tab = [DYTabBarViewController sharedInstance];
     self.window.rootViewController = tab;
 }
 
 -(void)reloadView{
-    DYTabBarViewController * tab = [[DYTabBarViewController alloc] init];
+    DYTabBarViewController * tab = [DYTabBarViewController sharedInstance];
     self.window.rootViewController = tab;
 }
 

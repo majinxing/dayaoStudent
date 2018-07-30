@@ -18,7 +18,6 @@
 #import "imageBigView.h"
 
 @interface CorrectAnswerViewController ()<UITableViewDelegate,UITableViewDataSource,ChoiceQuestionTableViewCellDelegate,EditPageViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,imageBigViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
-@property (nonatomic,strong)UITableView * tableView;
 
 @property (nonatomic,strong)NSString * testType;
 
@@ -26,7 +25,6 @@
 
 @property (nonatomic,strong)UserModel * user;
 
-@property (nonatomic,assign)int  temp;//标明单道题目时候的题号
 
 @property (nonatomic,assign)int temp1;//标记选择的模块
 
@@ -59,7 +57,7 @@
     _user = [[Appsetting sharedInstance] getUsetInfo];
     
     _allQuestionAry = [NSMutableArray arrayWithCapacity:1];
-    _testType = @"All";
+    _testType = @"single";
     
     _temp = 0;
     
@@ -76,7 +74,7 @@
     // Do any additional setup after loading the view from its nib.
 }
 -(void)addTableView{
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, APPLICATION_WIDTH, APPLICATION_HEIGHT-64-44) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT-64-44-44) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

@@ -291,7 +291,7 @@
     }
     vc.editable = NO;
     
-    vc.titleStr = @"试题";
+    vc.typeStr = @"问答";
     
     if ([vc.t.statusName isEqualToString:@"未进行"]) {
         [UIUtils showInfoMessage:@"考试未进行，不能查看" withVC:self];

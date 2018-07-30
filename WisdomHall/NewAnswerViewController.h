@@ -15,7 +15,7 @@
 
 @property (nonatomic,strong)TextModel *t;
 
-@property (nonatomic,strong)QuestionBank * qBank;
+
 
 @property (nonatomic,strong)ClassModel *classModel;
 

@@ -111,7 +111,7 @@
         
         
         
-        DYTabBarViewController *rootVC = [[DYTabBarViewController alloc] init];
+        DYTabBarViewController *rootVC = [DYTabBarViewController sharedInstance];
         
         [UIApplication sharedApplication].keyWindow.rootViewController = rootVC;
     }else{

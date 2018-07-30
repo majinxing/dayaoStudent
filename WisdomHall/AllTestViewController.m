@@ -26,6 +26,8 @@
 
 #import "SelfAnswerViewController.h"
 
+#import "TestCompletedViewController.h"
+
 @interface AllTestViewController ()<UITableViewDelegate,UITableViewDataSource,TextsTableViewCellDelegate,ShareViewDelegate>
 @property (nonatomic,strong)UITableView * tableView;
 @property (nonatomic,strong)FMDatabase *db;
@@ -276,7 +278,7 @@
         }
         vc.editable = NO;
         
-        vc.titleStr = @"试题";
+        vc.typeStr = @"测试";
         
         if ([vc.t.statusName isEqualToString:@"未进行"]) {
             [UIUtils showInfoMessage:@"考试未进行，不能查看" withVC:self];
@@ -286,7 +288,7 @@
             [self.navigationController pushViewController:vc animated:YES];
         }
     }else{
-        SelfAnswerViewController * vc= [[SelfAnswerViewController alloc] init];
+        TestCompletedViewController * vc= [[TestCompletedViewController alloc] init];
         
         vc.t = _dataAry[indexPath.row];
         if ([vc.t.statusName isEqualToString:@"已完成"]) {

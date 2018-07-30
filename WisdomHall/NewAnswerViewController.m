@@ -17,7 +17,9 @@
 
 #import "imageBigView.h"
 
-@interface NewAnswerViewController ()<UITableViewDelegate,UITableViewDataSource,ChoiceQuestionTableViewCellDelegate,EditPageViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,imageBigViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+#import "SelectQuestion.h"
+
+@interface NewAnswerViewController ()<UITableViewDelegate,UITableViewDataSource,ChoiceQuestionTableViewCellDelegate,EditPageViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,imageBigViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,SelectQuestionDelecate>
 
 @property (nonatomic,strong)UITableView * tableView;
 
@@ -47,6 +49,8 @@
 
 @property (nonatomic,strong) imageBigView * v;//查看大图
 
+@property (nonatomic,strong)SelectQuestion * selectQView;
+
 @property (strong, nonatomic) IBOutlet UIButton *nextQuestion;
 @property (strong, nonatomic) IBOutlet UIButton *OnQuestion;
 
@@ -60,6 +64,7 @@
     _user = [[Appsetting sharedInstance] getUsetInfo];
     
     _allQuestionAry = [NSMutableArray arrayWithCapacity:1];
+    
     _testType = @"single";
     
     _temp = 0;
@@ -71,12 +76,15 @@
     [self addTableView];
     
     
-    
     [_OnQuestion setEnabled:NO];
-
+    
     self.title = @"测验详情";
     
-    [self addSaveBtn];
+    if ([self.typeStr isEqualToString:@"问答"]) {
+        self.title = @"问答";
+
+        [self addSaveBtn];
+    }
     
     // Do any additional setup after loading the view from its nib.
 }
@@ -166,7 +174,7 @@
 }
 //交卷
 -(void)more{
-   
+    
     NSMutableArray * dataAry = [NSMutableArray arrayWithCapacity:1];
     
     for (int i = 0;i<_allQuestionAry.count; i++) {
@@ -200,18 +208,12 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)AllQuestionBtnPressed:(id)sender {
-    if ([_testType isEqualToString:@"single"]) {
-        _testType = @"All";
-        [_nextQuestion setTitle:@"提交" forState:UIControlStateNormal];
-        [_OnQuestion setEnabled:NO];
-    }else{
-        _testType = @"single";
-        _temp = 0;
-        [_nextQuestion setTitle:@"下一题" forState:UIControlStateNormal];
-        [_OnQuestion setEnabled:YES];
-
+    if (!_selectQView) {
+        _selectQView = [[SelectQuestion alloc] initWithFrame:CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT)];
+        _selectQView.delegate = self;
     }
-    [_tableView reloadData];
+    [_selectQView addScrollViewWithBtnNumber:(int)_allQuestionAry.count];
+    [self.view addSubview:_selectQView];
 }
 - (IBAction)OnQuestionBtnPressed:(id)sender {
     if ((_temp+1)>1) {
@@ -220,7 +222,7 @@
     }else{
         [_OnQuestion setEnabled:NO];
     }
-   
+    
     
     
 }
@@ -229,7 +231,7 @@
         _temp = _temp + 1;
         
         [_OnQuestion setEnabled:YES];
-
+        
         [_tableView reloadData];
         
     }
@@ -330,6 +332,26 @@
         
     }];
     
+}
+#pragma mark SelectQuestionDelecate
+-(void)selectQViewOutViewDelegate{
+    [_selectQView removeFromSuperview];
+    _selectQView = nil;
+}
+
+-(void)selectEdDelegate:(UIButton *)btn{
+    _temp = (int)btn.tag - 1;
+    if (_temp == 0) {
+        [_OnQuestion setEnabled:NO];
+        [_nextQuestion setEnabled:YES];
+    }
+    if (_temp+1 == _allQuestionAry.count) {
+        [_OnQuestion setEnabled:YES];
+        [_nextQuestion setEnabled:NO];
+    }
+    [_tableView reloadData];
+    [_selectQView removeFromSuperview];
+    _selectQView = nil;
 }
 #pragma mark imageBigViewDelegate
 -(void)outViewDelegate{
@@ -490,7 +512,7 @@
     }
     _v.delegate = self;
     
-//    _temp = (int)sender.tag/1000+4;
+    //    _temp = (int)sender.tag/1000+4;
     
     _pictureNum = ((int)sender.tag%1000)%1000;
     
@@ -772,7 +794,7 @@
                 [cell addFirstTitleTextView:q.questionAnswer withImageAry:q.questionAnswerImageIdAry withIsEdit:NO withIndexRow:(int)indexPath.section];
                 
             }
-//
+            //
         }else{
             if (![_testType isEqualToString:@"single"]) {
                 _questionNumber = (int)(indexPath.section);
@@ -793,49 +815,49 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    QuestionModel * q;
-//    if ([_testType isEqualToString:@"single"]) {
-//        q = _allQuestionAry[_temp];
-//    }else{
-//        q = _allQuestionAry[indexPath.section];
-//    }
-//
-//    if ([q.titleType isEqualToString:@"1"]) {
-//
-//        NSString * s = [NSString stringWithFormat:@"%c",65+(int)indexPath.row];//[NSString stringWithFormat:@"%c",(int)sender.tag%1000];
-//
-//        if ([[NSString stringWithFormat:@"%@",q.questionAnswer] isEqualToString:s]) {
-//            q.questionAnswer = @"";
-//        }else{
-//            q.questionAnswer = [NSString stringWithFormat:@"%c",65+(int)indexPath.row];;
-//        }
-//    }else{
-//        NSString *string = [NSString stringWithFormat:@"%@",q.questionAnswer];
-//
-//        NSString * s = [NSString stringWithFormat:@"%c",65+(int)indexPath.row];;
-//        //字条串是否包含有某字符串
-//        if ([string rangeOfString:s].location == NSNotFound) {
-//            if ([UIUtils isBlankString:string]) {
-//                q.questionAnswer = [NSString stringWithFormat:@"%c",65+(int)indexPath.row];
-//            }else{
-//                q.questionAnswer = [q.questionAnswer stringByAppendingString:[NSString stringWithFormat:@",%c",65+(int)indexPath.row]];
-//            }
-//        } else {
-//            NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[string componentsSeparatedByString:@","]];
-//            [array removeObject:s];
-//            q.questionAnswer = @"";
-//            for (int i = 0; i<array.count; i++) {
-//                if (i == 0) {
-//                    q.questionAnswer = [NSString stringWithFormat:@"%@",array[0]];
-//                }else{
-//                    q.questionAnswer = [q.questionAnswer stringByAppendingString:[NSString stringWithFormat:@",%@",array[i]]];
-//                }
-//
-//            }
-//            NSLog(@"string 包含 martin");
-//        }
-//    }
-//    [_tableView reloadData];
+    //    QuestionModel * q;
+    //    if ([_testType isEqualToString:@"single"]) {
+    //        q = _allQuestionAry[_temp];
+    //    }else{
+    //        q = _allQuestionAry[indexPath.section];
+    //    }
+    //
+    //    if ([q.titleType isEqualToString:@"1"]) {
+    //
+    //        NSString * s = [NSString stringWithFormat:@"%c",65+(int)indexPath.row];//[NSString stringWithFormat:@"%c",(int)sender.tag%1000];
+    //
+    //        if ([[NSString stringWithFormat:@"%@",q.questionAnswer] isEqualToString:s]) {
+    //            q.questionAnswer = @"";
+    //        }else{
+    //            q.questionAnswer = [NSString stringWithFormat:@"%c",65+(int)indexPath.row];;
+    //        }
+    //    }else{
+    //        NSString *string = [NSString stringWithFormat:@"%@",q.questionAnswer];
+    //
+    //        NSString * s = [NSString stringWithFormat:@"%c",65+(int)indexPath.row];;
+    //        //字条串是否包含有某字符串
+    //        if ([string rangeOfString:s].location == NSNotFound) {
+    //            if ([UIUtils isBlankString:string]) {
+    //                q.questionAnswer = [NSString stringWithFormat:@"%c",65+(int)indexPath.row];
+    //            }else{
+    //                q.questionAnswer = [q.questionAnswer stringByAppendingString:[NSString stringWithFormat:@",%c",65+(int)indexPath.row]];
+    //            }
+    //        } else {
+    //            NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[string componentsSeparatedByString:@","]];
+    //            [array removeObject:s];
+    //            q.questionAnswer = @"";
+    //            for (int i = 0; i<array.count; i++) {
+    //                if (i == 0) {
+    //                    q.questionAnswer = [NSString stringWithFormat:@"%@",array[0]];
+    //                }else{
+    //                    q.questionAnswer = [q.questionAnswer stringByAppendingString:[NSString stringWithFormat:@",%@",array[i]]];
+    //                }
+    //
+    //            }
+    //            NSLog(@"string 包含 martin");
+    //        }
+    //    }
+    //    [_tableView reloadData];
     
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

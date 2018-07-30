@@ -15,6 +15,7 @@
 
 @property (nonatomic,strong)UIScrollView * btnScrollView;
 @property (nonatomic,strong)UIScrollView * textScrollView;
+
 @property (nonatomic,strong)NSMutableArray * vcAry;
 @end
 

@@ -77,6 +77,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
     [self setNavigationTitle];
     
     [self addTableView];
+    
     // 1.注册通知
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UpdateTheClassPage) name:@"UpdateTheClassPage" object:nil];
@@ -129,12 +130,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
     }];
     
     [self.view addSubview:_tableView];
-//    UISwipeGestureRecognizer * priv = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
-//    [priv setDirection:(UISwipeGestureRecognizerDirectionRight)];
-//    [_tableView addGestureRecognizer:priv];
-//    UISwipeGestureRecognizer * recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
-//    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
-//    [_tableView addGestureRecognizer:recognizer];
+
 }
 -(void)addAlterView{
     _alterView = [[AlterView alloc] initWithFrame:CGRectMake(60, 200, APPLICATION_WIDTH-120, 120) withLabelText:@"暂无课程"];
@@ -409,7 +405,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
     view.backgroundColor = [UIColor whiteColor];//RGBA_COLOR(201, 242, 253, 1);
     
-    NSString * month = _monthStr;//[UIUtils getMonth];
+    NSString * month = [NSString stringWithFormat:@"%@月",_monthStr];//[UIUtils getMonth];
     
     NSMutableArray * day = [NSMutableArray arrayWithArray:_weekDayTime];//[UIUtils getWeekAllTimeWithType:nil];
     

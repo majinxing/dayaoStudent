@@ -1,8 +1,8 @@
 //
-//  CorrectAnswerViewController.h
+//  TestCompletedViewController.h
 //  WisdomHall
 //
-//  Created by XTU-TI on 2018/7/13.
+//  Created by XTU-TI on 2018/7/30.
 //  Copyright © 2018年 majinxing. All rights reserved.
 //
 
@@ -10,7 +10,8 @@
 #import "TextModel.h"
 #import "QuestionBank.h"
 #import "ClassModel.h"
-@interface CorrectAnswerViewController : UIViewController
+
+@interface TestCompletedViewController : UIViewController
 @property (nonatomic,strong)TextModel *t;
 
 @property (nonatomic,strong)ClassModel *classModel;
@@ -19,10 +20,8 @@
 
 @property (nonatomic,copy) NSString * titleStr;//标题名称
 
+@property (nonatomic,copy) NSString * typeStr;//判断是否是问答
+
 @property (nonatomic,assign)BOOL isAbleAnswer;
-
-@property (nonatomic,assign)int  temp;//标明单道题目时候的题号
-
-@property (nonatomic,strong)UITableView * tableView;
 
 @end

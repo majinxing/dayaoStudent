@@ -188,6 +188,8 @@
 		8B2F14561F5E9BD600438374 /* StudentScoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B2F14541F5E9BD600438374 /* StudentScoreTableViewCell.xib */; };
 		8B2F145A1F5E9D7200438374 /* StudentScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B2F14581F5E9D7200438374 /* StudentScoreViewController.m */; };
 		8B2F145B1F5E9D7200438374 /* StudentScoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B2F14591F5E9D7200438374 /* StudentScoreViewController.xib */; };
+		8B32EFB6210EA99000341347 /* TestCompletedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B32EFB4210EA99000341347 /* TestCompletedViewController.m */; };
+		8B32EFB7210EA99000341347 /* TestCompletedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B32EFB5210EA99000341347 /* TestCompletedViewController.xib */; };
 		8B32FEA51F4C038B00D9BF23 /* jcore-ios-1.1.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B32FEA21F4C038B00D9BF23 /* jcore-ios-1.1.5.a */; };
 		8B32FEA61F4C038B00D9BF23 /* jpush-ios-3.0.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B32FEA31F4C038B00D9BF23 /* jpush-ios-3.0.6.a */; };
 		8B32FEA81F4C03C200D9BF23 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B32FEA71F4C03C200D9BF23 /* CoreFoundation.framework */; };
@@ -1046,6 +1048,9 @@
 		8B2F14571F5E9D7200438374 /* StudentScoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentScoreViewController.h; sourceTree = "<group>"; };
 		8B2F14581F5E9D7200438374 /* StudentScoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentScoreViewController.m; sourceTree = "<group>"; };
 		8B2F14591F5E9D7200438374 /* StudentScoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StudentScoreViewController.xib; sourceTree = "<group>"; };
+		8B32EFB3210EA99000341347 /* TestCompletedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestCompletedViewController.h; sourceTree = "<group>"; };
+		8B32EFB4210EA99000341347 /* TestCompletedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestCompletedViewController.m; sourceTree = "<group>"; };
+		8B32EFB5210EA99000341347 /* TestCompletedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestCompletedViewController.xib; sourceTree = "<group>"; };
 		8B32FEA21F4C038B00D9BF23 /* jcore-ios-1.1.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.1.5.a"; sourceTree = "<group>"; };
 		8B32FEA31F4C038B00D9BF23 /* jpush-ios-3.0.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.0.6.a"; sourceTree = "<group>"; };
 		8B32FEA41F4C038B00D9BF23 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
@@ -2392,6 +2397,9 @@
 				8BA0468B20F35D07004571D1 /* NewAnswerViewController.h */,
 				8BA0468C20F35D07004571D1 /* NewAnswerViewController.m */,
 				8BA0468D20F35D07004571D1 /* NewAnswerViewController.xib */,
+				8B32EFB3210EA99000341347 /* TestCompletedViewController.h */,
+				8B32EFB4210EA99000341347 /* TestCompletedViewController.m */,
+				8B32EFB5210EA99000341347 /* TestCompletedViewController.xib */,
 				8BFF7E0620F874CA003AB37B /* SelfAnswerViewController.h */,
 				8BFF7E0720F874CA003AB37B /* SelfAnswerViewController.m */,
 				8BFF7E0820F874CA003AB37B /* SelfAnswerViewController.xib */,
@@ -3907,6 +3915,7 @@
 				8B0F41311EF522CF001AF4DF /* MJXChatViewController.xib in Resources */,
 				8BE24D611F8B488E00621055 /* GroupListViewController.xib in Resources */,
 				8BF864871ECAD21200B7EED4 /* MJRefresh.bundle in Resources */,
+				8B32EFB7210EA99000341347 /* TestCompletedViewController.xib in Resources */,
 				8B396B0E208B134600F20060 /* sc_qrcode_scan_light_green@3x.png in Resources */,
 				8BCCD08B20FD782D0090E27A /* license in Resources */,
 				8B0207161F8DA4DB00CE3B8C /* NoticeSwiftViewController.xib in Resources */,
@@ -4222,6 +4231,7 @@
 				8BA2245E1EADF68500627A1B /* main.m in Sources */,
 				8B9CCC921F17204B001833FD /* SelectPeopleToClassViewController.m in Sources */,
 				8BF79F61205F421E0033CCC3 /* UIBarButtonItem+Extends.m in Sources */,
+				8B32EFB6210EA99000341347 /* TestCompletedViewController.m in Sources */,
 				8BE877701EBC1CA800866A34 /* TextViewController.m in Sources */,
 				8B2F145A1F5E9D7200438374 /* StudentScoreViewController.m in Sources */,
 				8BA224AD1EAE00B000627A1B /* DYTabBarViewController.m in Sources */,

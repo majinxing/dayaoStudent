@@ -31,6 +31,9 @@
     UISwipeGestureRecognizer * recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
     [self.view addGestureRecognizer:recognizer];
+    
+    self.title = @"课堂";
+    
     // Do any additional setup after loading the view from its nib.
 }
 -(void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
@@ -167,6 +170,7 @@
     _OldVC.monthStr = [UIUtils getMonth];
     
     NSMutableArray * ary = [NSMutableArray arrayWithArray:[UIUtils getWeekAllTimeWithType:[_OldVC.dictDay objectForKey:@"firstDay"]]];
+    
     _FLDayAry = [NSMutableArray arrayWithCapacity:1];
     if (ary.count>=10) {
         [_FLDayAry addObject:ary[7]];

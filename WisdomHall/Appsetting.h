@@ -37,4 +37,6 @@
 -(void)saveWiFiMac:(NSString *)wifiMac;
 //获取缓存的wifi
 -(NSDictionary *)getWifiMacAndTime;
+//存储IM的token
+-(void)saveIMToken:(NSString *)IM_Token;
 @end

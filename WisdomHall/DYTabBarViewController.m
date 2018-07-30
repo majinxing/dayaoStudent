@@ -36,7 +36,6 @@
 #import "VoiceViewController.h"
 #import "JPUSHService.h"
 
-static dispatch_once_t predicate;
 
 @interface DYTabBarViewController ()<UIAlertViewDelegate>
 @property (nonatomic,copy)NSString * url;
@@ -48,6 +47,13 @@ static dispatch_once_t predicate;
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+-(void)attempDealloc{
+    predicate = 0;
+
+}
+    
+    
+
 /**
  *  单例初始化
  */
@@ -59,6 +65,7 @@ static dispatch_once_t predicate;
     return sharedDYTabBarViewControllerInstance;
 }
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     NavBarNavigationController * n = [NavBarNavigationController sharedInstance];

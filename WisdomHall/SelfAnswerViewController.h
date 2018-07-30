@@ -13,7 +13,7 @@
 @interface SelfAnswerViewController : UIViewController
 @property (nonatomic,strong)TextModel *t;
 
-@property (nonatomic,strong)QuestionBank * qBank;
+
 
 @property (nonatomic,strong)ClassModel *classModel;
 
@@ -22,4 +22,11 @@
 @property (nonatomic,copy) NSString * titleStr;//标题名称
 
 @property (nonatomic,assign)BOOL isAbleAnswer;
+
+@property (nonatomic,assign)int  temp;//标明单道题目时候的题号
+
+@property (nonatomic,strong)UITableView * tableView;
+
+@property (nonatomic,strong)NSMutableArray * allQuestionAry;//存储所有试题
+
 @end

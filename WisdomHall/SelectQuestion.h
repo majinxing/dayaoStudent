@@ -10,7 +10,7 @@
 
 @protocol SelectQuestionDelecate <NSObject>
 
--(void)outViewDelegate;
+-(void)selectQViewOutViewDelegate;
 
 -(void)selectEdDelegate:(UIButton *)btn;
 

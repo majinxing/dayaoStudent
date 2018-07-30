@@ -167,7 +167,7 @@
                     [self saveInfo];
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        DYTabBarViewController *rootVC = [[DYTabBarViewController alloc] init];
+                        DYTabBarViewController *rootVC = [DYTabBarViewController sharedInstance];
                         
                         [UIApplication sharedApplication].keyWindow.rootViewController = rootVC;
                     });
@@ -347,7 +347,7 @@
     [_selectSchoolBtn setTitle:s.schoolName forState:UIControlStateNormal];
     
     if (indexPath.row == 1) {
-        s.schoolHost = @"http://192.168.1.81:8080";
+        s.schoolHost = @"http://192.168.1.100:8080";
     }else if (indexPath.row == 0){
         s.schoolHost = @"http://api.dayaokeji.com";
     }

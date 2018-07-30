@@ -168,7 +168,7 @@
     }else{
         month = [NSString stringWithFormat:@"%ld",(long)nowCmps.month];
     }
-    NSString *nowDate = [NSString stringWithFormat:@"%@月",month];
+    NSString *nowDate = [NSString stringWithFormat:@"%@",month];
     
     return nowDate;
 }
@@ -1486,7 +1486,7 @@
     
     [formatterl setDateFormat:@"MM"];//前面的月
     
-    NSString *firstDayl = [formatterl stringFromDate:firstDayOfWeek];
+    NSString *firstDayl = [formatterl stringFromDate:lastDayOfWeek];
     
     [ary addObject:firstDayl];
     

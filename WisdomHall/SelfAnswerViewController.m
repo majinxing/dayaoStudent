@@ -21,15 +21,12 @@
 #import "CorrectAnswerViewController.h"
 
 @interface SelfAnswerViewController ()<UITableViewDelegate,UITableViewDataSource,ChoiceQuestionTableViewCellDelegate,EditPageViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,imageBigViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
-@property (nonatomic,strong)UITableView * tableView;
 
 @property (nonatomic,strong)NSString * testType;
 
-@property (nonatomic,strong)NSMutableArray * allQuestionAry;//存储所有试题
 
 @property (nonatomic,strong)UserModel * user;
 
-@property (nonatomic,assign)int  temp;//标明单道题目时候的题号
 
 @property (nonatomic,assign)int temp1;//标记选择的模块
 
@@ -64,7 +61,7 @@
     
     [_allQuestion setBackgroundImage:[UIImage imageNamed:@"Rectangle3"] forState:UIControlStateNormal];
     
-    _testType = @"All";
+    _testType = @"single";
     
     _temp = 0;
     
@@ -74,14 +71,14 @@
     
     [self addTableView];
     
-    if ((_temp+1) == _allQuestionAry.count) {
-        [_nextQuestion setTitle:@"提交" forState:UIControlStateNormal];
-    }
+//    if ((_temp+1) == _allQuestionAry.count) {
+//        [_nextQuestion setTitle:@"提交" forState:UIControlStateNormal];
+//    }
     
     // Do any additional setup after loading the view from its nib.
 }
 -(void)addTableView{
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, APPLICATION_WIDTH, APPLICATION_HEIGHT-64-44) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT-64-44-44) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

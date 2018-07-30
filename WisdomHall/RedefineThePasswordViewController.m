@@ -57,8 +57,6 @@
                        
                     }
                 }
-//                DYTabBarViewController *rootVC = [[DYTabBarViewController alloc] init];
-//                [UIApplication sharedApplication].keyWindow.rootViewController = rootVC;
                 
             } failure:^(NSError *error) {
                 [UIUtils showInfoMessage:@"请检查网络的连接状态" withVC:self];

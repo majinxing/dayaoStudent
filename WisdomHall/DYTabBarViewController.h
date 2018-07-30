@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+static dispatch_once_t predicate;
+
 @interface DYTabBarViewController : UITabBarController
+
 + (DYTabBarViewController *)sharedInstance;
+-(void)attempDealloc;
 @end

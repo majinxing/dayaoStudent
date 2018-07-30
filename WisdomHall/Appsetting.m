@@ -10,6 +10,8 @@
 #import "UserModel.h"
 #import "FMDBTool.h"
 #import "DYHeader.h"
+#import "IMHttpAPI.h"
+#import "IMService.h"
 
 @interface Appsetting()
 @property (nonatomic,strong)FMDatabase * db;
@@ -165,9 +167,29 @@
     s.schoolHost = host;
     return s;
 }
+
+-(void)saveIMToken:(NSString *)IM_Token{
+    
+    [_mySettingData setValue:IM_Token forKey:@"IM_Token"];
+    
+    [_mySettingData synchronize];
+}
 -(void)getOut{
     [_mySettingData setValue:@"0" forKey:@"is_Login"];
     [_mySettingData synchronize];
+    
+//    NSString * im_token = [_mySettingData objectForKey:@"IM_Token"];
+    
+//    [IMHttpAPI unbindDeviceToken:im_token success:^{
+//
+//    } fail:^{
+//
+//    }];
+    
+    [IMService instance].token = @"";
+    
+    [[IMService instance] stop];
+    
     
 }
 -(void)insertedIntoNoticeTable:(NSString *)noticeTime{

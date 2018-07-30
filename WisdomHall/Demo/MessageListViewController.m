@@ -67,6 +67,8 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
     self = [super init];
     if (self) {
         self.conversations = [[NSMutableArray alloc] init];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(home) name:@"OutOfApp" object:nil];
     }
     return self;
 }
@@ -78,6 +80,8 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
 //聊天列表
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
     
     _user = [[Appsetting sharedInstance] getUsetInfo];//i++
     
@@ -223,6 +227,9 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
         self.navigationItem.title = @"连接中...";
     }
     [self setNavigationTitle];
+    
+   
+
 }
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden = YES; //设置隐藏
@@ -990,6 +997,7 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
     //    self.chatButton.userInteractionEnabled = NO;
     //    long long sender = [tfSender.text longLongValue];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
         NSString *token = [self login:1];
         
         dispatch_async(dispatch_get_main_queue(), ^{

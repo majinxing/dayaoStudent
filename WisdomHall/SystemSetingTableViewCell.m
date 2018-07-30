@@ -99,16 +99,26 @@
 }
 - (IBAction)outAppBtnPressed:(id)sender {
     dispatch_async(dispatch_get_main_queue(), ^{
+        
+        NSNotification *notification =[NSNotification notificationWithName:@"OutOfApp" object:nil userInfo:nil];
+        // 3.通过 通知中心 发送 通知
+        
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+        
         [[Appsetting sharedInstance] getOut];
-        
+
         DYTabBarViewController *rootVC = [DYTabBarViewController sharedInstance];
+
+        [rootVC attempDealloc];
+
         rootVC = nil;
-        
-        
+
+
         WorkingLoginViewController * userLogin = [[WorkingLoginViewController alloc] init];
         //    TheLoginViewController * userLogin = [[TheLoginViewController alloc] init];
-        
+
         [UIApplication sharedApplication].keyWindow.rootViewController =[[UINavigationController alloc] initWithRootViewController:userLogin];
+        
     });
 }
 
