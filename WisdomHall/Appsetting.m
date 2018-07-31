@@ -378,6 +378,39 @@
     [dict setValue:[_mySettingData objectForKey:@"WIFI_time"] forKey:@"WIFI_time"];
     return dict;
 }
+
+//对群组id和响应昵称进行存储
+-(void)saveGroupId:(NSString *)groupID withGroupName:(NSString *)groupName{
+    
+    NSMutableArray * ary = [NSMutableArray arrayWithArray:[_mySettingData objectForKey:@"GroupId_Name"]];
+    
+    if (!ary) {
+        ary = [NSMutableArray arrayWithCapacity:1];
+    }
+    
+    for (int i = 0; i<ary.count; i++) {
+        NSDictionary * d = ary[i];
+        if ([[d objectForKey:@"groupId"] isEqualToString:groupID]) {
+            [ary removeObjectAtIndex:i];
+            break;
+        }
+    }
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",groupID],@"groupId",[NSString stringWithFormat:@"%@",groupName],@"groupName", nil];
+    [ary addObject:dict];
+    
+    [_mySettingData setValue:ary forKey:@"GroupId_Name"];
+    
+    [_mySettingData synchronize];
+    
+}
+-(NSMutableArray *)getGroupId_Name{
+    NSMutableArray * ary = [NSMutableArray arrayWithArray:[_mySettingData objectForKey:@"GroupId_Name"]];
+    return ary;
+}
+//对个人id和昵称进行存储
+-(void)sevePeopleId:(NSString *)peopleId withPeopleName:(NSString *)peopleName{
+    
+}
 @end
 
 

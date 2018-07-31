@@ -15,7 +15,7 @@
 
 
 @interface MessageConversationCell () 
-
+@property (nonatomic,strong)NSMutableArray * nameAry;
 @end
 
 
@@ -29,6 +29,7 @@
     [imageLayer setMasksToBounds:YES];
     [imageLayer setCornerRadius:self.headView.frame.size.width/2];
     
+    _nameAry = [NSMutableArray arrayWithArray:[[Appsetting sharedInstance] getGroupId_Name]];
 }
 
 #pragma mark - Private Methods
@@ -192,10 +193,40 @@
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if([keyPath isEqualToString:@"name"]) {
         NSMutableString * str1 = [NSMutableString stringWithFormat:@"%@",self.conversation.name];
-        if (str1.length>5) {
-            [str1 deleteCharactersInRange:NSMakeRange(0, 5)];
+        if (str1.length>6) {
+            if ([str1 rangeOfString:@"gname:"].location == NSNotFound) {
+                [str1 deleteCharactersInRange:NSMakeRange(0, 5)];
+                NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:str1,@"id", nil];
+                [[NetworkRequest sharedInstance] GET:QuerySelfInfo dict:dict succeed:^(id data) {
+                    NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+                    if ([str isEqualToString:@"成功"]) {
+                        self.namelabel.text = [NSString stringWithFormat:@"%@",[[data objectForKey:@"body"] objectForKey:@"name"]];//self.conversation.name;
+                    }
+                } failure:^(NSError *error) {
+                    
+                }];
+            }else{
+                [str1 deleteCharactersInRange:NSMakeRange(0, 6)];
+                self.namelabel.text = [UIUtils getGroupName:str1];
+
+                if ([UIUtils isBlankString:self.namelabel.text]) {
+                    
+                    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:str1,@"id", nil];
+                    
+                    [[NetworkRequest sharedInstance] GET:SelectGroupById dict:dict succeed:^(id data) {
+                        NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+                        if ([str isEqualToString:@"成功"]) {
+                            self.namelabel.text = [[data objectForKey:@"body"] objectForKey:@"name"];
+                        }
+                    } failure:^(NSError *error) {
+                        
+                    }];
+                }
+                
+            }
         }
-        self.namelabel.text = str1;//self.conversation.name;
+        
+        
     } else if ([keyPath isEqualToString:@"detail"]) {
         self.messageContent.text = self.conversation.detail;
     } else if ([keyPath isEqualToString:@"newMsgCount"]) {

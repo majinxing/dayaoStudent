@@ -1,13 +1,12 @@
-/*
- Copyright (c) 2014-2015, GoBelieve
- All rights reserved.
- 
- This source code is licensed under the BSD-style license found in the
- LICENSE file in the root directory of this source tree. An additional grant
- of patent rights can be found in the PATENTS file in the same directory.
- */
+//
+//  MessageIMViewController.m
+//  WisdomHall
+//
+//  Created by XTU-TI on 2018/7/31.
+//  Copyright © 2018年 majinxing. All rights reserved.
+//
 
-#import "MessageListViewController.h"
+#import "MessageIMViewController.h"
 //#import <gobelieve/IMessage.h>
 #import "IMessage.h"
 //#import <gobelieve/IMService.h>
@@ -42,8 +41,6 @@
 
 #import "SelectGroupPeopleViewController.h"
 
-#import "MessageIMViewController.h"
-
 #import "GroupModel.h"
 
 //RGB颜色
@@ -57,7 +54,8 @@ alpha:(a)]
 
 #define kConversationCellHeight         60
 
-@interface MessageListViewController()<UITableViewDelegate, UITableViewDataSource,
+
+@interface MessageIMViewController ()<UITableViewDelegate, UITableViewDataSource,
 TCPConnectionObserver, PeerMessageObserver, GroupMessageObserver,
 SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,MessageListViewControllerGroupDelegate,CreateChatGroupViewDelegate>
 @property (strong , nonatomic) NSMutableArray *conversations;
@@ -66,7 +64,7 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
 @property (nonatomic,strong)CreateChatGroupView * v;
 @end
 
-@implementation MessageListViewController
+@implementation MessageIMViewController
 
 -(id)init {
     self = [super init];
@@ -94,9 +92,9 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
     
     _currentUID = [str longLongValue];
     
-//    _groupDelegate = self;
+    _groupDelegate = self;
     
-    _userDelegate = self;
+//    _userDelegate = self;
     
     
     
@@ -130,16 +128,33 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillResignActive) name:UIApplicationWillResignActiveNotification object:nil];
     
+    
+    
+    
     id<ConversationIterator> iterator =  [[PeerMessageDB instance] newConversationIterator];
     
     IMessage * msg = [iterator next];
+    
+    NSMutableArray * aryG = [[Appsetting sharedInstance] getGroupId_Name];
+
+    for (int i = 0; i<aryG.count; i++) {
+        
+        Conversation *c = [[Conversation alloc] init];
+
+        c.cid = [[aryG[i] objectForKey:@"groupId"] intValue];
+        c.type = CONVERSATION_GROUP;
+        c.name = [aryG[i] objectForKey:@"groupName"];
+        
+        [self.conversations addObject:c];
+        
+    }
     
     while (msg) {
         Conversation *c = [[Conversation alloc] init];
         c.message = msg;
         c.cid = (self.currentUID == msg.sender) ? msg.receiver : msg.sender;
         c.type = CONVERSATION_PEER;
-        [self.conversations addObject:c];
+//        [self.conversations addObject:c];
         msg = [iterator next];
     }
     
@@ -186,21 +201,21 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
         m.timestamp = (int)time(NULL);
     }
     
-    Conversation *conv = [[Conversation alloc] init];
-    conv.message = msg;
-    conv.cid = ((ICustomerMessage*)msg).storeID;
-    conv.type = CONVERSATION_CUSTOMER_SERVICE;
-    conv.name = @"通知";
+//    Conversation *conv = [[Conversation alloc] init];
+//    conv.message = msg;
+//    conv.cid = ((ICustomerMessage*)msg).storeID;
+//    conv.type = CONVERSATION_CUSTOMER_SERVICE;
+//    conv.name = @"通知";
+//
+//    [self updateConversationDetail:conv];
     
-    [self updateConversationDetail:conv];
-    
-    Conversation *conv1 = [[Conversation alloc] init];
-    conv1.message = msg;
-    conv1.cid = ((ICustomerMessage*)msg).storeID;
-    conv1.type = CONVERSATION_CUSTOMER_SERVICE;
-    conv1.name = @"群组";
-    
-    [self updateConversationDetail:conv1];
+//    Conversation *conv1 = [[Conversation alloc] init];
+//    conv1.message = msg;
+//    conv1.cid = ((ICustomerMessage*)msg).storeID;
+//    conv1.type = CONVERSATION_CUSTOMER_SERVICE;
+//    conv1.name = @"群组";
+//
+//    [self updateConversationDetail:conv1];
     //    [self.conversations addObject:conv];
     
     //todo 从本地数据库加载最新的系统消息
@@ -222,9 +237,9 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
     
     self.conversations = [NSMutableArray arrayWithArray:sortedArray];
     
-    [self.conversations insertObject:conv1 atIndex:0];
+//    [self.conversations insertObject:conv1 atIndex:0];
     
-    [self.conversations insertObject:conv atIndex:1];
+//    [self.conversations insertObject:conv atIndex:1];
     
     
     self.navigationItem.title = @"消息";
@@ -233,17 +248,15 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
     }
     [self setNavigationTitle];
     
-   
-    [UIUtils getGroupData];
+    
+    
 }
-
-
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden = YES; //设置隐藏
 }
 -(void)viewWillDisappear:(BOOL)animated{
     self.navigationController.navigationBarHidden = NO; //设置隐藏
-
+    
 }
 -(void)setNavigationTitle{
     //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
@@ -293,7 +306,7 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
         
         createBtn.titleLabel.textAlignment = NSTextAlignmentRight;
         
-        [self.view addSubview:createBtn];
+//        [self.view addSubview:createBtn];
         
         [createBtn addTarget:self action:@selector(createGroup) forControlEvents:UIControlEventTouchUpInside];
         
@@ -482,15 +495,13 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
         NSString * mas = [NSString stringWithFormat:@"%@",_user.peopleId];
         
         [IMHttpAPI createGroup:imGroupModel.groupName master:[mas intValue] members:imGroupModel.groupPeople success:^(NSDictionary *groupId) {
-            
-            
-            NSString * g = [NSString stringWithFormat:@"%@",[groupId objectForKey:@"body"]];
-            NSString * message = [NSString stringWithFormat:[[groupId objectForKey:@"heard"] objectForKey:@"message"]];
+            NSLog(@"");
+            NSString * g = [NSString stringWithFormat:@"%@",[groupId objectForKey:@"group_id"]];
             if (![UIUtils isBlankString:g]) {
                 [_tableview reloadData];
                 [self outSelfViewDelegate];
             }else{
-                [UIUtils showInfoMessage:[NSString stringWithFormat:@"%@",message] withVC:self];
+                [UIUtils showInfoMessage:@"创建失败" withVC:self];
             }
         } fail:^(NSString *error) {
             [UIUtils showInfoMessage:@"创建失败" withVC:self];
@@ -534,6 +545,7 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     return kConversationCellHeight;
 }
 
@@ -553,36 +565,36 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
     
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (tableView == self.tableview) {
-        return YES;
-    }
-    return NO;
-}
+//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+//    if (tableView == self.tableview) {
+//        return YES;
+//    }
+//    return NO;
+//}
 
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return UITableViewCellEditingStyleDelete;
-}
+//- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return UITableViewCellEditingStyleDelete;
+//}
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        //add code here for when you hit delete
-        Conversation *con = [self.conversations objectAtIndex:indexPath.row];
-        if (con.type == CONVERSATION_PEER) {
-            [[PeerMessageDB instance] clearConversation:con.cid];
-        } else if (con.type == CONVERSATION_GROUP){
-            [[GroupMessageDB instance] clearConversation:con.cid];
-        }
-        [self.conversations removeObject:con];
-        
-        /*IOS8中删除最后一个cell的时，报一个错误
-         [RemindersCell _setDeleteAnimationInProgress:]: message sent to deallocated instance
-         在重新刷新tableView的时候延迟一下*/
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.tableview reloadData];
-        });
-    }
-}
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        //add code here for when you hit delete
+//        Conversation *con = [self.conversations objectAtIndex:indexPath.row];
+//        if (con.type == CONVERSATION_PEER) {
+//            [[PeerMessageDB instance] clearConversation:con.cid];
+//        } else if (con.type == CONVERSATION_GROUP){
+//            [[GroupMessageDB instance] clearConversation:con.cid];
+//        }
+//        [self.conversations removeObject:con];
+//
+//        /*IOS8中删除最后一个cell的时，报一个错误
+//         [RemindersCell _setDeleteAnimationInProgress:]: message sent to deallocated instance
+//         在重新刷新tableView的时候延迟一下*/
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [self.tableview reloadData];
+//        });
+//    }
+//}
 
 
 
@@ -593,24 +605,19 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.row==1) {
-        
-        NoticeViewController * noticeVC = [[NoticeViewController alloc] init];
-        self.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:noticeVC animated:YES];
-        self.hidesBottomBarWhenPushed = NO;
-        
-        return;
-    }else if (indexPath.row == 0){
-        
-        MessageIMViewController * g = [[MessageIMViewController alloc] init];
-        self.hidesBottomBarWhenPushed = YES;
-        g.type = @"enableCreate";
-        [self.navigationController pushViewController:g animated:YES];
-        self.hidesBottomBarWhenPushed = NO;
-        
-        return;
-    }
+//    if (indexPath.row==1) {
+//        NoticeViewController * noticeVC = [[NoticeViewController alloc] init];
+//        self.hidesBottomBarWhenPushed = YES;
+//        [self.navigationController pushViewController:noticeVC animated:YES];
+//        self.hidesBottomBarWhenPushed = NO;
+//        return;
+//    }else if (indexPath.row == 0){
+//        GroupListViewController * g = [[GroupListViewController alloc] init];
+//        self.hidesBottomBarWhenPushed = YES;
+//        [self.navigationController pushViewController:g animated:YES];
+//        self.hidesBottomBarWhenPushed = NO;
+//        return;
+//    }
     Conversation *con = [self.conversations objectAtIndex:indexPath.row];
     if (con.type == CONVERSATION_PEER) {
         PeerMessageViewController* msgController = [[PeerMessageViewController alloc] init];
@@ -621,6 +628,7 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
         msgController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:msgController animated:YES];
     } else if (con.type == CONVERSATION_GROUP) {
+        
         GroupMessageViewController* msgController = [[GroupMessageViewController alloc] init];
         msgController.isShowUserName = YES;
         msgController.userDelegate = self.userDelegate;
@@ -628,8 +636,9 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
         msgController.groupID = con.cid;
         msgController.groupName = con.name;
         msgController.currentUID = self.currentUID;
-        msgController.hidesBottomBarWhenPushed = YES;
+        self.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:msgController animated:YES];
+        
     } else if (con.type == CONVERSATION_CUSTOMER_SERVICE) {
         CustomerMessageViewController *msgController = [[CustomerMessageViewController alloc] init];
         msgController.userDelegate = self.userDelegate;
@@ -716,37 +725,37 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
         if (index != 0) {
             //置顶
             [self.conversations removeObjectAtIndex:index];
-            if (self.conversations.count>=2) {
-                [self.conversations insertObject:con atIndex:2];
-            }else{
-                [self.conversations insertObject:con atIndex:0];
-            }
-            //            [self.conversations insertObject:con atIndex:0];
+//            if (self.conversations.count>=2) {
+//                [self.conversations insertObject:con atIndex:2];
+//            }else{
+//                [self.conversations insertObject:con atIndex:0];
+//            }
+            [self.conversations insertObject:con atIndex:0];
             [self.tableview reloadData];
         }
     } else {
-//        Conversation *con = [[Conversation alloc] init];
-//        con.message = msg;
-//        [self updateConversationDetail:con];
-//
-//        if (self.currentUID != msg.sender) {
-//            con.newMsgCount += 1;
-//            [self setNewOnTabBar];
-//        }
-//
-//        con.type = CONVERSATION_GROUP;
-//        con.cid = cid;
-//        [self updateConversationName:con];
-//
+        Conversation *con = [[Conversation alloc] init];
+        con.message = msg;
+        [self updateConversationDetail:con];
+        
+        if (self.currentUID != msg.sender) {
+            con.newMsgCount += 1;
+            [self setNewOnTabBar];
+        }
+        
+        con.type = CONVERSATION_GROUP;
+        con.cid = cid;
+        [self updateConversationName:con];
+        
 //        if (self.conversations.count>=2) {
 //            [self.conversations insertObject:con atIndex:2];
 //        }else{
 //            [self.conversations insertObject:con atIndex:0];
 //        }
-//        //        [self.conversations insertObject:con atIndex:0];
-//        NSIndexPath *path = [NSIndexPath indexPathForRow:2 inSection:0];
-//        NSArray *array = [NSArray arrayWithObject:path];
-//        [self.tableview insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationMiddle];
+        [self.conversations insertObject:con atIndex:0];
+        NSIndexPath *path = [NSIndexPath indexPathForRow:2 inSection:0];
+        NSArray *array = [NSArray arrayWithObject:path];
+        [self.tableview insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationMiddle];
     }
 }
 
@@ -775,36 +784,36 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
         if (index != 0) {
             //置顶 修改位置chat
             [self.conversations removeObjectAtIndex:index];
-            if (self.conversations.count>=2) {
-                [self.conversations insertObject:con atIndex:2];
-            }else{
+//            if (self.conversations.count>=2) {
+//                [self.conversations insertObject:con atIndex:2];
+//            }else{
                 [self.conversations insertObject:con atIndex:0];
-            }
+//            }
             [self.tableview reloadData];
         }
     } else {
-        Conversation *con = [[Conversation alloc] init];
-        con.type = CONVERSATION_PEER;
-        con.cid = cid;
-        con.message = msg;
-        
-        [self updateConversationName:con];
-        [self updateConversationDetail:con];
-        
-        if (self.currentUID == msg.receiver) {
-            con.newMsgCount += 1;
-            [self setNewOnTabBar];
-        }
-        if (self.conversations.count>=2) {
-            [self.conversations insertObject:con atIndex:2];
-        }else{
-            [self.conversations insertObject:con atIndex:0];
-        }
-        
-        //        [self.conversations insertObject:con atIndex:0];
-        NSIndexPath *path = [NSIndexPath indexPathForRow:2 inSection:0];
-        NSArray *array = [NSArray arrayWithObject:path];
-        [self.tableview insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationMiddle];
+//        Conversation *con = [[Conversation alloc] init];
+//        con.type = CONVERSATION_PEER;
+//        con.cid = cid;
+//        con.message = msg;
+//
+//        [self updateConversationName:con];
+//        [self updateConversationDetail:con];
+//
+//        if (self.currentUID == msg.receiver) {
+//            con.newMsgCount += 1;
+//            [self setNewOnTabBar];
+//        }
+////        if (self.conversations.count>=2) {
+////            [self.conversations insertObject:con atIndex:2];
+////        }else{
+////            [self.conversations insertObject:con atIndex:0];
+////        }
+//
+//        [self.conversations insertObject:con atIndex:0];
+//        NSIndexPath *path = [NSIndexPath indexPathForRow:2 inSection:0];
+//        NSArray *array = [NSArray arrayWithObject:path];
+//        [self.tableview insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationMiddle];
     }
 }
 
@@ -834,12 +843,12 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
             //置顶
             
             [self.conversations removeObjectAtIndex:index];
-            if (self.conversations.count>=2) {
-                [self.conversations insertObject:con atIndex:2];
-            }else{
-                [self.conversations insertObject:con atIndex:0];
-            }
-            //            [self.conversations insertObject:con atIndex:0];
+//            if (self.conversations.count>=2) {
+//                [self.conversations insertObject:con atIndex:2];
+//            }else{
+//                [self.conversations insertObject:con atIndex:0];
+//            }
+            [self.conversations insertObject:con atIndex:0];
             [self.tableview reloadData];
         }
     } else {
@@ -855,12 +864,12 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
             con.newMsgCount += 1;
             [self setNewOnTabBar];
         }
-        if (self.conversations.count>=2) {
-            [self.conversations insertObject:con atIndex:2];
-        }else{
-            [self.conversations insertObject:con atIndex:0];
-        }
-        //        [self.conversations insertObject:con atIndex:0];
+//        if (self.conversations.count>=2) {
+//            [self.conversations insertObject:con atIndex:2];
+//        }else{
+//            [self.conversations insertObject:con atIndex:0];
+//        }
+        [self.conversations insertObject:con atIndex:0];
         NSIndexPath *path = [NSIndexPath indexPathForRow:2 inSection:0];
         NSArray *array = [NSArray arrayWithObject:path];
         [self.tableview insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationMiddle];
@@ -945,12 +954,12 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
         
         conv.type = CONVERSATION_SYSTEM;
         conv.cid = 0;
-        if (self.conversations.count>=2) {
-            [self.conversations insertObject:conv atIndex:2];
-        }else{
-            [self.conversations insertObject:conv atIndex:0];
-        }
-        //        [self.conversations insertObject:conv atIndex:0];
+//        if (self.conversations.count>=2) {
+//            [self.conversations insertObject:conv atIndex:2];
+//        }else{
+//            [self.conversations insertObject:conv atIndex:0];
+//        }
+        [self.conversations insertObject:conv atIndex:0];
         
         NSIndexPath *path = [NSIndexPath indexPathForRow:2 inSection:0];
         NSArray *array = [NSArray arrayWithObject:path];
@@ -964,12 +973,12 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
         if (index != 0) {
             //置顶
             [self.conversations removeObjectAtIndex:index];
-            if (self.conversations.count>=2) {
-                [self.conversations insertObject:conv atIndex:2];
-            }else{
-                [self.conversations insertObject:conv atIndex:0];
-            }
-            //            [self.conversations insertObject:conv atIndex:0];
+//            if (self.conversations.count>=2) {
+//                [self.conversations insertObject:conv atIndex:2];
+//            }else{
+//                [self.conversations insertObject:conv atIndex:0];
+//            }
+            [self.conversations insertObject:conv atIndex:0];
             [self.tableview reloadData];
         }
     }
@@ -1288,5 +1297,16 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
     [[IMService instance] sendUnreadCount:c];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:c];
 }
+
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

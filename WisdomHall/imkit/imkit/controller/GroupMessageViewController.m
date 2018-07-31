@@ -36,7 +36,11 @@
     
     [super viewDidLoad];
     
-    self.navigationItem.title = self.groupName;
+    NSMutableString * str1 = [NSMutableString stringWithFormat:@"%@",self.groupName];
+    
+    [str1 deleteCharactersInRange:NSMakeRange(0, 6)];
+    
+    self.navigationItem.title = [UIUtils getGroupName:str1];
 }
 
 

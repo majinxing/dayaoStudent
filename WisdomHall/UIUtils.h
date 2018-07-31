@@ -146,5 +146,10 @@
  * 返回文件类型对应的图片
  **/
 +(NSString *)returnFileType:(NSString *)typeStr;
+
++(void)getGroupData;
+//根据id获取groupname
++(NSString *)getGroupName:(NSString *)groupId;
+
 @end
 

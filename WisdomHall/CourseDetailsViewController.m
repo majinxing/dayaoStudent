@@ -465,8 +465,8 @@
                 VoiceViewController* msgController = [[VoiceViewController alloc] init];
                 msgController.userDelegate = self;
                 
-                NSString * str = [NSString stringWithFormat:@"%@%@",_user.school,_c.teacherWorkNo];
-                NSString * str1 = [NSString stringWithFormat:@"%@%@",_user.school,_user.studentId];
+                NSString * str = [NSString stringWithFormat:@"%@",_c.teacherId];
+                NSString * str1 = [NSString stringWithFormat:@"%@",_user.peopleId];
                 
                 msgController.peerUID = [str integerValue];//con.cid;
                 

@@ -91,7 +91,7 @@
     
     _user = [[Appsetting sharedInstance] getUsetInfo];
     
-    [IMTool IMLogin:[NSString stringWithFormat:@"%@%@",_user.school,_user.studentId]];
+    [IMTool IMLogin:[NSString stringWithFormat:@"%@",_user.peopleId]];
 
 
     

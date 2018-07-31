@@ -269,7 +269,7 @@
 -(NSString*)login:(long long)uid {
     //调用app自身的服务器获取连接im服务必须的access token
 //    NSString *url = @"http://demo.gobelieve.io/auth/token";
-    NSString * url = [NSString stringWithFormat:@"%@/%@",IMAPIURL,IMToken];//@"http://192.168.1.100:8010/course-im/auth/grant";
+    NSString * url = [NSString stringWithFormat:@"%@/%@",[IMHttpAPI instance].apiURL,IMToken];//@"http://192.168.1.100:8010/course-im/auth/grant";
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]
                                                               cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                           timeoutInterval:60];
@@ -282,6 +282,10 @@
     NSString * auth = [NSString stringWithFormat:@"Basic Nzo0NDk3NjBiMTIwNjEwYWMwYjNhYmRiZDk1NTI1NGVlMA=="];
     
     [headers setObject:auth forKey:@"Authorization"];
+    
+    NSString * tokenLD = [[Appsetting sharedInstance] getUsetInfo].token;
+    
+    [headers setObject:[NSString stringWithFormat:@"Bearer %@",tokenLD] forKey:@"token"];
     
     [urlRequest setAllHTTPHeaderFields:headers];
 

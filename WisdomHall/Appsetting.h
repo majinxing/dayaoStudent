@@ -39,4 +39,11 @@
 -(NSDictionary *)getWifiMacAndTime;
 //存储IM的token
 -(void)saveIMToken:(NSString *)IM_Token;
+
+//对群组id和响应昵称进行存储
+-(void)saveGroupId:(NSString *)groupID withGroupName:(NSString *)groupName;
+//对个人id和昵称进行存储
+-(void)sevePeopleId:(NSString *)peopleId withPeopleName:(NSString *)peopleName;
+
+-(NSMutableArray *)getGroupId_Name;
 @end

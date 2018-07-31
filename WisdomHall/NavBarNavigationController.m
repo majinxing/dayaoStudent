@@ -95,7 +95,7 @@
         
         NSString * str = [NSString stringWithFormat:@"%@",[dic objectForKey:@"teacherIM"]];
         
-        NSString * str1 = [NSString stringWithFormat:@"%@%@",user.school,user.studentId];
+        NSString * str1 = [NSString stringWithFormat:@"%@",user.peopleId];
         
         msgController.peerUID = [str integerValue];//con.cid;@"5012012551319";//
         

@@ -42,7 +42,24 @@
     
     // Do any additional setup after loading the view.
     if (self.peerName.length > 0) {
-        self.navigationItem.title = self.peerName;
+        
+        if ([self.peerName rangeOfString:@"gname:"].location == NSNotFound) {
+            
+            NSMutableString * str1 = [NSMutableString stringWithFormat:@"%@",self.peerName];
+            [str1 deleteCharactersInRange:NSMakeRange(0, 5)];
+            
+            NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:str1,@"id", nil];
+            
+            [[NetworkRequest sharedInstance] GET:QuerySelfInfo dict:dict succeed:^(id data) {
+                NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+                if ([str isEqualToString:@"成功"]) {
+                    self.navigationItem.title= [NSString stringWithFormat:@"%@",[[data objectForKey:@"body"] objectForKey:@"name"]];
+                }
+            } failure:^(NSError *error) {
+                
+            }];
+        }
+        
     } else {
         IUser *u = [self getUser:self.peerUID];
         if (u.name.length > 0) {

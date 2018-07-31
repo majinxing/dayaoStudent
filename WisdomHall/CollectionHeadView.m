@@ -10,6 +10,7 @@
 #import "DYHeader.h"
 #import "NoticeModel.h"
 #import "MBProgressHUD.h"
+#import "UIImageView+WebCache.h"
 
 static dispatch_once_t onceToken;
 
@@ -19,6 +20,7 @@ static dispatch_once_t onceToken;
 @property (nonatomic,strong)NSMutableArray * ary;
 @property (nonatomic,assign) int temp;
 @property (nonatomic,strong) UIScrollView * s;
+@property (nonatomic,strong)NSMutableArray * aryBananer;
 @end
 @implementation CollectionHeadView
 - (instancetype) init{
@@ -27,6 +29,7 @@ static dispatch_once_t onceToken;
         self.backgroundColor = [UIColor clearColor];
         _ary = [NSMutableArray arrayWithCapacity:1];
         _temp = 0;
+        _aryBananer = [NSMutableArray arrayWithCapacity:1];
 //        [self getData];
     }
     return self;
@@ -38,6 +41,23 @@ static dispatch_once_t onceToken;
     });
     return sharedDYTabBarViewControllerInstance;
 }
+-(void)getBananerViewData{
+    UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"26",@"function",[NSString stringWithFormat:@"%@",user.school],@"universityId",nil];
+    [[NetworkRequest sharedInstance] GET:QueryAdvertising dict:dict succeed:^(id data) {
+        NSArray * ary = [data objectForKey:@"body"];
+        for (int i = 0; i<ary.count; i++) {
+            NSString * str = [NSString stringWithFormat:@"%@",[ary[i] objectForKey:@"url"]];
+            [_aryBananer addObject: str];
+        }
+        [self addBananerScrollView];
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    
+}
+//获取通知数据
 -(void)getData{
     //轮播
     NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"start",@"5",@"length", nil];
@@ -75,6 +95,56 @@ static dispatch_once_t onceToken;
 -(void)onceSetNil{
     onceToken = 0;
 }
+-(void)addBananerScrollView{
+    if (_aryBananer.count>0) {
+        [_rotateTimer  invalidate];
+        _rotateTimer = nil;
+        [_s removeFromSuperview];
+        _temp = (int)_aryBananer.count;
+    }else{
+        [_rotateTimer  invalidate];
+        _rotateTimer = nil;
+        [_s removeFromSuperview];
+        return;
+    }
+    self.backgroundColor = [UIColor clearColor];
+    
+    _s = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0,APPLICATION_WIDTH, APPLICATION_HEIGHT/4)];
+    
+    _s.backgroundColor = [UIColor clearColor];
+    
+    _s.contentSize = CGSizeMake(APPLICATION_WIDTH*_temp, APPLICATION_HEIGHT/4);
+    _s.scrollEnabled = YES;//是否可以滚动
+    _s.pagingEnabled = YES;//是否整页滚动
+    _s.showsVerticalScrollIndicator = NO;//水平方向的滚动条
+    _s.showsHorizontalScrollIndicator = NO;
+    _s.bounces = NO;
+    _s.tag = 1000;
+    [self addSubview:_s];
+    
+    for (int i = 0; i<_temp; i++) {
+        
+        UIImageView * v = [self bananerView:_aryBananer[i] withInt:i];
+        
+        [_s addSubview:v];
+        
+    }
+    UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
+
+    UIImageView * imageview = [[UIImageView alloc] initWithFrame:CGRectMake(APPLICATION_WIDTH*_temp, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT/4)];
+    
+    [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",user.host,FileDownload,@"1"]] placeholderImage:[UIImage imageNamed:@"banner"]];
+    
+    [_s addSubview:imageview];
+    
+    //    [self addSubview:_myPageControl];
+    
+    //启动定时器
+    _rotateTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(changeView1) userInfo:nil repeats:YES];
+    
+    _s.delegate = self;
+}
+//通知的竖向滚动
 -(void)addScrollView{
     if (_ary.count>0) {
         [_rotateTimer  invalidate];
@@ -179,6 +249,17 @@ static dispatch_once_t onceToken;
     
     _s.delegate = self;
 }
+-(UIImageView *)bananerView:(NSString *)url withInt:(int)n{
+    
+    UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
+    
+    UIImageView * imageview = [[UIImageView alloc] initWithFrame:CGRectMake(APPLICATION_WIDTH*n, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT/4)];
+    
+    [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",user.host,FileDownload,url]] placeholderImage:[UIImage imageNamed:@"banner"]];
+    
+    return imageview;
+    
+}
 -(UIView *)scrollViewWithInt:(int)i{
     UIView * v = [[UIView alloc] initWithFrame:CGRectMake(0, 70*i, APPLICATION_WIDTH-20, 70)];
     v.backgroundColor = [UIColor clearColor];
@@ -223,6 +304,37 @@ static dispatch_once_t onceToken;
     if (self.delegate&&[self.delegate respondsToSelector:@selector(noticeBtnPressedDelegate:)]) {
         NoticeModel * notice = _ary[btn.tag-100];
         [self.delegate noticeBtnPressedDelegate:notice];
+    }
+}
+-(void)changeView1{
+    //得到scrollView
+    UIScrollView *scrollView = [self viewWithTag:1000];
+    //通过改变contentOffset来切换滚动视图的子界面
+    float offset_X = scrollView.contentOffset.x;
+    //每次切换一个屏幕
+    offset_X += CGRectGetWidth(self.frame);
+    
+    //说明要从最右边的多余视图开始滚动了，最右边的多余视图实际上就是第一个视图。所以偏移量需要更改为第一个视图的偏移量。
+    if (offset_X > CGRectGetWidth(self.frame)*_temp) {
+        scrollView.contentOffset = CGPointMake(0, 0);
+        
+    }
+    //说明正在显示的就是最右边的多余视图，最右边的多余视图实际上就是第一个视图。所以pageControl的小白点需要在第一个视图的位置。
+    if (offset_X == CGRectGetWidth(self.frame)*_temp) {
+        self.myPageControl.currentPage = 0;
+    }else{
+        self.myPageControl.currentPage = offset_X/CGRectGetWidth(self.frame);
+    }
+    
+    //得到最终的偏移量
+    CGPoint resultPoint = CGPointMake(offset_X,0);
+    //切换视图时带动画效果
+    //最右边的多余视图实际上就是第一个视图，现在是要从第一个视图向第二个视图偏移，所以偏移量为一个屏幕宽度
+    if (offset_X >CGRectGetWidth(self.frame)*_temp) {
+        self.myPageControl.currentPage = 1;
+        [scrollView setContentOffset:CGPointMake( CGRectGetWidth(self.frame),0) animated:YES];
+    }else{
+        [scrollView setContentOffset:resultPoint animated:YES];
     }
 }
 -(void)changeView{

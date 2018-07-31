@@ -119,8 +119,12 @@
     [self.view addSubview:_bottomScrollView];
     
     _bannerView = [[BananerView alloc] initWithFrame:CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT/4)];
+    
     _bannerView.backgroundColor = [UIColor grayColor];
+    
+    
     [_bannerView addContentView];
+    
     [_bottomScrollView addSubview:_bannerView];
     
     _noticeView = [[NoticeView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_bannerView.frame), APPLICATION_WIDTH, 56)];

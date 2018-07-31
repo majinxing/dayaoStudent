@@ -80,7 +80,7 @@
 @property(nonatomic,strong)CLLocationManager * locationManager;
 
 @property(nonatomic) MainViewController *mainViewController;
-
+@property (nonatomic,strong)UserModel * user;
 @end
 
 @implementation AppDelegate
@@ -112,11 +112,14 @@
     
     if ([[Appsetting sharedInstance] isLogin]) {
         
-        
+        [self IM:application];//注意IM服务器地址
+
         
         DYTabBarViewController * tab = [DYTabBarViewController sharedInstance];
         
         self.window.rootViewController = tab;
+        _user = [[Appsetting sharedInstance] getUsetInfo];
+        
         
     }else{
         WorkingLoginViewController * loginVC = [[WorkingLoginViewController alloc] init];
@@ -163,7 +166,7 @@
      selector:@selector(setColor)
      name:ThemeColorChangeNotification object:nil];
     
-    [self IM:application];
+    
     //可以通过以下方式禁用
     
     if (@available(iOS 11.0, *)) {
@@ -173,75 +176,29 @@
         UITableView.appearance.estimatedSectionHeaderHeight = 0;
     }
     
-    
-//    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
-//
-//
-//    [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
-//
+
 
     return YES;
 }
-//- (void)networkDidReceiveMessage:(NSNotification *)notification {
-//    NSDictionary * userInfo = [notification userInfo];
-//    NSString * strIM = [userInfo objectForKey:@"content_type"];
-//
-////    if ([strIM isEqualToString:@"im"]) {
-//
-//        NSError * err;
-//
-//        NSString *content = [userInfo valueForKey:@"content"];
-//
-//        NSData *jsonData = [content dataUsingEncoding:NSUTF8StringEncoding];
-//
-//        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
-//
-//        UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
-//
-//        VoiceViewController* msgController = [[VoiceViewController alloc] init];
-//
-//        msgController.userDelegate = self;
-//
-//        NSString * str = [NSString stringWithFormat:@"%@",[dic objectForKey:@"teacherIM"]];
-//
-//        NSString * str1 = [NSString stringWithFormat:@"%@%@",user.school,user.studentId];
-//
-//        msgController.peerUID = @"5012012551319";//[str integerValue];//con.cid;
-//
-//        msgController.peerName = [NSString stringWithFormat:@"%@",[dic objectForKey:@"teacherName"]];//con.name;
-//
-//        msgController.currentUID = [str1 integerValue];
-//
-//        msgController.backType = @"TabBar";
-//
-//        msgController.hidesBottomBarWhenPushed = YES;
-//
-//         self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:msgController];
-//
-//        NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",[dic objectForKey:@"relObjectDetailID"]],@"relDetailId",[NSString stringWithFormat:@"%@",[dic objectForKey:@"relObjectType"]],@"relType",nil];
-//
-//        [[NetworkRequest sharedInstance] POST:StudentReply dict:dict succeed:^(id data) {
-//            NSLog(@"%@",data);
-//        } failure:^(NSError *error) {
-//
-//        }];
-////    }
-//
-//
-////    [self.navigationController pushViewController:msgController animated:YES];
-////    NSString *messageID = [userInfo valueForKey:@"_j_msgid"];
-////    NSDictionary *extras = [userInfo valueForKey:@"extras"];
-////    NSString *customizeField1 = [extras valueForKey:@"customizeField1"]; //服务端传递的Extras附加字段，key是自己定义的
-//
-//}
+
 
 -(void)IM:(UIApplication *)application{
     
 //    course-im/auth/grant
     
+    _user = [[Appsetting sharedInstance] getUsetInfo];
+    
     //app可以单独部署服务器，给予第三方应用更多的灵活性
-    [IMHttpAPI instance].apiURL = IMAPIURL;//@"http://192.168.1.100:8010/course-im";
-    [IMService instance].host = IMHOSt;//@"192.168.1.100";
+    [IMHttpAPI instance].apiURL =  [NSString stringWithFormat:@"%@",_user.host];//[NSString stringWithFormat:@"http://192.168.1.100:8080"];//
+    
+    //IMAPIURL;//@"http://192.168.1.100:8010/course-im";
+    
+    NSMutableString * strHost = [NSMutableString stringWithFormat:@"%@",_user.host];//[NSMutableString stringWithFormat:@"192.168.1.100"];
+    // 
+    
+    [strHost deleteCharactersInRange:NSMakeRange(0, 7)];
+    [strHost deleteCharactersInRange:NSMakeRange(strHost.length-5, 5)];
+    [IMService instance].host = strHost;//@"192.168.1.100";
     //    //app可以单独部署服务器，给予第三方应用更多的灵活性
 //        [IMHttpAPI instance].apiURL = @"http://api.gobelieve.io";
 //        [IMService instance].host = @"imnode2.gobelieve.io";

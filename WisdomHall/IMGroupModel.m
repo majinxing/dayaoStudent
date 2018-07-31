@@ -24,10 +24,10 @@
         
         for (int i = 0; i<_groupPeople.count; i++) {
             SignPeople * s = _groupPeople[i];
-            NSString * str = [NSString stringWithFormat:@"%@%@",user.school,s.workNo];
+            NSString * str = [NSString stringWithFormat:@"%@",s.userId];
             [ary addObject:str];
         }
-        [ary addObject:[NSString stringWithFormat:@"%@%@",user.school,user.studentId]];
+        [ary addObject:[NSString stringWithFormat:@"%@",user.peopleId]];
         [_groupPeople removeAllObjects];
         _groupPeople = [NSMutableArray arrayWithArray:ary];
         

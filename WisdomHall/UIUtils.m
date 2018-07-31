@@ -22,6 +22,7 @@
 #import "ClassModel.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <CommonCrypto/CommonDigest.h>
+#import "GroupModel.h"
 
 
 @interface UIUtils()
@@ -1879,6 +1880,47 @@
         return @"other";
     }
     return @"s";
+}
++(void)getGroupData{
+    UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
+    
+    NSDictionary * d = [[NSDictionary alloc] initWithObjectsAndKeys:user.peopleId,@"userId", nil];
+    
+    [[NetworkRequest sharedInstance] POST:QueryGroupList dict:d succeed:^(id data) {
+        NSString * str = [[data objectForKey:@"header"] objectForKey:@"code"];
+        if ([str isEqualToString:@"0000"]) {
+            NSArray * ary = [data objectForKey:@"body"];
+            for (int i = 0; i<ary.count; i++) {
+                GroupModel * g = [[GroupModel alloc] init];
+                [g setSelfWithDict:ary[i]];
+                [[Appsetting sharedInstance] saveGroupId:[NSString stringWithFormat:@"%@",g.groupId] withGroupName:[NSString stringWithFormat:@"%@",g.groupName]];
+            }
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
++(NSString *)getPeopleNameWithPeopleId:(NSString *)peopleId{
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:peopleId,@"id", nil];
+    [[NetworkRequest sharedInstance] GET:QuerySelfInfo dict:dict succeed:^(id data) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    return @"";
+}
++(NSString *)getGroupName:(NSString *)groupId{
+    
+    NSMutableArray * ary = [NSMutableArray arrayWithArray:[[Appsetting sharedInstance] getGroupId_Name]];
+    
+    for (int i = 0; i<ary.count; i++) {
+        NSDictionary * dict = ary[i];
+        NSString * str = [NSString stringWithFormat:@"%@",[dict objectForKey:@"groupId"]];
+        if ([str isEqualToString:[NSString stringWithFormat:@"%@",groupId]]) {
+            return [NSString stringWithFormat:@"%@",[dict objectForKey:@"groupName"]];
+        }
+    }
+    return @"";
 }
 @end
 

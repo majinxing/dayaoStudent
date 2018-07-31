@@ -91,7 +91,13 @@
     NSMutableDictionary *headers = [NSMutableDictionary dictionaryWithObject:@"application/json" forKey:@"Content-Type"];
 //    NSString *auth = [NSString stringWithFormat:@"Bearer %@", self.token];
     NSString * auth = [NSString stringWithFormat:@"basic Nzo0NDk3NjBiMTIwNjEwYWMwYjNhYmRiZDk1NTI1NGVlMA=="];
+    
     [headers setObject:auth forKey:@"Authorization"];
+    
+    NSString * tokenLD = [[Appsetting sharedInstance] getUsetInfo].token;
+    
+    [headers setObject:[NSString stringWithFormat:@"Bearer %@",tokenLD] forKey:@"token"];
+    
     [urlRequest setAllHTTPHeaderFields:headers];
     
     return urlRequest;

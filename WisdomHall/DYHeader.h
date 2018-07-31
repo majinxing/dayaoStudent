@@ -148,15 +148,15 @@
 //接口 192.168.1.81:8080 api.dayaokeji.com xtu.api.dayaokeji.com
 //#define BaseURL                 @"http://192.168.1.103:8080/"
 
-#define IMAPIURL                @"http://192.168.1.100:8010/course"//IMAPI
+//#define IMAPIURL                @"http://192.168.1.100:8080/"//IMAPI
 
-#define IMHOSt                  @"192.168.1.100"                     //IM服务器
+//#define IMHOSt                  @"192.168.1.100"                     //IM服务器
 
-#define IMToken                 @"auth/grant"                        //IM token
+#define IMToken                 @"course/auth/grant"                        //IM token
 
-#define IMImages                @"images"                            //IM图片上传
+#define IMImages                @"course/images"                            //IM图片上传
 
-#define IMAudios                @"audios"                            //IM 音频上传
+#define IMAudios                @"course/audios"                            //IM 音频上传
 
 #define Login                   @"course/user/login"                //登录
 
@@ -329,3 +329,31 @@
 #define StudentLeave            @"course/course/leave"               //学生请假
 
 #define CourseStatistic         @"course/course/student/statistic/detail" //每一堂课的到课率
+
+#define SelectGroupById         @"course/group/selectGroupById"       //通过id查询群组
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

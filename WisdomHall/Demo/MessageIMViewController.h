@@ -1,12 +1,10 @@
-/*
- Copyright (c) 2014-2015, GoBelieve
- All rights reserved.
- 
- This source code is licensed under the BSD-style license found in the
- LICENSE file in the root directory of this source tree. An additional grant
- of patent rights can be found in the PATENTS file in the same directory.
- */
-
+//
+//  MessageIMViewController.h
+//  WisdomHall
+//
+//  Created by XTU-TI on 2018/7/31.
+//  Copyright © 2018年 majinxing. All rights reserved.
+//
 
 #import <UIKit/UIKit.h>
 
@@ -21,8 +19,7 @@
 - (void)asyncGetGroup:(int64_t)gid cb:(void(^)(IGroup*))cb;
 @end
 
-@interface MessageListViewController : UIViewController
-
+@interface MessageIMViewController : UIViewController
 @property(nonatomic) NSString *deviceToken;
 
 @property(nonatomic, assign) int64_t currentUID;

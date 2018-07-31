@@ -11,7 +11,7 @@
 #import "TAHttpOperation.h"
 #import "AFNetworking.h"
 
-#define API_URL IMAPIURL//@"http://192.168.1.100:8010/course-im"
+//#define API_URL IMAPIURL//@"http://192.168.1.100:8010/course-im"
 
 @implementation IMHttpAPI
 
@@ -22,7 +22,7 @@
     dispatch_once(&onceToken, ^{
         if (!im) {
             im = [[IMHttpAPI alloc] init];
-            im.apiURL = API_URL;
+            im.apiURL = [[Appsetting sharedInstance] getUsetInfo].host;
         }
     });
     return im;
@@ -31,9 +31,9 @@
 +(NSOperation*)uploadImage:(UIImage*)image success:(void (^)(NSString *url))success fail:(void (^)())fail {
     //    NSString * str = @"http://192.168.1.109:8010/course-im";
     
-    [IMHttpAPI POSTImage:[NSString stringWithFormat:@"%@/%@",IMAPIURL,IMImages] image:image dict:@{@"key":@"v"} succeed:^(id data) {
+    [IMHttpAPI POSTImage:[NSString stringWithFormat:@"%@/%@",[IMHttpAPI instance].apiURL,IMImages] image:image dict:@{@"key":@"v"} succeed:^(id data) {
         NSDictionary * dict = [IMHttpAPI returnDictionaryWithDataPath:data];
-        NSString * str =  [NSString stringWithFormat:@"%@/%@/%@",IMAPIURL,IMImages,[dict objectForKey:@"src"]];
+        NSString * str =  [NSString stringWithFormat:@"%@/%@/%@",[IMHttpAPI instance].apiURL,IMImages,[dict objectForKey:@"src"]];
         NSLog(@"2");
         
         success(str);
@@ -164,6 +164,11 @@
     
     [manager.requestSerializer setValue:auth forHTTPHeaderField:@"Authorization"];
     
+    NSString * tokenLD = [[Appsetting sharedInstance] getUsetInfo].token;
+    
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",tokenLD] forHTTPHeaderField:@"token"];
+
+    
     NSString * baseUrl = URLString;//@"http://192.168.1.100:8010/course-im/images";//@"http://www.dayaokeji.com/imtest/upload.php";// user.host;
     //发送网络请求(请求方式为POST)
     URLString = [NSString stringWithFormat:@"%@",baseUrl];
@@ -219,7 +224,14 @@
     
     
     [manager.requestSerializer setValue:auth forHTTPHeaderField:@"Authorization"];
-    NSString * baseUrl = @"http://192.168.1.100:8010/course-im/audios";//@"http://www.dayaokeji.com/imtest/upload.php";// user.host;
+    
+    NSString * tokenLD = [[Appsetting sharedInstance] getUsetInfo].token;
+    
+    
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",tokenLD] forHTTPHeaderField:@"token"];
+
+
+    NSString * baseUrl = URLString;//@"http://192.168.1.100:8010/course-im/audios";//@"http://www.dayaokeji.com/imtest/upload.php";// user.host;
     //发送网络请求(请求方式为POST)
     URLString = [NSString stringWithFormat:@"%@",baseUrl];
     
@@ -255,13 +267,13 @@
 }
 //语音上传
 +(NSOperation*)uploadAudio:(NSData*)data success:(void (^)(NSString *url))success fail:(void (^)())fail {
-    [IMHttpAPI POSTfile:[NSString stringWithFormat:@"%@/%@",IMAPIURL,IMAudios] image:data dict:@{@"key":@"v"} succeed:^(id data) {
+    [IMHttpAPI POSTfile:[NSString stringWithFormat:@"%@/%@",[IMHttpAPI instance].apiURL,IMAudios] image:data dict:@{@"key":@"v"} succeed:^(id data) {
         
         NSDictionary * dict = [IMHttpAPI returnDictionaryWithDataPath:data];
         if ([UIUtils isBlankString:[dict objectForKey:@"src"]]) {
             fail();
         }else{
-            NSString * str =  [NSString stringWithFormat:@"%@/%@/%@",IMAPIURL,IMAudios,[dict objectForKey:@"src"]];
+            NSString * str =  [NSString stringWithFormat:@"%@/%@/%@",[IMHttpAPI instance].apiURL,IMAudios,[dict objectForKey:@"src"]];
             NSLog(@"2");
             success(str);
         }
@@ -308,6 +320,10 @@
     NSString * auth = [NSString stringWithFormat:@"Basic Nzo0NDk3NjBiMTIwNjEwYWMwYjNhYmRiZDk1NTI1NGVlMA=="];
     [headers setObject:auth forKey:@"Authorization"];
     
+    NSString * tokenLD = [[Appsetting sharedInstance] getUsetInfo].token;
+    
+    [headers setObject:[NSString stringWithFormat:@"Bearer %@",tokenLD] forKey:@"token"];
+    
     request.headers = headers;
     NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
     request.postBody = data;
@@ -339,6 +355,10 @@
     //    NSString *auth = [NSString stringWithFormat:@"Bearer %@", [IMHttpAPI instance].accessToken];
     NSString * auth = [NSString stringWithFormat:@"Basic Nzo0NDk3NjBiMTIwNjEwYWMwYjNhYmRiZDk1NTI1NGVlMA=="];
     [headers setObject:auth forKey:@"Authorization"];
+    
+    NSString * tokenLD = [[Appsetting sharedInstance] getUsetInfo].token;
+    
+    [headers setObject:[NSString stringWithFormat:@"Bearer %@",tokenLD] forKey:@"token"];
     
     request.headers = headers;
     NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
@@ -372,6 +392,10 @@
     NSString * auth = [NSString stringWithFormat:@"Basic Nzo0NDk3NjBiMTIwNjEwYWMwYjNhYmRiZDk1NTI1NGVlMA=="];
     [headers setObject:auth forKey:@"Authorization"];
     
+    NSString * tokenLD = [[Appsetting sharedInstance] getUsetInfo].token;
+    
+    [headers setObject:[NSString stringWithFormat:@"Bearer %@",tokenLD] forKey:@"token"];
+    
     request.headers = headers;
     NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
     request.postBody = data;
@@ -402,6 +426,10 @@
     NSString * auth = [NSString stringWithFormat:@"Basic Nzo0NDk3NjBiMTIwNjEwYWMwYjNhYmRiZDk1NTI1NGVlMA=="];
     [headers setObject:auth forKey:@"Authorization"];
     
+    NSString * tokenLD = [[Appsetting sharedInstance] getUsetInfo].token;
+    
+    [headers setObject:[NSString stringWithFormat:@"Bearer %@",tokenLD] forKey:@"token"];
+    
     request.headers = headers;
     NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
     request.postBody = data;
@@ -426,17 +454,22 @@
 +(NSOperation*)createGroup:(NSString*)groupName master:(int64_t)master members:(NSArray*)members success:(void (^)(NSDictionary * groupId))success fail:(void (^)(NSString * error))fail {
     
     IMHttpOperation *request = [IMHttpOperation httpOperationWithTimeoutInterval:60];
-    request.targetURL = [[IMHttpAPI instance].apiURL stringByAppendingString:@"/group/create"];//接口
+    request.targetURL = [[IMHttpAPI instance].apiURL stringByAppendingString:@"/course/group/create"];//接口
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     
     [dict setObject:[NSNumber numberWithLongLong:master] forKey:@"master"];
     [dict setObject:groupName forKey:@"name"];
     [dict setObject:members forKey:@"members"];
+    [dict setObject:@"2" forKey:@"visibility"];
     
     NSMutableDictionary *headers = [NSMutableDictionary dictionaryWithObject:@"application/json" forKey:@"Content-Type"];
     //    NSString *auth = [NSString stringWithFormat:@"Bearer %@", [IMHttpAPI instance].accessToken];
     NSString * auth = [NSString stringWithFormat:@"Basic Nzo0NDk3NjBiMTIwNjEwYWMwYjNhYmRiZDk1NTI1NGVlMA=="];
     [headers setObject:auth forKey:@"Authorization"];
+    
+    NSString * tokenLD = [[Appsetting sharedInstance] getUsetInfo].token;
+    
+    [headers setObject:[NSString stringWithFormat:@"Bearer %@",tokenLD] forKey:@"token"];
     
     request.headers = headers;
     NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];

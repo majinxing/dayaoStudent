@@ -15,6 +15,7 @@
 @interface CollectionHeadView : UIView
 @property (nonatomic,weak)id<CollectionHeadViewDelegate>delegate;
 +(CollectionHeadView *)sharedInstance;
+-(void)getBananerViewData;
 -(void)getData;
 -(void)onceSetNil;
 @end

@@ -174,12 +174,9 @@
                 }
                 [self hideHud];
             }
-        }else if ([str isEqualToString:@"1014"]){
-            [UIUtils showInfoMessage:@"用户名或密码错误" withVC:self];
-        }else if ([str isEqualToString:@"9999"]){
-            [UIUtils showInfoMessage:@"网络错误或者其他不可知错误" withVC:self];
         }else{
-            [UIUtils showInfoMessage:@"登录失败" withVC:self];
+            NSString * strMessage = [[data objectForKey:@"header"] objectForKey:@"message"];
+            [UIUtils showInfoMessage:strMessage withVC:self];
         }
         [self hideHud];
     } failure:^(NSError *error) {

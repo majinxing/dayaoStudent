@@ -190,6 +190,8 @@
 		8B2F145B1F5E9D7200438374 /* StudentScoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B2F14591F5E9D7200438374 /* StudentScoreViewController.xib */; };
 		8B32EFB6210EA99000341347 /* TestCompletedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B32EFB4210EA99000341347 /* TestCompletedViewController.m */; };
 		8B32EFB7210EA99000341347 /* TestCompletedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B32EFB5210EA99000341347 /* TestCompletedViewController.xib */; };
+		8B32EFC121103A5400341347 /* MessageIMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B32EFBF21103A5400341347 /* MessageIMViewController.m */; };
+		8B32EFC221103A5400341347 /* MessageIMViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B32EFC021103A5400341347 /* MessageIMViewController.xib */; };
 		8B32FEA51F4C038B00D9BF23 /* jcore-ios-1.1.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B32FEA21F4C038B00D9BF23 /* jcore-ios-1.1.5.a */; };
 		8B32FEA61F4C038B00D9BF23 /* jpush-ios-3.0.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B32FEA31F4C038B00D9BF23 /* jpush-ios-3.0.6.a */; };
 		8B32FEA81F4C03C200D9BF23 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B32FEA71F4C03C200D9BF23 /* CoreFoundation.framework */; };
@@ -1051,6 +1053,9 @@
 		8B32EFB3210EA99000341347 /* TestCompletedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestCompletedViewController.h; sourceTree = "<group>"; };
 		8B32EFB4210EA99000341347 /* TestCompletedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestCompletedViewController.m; sourceTree = "<group>"; };
 		8B32EFB5210EA99000341347 /* TestCompletedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestCompletedViewController.xib; sourceTree = "<group>"; };
+		8B32EFBE21103A5400341347 /* MessageIMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageIMViewController.h; sourceTree = "<group>"; };
+		8B32EFBF21103A5400341347 /* MessageIMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageIMViewController.m; sourceTree = "<group>"; };
+		8B32EFC021103A5400341347 /* MessageIMViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageIMViewController.xib; sourceTree = "<group>"; };
 		8B32FEA21F4C038B00D9BF23 /* jcore-ios-1.1.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.1.5.a"; sourceTree = "<group>"; };
 		8B32FEA31F4C038B00D9BF23 /* jpush-ios-3.0.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.0.6.a"; sourceTree = "<group>"; };
 		8B32FEA41F4C038B00D9BF23 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
@@ -3302,6 +3307,9 @@
 				8BCCD1E520FD79130090E27A /* RoomLoginViewController.m */,
 				8BCCD1E620FD79130090E27A /* RoomViewController.h */,
 				8BCCD1E720FD79130090E27A /* RoomViewController.m */,
+				8B32EFBE21103A5400341347 /* MessageIMViewController.h */,
+				8B32EFBF21103A5400341347 /* MessageIMViewController.m */,
+				8B32EFC021103A5400341347 /* MessageIMViewController.xib */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -3947,6 +3955,7 @@
 				8BFB946C1EE7F7F1004BB963 /* ResultsOfVoteViewController.xib in Resources */,
 				8B081E001F06524000493B81 /* unicode_to_hanyu_pinyin.txt in Resources */,
 				8B17370F1EC2EDE400BE3C8F /* MeetingViewController.xib in Resources */,
+				8B32EFC221103A5400341347 /* MessageIMViewController.xib in Resources */,
 				8BE877861EBC2E0C00866A34 /* EndTheTestViewController.xib in Resources */,
 				8B48004720A3F08200038B47 /* HelpViewController.xib in Resources */,
 				8BA224671EADF68500627A1B /* Main.storyboard in Resources */,
@@ -4181,6 +4190,7 @@
 				8BCCD17F20FD78B20090E27A /* wavreader.c in Sources */,
 				8BFB947A1EE94948004BB963 /* VoteDrawView.m in Sources */,
 				8BCCD18320FD78B20090E27A /* UIImage+Resize.m in Sources */,
+				8B32EFC121103A5400341347 /* MessageIMViewController.m in Sources */,
 				8B99FC641FFB58E10092085B /* PhotoPromptBox.m in Sources */,
 				8B081DFB1F06524000493B81 /* HanyuPinyinOutputFormat.m in Sources */,
 				8BA0468E20F35D07004571D1 /* NewAnswerViewController.m in Sources */,

@@ -7,9 +7,11 @@
 //
 
 #import "BananerView.h"
-
+#import "CollectionHeadView.h"
 
 @interface BananerView()
+@property (nonatomic,strong)CollectionHeadView *collectionHeadView;
+
 @end
 
 @implementation BananerView
@@ -21,9 +23,12 @@
     return self;
 }
 -(void)addContentView{
-    UIImageView * image = [[UIImageView alloc] initWithFrame:self.frame];
-    image.image = [UIImage imageNamed:@"banner"];
-    [self addSubview:image];
+    _collectionHeadView = [[CollectionHeadView alloc] init];
+    _collectionHeadView.frame = CGRectMake(0,0, APPLICATION_WIDTH,APPLICATION_HEIGHT/4);
+    
+    [_collectionHeadView getBananerViewData];
+    
+    [self addSubview:_collectionHeadView];
 }
 /*
 // Only override drawRect: if you perform custom drawing.
