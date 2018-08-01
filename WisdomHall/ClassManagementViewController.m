@@ -66,7 +66,7 @@
         }
         [UIUtils showInfoMessage:str withVC:self];
 
-        NSLog(@"%@",data);
+        
     } failure:^(NSError *error) {
         [UIUtils showInfoMessage:@"退群失败，请检查网络" withVC:self];
     }];

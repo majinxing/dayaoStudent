@@ -379,7 +379,11 @@
     [dict setValue:[_mySettingData objectForKey:@"WIFI_time"] forKey:@"WIFI_time"];
     return dict;
 }
-
+-(void)delectAllGroup{
+    NSMutableArray * ary =  [NSMutableArray arrayWithArray:[_mySettingData objectForKey:@"GroupId_Name"]];
+    [ary removeAllObjects];
+    [_mySettingData setObject:ary forKey:@"GroupId_Name"];
+}
 //对群组id和响应昵称进行存储
 -(void)saveGroupId:(NSString *)groupID withGroupName:(NSString *)groupName{
     

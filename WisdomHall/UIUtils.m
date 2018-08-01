@@ -1890,6 +1890,7 @@
         NSString * str = [[data objectForKey:@"header"] objectForKey:@"code"];
         if ([str isEqualToString:@"0000"]) {
             NSArray * ary = [data objectForKey:@"body"];
+            [[Appsetting sharedInstance] delectAllGroup];
             for (int i = 0; i<ary.count; i++) {
                 GroupModel * g = [[GroupModel alloc] init];
                 [g setSelfWithDict:ary[i]];

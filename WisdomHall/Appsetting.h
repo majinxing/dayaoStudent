@@ -50,4 +50,6 @@
 -(NSMutableArray *)getPeopleId_Name;
 //删除退群的组
 -(void)delectGroupID:(NSString *)groupId;
+//删除全部缓存
+-(void)delectAllGroup;
 @end
