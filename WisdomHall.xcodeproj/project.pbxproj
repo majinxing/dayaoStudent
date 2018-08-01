@@ -192,6 +192,8 @@
 		8B32EFB7210EA99000341347 /* TestCompletedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B32EFB5210EA99000341347 /* TestCompletedViewController.xib */; };
 		8B32EFC121103A5400341347 /* MessageIMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B32EFBF21103A5400341347 /* MessageIMViewController.m */; };
 		8B32EFC221103A5400341347 /* MessageIMViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B32EFC021103A5400341347 /* MessageIMViewController.xib */; };
+		8B32EFC62111B38500341347 /* peopleInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B32EFC42111B38500341347 /* peopleInfoTableViewCell.m */; };
+		8B32EFC72111B38500341347 /* peopleInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B32EFC52111B38500341347 /* peopleInfoTableViewCell.xib */; };
 		8B32FEA51F4C038B00D9BF23 /* jcore-ios-1.1.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B32FEA21F4C038B00D9BF23 /* jcore-ios-1.1.5.a */; };
 		8B32FEA61F4C038B00D9BF23 /* jpush-ios-3.0.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B32FEA31F4C038B00D9BF23 /* jpush-ios-3.0.6.a */; };
 		8B32FEA81F4C03C200D9BF23 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B32FEA71F4C03C200D9BF23 /* CoreFoundation.framework */; };
@@ -1056,6 +1058,9 @@
 		8B32EFBE21103A5400341347 /* MessageIMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageIMViewController.h; sourceTree = "<group>"; };
 		8B32EFBF21103A5400341347 /* MessageIMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageIMViewController.m; sourceTree = "<group>"; };
 		8B32EFC021103A5400341347 /* MessageIMViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageIMViewController.xib; sourceTree = "<group>"; };
+		8B32EFC32111B38500341347 /* peopleInfoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = peopleInfoTableViewCell.h; sourceTree = "<group>"; };
+		8B32EFC42111B38500341347 /* peopleInfoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = peopleInfoTableViewCell.m; sourceTree = "<group>"; };
+		8B32EFC52111B38500341347 /* peopleInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = peopleInfoTableViewCell.xib; sourceTree = "<group>"; };
 		8B32FEA21F4C038B00D9BF23 /* jcore-ios-1.1.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.1.5.a"; sourceTree = "<group>"; };
 		8B32FEA31F4C038B00D9BF23 /* jpush-ios-3.0.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.0.6.a"; sourceTree = "<group>"; };
 		8B32FEA41F4C038B00D9BF23 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
@@ -2372,6 +2377,9 @@
 				8B2E16E11EBACAD7008B7C57 /* PersonalCollectionViewCell.xib */,
 				8BF82D751EDFB32500D33473 /* CollectionHeadView.h */,
 				8BF82D761EDFB32500D33473 /* CollectionHeadView.m */,
+				8B32EFC32111B38500341347 /* peopleInfoTableViewCell.h */,
+				8B32EFC42111B38500341347 /* peopleInfoTableViewCell.m */,
+				8B32EFC52111B38500341347 /* peopleInfoTableViewCell.xib */,
 			);
 			name = Collection;
 			sourceTree = "<group>";
@@ -3833,6 +3841,7 @@
 				8B027A151EF8F30100600E18 /* TheMeetingInfoViewController.xib in Resources */,
 				8B0857981F7E3A30009D5AC9 /* WorkingLoginViewController.xib in Resources */,
 				8B05CB7C1EC2ABFD0063EC20 /* PersonalInfoViewController.xib in Resources */,
+				8B32EFC72111B38500341347 /* peopleInfoTableViewCell.xib in Resources */,
 				8BFF7E0F20F8753C003AB37B /* CorrectAnswerViewController.xib in Resources */,
 				8B0AF75F1F511AA2003858A4 /* VoteResultTableViewCell.xib in Resources */,
 				8B2E16E31EBACAD7008B7C57 /* PersonalCollectionViewCell.xib in Resources */,
@@ -4336,6 +4345,7 @@
 				8B045B751F3458820021699B /* NSObject+MJClass.m in Sources */,
 				8BCCD1A120FD78B20090E27A /* FilePeerMessageDB.m in Sources */,
 				8BB221D91FA7088E00EC6478 /* SGQRCodeAlbumManager.m in Sources */,
+				8B32EFC62111B38500341347 /* peopleInfoTableViewCell.m in Sources */,
 				8B0333F31F8C50950021D495 /* GroupListTableViewCell.m in Sources */,
 				8BF864C11ECAD97300B7EED4 /* SDWebImageDownloader.m in Sources */,
 				8BCCD19F20FD78B20090E27A /* FileGroupMessageDB.m in Sources */,

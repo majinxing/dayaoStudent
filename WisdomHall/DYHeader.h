@@ -280,6 +280,8 @@
 
 #define GroupPeople             @"course/group/member"              //查询群组成员
 
+#define OutGroup                @"course/group/existGroup"          //退出群组
+
 #define QueryNotice             @"course/message/qurey"             //查询通知消息
 
 #define BindPhoe                @"course/user/bindPhone"            //绑定手机号

@@ -46,4 +46,8 @@
 -(void)sevePeopleId:(NSString *)peopleId withPeopleName:(NSString *)peopleName;
 
 -(NSMutableArray *)getGroupId_Name;
+
+-(NSMutableArray *)getPeopleId_Name;
+//删除退群的组
+-(void)delectGroupID:(NSString *)groupId;
 @end

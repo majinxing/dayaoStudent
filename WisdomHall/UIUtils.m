@@ -1922,6 +1922,19 @@
     }
     return @"";
 }
++(NSString *)getGPeopleName:(NSString *)peopleId{
+    
+    NSMutableArray * ary = [NSMutableArray arrayWithArray:[[Appsetting sharedInstance] getPeopleId_Name]];
+    
+    for (int i = 0; i<ary.count; i++) {
+        NSDictionary * dict = ary[i];
+        NSString * str = [NSString stringWithFormat:@"%@",[dict objectForKey:@"peopleId"]];
+        if ([str isEqualToString:[NSString stringWithFormat:@"%@",peopleId]]) {
+            return [NSString stringWithFormat:@"%@",[dict objectForKey:@"peopleName"]];
+        }
+    }
+    return @"";
+}
 @end
 
 

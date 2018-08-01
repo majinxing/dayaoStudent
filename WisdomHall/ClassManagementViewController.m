@@ -10,10 +10,11 @@
 #import "PersonalCollectionViewCell.h"
 #import "DYHeader.h"
 #import "CollectionFlowLayout.h"
-static NSString *cellIdentifier = @"cellIdentifierPersonal";
+#import "peopleInfoTableViewCell.h"
+#import "MessageIMViewController.h"
 
-@interface ClassManagementViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
-@property (nonatomic,strong) UICollectionView * collection;
+@interface ClassManagementViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic,strong) UITableView * tableView;
 
 @end
 
@@ -21,27 +22,17 @@ static NSString *cellIdentifier = @"cellIdentifierPersonal";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     [self setNavigationTitle];
-    [self addCollectionView];
+    
+    [self addTableView];
     // Do any additional setup after loading the view from its nib.
 }
--(void)addCollectionView{
-    _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64,APPLICATION_WIDTH,APPLICATION_HEIGHT-64) collectionViewLayout:[[CollectionFlowLayout alloc] init]];
-    //注册
-    [_collection registerClass:[PersonalCollectionViewCell class] forCellWithReuseIdentifier:cellIdentifier];
-    
-    _collection.delegate = self;
-    _collection.dataSource = self;
-    _collection.allowsMultipleSelection = YES;
-    _collection.showsVerticalScrollIndicator = NO;
-    _collection.showsHorizontalScrollIndicator = NO;
-    //取消滑动的滚动条
-    _collection.decelerationRate = UIScrollViewDecelerationRateNormal;
-    self.collection.alwaysBounceVertical = YES; //垂直方向遇到边框是否总是反弹
-
-    _collection.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:_collection];
-
+-(void)addTableView{
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, APPLICATION_WIDTH, APPLICATION_HEIGHT-64) style:UITableViewStylePlain];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    [self.view addSubview:_tableView];
 }
 /**
  *  显示navigation的标题
@@ -49,86 +40,67 @@ static NSString *cellIdentifier = @"cellIdentifierPersonal";
 -(void)setNavigationTitle{
 //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
-    self.title = @"人员管理";
+    self.title = @"群组成员";
+    //
+    UIBarButtonItem * selection = [[UIBarButtonItem alloc] initWithTitle:@"退出群组" style:UIBarButtonItemStylePlain target:self action:@selector(outGroup)];
+    self.navigationItem.rightBarButtonItem = selection;
+}
+-(void)outGroup{
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_groupId,@"id", nil];
+    [[NetworkRequest sharedInstance] POST:OutGroup dict:dict succeed:^(id data) {
+        NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+        if ([str isEqualToString:@"成功"]) {
+            
+            [[Appsetting sharedInstance] delectGroupID:_groupId];
+            
+            NSArray *vcArray = self.navigationController.viewControllers;
+            
+            for(UIViewController *vc in vcArray)
+            {
+                if ([vc isKindOfClass:[MessageIMViewController class]])
+                {
+                    [self.navigationController popToViewController:vc animated:YES];
+                }
+            }
+            
+        }
+        [UIUtils showInfoMessage:str withVC:self];
+
+        NSLog(@"%@",data);
+    } failure:^(NSError *error) {
+        [UIUtils showInfoMessage:@"退群失败，请检查网络" withVC:self];
+    }];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-#pragma mark UICollectionViewDataSource
-//定义每个Section的四边间距
--(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-    return UIEdgeInsetsMake(15, 5, 15, 5);//分别为上、左、下、右
+
+#pragma mark UITableViewdelegate
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
 }
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    if (_manage == MeetingManageType) {
-        if (_meeting.signAry.count>0) {
-            return _meeting.signAry.count;
-        }
-    }else if (_manage == ClassManageType){
-        if (_signAry.count>0) {
-            return _signAry.count;
-        }else{
-            return 0;
-        }
-    }
-    
-    return 0;
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return _signAry.count;
 }
 
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
-                  cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    PersonalCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor whiteColor];
-    if (_manage == MeetingManageType) {
-        [cell setPersonalInfo:_meeting.signAry[indexPath.row]];
-    }else{
-        [cell setPersonalInfo:_signAry[indexPath.row]];
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    peopleInfoTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"peopleInfoTableViewCell"];
+    if (!cell) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"peopleInfoTableViewCell" owner:self options:nil] objectAtIndex:0];
     }
+    [cell addContViewWith:_signAry[indexPath.row]];
     return cell;
-    //    CourseCollectionViewCell *cell1 = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-    //    return cell1;
-    
-    
 }
-#pragma mark UICollectionViewDelegate
-//初次点击走
-- (void)collectionView:(UICollectionView *)collectionView
-didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-//有了初次点击再走这个
-- (void)collectionView:(UICollectionView *)collectionView
-didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@"%s",__func__);
-    
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 60;
 }
-//这个是两行cell之间的间距（上下行cell的间距）
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 10;
-};
-//两个cell之间的间距（同一行的cell的间距）
--(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
-    return 5;
-};
-
-#pragma mark UICollectionViewDelegateFlowLayout
-- (CGSize)collectionView:(nonnull UICollectionView *)collectionView layout:(nonnull UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    NSString * str = [UIUtils deviceVersion];
-    BOOL b = [str hasPrefix:@"iPhone 5"];
-    if (b) {
-        return CGSizeMake(APPLICATION_WIDTH/3-10, APPLICATION_WIDTH/3+10);
-    }else
-    return CGSizeMake(APPLICATION_WIDTH/4-10, APPLICATION_WIDTH/4+25);
 }
-
 /*
 #pragma mark - Navigation
 

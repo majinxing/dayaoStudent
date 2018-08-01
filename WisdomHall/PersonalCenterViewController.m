@@ -109,7 +109,7 @@
     if (section == 0) {
         return 1;
     }else if (section == 1){
-        return 6;
+        return 5;
     }else if (section == 2){
         return 1;
     }
@@ -133,12 +133,6 @@
             self.hidesBottomBarWhenPushed = NO;
         }
         else if (indexPath.row == 1){
-            GroupListViewController * g = [[GroupListViewController alloc] init];
-            self.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:g animated:YES];
-            self.hidesBottomBarWhenPushed = NO;
-        }
-        else if (indexPath.row == 2){
             
             StatisticalViewController * vc = [[StatisticalViewController alloc] init];
             self.hidesBottomBarWhenPushed = YES;
@@ -146,29 +140,17 @@
             self.hidesBottomBarWhenPushed = NO;
             
         }
-//        else if (indexPath.row == 3){
-//            ChangeThemeInfoViewController * vc = [[ChangeThemeInfoViewController alloc] init];
-//            self.hidesBottomBarWhenPushed = YES;
-//            [self.navigationController pushViewController:vc animated:YES];
-//            self.hidesBottomBarWhenPushed = NO;
-//        }
-//        else if (indexPath.row == 2) {
-//            SystemSettingsViewController * systemVC = [[SystemSettingsViewController alloc] init];
-//            self.hidesBottomBarWhenPushed = YES;
-//            [self.navigationController pushViewController:systemVC animated:YES];
-//            self.hidesBottomBarWhenPushed = NO;
-//        }
-        else if (indexPath.row == 3){
+        else if (indexPath.row == 2){
             AboutUSViewController *cVC = [[AboutUSViewController alloc] init];
             self.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:cVC animated:YES];
             self.hidesBottomBarWhenPushed = NO;
-        }else if (indexPath.row == 4){
+        }else if (indexPath.row == 3){
             FeedbackViewController * f = [[FeedbackViewController alloc] init];
             self.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:f animated:YES];
             self.hidesBottomBarWhenPushed = NO;
-        }else if (indexPath.row == 5){
+        }else if (indexPath.row == 4){
             HelpViewController * f = [[HelpViewController alloc] init];
             self.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:f animated:YES];

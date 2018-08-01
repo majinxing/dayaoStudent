@@ -112,9 +112,6 @@
     
     if ([[Appsetting sharedInstance] isLogin]) {
         
-        [self IM:application];//注意IM服务器地址
-
-        
         DYTabBarViewController * tab = [DYTabBarViewController sharedInstance];
         
         self.window.rootViewController = tab;
@@ -177,6 +174,7 @@
     }
     
 
+    [self IM:application];//注意IM服务器地址
 
     return YES;
 }
@@ -189,16 +187,18 @@
     _user = [[Appsetting sharedInstance] getUsetInfo];
     
     //app可以单独部署服务器，给予第三方应用更多的灵活性
-    [IMHttpAPI instance].apiURL =  [NSString stringWithFormat:@"%@",_user.host];//[NSString stringWithFormat:@"http://192.168.1.100:8080"];//
+    [IMHttpAPI instance].apiURL =  [NSString stringWithFormat:@"http://192.168.1.100:8080"];//[NSString stringWithFormat:@"%@",_user.host];//
     
     //IMAPIURL;//@"http://192.168.1.100:8010/course-im";
     
-    NSMutableString * strHost = [NSMutableString stringWithFormat:@"%@",_user.host];//[NSMutableString stringWithFormat:@"192.168.1.100"];
-    // 
+    NSMutableString * strHost = [NSMutableString stringWithFormat:@"http://192.168.1.100:8080"];//[NSMutableString stringWithFormat:@"%@",_user.host];//[NSMutableString stringWithFormat:@"192.168.1.100"];
+    //
     
     [strHost deleteCharactersInRange:NSMakeRange(0, 7)];
     [strHost deleteCharactersInRange:NSMakeRange(strHost.length-5, 5)];
-    [IMService instance].host = strHost;//@"192.168.1.100";
+    [IMService instance].host = strHost;
+    
+    //@"192.168.1.100";
     //    //app可以单独部署服务器，给予第三方应用更多的灵活性
 //        [IMHttpAPI instance].apiURL = @"http://api.gobelieve.io";
 //        [IMService instance].host = @"imnode2.gobelieve.io";

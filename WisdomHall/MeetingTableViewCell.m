@@ -142,14 +142,15 @@
         NSString * baseURL = user.host;
         
         [_teacherPicture sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",baseURL,FileDownload,classModel.teacherPictureId]] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+        
     }else{
         _teacherPicture.image = [UIImage imageNamed:@"course"];
     }
     if (![UIUtils isBlankString:[NSString stringWithFormat:@"%@",classModel.signStatus]]) {
         if (![[NSString stringWithFormat:@"%@",classModel.signStatus] isEqualToString:@"1"]) {
-            _signCode.frame = CGRectMake(APPLICATION_WIDTH/2+40, 100, 80, 80);
+            _signCode.frame = CGRectMake(APPLICATION_WIDTH/2, CGRectGetMaxY(_meetPlace.frame)+10, 120, 80);
             _signCode.image = [UIImage imageNamed:@"ic_sgin_success"];
-//            [self.contentView addSubview:_signCode];
+            [self.contentView addSubview:_signCode];
         }
     }
     _peopleNum.text = [NSString stringWithFormat:@"%d人",classModel.n+classModel.m];

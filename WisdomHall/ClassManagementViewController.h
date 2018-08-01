@@ -17,5 +17,5 @@ typedef enum {
 @property (nonatomic,strong)MeetingModel * meeting;
 @property (nonatomic,strong)NSMutableArray * signAry;
 @property (nonatomic,assign)ManageType manage;
-
+@property (nonatomic,copy)NSString * groupId;
 @end

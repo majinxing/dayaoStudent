@@ -233,13 +233,15 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
     }
     [self setNavigationTitle];
     
-   
-    [UIUtils getGroupData];
 }
 
 
 -(void)viewWillAppear:(BOOL)animated{
+    
+    [UIUtils getGroupData];
+
     self.navigationController.navigationBarHidden = YES; //设置隐藏
+    
 }
 -(void)viewWillDisappear:(BOOL)animated{
     self.navigationController.navigationBarHidden = NO; //设置隐藏
@@ -485,8 +487,10 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
             
             
             NSString * g = [NSString stringWithFormat:@"%@",[groupId objectForKey:@"body"]];
-            NSString * message = [NSString stringWithFormat:[[groupId objectForKey:@"heard"] objectForKey:@"message"]];
+            NSString * message = [NSString stringWithFormat:@"%@",[[groupId objectForKey:@"heard"] objectForKey:@"message"]];
             if (![UIUtils isBlankString:g]) {
+                [[Appsetting sharedInstance] saveGroupId:g withGroupName:imGroupModel.groupName];
+                
                 [_tableview reloadData];
                 [self outSelfViewDelegate];
             }else{
@@ -602,7 +606,7 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
         
         return;
     }else if (indexPath.row == 0){
-        
+
         MessageIMViewController * g = [[MessageIMViewController alloc] init];
         self.hidesBottomBarWhenPushed = YES;
         g.type = @"enableCreate";

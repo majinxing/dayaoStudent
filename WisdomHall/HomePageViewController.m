@@ -78,6 +78,7 @@
     [self getNewMeeting];
     if (_collectionHeadView) {
         [_collectionHeadView getData];
+        [_bannerView.collectionHeadView getBananerViewData];
     }
 }
 -(void)getNewMeeting{

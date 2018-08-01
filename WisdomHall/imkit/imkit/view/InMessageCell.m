@@ -119,7 +119,23 @@
         name = self.msg.senderInfo.identifier;
     }
     
-    self.nameLabel.text = name;
+    self.nameLabel.text = [UIUtils getGPeopleName:[NSString stringWithFormat:@"%lld",self.msg.sender]];
+    if ([UIUtils isBlankString:self.nameLabel.text]) {
+        NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%lld",self.msg.sender],@"id", nil];
+        
+        [[NetworkRequest sharedInstance] GET:QuerySelfInfo dict:dict succeed:^(id data) {
+            NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+            if ([str isEqualToString:@"成功"]) {
+                self.nameLabel.text = [NSString stringWithFormat:@"%@",[[data objectForKey:@"body"] objectForKey:@"name"]];//self.conversation.name;
+                [[Appsetting sharedInstance] sevePeopleId:[NSString stringWithFormat:@"%lld",self.msg.sender] withPeopleName:self.nameLabel.text];
+            }
+        } failure:^(NSError *error) {
+            
+        }];
+    }
+    
+//    self.nameLabel.text = name;
+    
     self.nameLabel.textAlignment = NSTextAlignmentLeft;
     self.nameLabel.hidden = !self.showName;
     

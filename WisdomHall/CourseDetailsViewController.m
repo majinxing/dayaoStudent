@@ -404,8 +404,11 @@
 }
 #pragma mark - AskForLeaveViewDelegate
 -(void)askForLeaveWithReationDelegate:(NSString *)reasionStr{
-    
-    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",reasionStr],@"reason",_laevePictureId,@"resourceId",[NSString stringWithFormat:@"%@",_c.courseDetailId],@"detailId",nil];
+    if ([UIUtils isBlankString:reasionStr]&&[UIUtils isBlankString:[NSString stringWithFormat:@"%@",_laevePictureId]]) {
+        [UIUtils showInfoMessage:@"照片证明和请假原因不能同时为空" withVC:self];
+        return;
+    }
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_c.courseDetailId],@"detailId",[NSString stringWithFormat:@"%@",reasionStr],@"reason",_laevePictureId,@"resourceId",nil];
     
     [[NetworkRequest sharedInstance] POST:StudentLeave dict:dict succeed:^(id data) {
         [self outSelfViewDelegate];

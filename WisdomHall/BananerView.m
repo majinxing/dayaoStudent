@@ -7,10 +7,9 @@
 //
 
 #import "BananerView.h"
-#import "CollectionHeadView.h"
 
 @interface BananerView()
-@property (nonatomic,strong)CollectionHeadView *collectionHeadView;
+//@property (nonatomic,strong)CollectionHeadView *collectionHeadView;
 
 @end
 

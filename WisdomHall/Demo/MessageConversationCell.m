@@ -37,7 +37,7 @@
 #pragma mark - Overridden Methods
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
-	[super setEditing:editing animated:animated];
+    [super setEditing:editing animated:animated];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -48,22 +48,22 @@
 }
 
 -(void) showNewMessage:(int)count{
-//    JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:self.messageContent alignment:JSBadgeViewAlignmentCenterRight];
-//    [badgeView setBadgeTextFont:[UIFont systemFontOfSize:14.0f]];
-//    [self.messageContent bringSubviewToFront:badgeView];
-//    if (count > 99) {
-//       badgeView.badgeText = @"99+";
-//    }else{
-//        badgeView.badgeText = [NSString stringWithFormat:@"%d",count];
-//    }
+    //    JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:self.messageContent alignment:JSBadgeViewAlignmentCenterRight];
+    //    [badgeView setBadgeTextFont:[UIFont systemFontOfSize:14.0f]];
+    //    [self.messageContent bringSubviewToFront:badgeView];
+    //    if (count > 99) {
+    //       badgeView.badgeText = @"99+";
+    //    }else{
+    //        badgeView.badgeText = [NSString stringWithFormat:@"%d",count];
+    //    }
 }
 
 -(void) clearNewMessage{
-//    for (UIView *vi in [self.messageContent subviews]) {
-//        if ([vi isKindOfClass:[JSBadgeView class]]) {
-//            [vi removeFromSuperview];
-//        }
-//    }
+    //    for (UIView *vi in [self.messageContent subviews]) {
+    //        if ([vi isKindOfClass:[JSBadgeView class]]) {
+    //            [vi removeFromSuperview];
+    //        }
+    //    }
 }
 
 - (void)dealloc {
@@ -124,7 +124,9 @@
     if(conv.type == CONVERSATION_PEER){
         [self.headView sd_setImageWithURL: [NSURL URLWithString:conv.avatarURL] placeholderImage:[UIImage imageNamed:@"PersonalChat"]];
     } else if (conv.type == CONVERSATION_GROUP){
+        
         [self.headView sd_setImageWithURL:[NSURL URLWithString:conv.avatarURL] placeholderImage:[UIImage imageNamed:@"GroupChat"]];
+        
     } else if (self.conversation.type == CONVERSATION_SYSTEM) {
         //todo
     } else if (self.conversation.type == CONVERSATION_CUSTOMER_SERVICE) {
@@ -133,29 +135,60 @@
     
     self.messageContent.text = self.conversation.detail;
     
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970: conv.timestamp];
-    
-    NSString *str = [[self class] getConversationTimeString:date ];//
-    
-    self.timelabel.text = str;
-    
-    self.namelabel.text = conv.name;
-    
-    if ([[NSString stringWithFormat:@"%@",conv.name] isEqualToString:@"通知"]) {
+    if (conv.timestamp>0) {
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970: conv.timestamp];
         
+        NSString *str = [[self class] getConversationTimeString:date ];//
+        
+        self.timelabel.text = str;
+    }
+    
+    
+    NSMutableString * str1 = [NSMutableString stringWithFormat:@"%@",conv.name];
+
+    if ([str1 rangeOfString:@"gname:"].location != NSNotFound) {
+        [str1 deleteCharactersInRange:NSMakeRange(0, 6)];
+
+        NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:str1,@"id", nil];
+
+        [[NetworkRequest sharedInstance] GET:SelectGroupById dict:dict succeed:^(id data) {
+            NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+            if ([str isEqualToString:@"成功"]) {
+                self.namelabel.text = [[data objectForKey:@"body"] objectForKey:@"name"];
+            }
+        } failure:^(NSError *error) {
+
+        }];
+    }else{
+        if (str1.length>6) {
+            [str1 deleteCharactersInRange:NSMakeRange(0, 5)];
+            NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:str1,@"id", nil];
+            [[NetworkRequest sharedInstance] GET:QuerySelfInfo dict:dict succeed:^(id data) {
+                NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+                if ([str isEqualToString:@"成功"]) {
+                    self.namelabel.text = [NSString stringWithFormat:@"%@",[[data objectForKey:@"body"] objectForKey:@"name"]];//self.conversation.name;
+                }
+            } failure:^(NSError *error) {
+                
+            }];
+        }
+    }
+
+    if ([[NSString stringWithFormat:@"%@",conv.name] isEqualToString:@"通知"]) {
+        self.namelabel.text = conv.name;
+
         self.timelabel.text = @"";
         
         self.messageContent.text = @"";
-        
-//        self.namelabel.frame = CGRectMake(self.namelabel.frame.origin.x, self.frame.size.height/2-self.namelabel.frame.size.height/2, self.namelabel.frame.size.height);
         self.namelabel.frame = CGRectMake(self.namelabel.frame.origin.x, self.frame.size.height/2-self.namelabel.frame.size.height/2, self.namelabel.frame.size.width, self.namelabel.frame.size.height);
         self.headView.image = [UIImage imageNamed:@"通知"];
     }else if ([[NSString stringWithFormat:@"%@",conv.name] isEqualToString:@"群组"]){
+        self.namelabel.text = conv.name;
+
         self.timelabel.text = @"";
         
         self.messageContent.text = @"";
         
-        //        self.namelabel.frame = CGRectMake(self.namelabel.frame.origin.x, self.frame.size.height/2-self.namelabel.frame.size.height/2, self.namelabel.frame.size.height);
         self.namelabel.frame = CGRectMake(self.namelabel.frame.origin.x, self.frame.size.height/2-self.namelabel.frame.size.height/2, self.namelabel.frame.size.width, self.namelabel.frame.size.height);
         self.headView.image = [UIImage imageNamed:@"群组"];
     }
@@ -165,7 +198,7 @@
     } else {
         [self clearNewMessage];
     }
-
+    
     
     [self.conversation addObserver:self
                         forKeyPath:@"name"
@@ -196,19 +229,25 @@
         if (str1.length>6) {
             if ([str1 rangeOfString:@"gname:"].location == NSNotFound) {
                 [str1 deleteCharactersInRange:NSMakeRange(0, 5)];
-                NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:str1,@"id", nil];
-                [[NetworkRequest sharedInstance] GET:QuerySelfInfo dict:dict succeed:^(id data) {
-                    NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
-                    if ([str isEqualToString:@"成功"]) {
-                        self.namelabel.text = [NSString stringWithFormat:@"%@",[[data objectForKey:@"body"] objectForKey:@"name"]];//self.conversation.name;
-                    }
-                } failure:^(NSError *error) {
-                    
-                }];
+                
+                self.namelabel.text = [UIUtils getGPeopleName:str1];
+                if ([UIUtils isBlankString:self.namelabel.text]) {
+                    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:str1,@"id", nil];
+                    [[NetworkRequest sharedInstance] GET:QuerySelfInfo dict:dict succeed:^(id data) {
+                        NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+                        if ([str isEqualToString:@"成功"]) {
+                            
+                            self.namelabel.text = [NSString stringWithFormat:@"%@",[[data objectForKey:@"body"] objectForKey:@"name"]];//self.conversation.name;
+                            [[Appsetting sharedInstance] sevePeopleId:str1 withPeopleName:self.namelabel.text];
+                        }
+                    } failure:^(NSError *error) {
+                        
+                    }];
+                }
             }else{
                 [str1 deleteCharactersInRange:NSMakeRange(0, 6)];
                 self.namelabel.text = [UIUtils getGroupName:str1];
-
+                
                 if ([UIUtils isBlankString:self.namelabel.text]) {
                     
                     NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:str1,@"id", nil];
@@ -217,6 +256,7 @@
                         NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
                         if ([str isEqualToString:@"成功"]) {
                             self.namelabel.text = [[data objectForKey:@"body"] objectForKey:@"name"];
+                            [[Appsetting sharedInstance] saveGroupId:str1 withGroupName:self.namelabel.text];
                         }
                     } failure:^(NSError *error) {
                         
@@ -249,7 +289,7 @@
         } else if (self.conversation.type == CONVERSATION_SYSTEM) {
             //todo
         }
-
+        
     }
 }
 

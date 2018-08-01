@@ -10,6 +10,7 @@
 #import "VoteOption.h"
 #import "DYHeader.h"
 @interface VoteResultTableViewCell()<UITextViewDelegate,UITextFieldDelegate>
+@property (strong, nonatomic) IBOutlet UILabel *voteNumberFirst;
 
 @property (strong, nonatomic) IBOutlet UITextView *optionList;
 
@@ -45,7 +46,7 @@
     
     _optionList.text = [NSString stringWithFormat:@"选项%d: %@",n,voteOption.content];
     
-//    _votes.text = voteOption.count;
+    _voteNumberFirst.text = [NSString stringWithFormat:@"%@票",voteOption.count];
     
     double a = [voteOption.count doubleValue]/[allNumber doubleValue];
     

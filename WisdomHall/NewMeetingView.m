@@ -36,12 +36,12 @@
     
     if (!_nMeeting) {
         _nMeeting = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 60, 21)];
+        [self addSubview:_nMeeting];
     }
     _nMeeting.font = [UIFont fontWithName:@"PingFangSC-Semibold" size:15];
     
     _nMeeting.text = @"最新会议";
     
-    [self addSubview:_nMeeting];
     
     if (!_meetingName) {
         _meetingName = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(_nMeeting.frame)+10, APPLICATION_WIDTH-140, 20)];

@@ -163,6 +163,10 @@
             
             NSString * baseUrl = user.host;
             
+            if ([UIUtils isBlankString:[NSString stringWithFormat:@"%@",ary[i]]]) {
+                ary[i] = @"0";
+            }
+            
             [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",baseUrl,FileDownload,ary[i]]] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
             
             
@@ -285,6 +289,9 @@
             
             NSString * baseUrl = user.host;
             
+            if ([UIUtils isBlankString:[NSString stringWithFormat:@"%@",optionsM.optionsImageIdAry[i]]]) {
+                optionsM.optionsImageIdAry[i] = @"0";
+            }
             [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",baseUrl,FileDownload,optionsM.optionsImageIdAry[i]]] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
             
             
@@ -403,6 +410,11 @@
         UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
         
         NSString * baseUrl = user.host;
+        
+        if ([UIUtils isBlankString:[NSString stringWithFormat:@"%@",optionsM.optionsImageIdAry[i]]]) {
+            optionsM.optionsImageIdAry[i] = @"0";
+        }
+        
         
         [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",baseUrl,FileDownload,optionsM.optionsImageIdAry[i]]] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
         

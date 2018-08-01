@@ -46,8 +46,9 @@ static dispatch_once_t onceToken;
     NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"26",@"function",[NSString stringWithFormat:@"%@",user.school],@"universityId",nil];
     [[NetworkRequest sharedInstance] GET:QueryAdvertising dict:dict succeed:^(id data) {
         NSArray * ary = [data objectForKey:@"body"];
+        [_aryBananer removeAllObjects];
         for (int i = 0; i<ary.count; i++) {
-            NSString * str = [NSString stringWithFormat:@"%@",[ary[i] objectForKey:@"url"]];
+            NSString * str = [NSString stringWithFormat:@"%@",[ary[i] objectForKey:@"id"]];
             [_aryBananer addObject: str];
         }
         [self addBananerScrollView];
@@ -100,6 +101,7 @@ static dispatch_once_t onceToken;
         [_rotateTimer  invalidate];
         _rotateTimer = nil;
         [_s removeFromSuperview];
+        _s = nil;
         _temp = (int)_aryBananer.count;
     }else{
         [_rotateTimer  invalidate];
@@ -108,8 +110,10 @@ static dispatch_once_t onceToken;
         return;
     }
     self.backgroundColor = [UIColor clearColor];
-    
-    _s = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0,APPLICATION_WIDTH, APPLICATION_HEIGHT/4)];
+    if (!_s) {
+        _s = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0,APPLICATION_WIDTH, APPLICATION_HEIGHT/4)];
+
+    }
     
     _s.backgroundColor = [UIColor clearColor];
     
@@ -133,7 +137,11 @@ static dispatch_once_t onceToken;
 
     UIImageView * imageview = [[UIImageView alloc] initWithFrame:CGRectMake(APPLICATION_WIDTH*_temp, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT/4)];
     
-    [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",user.host,FileDownload,@"1"]] placeholderImage:[UIImage imageNamed:@"banner"]];
+//    if ([UIUtils isBlankString:[NSString stringWithFormat:@"%@",_aryBananer[0]]]) {
+//        _aryBananer[0] = @"A";
+//    }
+    
+    [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",user.host,FileDownload,_aryBananer[0]]] placeholderImage:[UIImage imageNamed:@"banner"]];
     
     [_s addSubview:imageview];
     
@@ -150,6 +158,7 @@ static dispatch_once_t onceToken;
         [_rotateTimer  invalidate];
         _rotateTimer = nil;
         [_s removeFromSuperview];
+        _s = nil;
         _temp = (int)_ary.count;
     }else{
         [_rotateTimer  invalidate];
@@ -158,10 +167,10 @@ static dispatch_once_t onceToken;
         return;
     }
     self.backgroundColor = [UIColor clearColor];
-    
-    _s = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0,ScrollViewW, 70)];
-    
-    
+    if (!_s) {
+        _s = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0,ScrollViewW, 70)];
+
+    }
     _s.backgroundColor = [UIColor clearColor];
     
     _s.contentSize = CGSizeMake(ScrollViewW, 70*_temp);

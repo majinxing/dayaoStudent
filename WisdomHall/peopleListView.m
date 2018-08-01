@@ -47,7 +47,9 @@
         }
         imageView.layer.masksToBounds = YES;
         imageView.layer.cornerRadius = (imageWH-10)/2;
-        
+        if ([UIUtils isBlankString:[NSString stringWithFormat:@"%@",s.pictureId]]) {
+            s.pictureId = @"0";
+        }
         [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",baseURL,FileDownload,s.pictureId]] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
         
         [self addSubview:imageView];
@@ -75,7 +77,9 @@
         }
         imageView.layer.masksToBounds = YES;
         imageView.layer.cornerRadius = (groupImageWH-10)/2;
-        
+        if ([UIUtils isBlankString:[NSString stringWithFormat:@"%@",s.pictureId]]) {
+            s.pictureId = @"0";
+        }
         [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",baseURL,FileDownload,s.pictureId]] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
         
         [self addSubview:imageView];

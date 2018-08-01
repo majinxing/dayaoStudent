@@ -46,18 +46,18 @@
     [father addSubview:_courseNumber];
     
     UIButton * cancel = [UIButton buttonWithType:UIButtonTypeCustom];
-    cancel.frame = CGRectMake(225, -15, 30, 30);
+    cancel.frame = CGRectMake(CGRectGetMaxX(father.frame)-20, father.frame.origin.y-20, 40, 40);
     [cancel setTitle:@"X" forState:UIControlStateNormal];
 //    [cancel setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     cancel.backgroundColor = [UIColor blackColor];
     cancel.titleLabel.font = [UIFont systemFontOfSize:12];
     cancel.layer.masksToBounds = YES;
-    cancel.layer.cornerRadius = 15;
+    cancel.layer.cornerRadius = 20;
 //    cancel.layer.borderWidth = 1;
 //    cancel.layer.borderColor = [UIColor colorWithHexString:@"#29a7e1"].CGColor;
     [cancel addTarget:self action:@selector(joinCoures:) forControlEvents:UIControlEventTouchUpInside];
     cancel.tag = 1;
-    [father addSubview:cancel];
+    [self addSubview:cancel];
 //
     UIButton * determine = [UIButton buttonWithType:UIButtonTypeCustom];
     determine.frame = CGRectMake(20,120, 200, 44);

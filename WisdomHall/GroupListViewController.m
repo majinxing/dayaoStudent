@@ -14,8 +14,9 @@
 #import "SignPeople.h"
 #import "ClassManagementViewController.h"
 #import "GroupListTableViewCell.h"
+#import "JoinCours.h"
 
-@interface GroupListViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface GroupListViewController ()<UITableViewDelegate,UITableViewDataSource,JoinCoursDelegate>
 @property (nonatomic,strong)NSMutableArray * dataAry;
 @property (nonatomic,strong)UITableView * tableView;
 @property (nonatomic,strong)JoinCours * join;

@@ -121,7 +121,9 @@
     NSString * baseUrl = user.host;
     
 //    _imageview = [[UIImageView alloc] init];//WithFrame:CGRectMake(10,40, APPLICATION_WIDTH-20, self.frame.size.height- 80)];
-
+    if ([UIUtils isBlankString:[NSString stringWithFormat:@"%@",str]]) {
+        str = @"0";
+    }
     [_imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",baseUrl,FileDownload,str]] placeholderImage:[UIImage imageNamed:@"addImage"]];
     
     double n = (double)_imageview.image.size.height/(double)_imageview.image.size.width;

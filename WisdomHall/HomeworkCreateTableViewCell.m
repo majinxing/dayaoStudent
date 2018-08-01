@@ -78,7 +78,9 @@
             UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
             
             NSString * baseUrl = user.host;
-            
+            if ([UIUtils isBlankString:[NSString stringWithFormat:@"%@",ary[i]]]) {
+                ary[i] = @"0";
+            }
             [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",baseUrl,FileDownload,ary[i]]] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
             
             [self.contentView addSubview:image];

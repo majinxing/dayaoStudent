@@ -150,6 +150,8 @@
 +(void)getGroupData;
 //根据id获取groupname
 +(NSString *)getGroupName:(NSString *)groupId;
+//根据id获取名字
++(NSString *)getGPeopleName:(NSString *)peopleId;
 
 @end
 

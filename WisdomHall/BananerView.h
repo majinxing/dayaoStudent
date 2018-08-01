@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CollectionHeadView.h"
 
 @interface BananerView : UIView
+@property (nonatomic,strong)CollectionHeadView *collectionHeadView;
+
 -(void)addContentView;
 @end

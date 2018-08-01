@@ -19,6 +19,7 @@
 @end
 
 @implementation Appsetting
+
 +(Appsetting *)sharedInstance{
     static Appsetting * shareInstance = nil;
     if (shareInstance == nil) {
@@ -407,9 +408,42 @@
     NSMutableArray * ary = [NSMutableArray arrayWithArray:[_mySettingData objectForKey:@"GroupId_Name"]];
     return ary;
 }
+-(void)delectGroupID:(NSString *)groupId{
+    NSMutableArray * ary = [NSMutableArray arrayWithArray:[_mySettingData objectForKey:@"GroupId_Name"]];
+    for (int i = 0; i<ary.count; i++) {
+        NSDictionary * dict = ary[i];
+        if ([[NSString stringWithFormat:@"%@",groupId] isEqualToString:[dict objectForKey:@"groupId"]]) {
+            [ary removeObjectAtIndex:i];
+            [_mySettingData setValue:ary forKey:@"GroupId_Name"];
+            break;
+        }
+    }
+}
 //对个人id和昵称进行存储
 -(void)sevePeopleId:(NSString *)peopleId withPeopleName:(NSString *)peopleName{
+    NSMutableArray * ary = [NSMutableArray arrayWithArray:[_mySettingData objectForKey:@"peopleId_Name"]];
     
+    if (!ary) {
+        ary = [NSMutableArray arrayWithCapacity:1];
+    }
+    
+    for (int i = 0; i<ary.count; i++) {
+        NSDictionary * d = ary[i];
+        if ([[d objectForKey:@"peopleId"] isEqualToString:peopleId]) {
+            [ary removeObjectAtIndex:i];
+            break;
+        }
+    }
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",peopleId],@"peopleId",[NSString stringWithFormat:@"%@",peopleName],@"peopleName", nil];
+    [ary addObject:dict];
+    
+    [_mySettingData setValue:ary forKey:@"peopleId_Name"];
+    
+    [_mySettingData synchronize];
+}
+-(NSMutableArray *)getPeopleId_Name{
+    NSMutableArray * ary = [NSMutableArray arrayWithArray:[_mySettingData objectForKey:@"peopleId_Name"]];
+    return ary;
 }
 @end
 
