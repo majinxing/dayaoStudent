@@ -94,7 +94,7 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
     
     _currentUID = [str longLongValue];
     
-//    _groupDelegate = self;
+    _groupDelegate = self;
     
     _userDelegate = self;
     
@@ -150,7 +150,7 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
         c.message = msg;
         c.cid = msg.receiver;
         c.type = CONVERSATION_GROUP;
-//        [self.conversations addObject:c];
+        [self.conversations addObject:c];
         msg = [iterator next];
     }
     
@@ -190,7 +190,7 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
     conv.message = msg;
     conv.cid = ((ICustomerMessage*)msg).storeID;
     conv.type = CONVERSATION_CUSTOMER_SERVICE;
-    conv.name = @"通知";
+    conv.name = @"群组";
     
     [self updateConversationDetail:conv];
     
@@ -198,7 +198,7 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
     conv1.message = msg;
     conv1.cid = ((ICustomerMessage*)msg).storeID;
     conv1.type = CONVERSATION_CUSTOMER_SERVICE;
-    conv1.name = @"群组";
+    conv1.name = @"通知";
     
     [self updateConversationDetail:conv1];
     //    [self.conversations addObject:conv];
@@ -559,6 +559,9 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == self.tableview) {
+        if (indexPath.row==0||indexPath.row==1) {
+            return NO;
+        }
         return YES;
     }
     return NO;
@@ -597,7 +600,7 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.row==1) {
+    if (indexPath.row==0) {
         
         NoticeViewController * noticeVC = [[NoticeViewController alloc] init];
         self.hidesBottomBarWhenPushed = YES;
@@ -605,7 +608,7 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
         self.hidesBottomBarWhenPushed = NO;
         
         return;
-    }else if (indexPath.row == 0){
+    }else if (indexPath.row == 1){
 
         MessageIMViewController * g = [[MessageIMViewController alloc] init];
         self.hidesBottomBarWhenPushed = YES;

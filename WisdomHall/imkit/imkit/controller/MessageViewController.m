@@ -198,12 +198,12 @@ static int uptime = 0;
     self.view.backgroundColor = [UIColor colorWithHexString:@"#fafafa"];// RGBACOLOR(235, 235, 235, 1);
 
 	self.tableView = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStylePlain];
-	self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.tableView.allowsMultipleSelectionDuringEditing = YES;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView setBackgroundColor:[UIColor clearColor]];
     
-    UIView *refreshView = [[UIView alloc] initWithFrame:CGRectMake(0, 55, 0, 0)];
+    UIView *refreshView = [[UIView alloc] initWithFrame:CGRectMake(0, 60, 0, 0)];
     self.tableView.tableHeaderView = refreshView;
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(pullToRefresh) forControlEvents:UIControlEventValueChanged];

@@ -158,6 +158,7 @@
     
     [NavBarNavigationController sharedInstance].showTimer = nil;
     
+    [self outApp];
 }
 -(void)inApp{
     //时间间隔

@@ -185,17 +185,15 @@
 //    course-im/auth/grant
     
     _user = [[Appsetting sharedInstance] getUsetInfo];
-    
+
+
     //app可以单独部署服务器，给予第三方应用更多的灵活性
-    [IMHttpAPI instance].apiURL =  [NSString stringWithFormat:@"http://192.168.1.100:8080"];//[NSString stringWithFormat:@"%@",_user.host];//
+    [IMHttpAPI instance].apiURL =  [NSString stringWithFormat:@"http://api.jiantuokeji.com"];
     
-    //IMAPIURL;//@"http://192.168.1.100:8010/course-im";
+    NSMutableString * strHost = [NSMutableString stringWithFormat:@"api.jiantuokeji.com"];
     
-    NSMutableString * strHost = [NSMutableString stringWithFormat:@"http://192.168.1.100:8080"];//[NSMutableString stringWithFormat:@"%@",_user.host];//[NSMutableString stringWithFormat:@"192.168.1.100"];
-    //
-    
-    [strHost deleteCharactersInRange:NSMakeRange(0, 7)];
-    [strHost deleteCharactersInRange:NSMakeRange(strHost.length-5, 5)];
+//    [strHost deleteCharactersInRange:NSMakeRange(0, 7)];
+//    [strHost deleteCharactersInRange:NSMakeRange(strHost.length-5, 5)];
     [IMService instance].host = strHost;
     
     //@"192.168.1.100";

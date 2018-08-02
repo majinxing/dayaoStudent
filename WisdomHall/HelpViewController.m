@@ -40,7 +40,7 @@
 // 让浏览器加载指定的字符串,使用m.baidu.com进行搜索
 - (void)loadString{
     // 1. URL 定位资源,需要资源的地址
-    NSString *urlStr = [NSString stringWithFormat:@"http://www.dayaokeji.com/LvDongXiaoYuan/m/article_category.php?id=2"];
+    NSString *urlStr = [NSString stringWithFormat:@"http://www.jiantuokeji.com/LvDongXiaoYuan/m/article_category.php?id=2"];
     
     
     NSURL *url = [NSURL URLWithString:urlStr];

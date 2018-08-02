@@ -31,7 +31,7 @@
 
 #import "CourseListALLViewController.h"
 
-@interface HomePageViewController ()<HomeButtonViewDelegate,NewMeetingViewDelegate,CollectionHeadViewDelegate>
+@interface HomePageViewController ()<HomeButtonViewDelegate,NewMeetingViewDelegate,CollectionHeadViewDelegate,UIScrollViewDelegate>
 @property (nonatomic,strong)UIScrollView * bottomScrollView;
 @property (nonatomic,strong)BananerView * bannerView;
 @property (nonatomic,strong)NoticeView * noticeView;
@@ -56,12 +56,21 @@
     
     _userModel = [[Appsetting sharedInstance] getUsetInfo];
     
-    [self setAlias];//i++
+    [self setAlias];
     
     [UIUtils getInternetDate];
 
     // Do any additional setup after loading the view from its nib.
 }
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self getNewMeeting];
+    
+    [_collectionHeadView getData];
+    
+//    [_bannerView.collectionHeadView getBananerViewData];
+    
+}
+
 -(void)setAlias{
 #pragma mark - 推送别名设置
     UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
@@ -116,7 +125,7 @@
     _bottomScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64,APPLICATION_WIDTH, APPLICATION_HEIGHT-64-44)];
     _bottomScrollView.bounces  = YES;//弹簧效果
     _bottomScrollView.contentOffset = CGPointMake(0, 0);
-    
+    _bottomScrollView.delegate = self;
     [self.view addSubview:_bottomScrollView];
     
     _bannerView = [[BananerView alloc] initWithFrame:CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT/4)];
@@ -168,6 +177,7 @@
     self.hidesBottomBarWhenPushed = NO;
     
 }
+
 #pragma mark NewMeetingDelegate
 -(void)intoMeetingBtnPressedDelegate:(MeetingModel *)meetingModel{
     TheMeetingInfoViewController * mInfo = [[TheMeetingInfoViewController alloc] init];

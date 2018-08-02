@@ -152,6 +152,7 @@
 +(NSString *)getGroupName:(NSString *)groupId;
 //根据id获取名字
 +(NSString *)getGPeopleName:(NSString *)peopleId;
-
+//获取缓存的头像数据
++(NSString *)getGPeoplePictureId:(NSString *)peopleId;
 @end
 

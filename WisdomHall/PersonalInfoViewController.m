@@ -55,8 +55,12 @@
         UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
         
         NSString * baseURL = user.host;
+
+        if (![UIUtils isBlankString:[NSString stringWithFormat:@"%@",user.userHeadImageId]]) {
+            _headImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",baseURL,FileDownload,user.userHeadImageId]]]];
+        }
+    
         
-        _headImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",baseURL,FileDownload,user.userHeadImageId]]]];
         
         [_tableView reloadData];
         
@@ -102,6 +106,7 @@
         [_myButton setTitle:@"修改"];
         _isEdictor = NO;
         [_tableView reloadData];
+        _user = [[Appsetting sharedInstance] getUsetInfo];
         NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_user.peopleId,@"id",_textAry[6],@"email",_textAry[7],@"region",_sex,@"sex",_textAry[9],@"birthday",_textAry[10],@"sign",nil];
         [[NetworkRequest sharedInstance] POST:ChangeSelfInfo dict:dict succeed:^(id data) {
 //            NSLog(@"%@",data);
@@ -114,7 +119,7 @@
             
         }];
         
-        NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",@"www",@"description",[NSString stringWithFormat:@"%@",_user.peopleId],@" relId",@"4",@"function",@"true",@"deleteOld",nil];
+        NSDictionary * dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"type",@"www",@"description",[NSString stringWithFormat:@"%@",_user.peopleId],@"relId",@"4",@"function",@"true",@"deleteOld",nil];
         if (_headImage) {
             [[NetworkRequest sharedInstance] POSTImage:FileUpload image:_headImage dict:dict1 succeed:^(id data) {
                 NSString * code = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"code"]];

@@ -43,7 +43,7 @@
 //对群组id和响应昵称进行存储
 -(void)saveGroupId:(NSString *)groupID withGroupName:(NSString *)groupName;
 //对个人id和昵称进行存储
--(void)sevePeopleId:(NSString *)peopleId withPeopleName:(NSString *)peopleName;
+-(void)sevePeopleId:(NSString *)peopleId withPeopleName:(NSString *)peopleName withPeoplePictureId:(NSString *)pictureId;
 
 -(NSMutableArray *)getGroupId_Name;
 

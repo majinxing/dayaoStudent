@@ -27,7 +27,7 @@
                             <outlet property="delegate" destination="KGk-i7-Jjw" id="Rxp-ym-cYr"/>
                         </connections>
                     </textView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vHS-8M-ZBN">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vHS-8M-ZBN">
                         <rect key="frame" x="25" y="100" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="SjQ-80-X2r"/>
@@ -54,8 +54,8 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Mo-dJ-m0h">
-                        <rect key="frame" x="358" y="20" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Mo-dJ-m0h">
+                        <rect key="frame" x="368" y="22" width="42" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="QkJ-rt-csh"/>
                             <constraint firstAttribute="width" constant="42" id="TxN-6b-Wcw"/>
@@ -66,9 +66,9 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="2Mo-dJ-m0h" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="8T7-sL-hPa"/>
+                    <constraint firstItem="2Mo-dJ-m0h" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="22" id="8T7-sL-hPa"/>
                     <constraint firstItem="vHS-8M-ZBN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="AGr-8i-jUt"/>
-                    <constraint firstAttribute="trailing" secondItem="2Mo-dJ-m0h" secondAttribute="trailing" constant="20" id="E8I-R6-irH"/>
+                    <constraint firstAttribute="trailing" secondItem="2Mo-dJ-m0h" secondAttribute="trailing" constant="10" id="E8I-R6-irH"/>
                     <constraint firstAttribute="trailing" secondItem="yF9-UE-VcC" secondAttribute="trailing" constant="25" id="Hea-Z3-MY6"/>
                     <constraint firstItem="Vgb-wZ-yAs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="Ix4-Kl-iM5"/>
                     <constraint firstItem="vHS-8M-ZBN" firstAttribute="top" secondItem="yF9-UE-VcC" secondAttribute="bottom" constant="10" id="OL6-bs-Scs"/>

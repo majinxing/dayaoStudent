@@ -233,7 +233,7 @@
 "message.video1" = "[video]";
 "message.beginReceiveOffine" = "begin to receive offline messages";
 "message.endReceiveOffine" = "end to receive offline messages";
-"message.toolBar.inputPlaceHolder" = "input a new message";
+"message.toolBar.inputPlaceHolder" = "输入消息";
 "message.toolBar.record.upCancel" = "滑动取消发送";
 "message.toolBar.record.loosenCancel" = "release the fingers, to cancel sending";
 "message.toolBar.record.touch" = "按住说话";//"hold down to talk";

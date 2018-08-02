@@ -424,7 +424,7 @@
     }
 }
 //对个人id和昵称进行存储
--(void)sevePeopleId:(NSString *)peopleId withPeopleName:(NSString *)peopleName{
+-(void)sevePeopleId:(NSString *)peopleId withPeopleName:(NSString *)peopleName withPeoplePictureId:(NSString *)pictureId{
     NSMutableArray * ary = [NSMutableArray arrayWithArray:[_mySettingData objectForKey:@"peopleId_Name"]];
     
     if (!ary) {
@@ -438,7 +438,7 @@
             break;
         }
     }
-    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",peopleId],@"peopleId",[NSString stringWithFormat:@"%@",peopleName],@"peopleName", nil];
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",peopleId],@"peopleId",[NSString stringWithFormat:@"%@",peopleName],@"peopleName",[NSString stringWithFormat:@"%@",pictureId],@"peoplePictureId",nil];
     [ary addObject:dict];
     
     [_mySettingData setValue:ary forKey:@"peopleId_Name"];

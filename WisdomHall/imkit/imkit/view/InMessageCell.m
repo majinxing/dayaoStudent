@@ -127,7 +127,9 @@
             NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
             if ([str isEqualToString:@"成功"]) {
                 self.nameLabel.text = [NSString stringWithFormat:@"%@",[[data objectForKey:@"body"] objectForKey:@"name"]];//self.conversation.name;
-                [[Appsetting sharedInstance] sevePeopleId:[NSString stringWithFormat:@"%lld",self.msg.sender] withPeopleName:self.nameLabel.text];
+                NSString * pId = [NSString stringWithFormat:@"%@",[[data objectForKey:@"body"] objectForKey:@"pictureId"]];
+                
+                [[Appsetting sharedInstance] sevePeopleId:[NSString stringWithFormat:@"%lld",self.msg.sender] withPeopleName:self.nameLabel.text withPeoplePictureId:pId];
             }
         } failure:^(NSError *error) {
             

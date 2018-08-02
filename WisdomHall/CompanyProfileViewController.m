@@ -22,7 +22,7 @@
     
     // 定义一个可变属性字符串对象
    // NSMutableAttributedString * str = [[NSMutableAttributedString alloc]initWithString:@"湖南大姚科技有限公司是一家致力于科技改变生活的高新技术研发与销售公司，集高科技创意产品设计、研发与推广的创新创业公司。\n联系我们\n通讯地址：长沙市高新开发区芯城科技园，邮编410000\n服务邮箱：hunandayaokeji@163.com\n我们将随时为您献上真诚的服务。\n网站网址:"];
-    NSMutableAttributedString *atbs =[[NSMutableAttributedString alloc] initWithString: @"湖南大姚科技有限公司是一家致力于科技改变生活的高新技术研发与销售公司，集高科技创意产品设计、研发与推广的创新创业公司。\n\n联系我们\n\n通讯地址：长沙市高新开发区芯城科技园\n\n邮编：410000\n\n服务邮箱：hunandayaokeji@163.com\n\n我们将随时为您献上真诚的服务。\n\n网站网址：www.dayaokeji.com"];
+    NSMutableAttributedString *atbs =[[NSMutableAttributedString alloc] initWithString: @"湖南简拓科技有限公司是一家致力于科技改变生活的高新技术研发与销售公司，集高科技创意产品设计、研发与推广的创新创业公司。\n\n联系我们\n\n通讯地址：长沙市高新开发区芯城科技园\n\n邮编：410000\n\n服务邮箱：jiantuokeji@163.com\n\n我们将随时为您献上真诚的服务。\n\n网站网址：www.jiantuokeji.com"];
     
     [atbs addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, atbs.length)];
     

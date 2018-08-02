@@ -160,7 +160,7 @@
 
 #define Login                   @"course/user/login"                //登录
 
-#define SchoolList              @"http://www.jiantuokeji.com/ldxy_serverlist.html" //   获取学校数据
+#define SchoolList              @"http://api.jiantuokeji.com/course/sysParameter/loginAddress?" //   获取学校数据
 
 #define Register                @"course/user/register"             //注册
 
