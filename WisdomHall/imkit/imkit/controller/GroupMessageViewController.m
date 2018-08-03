@@ -41,6 +41,7 @@
     
     
     self.tableView.frame = CGRectMake(0, 64, APPLICATION_WIDTH, APPLICATION_HEIGHT-64- [EaseChatToolbar defaultHeight]);
+    
 //    self.navigationItem.title = [UIUtils getGroupName:str1];
 }
 

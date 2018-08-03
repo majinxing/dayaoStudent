@@ -974,6 +974,7 @@ static int uptime = 0;
 {
 	NSLog(@"Chose image!  Details:  %@", info);
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+//    UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
 
     [self sendImageMessage:image];
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -1446,11 +1447,12 @@ static int uptime = 0;
         return;
     }
  
-    UIImage *sizeImage = [image resize:CGSizeMake(256, 256)];
+    UIImage *sizeImage = image;//[image resize:CGSizeMake(256, 256)];
     image = [self resizeImage:image];
     int newWidth = image.size.width;
     int newHeight = image.size.height;
     NSLog(@"image size:%f %f resize to %d %d", image.size.width, image.size.height, newWidth, newHeight);
+    
     
     IMessage *msg = [self.messageDB newOutMessage];
     MessageImageContent *content = [[MessageImageContent alloc] initWithImageURL:[self localImageURL] width:newWidth height:newHeight];
@@ -1461,12 +1463,15 @@ static int uptime = 0;
     [self loadSenderInfo:msg];
     
     [[SDImageCache sharedImageCache] storeImage:image forKey:content.imageURL];
+    
     NSString *littleUrl =  [content littleImageURL];
+    
     [[SDImageCache sharedImageCache] storeImage:sizeImage forKey: littleUrl];
     
     [self saveMessage:msg];
     
     [self sendMessage:msg withImage:image];
+    
     [self insertMessage:msg];
 }
 
@@ -1696,7 +1701,7 @@ static int uptime = 0;
     picker.delegate  = self;
     picker.allowsEditing = NO;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    picker.mediaTypes = @[(NSString *)kUTTypeImage];
+//    picker.mediaTypes = @[(NSString *)kUTTypeImage];
     [self presentViewController:picker animated:YES completion:NULL];
 #endif
 }

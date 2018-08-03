@@ -148,16 +148,41 @@
     
     NSURL *url = [NSURL URLWithString:self.msg.senderInfo.avatarURL];
     
-//
-     NSString * pictId = [UIUtils getGPeoplePictureId:[NSString stringWithFormat:@"%lld",self.msg.sender]];
+
+    NSString * pictId = [UIUtils getGPeoplePictureId:[NSString stringWithFormat:@"%lld",self.msg.sender]];
     
-    url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",_user.host,FileDownload,pictId]];
-//    url = [NSURL URLWithString:@"%@",[UIUtils getGPeoplePictureId:[NSString stringWithFormat:@"%lld",self.msg.sender]]];
+    if ([UIUtils isBlankString:pictId]) {
+        NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%lld",self.msg.sender],@"id", nil];
+        
+        [[NetworkRequest sharedInstance] GET:QuerySelfInfo dict:dict succeed:^(id data) {
+            NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+            if ([str isEqualToString:@"成功"]) {
+                
+                NSString * picId = [[data objectForKey:@"body"] objectForKey:@"pictureId"];
+                
+                [[Appsetting sharedInstance] sevePeopleId:[NSString stringWithFormat:@"%lld",self.msg.sender] withPeopleName:[[data objectForKey:@"body"] objectForKey:@"name"] withPeoplePictureId:pictId];
+                
+                if(![UIUtils isBlankString:[NSString stringWithFormat:@"%@",picId]]){
+                    [self.headView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",_user.host,FileDownload,picId]] placeholderImage:[UIImage imageNamed:@"PersonalChat"]];
+                }
+                
+            }
+        } failure:^(NSError *error) {
+            
+        }];
+        
+    }else{
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",_user.host,FileDownload,pictId]];
+        
+        //    url = [NSURL URLWithString:@"%@",[UIUtils getGPeoplePictureId:[NSString stringWithFormat:@"%lld",self.msg.sender]]];
+        
+        [self.headView sd_setImageWithURL: url placeholderImage:placehodler
+                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                    
+                                }];
+    }
     
-    [self.headView sd_setImageWithURL: url placeholderImage:placehodler
-                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                
-                            }];
+    
     
     self.bubbleView.msg = message;
     

@@ -46,17 +46,22 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+/**
+ *  将图片添加到本地相册
+ */
+
 
  - (void) saveImage:(id)sender{
      
-     ALAuthorizationStatus status = [ALAssetsLibrary authorizationStatus];
-     if (status != ALAuthorizationStatusAuthorized) {
-         //show alert for asking the user to give permission
-        [self.view makeToast:@"请允许读取相册!可以到系统设置里修改" duration:0.9 position:@"center"];
-        return;
-     }
+//     ALAuthorizationStatus status = [ALAssetsLibrary authorizationStatus];
+//     if (status != ALAuthorizationStatusAuthorized) {
+//         //show alert for asking the user to give permission
+//        [self.view makeToast:@"请允许读取相册!可以到系统设置里修改" duration:0.9 position:@"center"];
+//        return;
+//     }
+    UIImageWriteToSavedPhotosAlbum(self.image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
      //TODO 权限问题
-     UIImageWriteToSavedPhotosAlbum(self.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+//     UIImageWriteToSavedPhotosAlbum(self.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
  }
  
  
