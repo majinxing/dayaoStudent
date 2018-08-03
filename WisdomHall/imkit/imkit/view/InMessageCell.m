@@ -24,6 +24,7 @@
 @interface InMessageCell()
 
 @property (nonatomic) TriangleView *triangleView;
+@property(nonatomic,strong)UserModel * user;
 @end
 
 @implementation InMessageCell
@@ -95,6 +96,7 @@
         
 
     }
+    _user = [[Appsetting sharedInstance] getUsetInfo];
     return self;
 }
 
@@ -120,6 +122,7 @@
     }
     
     self.nameLabel.text = [UIUtils getGPeopleName:[NSString stringWithFormat:@"%lld",self.msg.sender]];
+    
     if ([UIUtils isBlankString:self.nameLabel.text]) {
         NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%lld",self.msg.sender],@"id", nil];
         
@@ -142,14 +145,24 @@
     self.nameLabel.hidden = !self.showName;
     
     UIImage *placehodler = [UIImage imageNamed:@"PersonalChat"];
+    
     NSURL *url = [NSURL URLWithString:self.msg.senderInfo.avatarURL];
+    
+//
+     NSString * pictId = [UIUtils getGPeoplePictureId:[NSString stringWithFormat:@"%lld",self.msg.sender]];
+    
+    url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",_user.host,FileDownload,pictId]];
+//    url = [NSURL URLWithString:@"%@",[UIUtils getGPeoplePictureId:[NSString stringWithFormat:@"%lld",self.msg.sender]]];
+    
     [self.headView sd_setImageWithURL: url placeholderImage:placehodler
                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                 
                             }];
     
     self.bubbleView.msg = message;
+    
     [self setNeedsUpdateConstraints];
+    
 }
 
 

@@ -121,7 +121,7 @@
     
     [ary addObjectsFromArray:meetModel.signNo];
     
-    [_peopleListView addContentView:ary];
+//    [_peopleListView addContentView:ary];
     
     _peopleNum.text = [NSString stringWithFormat:@"%ld人",meetModel.signAry.count];
 }
@@ -155,7 +155,7 @@
     }
     _peopleNum.text = [NSString stringWithFormat:@"%d人",classModel.n+classModel.m];
     
-    [_peopleListView addContentView:classModel.signAry];
+//    [_peopleListView addContentView:classModel.signAry];
 
 }
 

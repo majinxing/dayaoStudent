@@ -26,6 +26,7 @@
 @interface OutMessageCell()
 @property (nonatomic) UIActivityIndicatorView *sendingIndicatorView;
 @property (nonatomic) TriangleView *triangleView;
+@property (nonatomic,strong)UserModel * user;
 @end
 
 @implementation OutMessageCell
@@ -100,6 +101,7 @@
             make.right.equalTo(self.containerView.mas_right).offset(-8);
         }];
     }
+    _user = [[Appsetting sharedInstance] getUsetInfo];
     return self;
 }
 
@@ -120,7 +122,13 @@
     self.bubbleView.msg = message;
     
     UIImage *placehodler = [UIImage imageNamed:@"PersonalChat"];
+    
     NSURL *url = [NSURL URLWithString:self.msg.senderInfo.avatarURL];
+    
+//    NSString * pictId = [UIUtils getGPeoplePictureId:[NSString stringWithFormat:@"%lld",self.msg.sender]];
+    
+    url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",_user.host,FileDownload,_user.userHeadImageId]];
+    
     [self.headView sd_setImageWithURL: url placeholderImage:placehodler
                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                 
