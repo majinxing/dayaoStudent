@@ -9,6 +9,7 @@
 #import "CourseListALLViewController.h"
 #import "SignInViewController.h"
 #import "NavBarNavigationController.h"
+#import "SelectClassViewController.h"
 
 @interface CourseListALLViewController ()
 @property (nonatomic,strong)SignInViewController * OldVC;
@@ -32,9 +33,29 @@
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
     [self.view addGestureRecognizer:recognizer];
     
-    self.title = @"课堂";
     
+    [self setNavigation];
     // Do any additional setup after loading the view from its nib.
+}
+-(void)setNavigation{
+    
+    self.title = @"课堂";
+
+    UIBarButtonItem * selection = [[UIBarButtonItem alloc] initWithTitle:@"•••" style:UIBarButtonItemStylePlain target:self action:@selector(selectionBtnPressed)];
+    self.navigationItem.rightBarButtonItem = selection;
+}
+/**
+ * 搜索
+ **/
+-(void)selectionBtnPressed{
+    
+    SelectClassViewController * s = [[SelectClassViewController alloc] init];
+    self.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:s animated:YES];
+    //    self.hidesBottomBarWhenPushed = NO;
+    
+    //    UIBarButtonItem * selection = [[UIBarButtonItem alloc] initWithTitle:@"搜索" style:UIBarButtonItemStylePlain target:self action:@selector(selectionBtnPressed)];
+    //    self.navigationItem.leftBarButtonItem = selection;
 }
 -(void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
     
@@ -74,12 +95,12 @@
         }
         
         [self addChildViewController:_nVC];
-
+        
         
         [self.view addSubview:_nVC.view];
         
         [UIView animateWithDuration:0.5 animations:^{
-
+            
             _OldVC.view.frame = CGRectMake(-APPLICATION_WIDTH, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);//CGAffineTransformMakeTranslation(-APPLICATION_WIDTH, 0);
             
             _nVC.view.transform = CGAffineTransformMakeTranslation(-APPLICATION_WIDTH, 0);
@@ -93,10 +114,10 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 _OldVC.view.frame = CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);
-
+                
             });
             
-
+            
         }];
         
         
@@ -160,7 +181,7 @@
 -(void)addChildViewVC{
     
     NSDictionary * dictDay = [UIUtils getWeekTimeWithType:[UIUtils getTime]];
-
+    
     self.view.frame = CGRectMake(0, 0, APPLICATION_WIDTH, APPLICATION_HEIGHT);
     
     _OldVC = [[SignInViewController alloc] init];

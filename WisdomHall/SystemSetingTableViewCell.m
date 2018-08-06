@@ -99,7 +99,7 @@
 }
 - (IBAction)outAppBtnPressed:(id)sender {
     dispatch_async(dispatch_get_main_queue(), ^{
-        
+        //i++
         NSNotification *notification =[NSNotification notificationWithName:@"OutOfApp" object:nil userInfo:nil];
         // 3.通过 通知中心 发送 通知
         

@@ -189,9 +189,14 @@
 
     //app可以单独部署服务器，给予第三方应用更多的灵活性
     [IMHttpAPI instance].apiURL =  [NSString stringWithFormat:@"http://api.jiantuokeji.com"];
-    
+//
     NSMutableString * strHost = [NSMutableString stringWithFormat:@"api.jiantuokeji.com"];
     
+//    [IMHttpAPI instance].apiURL =  [NSString stringWithFormat:@"http://192.168.1.100:8080"];
+
+//    NSMutableString * strHost = [NSMutableString stringWithFormat:@"192.168.1.100"];
+    
+////    @"http://192.168.1.100:8080"
 //    [strHost deleteCharactersInRange:NSMakeRange(0, 7)];
 //    [strHost deleteCharactersInRange:NSMakeRange(strHost.length-5, 5)];
     [IMService instance].host = strHost;
@@ -214,7 +219,9 @@
     [IMService instance].peerMessageHandler = [PeerMessageHandler instance];
     [IMService instance].groupMessageHandler = [GroupMessageHandler instance];
     [IMService instance].customerMessageHandler = [CustomerMessageHandler instance];
+    
     [[IMService instance] startRechabilityNotifier];
+    
     UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert
                                                                                          | UIUserNotificationTypeBadge
                                                                                          | UIUserNotificationTypeSound) categories:nil];

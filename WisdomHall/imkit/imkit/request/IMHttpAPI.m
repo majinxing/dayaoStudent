@@ -274,12 +274,12 @@
             fail();
         }else{
             NSString * str =  [NSString stringWithFormat:@"%@/%@/%@",[IMHttpAPI instance].apiURL,IMAudios,[dict objectForKey:@"src"]];
-            NSLog(@"2");
+//            NSLog(@"2");
             success(str);
         }
         
     } failure:^(NSError *error) {
-        NSLog(@"2");
+//        NSLog(@"2");
     }];
     
     IMHttpOperation *request = [IMHttpOperation httpOperationWithTimeoutInterval:60];

@@ -148,7 +148,7 @@ static dispatch_once_t onceToken;
     //    [self addSubview:_myPageControl];
     
     //启动定时器
-    _rotateTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(changeView1) userInfo:nil repeats:YES];
+    _rotateTimer = [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(changeView1) userInfo:nil repeats:YES];
     
     _s.delegate = self;
 }
@@ -254,7 +254,7 @@ static dispatch_once_t onceToken;
 //    [self addSubview:_myPageControl];
     
     //启动定时器
-    _rotateTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(changeView) userInfo:nil repeats:YES];
+    _rotateTimer = [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(changeView) userInfo:nil repeats:YES];
     
     _s.delegate = self;
 }

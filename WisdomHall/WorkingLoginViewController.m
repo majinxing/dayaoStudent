@@ -76,6 +76,9 @@
     
     if (![UIUtils isBlankString:_user.schoolName]&&![UIUtils isBlankString:_user.host]) {
         [_selectSchoolBtn setTitle:_user.schoolName forState:UIControlStateNormal];
+    }else{
+        [_selectSchoolBtn setTitle:@"请选择" forState:UIControlStateNormal];
+
     }
     _password.textColor = [UIColor whiteColor];
 
@@ -344,7 +347,7 @@
     [_selectSchoolBtn setTitle:s.schoolName forState:UIControlStateNormal];
     
 //    if (indexPath.row == 1) {
-//        s.schoolHost = @"http://192.168.1.100:8080"
+//    s.schoolHost = @"http://192.168.1.100:8080";
 //    }else if (indexPath.row == 0){
 //        s.schoolHost = @"http://api.dayaokeji.com";
 //    }

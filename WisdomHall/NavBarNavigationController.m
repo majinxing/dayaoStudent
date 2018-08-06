@@ -28,7 +28,7 @@
         [[NSNotificationCenter defaultCenter]
          addObserver:sharedDYTabBarViewControllerInstance
          selector:@selector(networkDidReceiveMessage:)
-         name:kJPFNetworkDidReceiveMessageNotification object:nil];
+         name:@"kJPFNetworkDidReceiveMessageNotification" object:nil];
         
         [[NSNotificationCenter defaultCenter]
          addObserver:sharedDYTabBarViewControllerInstance
@@ -68,28 +68,19 @@
 }
 - (void)networkDidReceiveMessage:(NSNotification *)notification {
     
-    NSDictionary * userInfo = [notification userInfo];
+    NSDictionary * userInfo = [notification object];
     
     NSString * strIM = [userInfo objectForKey:@"content_type"];
     
     if ([strIM isEqualToString:@"im"]) {
         
-        NSError * err;
-        
-        NSString *content = [userInfo valueForKey:@"content"];
-        
-        NSData *jsonData = [content dataUsingEncoding:NSUTF8StringEncoding];
-        
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
         
         UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
         
         VoiceViewController* msgController = [[VoiceViewController alloc] init];
         
-        //        NSString * strq = [NSString stringWithUTF8String:object_getClassName(msgController)];
-        //        if( strq == @"VoiceViewController"){
-        //                NSLog(@"%s",__func__);
-        //        }
+        
+        NSDictionary * dic = [userInfo objectForKey:@"msg_content"];
         
         msgController.userDelegate = self;
         
@@ -106,19 +97,24 @@
         //        msgController.backType = @"TabBar";
         
         msgController.hidesBottomBarWhenPushed = YES;
+        NSArray * ary = [dic objectForKey:@"recvUsers"];
+        NSString * str11 = [ary componentsJoinedByString:@","];
         
-        DYTabBarViewController * root = (DYTabBarViewController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-        
-        if ([root isKindOfClass:[UITabBarController class]]) {//判断是否是当前根视图
-            
-            UINavigationController *nav = root.selectedViewController;//获取到当前视图的导航视图
-            
-            [nav.topViewController.navigationController pushViewController:msgController animated:YES];//获取当前跟视图push到的最高视图层,然后进行push到目的页面
-            
+        if ([UIUtils isBlankString:msgController.type]) {
+            msgController.type = @"1";
+            if ([str11 rangeOfString:[NSString stringWithFormat:@"%@%@",user.school,user.studentId]].location != NSNotFound) {
+                DYTabBarViewController * root = (DYTabBarViewController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+                
+                if ([root isKindOfClass:[UITabBarController class]]) {//判断是否是当前根视图
+                    
+                    UINavigationController *nav = root.selectedViewController;//获取到当前视图的导航视图
+                    
+                    [nav.topViewController.navigationController pushViewController:msgController animated:YES];//获取当前跟视图push到的最高视图层,然后进行push到目的页面
+                    
+                }
+            }
         }
-        //        [self.navigationController pushViewController:msgController animated:ye];
         
-        //        [UIApplication sharedApplication].keyWindow.rootViewController = [[UINavigationController alloc]initWithRootViewController:msgController];
         
         NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",[dic objectForKey:@"relObjectDetailID"]],@"relDetailId",[NSString stringWithFormat:@"%@",[dic objectForKey:@"relObjectType"]],@"relType",nil];
         

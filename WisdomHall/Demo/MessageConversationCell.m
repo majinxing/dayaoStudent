@@ -127,7 +127,7 @@
     
     Conversation *conv = self.conversation;
     if(conv.type == CONVERSATION_PEER){
-//        [self.headView sd_setImageWithURL: [NSURL URLWithString:conv.avatarURL] placeholderImage:[UIImage imageNamed:@"PersonalChat"]];
+        //        [self.headView sd_setImageWithURL: [NSURL URLWithString:conv.avatarURL] placeholderImage:[UIImage imageNamed:@"PersonalChat"]];
     } else if (conv.type == CONVERSATION_GROUP){
         
         [self.headView sd_setImageWithURL:[NSURL URLWithString:conv.avatarURL] placeholderImage:[UIImage imageNamed:@"GroupChat"]];
@@ -150,10 +150,11 @@
     
     
     NSMutableString * str1 = [NSMutableString stringWithFormat:@"%@",conv.name];
-
+    
     if ([str1 rangeOfString:@"gname:"].location != NSNotFound) {
         [str1 deleteCharactersInRange:NSMakeRange(0, 6)];
         self.namelabel.text = [UIUtils getGroupName:str1];
+        
         if ([UIUtils isBlankString:self.namelabel.text]) {
             NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:str1,@"id", nil];
             
@@ -170,19 +171,30 @@
     }else{
         if (str1.length>6) {
             [str1 deleteCharactersInRange:NSMakeRange(0, 5)];
+            
             self.namelabel.text = [UIUtils getGPeopleName:str1];
+            
             NSString * strId = [UIUtils getGPeoplePictureId:str1];
             
-            if ([UIUtils isBlankString:self.namelabel.text]) {
+            [self.headView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",_user.host,FileDownload,strId]] placeholderImage:[UIImage imageNamed:@"PersonalChat"]];
+            
+            
+            if ([UIUtils isBlankString:self.namelabel.text]||[UIUtils isBlankString:strId]) {
                 NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:str1,@"id", nil];
                 [[NetworkRequest sharedInstance] GET:QuerySelfInfo dict:dict succeed:^(id data) {
                     NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
                     if ([str isEqualToString:@"成功"]) {
+                        
                         self.namelabel.text = [NSString stringWithFormat:@"%@",[[data objectForKey:@"body"] objectForKey:@"name"]];//self.conversation.name;
-            
+                        
                         NSString * picId = [[data objectForKey:@"body"] objectForKey:@"pictureId"];
+                        
+                        [[Appsetting sharedInstance] sevePeopleId:str1 withPeopleName:self.namelabel.text withPeoplePictureId:picId];
+                        
                         if(![UIUtils isBlankString:[NSString stringWithFormat:@"%@",picId]]){
+                            
                             [self.headView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",_user.host,FileDownload,picId]] placeholderImage:[UIImage imageNamed:@"PersonalChat"]];
+                            
                         }
                         
                     }
@@ -195,10 +207,10 @@
             
         }
     }
-
+    
     if ([[NSString stringWithFormat:@"%@",conv.name] isEqualToString:@"通知"]) {
         self.namelabel.text = conv.name;
-
+        
         self.timelabel.text = @"";
         
         self.messageContent.text = @"";
@@ -206,7 +218,7 @@
         self.headView.image = [UIImage imageNamed:@"通知"];
     }else if ([[NSString stringWithFormat:@"%@",conv.name] isEqualToString:@"群组"]){
         self.namelabel.text = conv.name;
-
+        
         self.timelabel.text = @"";
         
         self.messageContent.text = @"";
@@ -310,18 +322,37 @@
                 [str1 deleteCharactersInRange:NSMakeRange(0, 5)];
                 
                 NSString * picId = [UIUtils getGPeoplePictureId:str1];
+                
                 if (![UIUtils isBlankString:picId]) {
                     [self.headView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",_user.host,FileDownload,picId]] placeholderImage:[UIImage imageNamed:@"PersonalChat"]];
+                }else{
+                    
+                    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:str1,@"id", nil];
+                    
+                    [[NetworkRequest sharedInstance] GET:QuerySelfInfo dict:dict succeed:^(id data) {
+                        NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+                        if ([str isEqualToString:@"成功"]) {
+                            NSString * pId = [NSString stringWithFormat:@"%@",[[data objectForKey:@"body"] objectForKey:@"pictureId"]];
+                            [self.headView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",_user.host,FileDownload,pId]] placeholderImage:[UIImage imageNamed:@"PersonalChat"]];
+                            
+                        }
+                    } failure:^(NSError *error) {
+                        
+                    }];
                 }
                 
             }
             
             
-//            [self.headView sd_setImageWithURL: [NSURL URLWithString:self.conversation.avatarURL]
-//                             placeholderImage:[UIImage imageNamed:@"PersonalChat"]];
+            //            [self.headView sd_setImageWithURL: [NSURL URLWithString:self.conversation.avatarURL]
+            //                             placeholderImage:[UIImage imageNamed:@"PersonalChat"]];
         } else if (self.conversation.type == CONVERSATION_GROUP){
+            
+            
+            
             [self.headView sd_setImageWithURL:[NSURL URLWithString:self.conversation.avatarURL]
                              placeholderImage:[UIImage imageNamed:@"GroupChat"]];
+            
         } else if (self.conversation.type == CONVERSATION_SYSTEM) {
             //todo
         }

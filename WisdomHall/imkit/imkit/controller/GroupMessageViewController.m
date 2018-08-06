@@ -29,6 +29,10 @@
 
 @implementation GroupMessageViewController
 
+-(void)dealloc{
+    self.navigationController.navigationBarHidden = NO; //设置隐藏
+
+}
 - (void)viewDidLoad {
     IGroupMessageDB *db = [[IGroupMessageDB alloc] init];
     db.groupID = self.groupID;
@@ -47,9 +51,9 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden = YES; //设置隐藏
+//    [self setNavigationTitle];
 }
 -(void)viewWillDisappear:(BOOL)animated{
-    self.navigationController.navigationBarHidden = NO; //设置隐藏
     
 }
 -(void)setNavigationTitle{
@@ -99,6 +103,7 @@
     
     UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(APPLICATION_WIDTH-30,34, 20, 20)];
     image.image = [UIImage imageNamed:@"群组成员"];
+    
     [self.view addSubview:image];
     
     UIButton * createBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -143,6 +148,8 @@
             classManegeVC.signAry = [NSMutableArray arrayWithCapacity:1];
             classManegeVC.signAry = signAry;
             classManegeVC.groupId = [NSString stringWithFormat:@"%lld",self.groupID];
+            self.navigationController.navigationBarHidden = NO; //设置隐藏
+
             [self.navigationController pushViewController:classManegeVC animated:YES];
         }else{
             [UIUtils showInfoMessage:@"获取数据失败" withVC:self];
@@ -182,7 +189,15 @@
         [self disableSend];
     }
 }
-
+//隐藏Navigateion的时候tableView会上升，因为这里没有了64 i++
+#pragma mark - EMChatToolbarDelegate
+- (void)chatToolbarDidChangeFrameToHeight:(CGFloat)toHeight {
+    CGRect rect = self.tableView.frame;
+    rect.origin.y = 64;
+    rect.size.height = self.view.frame.size.height - toHeight-64;
+    self.tableView.frame = rect;
+    [self scrollToBottomAnimated:NO];
+}
 
 
 #pragma mark - MessageObserver

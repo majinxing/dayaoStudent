@@ -14,12 +14,15 @@
 #import "Message.h"
 #import "util.h"
 #import "GOReachability.h"
+#import "VoiceViewController.h"
+#import "DYTabBarViewController.h"
 
 #define HEARTBEAT_HZ (180)
 
 #define HOST  @"imnode2.gobelieve.io"
 #define PORT 23000
 
+extern NSString *const kJPFNetworkDidReceiveMessageNotification;         // 收到消息(非APNS)
 
 @interface GroupSync : NSObject
 @property(nonatomic, assign) int64_t groupID;
@@ -330,8 +333,9 @@
     }
 }
 
-
+//IM个人消息接受dian
 -(void)publishPeerMessage:(IMMessage*)msg {
+
     for (NSValue *value in self.peerObservers) {
         if (value) {
             id<PeerMessageObserver> ob = [value nonretainedObjectValue];
@@ -422,13 +426,35 @@
         }
     }
 }
-
+//IM系统消息
 -(void)publishSystemMessage:(NSString*)sys {
+    
     for (NSValue *value in self.systemObservers) {
         id<SystemMessageObserver> ob = [value nonretainedObjectValue];
         if ([ob respondsToSelector:@selector(onSystemMessage:)]) {
             [ob onSystemMessage:sys];
         }
+    }
+    sys = [sys stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+    NSMutableString * s = [NSMutableString stringWithFormat:@"%@",sys];
+//    [s deleteCharactersInRange:NSMakeRange(16, 1)];
+//    [s deleteCharactersInRange:NSMakeRange(s.length-2, 1)];
+
+    NSData *jsonData = [s dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSError *err;
+    
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:jsonData
+                          
+                                                         options:NSJSONReadingMutableContainers
+                          
+                                                           error:&err];
+    
+    NSString * strIM = [dict objectForKey:@"content_type"];
+    
+    
+    if ([strIM isEqualToString:@"im"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"kJPFNetworkDidReceiveMessageNotification" object:dict];
     }
 }
 
@@ -485,7 +511,9 @@
     } else if (msg.cmd == MSG_ROOM_IM) {
         [self handleRoomMessage:msg];
     } else if (msg.cmd == MSG_SYSTEM) {
+        
         [self handleSystemMessage:msg];
+        
     } else if (msg.cmd == MSG_CUSTOMER) {
         [self handleCustomerMessage:msg];
     } else if (msg.cmd == MSG_CUSTOMER_SUPPORT) {

@@ -53,6 +53,7 @@
 		8B045B9D1F3458E40021699B /* ZFSeatButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B045B901F3458E40021699B /* ZFSeatButton.m */; };
 		8B045BA31F34595D0021699B /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B045BA21F34595D0021699B /* UIView+Extension.m */; };
 		8B045BA61F3462640021699B /* SeatIngModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B045BA51F3462640021699B /* SeatIngModel.m */; };
+		8B04C3EF2118205D00046E6F /* IMTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B04C3ED2118205C00046E6F /* IMTool.m */; };
 		8B0502FB2021A8BA0030CF75 /* AllOrPersonalDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B0502F52021A8A90030CF75 /* AllOrPersonalDataViewController.xib */; };
 		8B0502FC2021A8BA0030CF75 /* PersonalUploadDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0502F72021A8B00030CF75 /* PersonalUploadDataViewController.m */; };
 		8B0502FD2021A8BA0030CF75 /* PersonalUploadDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B0502F82021A8B30030CF75 /* PersonalUploadDataViewController.xib */; };
@@ -343,7 +344,6 @@
 		8BB56D881EB2E2820023DAFF /* RedefineThePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BB56D861EB2E2820023DAFF /* RedefineThePasswordViewController.xib */; };
 		8BB56D8C1EB31C110023DAFF /* SystemSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB56D8A1EB31C110023DAFF /* SystemSettingsViewController.m */; };
 		8BB56D8D1EB31C110023DAFF /* SystemSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BB56D8B1EB31C110023DAFF /* SystemSettingsViewController.xib */; };
-		8BCCCE6E20FC33CB0090E27A /* IMTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BCCCE6D20FC33CB0090E27A /* IMTool.m */; };
 		8BCCD08B20FD782D0090E27A /* license in Resources */ = {isa = PBXBuildFile; fileRef = 8BCCD08520FD782D0090E27A /* license */; };
 		8BCCD08C20FD782D0090E27A /* readme.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 8BCCD08620FD782D0090E27A /* readme.markdown */; };
 		8BCCD08D20FD782D0090E27A /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BCCD08A20FD782D0090E27A /* UIView+Toast.m */; };
@@ -846,6 +846,10 @@
 		8B045BA21F34595D0021699B /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		8B045BA41F3462640021699B /* SeatIngModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeatIngModel.h; sourceTree = "<group>"; };
 		8B045BA51F3462640021699B /* SeatIngModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeatIngModel.m; sourceTree = "<group>"; };
+		8B04C3ED2118205C00046E6F /* IMTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMTool.m; sourceTree = "<group>"; };
+		8B04C3EE2118205D00046E6F /* IMTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMTool.h; sourceTree = "<group>"; };
+		8B04C3F12118218400046E6F /* IM_integration-prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IM_integration-prefix.pch"; sourceTree = "<group>"; };
+		8B04C3F42118237800046E6F /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		8B0502F52021A8A90030CF75 /* AllOrPersonalDataViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllOrPersonalDataViewController.xib; sourceTree = "<group>"; };
 		8B0502F62021A8AC0030CF75 /* PersonalUploadDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalUploadDataViewController.h; sourceTree = "<group>"; };
 		8B0502F72021A8B00030CF75 /* PersonalUploadDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalUploadDataViewController.m; sourceTree = "<group>"; };
@@ -1311,10 +1315,6 @@
 		8BB56D891EB31C110023DAFF /* SystemSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemSettingsViewController.h; sourceTree = "<group>"; };
 		8BB56D8A1EB31C110023DAFF /* SystemSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemSettingsViewController.m; sourceTree = "<group>"; };
 		8BB56D8B1EB31C110023DAFF /* SystemSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SystemSettingsViewController.xib; sourceTree = "<group>"; };
-		8BCCCD1920FC322B0090E27A /* IM_integration-prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "IM_integration-prefix.pch"; path = "../../../../../IM_integration/IM_integration/IM_integration-prefix.pch"; sourceTree = "<group>"; };
-		8BCCCE6B20FC33120090E27A /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = ../../../../../IM_integration/IM_integration/PrefixHeader.pch; sourceTree = "<group>"; };
-		8BCCCE6C20FC33CA0090E27A /* IMTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMTool.h; path = "../../../dayao 2/dayaoStudent/WisdomHall/IMTool.h"; sourceTree = "<group>"; };
-		8BCCCE6D20FC33CB0090E27A /* IMTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMTool.m; path = "../../../dayao 2/dayaoStudent/WisdomHall/IMTool.m"; sourceTree = "<group>"; };
 		8BCCD08520FD782D0090E27A /* license */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license; sourceTree = "<group>"; };
 		8BCCD08620FD782D0090E27A /* readme.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = readme.markdown; sourceTree = "<group>"; };
 		8BCCD08920FD782D0090E27A /* UIView+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
@@ -2126,16 +2126,15 @@
 		8B10411E20E4757B008CFB97 /* IM */ = {
 			isa = PBXGroup;
 			children = (
-				8BA224B51EAED4DB00627A1B /* Utils */,
 				8BCCD1D520FD79130090E27A /* Demo */,
 				8BCCD0B720FD78AE0090E27A /* imkit */,
 				8BCCD16F20FD78B20090E27A /* imsdk */,
 				8BCCD08E20FD78630090E27A /* Masonry */,
 				8BCCD08420FD782D0090E27A /* Toast */,
-				8BCCCE6C20FC33CA0090E27A /* IMTool.h */,
-				8BCCCE6D20FC33CB0090E27A /* IMTool.m */,
-				8BCCCE6B20FC33120090E27A /* PrefixHeader.pch */,
-				8BCCCD1920FC322B0090E27A /* IM_integration-prefix.pch */,
+				8B04C3EE2118205D00046E6F /* IMTool.h */,
+				8B04C3ED2118205C00046E6F /* IMTool.m */,
+				8B04C3F42118237800046E6F /* PrefixHeader.pch */,
+				8B04C3F12118218400046E6F /* IM_integration-prefix.pch */,
 				8B5CAF6220FF314B00E9950F /* CreateChatGroupView.h */,
 				8B5CAF6320FF314B00E9950F /* CreateChatGroupView.m */,
 				8B5CAF6521006DEA00E9950F /* SelectGroupPeopleViewController.h */,
@@ -2451,6 +2450,7 @@
 			children = (
 				8B32FEAD1F4C052700D9BF23 /* WisdomHall.entitlements */,
 				8B10411E20E4757B008CFB97 /* IM */,
+				8BA224B51EAED4DB00627A1B /* Utils */,
 				8B045B531F3458660021699B /* seating */,
 				8BA224961EADFF2700627A1B /* FrameWork */,
 				8BA224951EADFF1600627A1B /* Model */,
@@ -4081,6 +4081,7 @@
 				8B37267D20EC662B00C4344F /* NewMeetingView.m in Sources */,
 				8BF79F52205F41F60033CCC3 /* HKClipperHelper.m in Sources */,
 				8BCCD18A20FD78B20090E27A /* MEESImageViewController.m in Sources */,
+				8B04C3EF2118205D00046E6F /* IMTool.m in Sources */,
 				8BF864C71ECAD97300B7EED4 /* UIImage+MultiFormat.m in Sources */,
 				8B64EB5B1F1A2BA900BF7D0F /* SelectClassViewController.m in Sources */,
 				8BCCD1A320FD78B20090E27A /* IGroupMessageDB.m in Sources */,
@@ -4213,7 +4214,6 @@
 				8BF8648C1ECAD21200B7EED4 /* UIScrollView+MJExtension.m in Sources */,
 				8BF864C81ECAD97300B7EED4 /* UIImageView+HighlightedWebCache.m in Sources */,
 				8BCCD1C220FD78B20090E27A /* MessageViewCell.m in Sources */,
-				8BCCCE6E20FC33CB0090E27A /* IMTool.m in Sources */,
 				8BA224A71EAE000000627A1B /* PersonalCenterViewController.m in Sources */,
 				8B77250B1F302E6200D1B521 /* FeedBackTableViewCell.m in Sources */,
 				8BCCD17E20FD78B20090E27A /* wav_amr.c in Sources */,
@@ -4640,7 +4640,7 @@
 					"$(PROJECT_DIR)/WisdomHall/WisdomHall/HyphenateSDK",
 					"$(PROJECT_DIR)/WisdomHall/WisdomHall/XinSuiFang/Rong_Cloud_iOS_IMLib_SDK_v2_7_3_stable",
 				);
-				GCC_PREFIX_HEADER = "/Users/xtu-ti/Documents/IM_integration/IM_integration/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "/Users/xtu-ti/Documents/律动课程学生版/dayao-/dayao/dayaoStudent/WisdomHall/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/WisdomHall/Bugly.framework";
 				INFOPLIST_FILE = WisdomHall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
@@ -4852,7 +4852,7 @@
 					"$(PROJECT_DIR)/WisdomHall/WisdomHall/HyphenateSDK",
 					"$(PROJECT_DIR)/WisdomHall/WisdomHall/XinSuiFang/Rong_Cloud_iOS_IMLib_SDK_v2_7_3_stable",
 				);
-				GCC_PREFIX_HEADER = "/Users/xtu-ti/Documents/IM_integration/IM_integration/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "/Users/xtu-ti/Documents/律动课程学生版/dayao-/dayao/dayaoStudent/WisdomHall/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/WisdomHall/Bugly.framework";
 				INFOPLIST_FILE = WisdomHall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
@@ -4911,7 +4911,7 @@
 					"$(PROJECT_DIR)/WisdomHall/WisdomHall/HyphenateSDK",
 					"$(PROJECT_DIR)/WisdomHall/WisdomHall/XinSuiFang/Rong_Cloud_iOS_IMLib_SDK_v2_7_3_stable",
 				);
-				GCC_PREFIX_HEADER = "/Users/xtu-ti/Documents/IM_integration/IM_integration/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "/Users/xtu-ti/Documents/律动课程学生版/dayao-/dayao/dayaoStudent/WisdomHall/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/WisdomHall/Bugly.framework";
 				INFOPLIST_FILE = WisdomHall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;

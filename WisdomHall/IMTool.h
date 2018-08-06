@@ -2,7 +2,7 @@
 //  IMTool.h
 //  WisdomHall
 //
-//  Created by XTU-TI on 2018/6/29.
+///Users/xtu-ti/Documents/IM_integration/IM_integration/imkit/Users/xtu-ti/Documents/IM_integration/IM_integration/imsdk  Created by XTU-TI on 2018/6/29.
 //  Copyright © 2018年 majinxing. All rights reserved.
 //
 

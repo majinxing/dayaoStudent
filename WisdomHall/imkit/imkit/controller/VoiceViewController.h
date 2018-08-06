@@ -16,8 +16,10 @@
 #define CLEAR_PEER_NEW_MESSAGE @"clear_peer_single_conv_new_message_notify"
 
 @interface VoiceViewController : MessageViewController<PeerMessageObserver, TCPConnectionObserver>
++(VoiceViewController *)sharedInstance;
 @property(nonatomic, assign) int64_t peerUID;
 @property(nonatomic, copy) NSString *peerName;
 @property(nonatomic, copy) NSString *peerAvatar;
 @property(nonatomic, copy) NSString *backType;
+@property(nonatomic, copy) NSString *type;
 @end

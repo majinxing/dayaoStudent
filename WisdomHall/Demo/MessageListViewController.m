@@ -728,32 +728,32 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
             }else{
                 [self.conversations insertObject:con atIndex:0];
             }
-            //            [self.conversations insertObject:con atIndex:0];
+//            [self.conversations insertObject:con atIndex:0];
             [self.tableview reloadData];
         }
     } else {
-//        Conversation *con = [[Conversation alloc] init];
-//        con.message = msg;
-//        [self updateConversationDetail:con];
-//
-//        if (self.currentUID != msg.sender) {
-//            con.newMsgCount += 1;
-//            [self setNewOnTabBar];
-//        }
-//
-//        con.type = CONVERSATION_GROUP;
-//        con.cid = cid;
-//        [self updateConversationName:con];
-//
-//        if (self.conversations.count>=2) {
-//            [self.conversations insertObject:con atIndex:2];
-//        }else{
-//            [self.conversations insertObject:con atIndex:0];
-//        }
-//        //        [self.conversations insertObject:con atIndex:0];
-//        NSIndexPath *path = [NSIndexPath indexPathForRow:2 inSection:0];
-//        NSArray *array = [NSArray arrayWithObject:path];
-//        [self.tableview insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationMiddle];
+        Conversation *con = [[Conversation alloc] init];
+        con.message = msg;
+        [self updateConversationDetail:con];
+
+        if (self.currentUID != msg.sender) {
+            con.newMsgCount += 1;
+            [self setNewOnTabBar];
+        }
+
+        con.type = CONVERSATION_GROUP;
+        con.cid = cid;
+        [self updateConversationName:con];
+
+        if (self.conversations.count>=2) {
+            [self.conversations insertObject:con atIndex:2];
+        }else{
+            [self.conversations insertObject:con atIndex:0];
+        }
+        //        [self.conversations insertObject:con atIndex:0];
+        NSIndexPath *path = [NSIndexPath indexPathForRow:2 inSection:0];
+        NSArray *array = [NSArray arrayWithObject:path];
+        [self.tableview insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationMiddle];
     }
 }
 
@@ -942,26 +942,26 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
         return conv.type == CONVERSATION_SYSTEM;
     }];
     if (index == NSNotFound) {
-        Conversation *conv = [[Conversation alloc] init];
-        //todo maybe 从系统消息体中获取时间
-        conv.timestamp = (int)time(NULL);
-        //todo 解析系统消息格式
-        conv.detail = sm;
-        
-        conv.name = @"新朋友";
-        
-        conv.type = CONVERSATION_SYSTEM;
-        conv.cid = 0;
-        if (self.conversations.count>=2) {
-            [self.conversations insertObject:conv atIndex:2];
-        }else{
-            [self.conversations insertObject:conv atIndex:0];
-        }
-        //        [self.conversations insertObject:conv atIndex:0];
-        
-        NSIndexPath *path = [NSIndexPath indexPathForRow:2 inSection:0];
-        NSArray *array = [NSArray arrayWithObject:path];
-        [self.tableview insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationMiddle];
+//        Conversation *conv = [[Conversation alloc] init];
+//        //todo maybe 从系统消息体中获取时间
+//        conv.timestamp = (int)time(NULL);
+//        //todo 解析系统消息格式
+//        conv.detail = sm;
+//        
+//        conv.name = @"新朋友";
+//        
+//        conv.type = CONVERSATION_SYSTEM;
+//        conv.cid = 0;
+//        if (self.conversations.count>=2) {
+//            [self.conversations insertObject:conv atIndex:2];
+//        }else{
+//            [self.conversations insertObject:conv atIndex:0];
+//        }
+//        //        [self.conversations insertObject:conv atIndex:0];
+//        
+//        NSIndexPath *path = [NSIndexPath indexPathForRow:2 inSection:0];
+//        NSArray *array = [NSArray arrayWithObject:path];
+//        [self.tableview insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationMiddle];
     } else {
         Conversation *conv = [self.conversations objectAtIndex:index];
         
@@ -976,7 +976,7 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
             }else{
                 [self.conversations insertObject:conv atIndex:0];
             }
-            //            [self.conversations insertObject:conv atIndex:0];
+                        [self.conversations insertObject:conv atIndex:0];
             [self.tableview reloadData];
         }
     }

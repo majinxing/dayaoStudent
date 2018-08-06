@@ -1701,7 +1701,7 @@ static int uptime = 0;
     picker.delegate  = self;
     picker.allowsEditing = NO;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-//    picker.mediaTypes = @[(NSString *)kUTTypeImage];
+    picker.mediaTypes = @[(NSString *)kUTTypeImage];
     [self presentViewController:picker animated:YES completion:NULL];
 #endif
 }

@@ -34,7 +34,13 @@
 
     NSLog(@"peermessageviewcontroller dealloc");
 }
-
++(VoiceViewController *)sharedInstance{
+    static VoiceViewController * shareInstance = nil;
+    if (shareInstance == nil) {
+        shareInstance = [[VoiceViewController alloc] init];
+    }
+    return shareInstance;
+}
 - (void)viewDidLoad {
     IPeerMessageDB *db = [[IPeerMessageDB alloc] init];
     db.currentUID = self.currentUID;
@@ -70,15 +76,18 @@
     [btn setBackgroundImage:[UIImage imageNamed:@"Rectangle3"] forState:UIControlStateNormal];
     [self.view addSubview:btn];
 
-    [self setNavigationTitle];
-}
--(void)viewWillAppear:(BOOL)animated{
-        self.navigationController.navigationBarHidden = YES; //设置隐藏
+//    [self setNavigationTitle];
 }
 -(void)viewWillDisappear:(BOOL)animated{
-        self.navigationController.navigationBarHidden = NO; //设置隐藏
-
+    _type = @"";
 }
+//-(void)viewWillAppear:(BOOL)animated{
+//        self.navigationController.navigationBarHidden = YES; //设置隐藏
+//}
+//-(void)viewWillDisappear:(BOOL)animated{
+//        self.navigationController.navigationBarHidden = NO; //设置隐藏
+//
+//}
 /**
  *  显示navigation的标题
  **/
