@@ -947,9 +947,9 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
 //        conv.timestamp = (int)time(NULL);
 //        //todo 解析系统消息格式
 //        conv.detail = sm;
-//        
+//
 //        conv.name = @"新朋友";
-//        
+//
 //        conv.type = CONVERSATION_SYSTEM;
 //        conv.cid = 0;
 //        if (self.conversations.count>=2) {
@@ -958,7 +958,7 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
 //            [self.conversations insertObject:conv atIndex:0];
 //        }
 //        //        [self.conversations insertObject:conv atIndex:0];
-//        
+//
 //        NSIndexPath *path = [NSIndexPath indexPathForRow:2 inSection:0];
 //        NSArray *array = [NSArray arrayWithObject:path];
 //        [self.tableview insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationMiddle];
@@ -1008,193 +1008,193 @@ SystemMessageObserver, RTMessageObserver, MessageViewControllerUserDelegate,Mess
     return YES;
 }
 
-- (void)actionChat {
-    //    if (!tfSender.text.length) {
-    //        NSLog(@"invalid input");
-    //        return;
-    //    }
-    [self.view endEditing:YES];
-    
-    //    self.chatButton.userInteractionEnabled = NO;
-    //    long long sender = [tfSender.text longLongValue];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        NSString *token = [self login:1];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            //            self.chatButton.userInteractionEnabled = YES;
-            
-            if (token.length == 0) {
-                NSLog(@"login fail");
-                return;
-            }
-            
-            NSLog(@"login success");
-            
-            
-            
-#ifdef FILE_ENGINE_DB
-            NSString *path = [self getDocumentPath];
-            NSString *dbPath = [NSString stringWithFormat:@"%@/%lld", path, [@"1" longLongValue]];
-            [self mkdir:dbPath];
-            
-#elif defined SQL_ENGINE_DB
-            NSString *path = [self getDocumentPath];
-            NSString *dbPath = [NSString stringWithFormat:@"%@/gobelieve_%lld.db", path, [tfSender.text longLongValue]];
-            
-            //检查数据库文件是否已经存在
-            NSFileManager *fileManager = [NSFileManager defaultManager];
-            if (![fileManager fileExistsAtPath:dbPath]) {
-                NSString *p = [[NSBundle mainBundle] pathForResource:@"gobelieve" ofType:@"db"];
-                [fileManager copyItemAtPath:p toPath:dbPath error:nil];
-            }
-            FMDatabase *db = [[FMDatabase alloc] initWithPath:dbPath];
-            BOOL r = [db openWithFlags:SQLITE_OPEN_READWRITE|SQLITE_OPEN_WAL vfs:nil];
-            if (!r) {
-                NSLog(@"open database error:%@", [db lastError]);
-                db = nil;
-                NSAssert(NO, @"");
-            }
-#else
-#error dd
-#endif
-            
-            
-            
-#ifdef FILE_ENGINE_DB
-            [PeerMessageDB instance].dbPath = [NSString stringWithFormat:@"%@/peer", dbPath];
-            [GroupMessageDB instance].dbPath = [NSString stringWithFormat:@"%@/group", dbPath];
-            [CustomerMessageDB instance].dbPath = [NSString stringWithFormat:@"%@/customer", dbPath];
-#elif defined SQL_ENGINE_DB
-            [PeerMessageDB instance].db = db;
-            [GroupMessageDB instance].db = db;
-            [CustomerMessageDB instance].db = db;
-#else
-            
-#endif
-            
-            [PeerMessageHandler instance].uid = [@"1" longLongValue];
-            [GroupMessageHandler instance].uid = [@"1" longLongValue];
-            [CustomerMessageHandler instance].uid = [@"1" longLongValue];
-            
-            [IMHttpAPI instance].accessToken = token;
-            [IMService instance].token = token;
-            
-            
-            path = [self getDocumentPath];
-            dbPath = [NSString stringWithFormat:@"%@/%lld", path, [@"1" longLongValue]];
-            [self mkdir:dbPath];
-            
-            NSString *fileName = [NSString stringWithFormat:@"%@/synckey", dbPath];
-            
-            SyncKeyHandler *handler = [[SyncKeyHandler alloc] initWithFileName:fileName];
-            [IMService instance].syncKeyHandler = handler;
-            
-            [IMService instance].syncKey = [handler syncKey];
-            NSLog(@"sync key:%lld", [handler syncKey]);
-            
-            [[IMService instance] clearSuperGroupSyncKey];
-            NSDictionary *groups = [handler superGroupSyncKeys];
-            for (NSNumber *k in groups) {
-                NSNumber *v = [groups objectForKey:k];
-                NSLog(@"group id:%@ sync key:%@", k, v);
-                [[IMService instance] addSuperGroupSyncKey:[v longLongValue] gid:[k longLongValue]];
-            }
-            
-            [[IMService instance] start];
-            
-            if (self.deviceToken.length > 0) {
-                
-                [IMHttpAPI bindDeviceToken:self.deviceToken
-                                   success:^{
-                                       NSLog(@"bind device token success");
-                                   }
-                                      fail:^{
-                                          NSLog(@"bind device token fail");
-                                      }];
-            }
-            
-            //            if (tfReceiver.text.length > 0) {
-            //                PeerMessageViewController *msgController = [[PeerMessageViewController alloc] init];
-            //                msgController.currentUID = [tfSender.text longLongValue];
-            //                msgController.peerUID = [tfReceiver.text longLongValue];
-            //                msgController.peerName = @"测试";
-            //                msgController.userDelegate = self;
-            //                self.navigationController.navigationBarHidden = NO;
-            //                [self.navigationController pushViewController:msgController animated:YES];
-            //            } else {
-            //                MessageListViewController *ctrl = [[MessageListViewController alloc] init];
-            //                ctrl.currentUID = [tfSender.text longLongValue];
-            //                ctrl.userDelegate = self;
-            //                ctrl.groupDelegate = self;
-            //                self.navigationController.navigationBarHidden = NO;
-            //                [self.navigationController pushViewController:ctrl animated:YES];
-            //            }
-        });
-    });
-}
+//- (void)actionChat {
+//    //    if (!tfSender.text.length) {
+//    //        NSLog(@"invalid input");
+//    //        return;
+//    //    }
+//    [self.view endEditing:YES];
+//
+//    //    self.chatButton.userInteractionEnabled = NO;
+//    //    long long sender = [tfSender.text longLongValue];
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//
+//        NSString *token = [self login:1];
+//
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            //            self.chatButton.userInteractionEnabled = YES;
+//
+//            if (token.length == 0) {
+//                NSLog(@"login fail");
+//                return;
+//            }
+//
+//            NSLog(@"login success");
+//
+//
+//
+//#ifdef FILE_ENGINE_DB
+//            NSString *path = [self getDocumentPath];
+//            NSString *dbPath = [NSString stringWithFormat:@"%@/%lld", path, [@"1" longLongValue]];
+//            [self mkdir:dbPath];
+//
+//#elif defined SQL_ENGINE_DB
+//            NSString *path = [self getDocumentPath];
+//            NSString *dbPath = [NSString stringWithFormat:@"%@/gobelieve_%lld.db", path, [tfSender.text longLongValue]];
+//
+//            //检查数据库文件是否已经存在
+//            NSFileManager *fileManager = [NSFileManager defaultManager];
+//            if (![fileManager fileExistsAtPath:dbPath]) {
+//                NSString *p = [[NSBundle mainBundle] pathForResource:@"gobelieve" ofType:@"db"];
+//                [fileManager copyItemAtPath:p toPath:dbPath error:nil];
+//            }
+//            FMDatabase *db = [[FMDatabase alloc] initWithPath:dbPath];
+//            BOOL r = [db openWithFlags:SQLITE_OPEN_READWRITE|SQLITE_OPEN_WAL vfs:nil];
+//            if (!r) {
+//                NSLog(@"open database error:%@", [db lastError]);
+//                db = nil;
+//                NSAssert(NO, @"");
+//            }
+//#else
+//#error dd
+//#endif
+//
+//
+//
+//#ifdef FILE_ENGINE_DB
+//            [PeerMessageDB instance].dbPath = [NSString stringWithFormat:@"%@/peer", dbPath];
+//            [GroupMessageDB instance].dbPath = [NSString stringWithFormat:@"%@/group", dbPath];
+//            [CustomerMessageDB instance].dbPath = [NSString stringWithFormat:@"%@/customer", dbPath];
+//#elif defined SQL_ENGINE_DB
+//            [PeerMessageDB instance].db = db;
+//            [GroupMessageDB instance].db = db;
+//            [CustomerMessageDB instance].db = db;
+//#else
+//
+//#endif
+//
+//            [PeerMessageHandler instance].uid = [@"1" longLongValue];
+//            [GroupMessageHandler instance].uid = [@"1" longLongValue];
+//            [CustomerMessageHandler instance].uid = [@"1" longLongValue];
+//
+//            [IMHttpAPI instance].accessToken = token;
+//            [IMService instance].token = token;
+//
+//
+//            path = [self getDocumentPath];
+//            dbPath = [NSString stringWithFormat:@"%@/%lld", path, [@"1" longLongValue]];
+//            [self mkdir:dbPath];
+//
+//            NSString *fileName = [NSString stringWithFormat:@"%@/synckey", dbPath];
+//
+//            SyncKeyHandler *handler = [[SyncKeyHandler alloc] initWithFileName:fileName];
+//            [IMService instance].syncKeyHandler = handler;
+//
+//            [IMService instance].syncKey = [handler syncKey];
+//            NSLog(@"sync key:%lld", [handler syncKey]);
+//
+//            [[IMService instance] clearSuperGroupSyncKey];
+//            NSDictionary *groups = [handler superGroupSyncKeys];
+//            for (NSNumber *k in groups) {
+//                NSNumber *v = [groups objectForKey:k];
+//                NSLog(@"group id:%@ sync key:%@", k, v);
+//                [[IMService instance] addSuperGroupSyncKey:[v longLongValue] gid:[k longLongValue]];
+//            }
+//
+//            [[IMService instance] start];
+//
+//            if (self.deviceToken.length > 0) {
+//
+//                [IMHttpAPI bindDeviceToken:self.deviceToken
+//                                   success:^{
+//                                       NSLog(@"bind device token success");
+//                                   }
+//                                      fail:^{
+//                                          NSLog(@"bind device token fail");
+//                                      }];
+//            }
+//
+//            //            if (tfReceiver.text.length > 0) {
+//            //                PeerMessageViewController *msgController = [[PeerMessageViewController alloc] init];
+//            //                msgController.currentUID = [tfSender.text longLongValue];
+//            //                msgController.peerUID = [tfReceiver.text longLongValue];
+//            //                msgController.peerName = @"测试";
+//            //                msgController.userDelegate = self;
+//            //                self.navigationController.navigationBarHidden = NO;
+//            //                [self.navigationController pushViewController:msgController animated:YES];
+//            //            } else {
+//            //                MessageListViewController *ctrl = [[MessageListViewController alloc] init];
+//            //                ctrl.currentUID = [tfSender.text longLongValue];
+//            //                ctrl.userDelegate = self;
+//            //                ctrl.groupDelegate = self;
+//            //                self.navigationController.navigationBarHidden = NO;
+//            //                [self.navigationController pushViewController:ctrl animated:YES];
+//            //            }
+//        });
+//    });
+//}
 //生成token
--(NSString*)login:(long long)uid {
-    //调用app自身的服务器获取连接im服务必须的access token
-    //    NSString *url = @"http://demo.gobelieve.io/auth/token";
-    NSString * url = [NSString stringWithFormat:@"%@/%@",[IMHttpAPI instance].apiURL,IMToken];//@"http://192.168.1.100:8010/course-im/auth/grant";
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]
-                                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                          timeoutInterval:60];
-    
-    
-    [urlRequest setHTTPMethod:@"POST"];
-    
-    NSMutableDictionary *headers = [NSMutableDictionary dictionaryWithObject:@"application/json" forKey:@"Content-Type"];
-    
-    NSString * auth = [NSString stringWithFormat:@"Basic Nzo0NDk3NjBiMTIwNjEwYWMwYjNhYmRiZDk1NTI1NGVlMA=="];
-    
-    [headers setObject:auth forKey:@"Authorization"];
-    
-    NSString * tokenLD = [[Appsetting sharedInstance] getUsetInfo].token;
-    
-    [headers setObject:[NSString stringWithFormat:@"Bearer %@",tokenLD] forKey:@"token"];
-    
-    [urlRequest setAllHTTPHeaderFields:headers];
-    
-    
-    
-#if TARGET_IPHONE_SIMULATOR
-    NSString *deviceID = @"7C8A8F5B-E5F4-4797-8758-05367D2A4D61";
-    NSLog(@"device id:%@", @"7C8A8F5B-E5F4-4797-8758-05367D2A4D61");
-#else
-    NSString *deviceID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-    NSLog(@"device id:%@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]);
-#endif
-    
-    
-    NSMutableDictionary *obj = [NSMutableDictionary dictionary];
-    [obj setObject:[NSNumber numberWithLongLong:uid] forKey:@"uid"];
-    [obj setObject:[NSString stringWithFormat:@"测试用户%lld", uid] forKey:@"user_name"];
-    [obj setObject:[NSNumber numberWithInt:PLATFORM_IOS] forKey:@"platform_id"];
-    [obj setObject:deviceID forKey:@"device_id"];
-    
-    NSData *postBody = [NSJSONSerialization dataWithJSONObject:obj options:0 error:nil];
-    
-    [urlRequest setHTTPBody:postBody];
-    
-    NSURLResponse *response = nil;
-    
-    NSError *error = nil;
-    
-    NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
-    if (error != nil) {
-        NSLog(@"error:%@", error);
-        return nil;
-    }
-    NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*)response;
-    if (httpResp.statusCode != 200) {
-        return nil;
-    }
-    NSDictionary *e = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-    return [NSString stringWithFormat:@"%@", [e objectForKey:@"token"]];
-    //    return [NSString stringWithFormat:@"%@",[[e objectForKey:@"body"] objectForKey:@"token"]];
-}
+//-(NSString*)login:(long long)uid {
+//    //调用app自身的服务器获取连接im服务必须的access token
+//    //    NSString *url = @"http://demo.gobelieve.io/auth/token";
+//    NSString * url = [NSString stringWithFormat:@"%@/%@",[IMHttpAPI instance].apiURL,IMToken];
+//    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]
+//                                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
+//                                                          timeoutInterval:60];
+//
+//
+//    [urlRequest setHTTPMethod:@"POST"];
+//
+//    NSMutableDictionary *headers = [NSMutableDictionary dictionaryWithObject:@"application/json" forKey:@"Content-Type"];
+//
+//    NSString * auth = [NSString stringWithFormat:@"Basic Nzo0NDk3NjBiMTIwNjEwYWMwYjNhYmRiZDk1NTI1NGVlMA=="];
+//
+//    [headers setObject:auth forKey:@"Authorization"];
+//
+//    NSString * tokenLD = [[Appsetting sharedInstance] getUsetInfo].token;
+//
+//    [headers setObject:[NSString stringWithFormat:@"Bearer %@",tokenLD] forKey:@"token"];
+//
+//    [urlRequest setAllHTTPHeaderFields:headers];
+//
+//
+//
+//#if TARGET_IPHONE_SIMULATOR
+//    NSString *deviceID = @"7C8A8F5B-E5F4-4797-8758-05367D2A4D61";
+//    NSLog(@"device id:%@", @"7C8A8F5B-E5F4-4797-8758-05367D2A4D61");
+//#else
+//    NSString *deviceID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+//    NSLog(@"device id:%@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]);
+//#endif
+//
+//
+//    NSMutableDictionary *obj = [NSMutableDictionary dictionary];
+//    [obj setObject:[NSNumber numberWithLongLong:uid] forKey:@"uid"];
+//    [obj setObject:[NSString stringWithFormat:@"测试用户%lld", uid] forKey:@"user_name"];
+//    [obj setObject:[NSNumber numberWithInt:PLATFORM_IOS] forKey:@"platform_id"];
+//    [obj setObject:deviceID forKey:@"device_id"];
+//
+//    NSData *postBody = [NSJSONSerialization dataWithJSONObject:obj options:0 error:nil];
+//
+//    [urlRequest setHTTPBody:postBody];
+//
+//    NSURLResponse *response = nil;
+//
+//    NSError *error = nil;
+//
+//    NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
+//    if (error != nil) {
+//        NSLog(@"error:%@", error);
+//        return nil;
+//    }
+//    NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*)response;
+//    if (httpResp.statusCode != 200) {
+//        return nil;
+//    }
+//    NSDictionary *e = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+//    return [NSString stringWithFormat:@"%@", [e objectForKey:@"token"]];
+//    //    return [NSString stringWithFormat:@"%@",[[e objectForKey:@"body"] objectForKey:@"token"]];
+//}
 
 
 - (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {

@@ -65,29 +65,24 @@
             }];
         }
     }
-//    _recordView = [[EaseRecordView alloc] initWithFrame:CGRectMake(90, 130, 140, 140)];
-    
+    [self setVoiceBtn];//设置抢答按钮
+}
+-(void)setVoiceBtn{
     UIButton * btn = self.chatToolbar.recordButton;//[UIButton buttonWithType:UIButtonTypeCustom];
     btn.hidden = NO;
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btn setTitle:@"按住抢答" forState:UIControlStateNormal];
     [btn setTitle:@"上滑取消" forState:UIControlStateHighlighted];
+    if ([[IMService instance] connectState] == STATE_CONNECTING) {
+        self.navigationItem.title = @"连接中...";
+        [btn setEnabled:NO];
+    }
     btn.frame = CGRectMake(0, APPLICATION_HEIGHT-50, APPLICATION_WIDTH, 50);
     [btn setBackgroundImage:[UIImage imageNamed:@"Rectangle3"] forState:UIControlStateNormal];
     [self.view addSubview:btn];
 
-//    [self setNavigationTitle];
 }
--(void)viewWillDisappear:(BOOL)animated{
-    _type = @"";
-}
-//-(void)viewWillAppear:(BOOL)animated{
-//        self.navigationController.navigationBarHidden = YES; //设置隐藏
-//}
-//-(void)viewWillDisappear:(BOOL)animated{
-//        self.navigationController.navigationBarHidden = NO; //设置隐藏
-//
-//}
+
 /**
  *  显示navigation的标题
  **/
@@ -127,10 +122,11 @@
     //
     //    self.navigationItem.leftBarButtonItem = myButton;
 }
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBarHidden = NO; //设置隐藏
+}
 -(void)back{
     if ([_backType isEqualToString:@"TabBar"]) {
-        
-        
         
         DYTabBarViewController *rootVC = [DYTabBarViewController sharedInstance];
         

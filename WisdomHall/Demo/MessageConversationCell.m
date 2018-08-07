@@ -143,9 +143,16 @@
     if (conv.timestamp>0) {
         NSDate *date = [NSDate dateWithTimeIntervalSince1970: conv.timestamp];
         
-        NSString *str = [[self class] getConversationTimeString:date ];//
+        NSString *str = [[self class] getConversationTimeString:date];//
+        self.timelabel.text = str;//暂时发现存在垃圾时间数据
+
+//        NSArray * aryTime = [str componentsSeparatedByString:@"-"];
+//        if (aryTime.count>0) {
+//            if ([aryTime[0] intValue]>=2018) {
+//                self.timelabel.text = str;//暂时发现存在垃圾时间数据
+//            }
+//        }
         
-        self.timelabel.text = str;
     }
     
     

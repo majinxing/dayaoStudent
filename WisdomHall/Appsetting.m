@@ -189,6 +189,8 @@
     
     [IMService instance].token = @"";
     
+    [IMHttpAPI instance].accessToken = @"";
+    
     [[IMService instance] stop];
     
     

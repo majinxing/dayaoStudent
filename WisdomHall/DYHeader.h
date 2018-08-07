@@ -334,7 +334,7 @@
 
 #define SelectGroupById         @"course/group/selectGroupById"       //通过id查询群组
 
-
+#define SelectCourseById        @"course/course/query/byStudent"      //查询课程
 
 
 

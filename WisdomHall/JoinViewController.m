@@ -64,7 +64,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
 }
 -(void)addTableView{
     CollectionFlowLayout * flowLayout = [[CollectionFlowLayout alloc] init];
-    _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64+CGRectGetMaxY(_searchBtn.frame),APPLICATION_WIDTH,APPLICATION_HEIGHT-54-64) collectionViewLayout:flowLayout];
+    _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64+CGRectGetMaxY(_searchBtn.frame),APPLICATION_WIDTH,APPLICATION_HEIGHT-CGRectGetMaxY(_searchBtn.frame)-64) collectionViewLayout:flowLayout];
     //    flowLayout.headerReferenceSize = CGSizeMake(0, APPLICATION_HEIGHT/4);
     self.automaticallyAdjustsScrollViewInsets = NO;
     //注册
@@ -112,7 +112,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
                 [_classModelAry removeAllObjects];
             }
             dispatch_async(dispatch_get_main_queue(), ^{
-                [strongSelf getSelfJoinClassType:aPage];
+                [strongSelf getSelfJoinClass:aPage];
             });
             
             if (aIsHeader) {
@@ -125,43 +125,18 @@ static NSString * cellIdentifier = @"cellIdentifier";
 }
 
 -(void)getSelfJoinClass:(NSInteger)page{
-    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%ld",(long)page],@"start",_userModel.peopleId,@"studentId",@"2017-07-01",@"actStartTime",@"1000",@"length",_userModel.school,@"universityId",[NSString stringWithFormat:@"%d",[UIUtils getTermId]],@"termId",@"1",@"courseType",_searchStr,@"courseId",@"1",@"type",nil];
-    [[NetworkRequest sharedInstance] GET:QueryCourse dict:dict succeed:^(id data) {
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_textFile.text,@"id",nil];
+    [[NetworkRequest sharedInstance] GET:SelectCourseById dict:dict succeed:^(id data) {
         // NSLog(@"%@",data);
         NSString * str = [[data objectForKey:@"header"] objectForKey:@"message"];
         if ([str isEqualToString:@"成功"]) {
-            NSArray * ary = [[data objectForKey:@"body"] objectForKey:@"list"];
+            NSArray * ary = [data objectForKey:@"body"];
             for (int i = 0; i<ary.count; i++) {
                 ClassModel * c = [[ClassModel alloc] init];
                 [c setInfoWithDict:ary[i]];
                 [_classModelAry addObject:c];
             }
         }
-        [self getSelfJoinClassType:page];
-    } failure:^(NSError *error) {
-        NSLog(@"%@",error);
-        [UIUtils showInfoMessage:@"获取数据失败，请检查网络" withVC:self];
-        
-        [self hideHud];
-        
-    }];
-}
-
-//临时
--(void)getSelfJoinClassType:(NSInteger)page{
-    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%ld",(long)page],@"start",_userModel.peopleId,@"studentId",@"2017-07-01",@"actStartTime",@"1000",@"length",_userModel.school,@"universityId",_searchStr,@"courseId",@"1",@"type",nil];
-    [[NetworkRequest sharedInstance] GET:QueryCourse dict:dict succeed:^(id data) {
-        //NSLog(@"%@",data);
-        NSString * str = [[data objectForKey:@"header"] objectForKey:@"message"];
-        if ([str isEqualToString:@"成功"]) {
-            NSArray * ary = [[data objectForKey:@"body"] objectForKey:@"list"];
-            for (int i = 0; i<ary.count; i++) {
-                ClassModel * c = [[ClassModel alloc] init];
-                [c setInfoWithDict:ary[i]];
-                [_classModelAry addObject:c];
-            }
-        }
-        
         dispatch_async(dispatch_get_main_queue(), ^{
             [_collection reloadData];
             if (_classModelAry.count>0) {
@@ -180,8 +155,9 @@ static NSString * cellIdentifier = @"cellIdentifier";
         [self hideHud];
         
     }];
-    
 }
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

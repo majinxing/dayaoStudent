@@ -90,7 +90,7 @@
     [self selectApp];
     
     _user = [[Appsetting sharedInstance] getUsetInfo];
-    
+//
     [IMTool IMLogin:[NSString stringWithFormat:@"%@",_user.peopleId]];
 
 

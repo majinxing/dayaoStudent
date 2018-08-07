@@ -64,6 +64,8 @@
 //#import <gobelieve/IMHttpAPI.H>
 #import "IMHttpAPI.h"
 
+#import "IMTool.h"
+
 #include <netdb.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
@@ -175,7 +177,11 @@
     
 
     [self IM:application];//注意IM服务器地址
-
+    
+//    _user = [[Appsetting sharedInstance] getUsetInfo];
+    
+//    [IMTool IMLogin:[NSString stringWithFormat:@"%@",_user.peopleId]];
+    
     return YES;
 }
 
@@ -189,11 +195,11 @@
 
     //app可以单独部署服务器，给予第三方应用更多的灵活性
     [IMHttpAPI instance].apiURL =  [NSString stringWithFormat:@"http://api.jiantuokeji.com"];
-//
+////
     NSMutableString * strHost = [NSMutableString stringWithFormat:@"api.jiantuokeji.com"];
     
 //    [IMHttpAPI instance].apiURL =  [NSString stringWithFormat:@"http://192.168.1.100:8080"];
-
+//
 //    NSMutableString * strHost = [NSMutableString stringWithFormat:@"192.168.1.100"];
     
 ////    @"http://192.168.1.100:8080"
@@ -285,7 +291,7 @@
     
     n.backType = @"TabBar";
     
-//    self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:n];
+
     
         NSLog(@"%s",__func__);
     
