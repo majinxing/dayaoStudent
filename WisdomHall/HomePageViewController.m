@@ -52,6 +52,8 @@
     
     self.title = @"律动";
     
+    self.navigationController.title = @"首页";
+    
     [self addScrollView];
     
     _userModel = [[Appsetting sharedInstance] getUsetInfo];

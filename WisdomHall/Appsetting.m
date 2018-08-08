@@ -179,13 +179,6 @@
     [_mySettingData setValue:@"0" forKey:@"is_Login"];
     [_mySettingData synchronize];
     
-//    NSString * im_token = [_mySettingData objectForKey:@"IM_Token"];
-    
-//    [IMHttpAPI unbindDeviceToken:im_token success:^{
-//
-//    } fail:^{
-//
-//    }];
     
     [IMService instance].token = @"";
     

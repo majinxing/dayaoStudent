@@ -50,7 +50,8 @@
  **/
 -(void)setNavigationTitle{
 //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-   
+    self.navigationController.title = @"我的";
+    
     self.title = @"个人中心";
 }
 -(void)viewWillAppear:(BOOL)animated{

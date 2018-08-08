@@ -835,11 +835,18 @@
 }
 +(void)accountWasUnderTheRoof{
     
+    NSNotification *notification =[NSNotification notificationWithName:@"OutOfApp" object:nil userInfo:nil];
+
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+
     [[Appsetting sharedInstance] getOut];
+    
     DYTabBarViewController *rootVC = [DYTabBarViewController sharedInstance];
+    
+    [rootVC attempDealloc];
+
     rootVC = nil;
-    //    ChatHelper * c =[ChatHelper shareHelper];
-    //    [c getOut];
+ 
     WorkingLoginViewController * userLogin = [[WorkingLoginViewController alloc] init];
     [UIApplication sharedApplication].keyWindow.rootViewController =[[UINavigationController alloc] initWithRootViewController:userLogin];
     [UIUtils showInfoMessage:@"账号在另一台设备登录，请重新登录或修改密码" withVC:userLogin];

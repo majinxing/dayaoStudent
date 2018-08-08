@@ -141,7 +141,7 @@
         [self hideHud];
         return;
     }
-    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"500",@"universityId",_workNumber.text,@"loginStr",_password.text,@"password", nil];//大学id要灵活
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_user.school],@"universityId",_workNumber.text,@"loginStr",_password.text,@"password", nil];//大学id要灵活
     
     [[NetworkRequest sharedInstance] POST:Login dict:dict succeed:^(id data) {
         NSString * str = [[data objectForKey:@"header"] objectForKey:@"code"];

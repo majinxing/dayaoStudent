@@ -176,7 +176,7 @@
     }
     
 
-    [self IM:application];//注意IM服务器地址
+//    [self IM:application];//注意IM服务器地址
     
 //    _user = [[Appsetting sharedInstance] getUsetInfo];
     
@@ -186,56 +186,7 @@
 }
 
 
--(void)IM:(UIApplication *)application{
-    
-//    course-im/auth/grant
-    
-    _user = [[Appsetting sharedInstance] getUsetInfo];
 
-
-    //app可以单独部署服务器，给予第三方应用更多的灵活性
-    [IMHttpAPI instance].apiURL =  [NSString stringWithFormat:@"http://api.jiantuokeji.com"];
-////
-    NSMutableString * strHost = [NSMutableString stringWithFormat:@"api.jiantuokeji.com"];
-    
-//    [IMHttpAPI instance].apiURL =  [NSString stringWithFormat:@"http://192.168.1.100:8080"];
-//
-//    NSMutableString * strHost = [NSMutableString stringWithFormat:@"192.168.1.100"];
-    
-////    @"http://192.168.1.100:8080"
-//    [strHost deleteCharactersInRange:NSMakeRange(0, 7)];
-//    [strHost deleteCharactersInRange:NSMakeRange(strHost.length-5, 5)];
-    [IMService instance].host = strHost;
-    
-    //@"192.168.1.100";
-    //    //app可以单独部署服务器，给予第三方应用更多的灵活性
-//        [IMHttpAPI instance].apiURL = @"http://api.gobelieve.io";
-//        [IMService instance].host = @"imnode2.gobelieve.io";
-    
-    //
-    
-#if TARGET_IPHONE_SIMULATOR
-    NSString *deviceID = @"7C8A8F5B-E5F4-4797-8758-05367D2A4D61";
-#else
-    NSString *deviceID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-#endif
-    [IMService instance].deviceID = deviceID;
-    NSLog(@"device id:%@", deviceID);
-    
-    [IMService instance].peerMessageHandler = [PeerMessageHandler instance];
-    [IMService instance].groupMessageHandler = [GroupMessageHandler instance];
-    [IMService instance].customerMessageHandler = [CustomerMessageHandler instance];
-    
-    [[IMService instance] startRechabilityNotifier];
-    
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert
-                                                                                         | UIUserNotificationTypeBadge
-                                                                                         | UIUserNotificationTypeSound) categories:nil];
-    [application registerUserNotificationSettings:settings];
-    
-    
-    [self refreshHost];
-}
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     /// Required - 注册 DeviceToken
@@ -284,12 +235,6 @@
 }
 
 -(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
-    
-    NoticeViewController * n = [[NoticeViewController alloc] init];
-    
-    
-    
-    n.backType = @"TabBar";
     
 
     
@@ -483,10 +428,10 @@
     UNNotificationContent *content = request.content; // 收到推送的消息内容
     
 //    NSNumber *badge = @1;  // 推送消息的角标
-    NSString *body = content.body;    // 推送消息体
-    UNNotificationSound *sound = content.sound;  // 推送消息的声音
-    NSString *subtitle = content.subtitle;  // 推送消息的副标题
-    NSString *title = content.title;  // 推送消息的标题
+//    NSString *body = content.body;    // 推送消息体
+//    UNNotificationSound *sound = content.sound;  // 推送消息的声音
+//    NSString *subtitle = content.subtitle;  // 推送消息的副标题
+//    NSString *title = content.title;  // 推送消息的标题
     
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
