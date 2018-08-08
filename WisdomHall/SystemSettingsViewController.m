@@ -24,7 +24,6 @@
     self.title = @"系统设置";
     self.view.backgroundColor = [UIColor whiteColor];
     self.outApp.backgroundColor = [[Appsetting sharedInstance] getThemeColor];
-    // Do any additional setup after loading the view from its nib.
 }
 - (IBAction)logoutButtonPressed:(id)sender {
     
