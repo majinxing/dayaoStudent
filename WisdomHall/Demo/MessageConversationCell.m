@@ -145,13 +145,13 @@
         
         NSString *str = [[self class] getConversationTimeString:date];//
         self.timelabel.text = str;//暂时发现存在垃圾时间数据
-
-//        NSArray * aryTime = [str componentsSeparatedByString:@"-"];
-//        if (aryTime.count>0) {
-//            if ([aryTime[0] intValue]>=2018) {
-//                self.timelabel.text = str;//暂时发现存在垃圾时间数据
-//            }
-//        }
+        
+        //        NSArray * aryTime = [str componentsSeparatedByString:@"-"];
+        //        if (aryTime.count>0) {
+        //            if ([aryTime[0] intValue]>=2018) {
+        //                self.timelabel.text = str;//暂时发现存在垃圾时间数据
+        //            }
+        //        }
         
     }
     
@@ -186,31 +186,32 @@
             [self.headView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",_user.host,FileDownload,strId]] placeholderImage:[UIImage imageNamed:@"PersonalChat"]];
             
             
-            if ([UIUtils isBlankString:self.namelabel.text]||[UIUtils isBlankString:strId]) {
-                NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:str1,@"id", nil];
-                [[NetworkRequest sharedInstance] GET:QuerySelfInfo dict:dict succeed:^(id data) {
-                    NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
-                    if ([str isEqualToString:@"成功"]) {
+            //            if ([UIUtils isBlankString:self.namelabel.text]||[UIUtils isBlankString:strId]) {
+            NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:str1,@"id", nil];
+            [[NetworkRequest sharedInstance] GET:QuerySelfInfo dict:dict succeed:^(id data) {
+                NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+                if ([str isEqualToString:@"成功"]) {
+                    
+                    self.namelabel.text = [NSString stringWithFormat:@"%@",[[data objectForKey:@"body"] objectForKey:@"name"]];//self.conversation.name;
+                    
+                    NSString * picId = [[data objectForKey:@"body"] objectForKey:@"pictureId"];
+                    
+                    [[Appsetting sharedInstance] sevePeopleId:str1 withPeopleName:self.namelabel.text withPeoplePictureId:picId];
+                    
+                    if(![UIUtils isBlankString:[NSString stringWithFormat:@"%@",picId]]){
                         
-                        self.namelabel.text = [NSString stringWithFormat:@"%@",[[data objectForKey:@"body"] objectForKey:@"name"]];//self.conversation.name;
-                        
-                        NSString * picId = [[data objectForKey:@"body"] objectForKey:@"pictureId"];
-                        
-                        [[Appsetting sharedInstance] sevePeopleId:str1 withPeopleName:self.namelabel.text withPeoplePictureId:picId];
-                        
-                        if(![UIUtils isBlankString:[NSString stringWithFormat:@"%@",picId]]){
-                            
-                            [self.headView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",_user.host,FileDownload,picId]] placeholderImage:[UIImage imageNamed:@"PersonalChat"]];
-                            
-                        }
+                        [self.headView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",_user.host,FileDownload,picId]] placeholderImage:[UIImage imageNamed:@"PersonalChat"]];
                         
                     }
-                } failure:^(NSError *error) {
                     
-                }];
-            }else{
-                [self.headView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",_user.host,FileDownload,strId]] placeholderImage:[UIImage imageNamed:@"PersonalChat"]];
-            }
+                }
+            } failure:^(NSError *error) {
+                
+            }];
+            //            }
+            //        else{
+            //                [self.headView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",_user.host,FileDownload,strId]] placeholderImage:[UIImage imageNamed:@"PersonalChat"]];
+            //            }
             
         }
     }

@@ -11,7 +11,7 @@
 #import "ShareButton.h"
 
 #define columns 4
-#define buttonWH 52
+#define buttonWH 59
 #define marginHeight 8
 
 @implementation HomeButtonView

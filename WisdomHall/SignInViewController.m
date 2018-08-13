@@ -173,31 +173,6 @@ static NSString *cellIdentifier = @"cellIdentifier";
     });
 }
 
--(void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
-    NSString *subtypeString;
-    
-    subtypeString = kCATransitionFromRight;
-    
-    [self transitionWithType:@"pageCurl" WithSubtype:subtypeString ForView:self.view];
-}
-- (void) transitionWithType:(NSString *) type WithSubtype:(NSString *) subtype ForView : (UIView *) view {
-    
-    CATransition *animation = [CATransition animation];
-    
-    animation.duration = 0.7f;
-    
-    animation.type = type;
-    
-    if (subtype != nil) {
-        animation.subtype = subtype;
-        
-    }
-    animation.timingFunction = UIViewAnimationOptionCurveEaseInOut;
-    
-    [view.layer addAnimation:animation forKey:@"animation"];
-    
-}
-
 #pragma mark 获取数据
 
 -(void)getSelfJoinClass:(NSInteger)page{
@@ -294,8 +269,6 @@ static NSString *cellIdentifier = @"cellIdentifier";
  *  显示navigation的标题
  **/
 -(void)setNavigationTitle{
-//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    
 
     
     UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"..." style:UIBarButtonItemStylePlain target:self action:@selector(selectionBtnPressed)];

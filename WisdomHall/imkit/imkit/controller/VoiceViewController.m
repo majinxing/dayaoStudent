@@ -65,7 +65,12 @@
             }];
         }
     }
+    self.tableView.frame = CGRectMake(0, 0, self.tableView.frame.size.width,self.tableView.frame.size.height-10);
+
     [self setVoiceBtn];//设置抢答按钮
+    
+    
+    
 }
 -(void)setVoiceBtn{
     UIButton * btn = self.chatToolbar.recordButton;//[UIButton buttonWithType:UIButtonTypeCustom];
@@ -77,7 +82,9 @@
         self.navigationItem.title = @"连接中...";
         [btn setEnabled:NO];
     }
-    btn.frame = CGRectMake(0, APPLICATION_HEIGHT-50, APPLICATION_WIDTH, 50);
+//    [UIUtils deviceVersion];
+    btn.frame = CGRectMake(0, APPLICATION_HEIGHT-60, APPLICATION_WIDTH, 60);
+    
     [btn setBackgroundImage:[UIImage imageNamed:@"Rectangle3"] forState:UIControlStateNormal];
     [self.view addSubview:btn];
 
