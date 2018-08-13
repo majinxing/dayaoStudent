@@ -1670,7 +1670,23 @@
 //修改屏幕亮度
 
 +(BOOL)didUserPressLockButton{
+    //获取屏幕亮度
+//    CGFloat oldBrightness = [UIScreen mainScreen].brightness;
+//    //以较小的数量改变屏幕亮度
+////    [[UIScreen mainScreen] setBrightness:oldBrightness + (oldBrightness <= 0.0001 ? (0.0001) : (-0.0001))];
+//    [UIScreen mainScreen].brightness = oldBrightness + 0.0001;
+//    CGFloat newBrightness = [UIScreen mainScreen].brightness;
+//    //恢复屏幕亮度
+//    [UIScreen mainScreen].brightness = oldBrightness;
+//    //判断屏幕亮度是否能够被改变
+//    if (oldBrightness == newBrightness) {
+//        return NO;
+//    }
+//    return YES;
     
+    
+  
+//    return YES;
     CGFloat screenBrightness = [[UIScreen mainScreen] brightness];
     if (screenBrightness > 0) {
         // Home事件
@@ -1682,16 +1698,7 @@
         return YES;
     }
     return NO;
-    //    //获取屏幕亮度
-    //    CGFloat oldBrightness = [UIScreen mainScreen].brightness;
-    //    //以较小的数量改变屏幕亮度
-    //    [UIScreen mainScreen].brightness = oldBrightness + (oldBrightness <= 0.01 ? (0.01) : (-0.01));
-    //
-    //    CGFloat newBrightness = [UIScreen mainScreen].brightness;
-    //    //恢复屏幕亮度
-    //    [UIScreen mainScreen].brightness = oldBrightness;
-    //    //判断屏幕亮度是否能够被改变
-    //    return oldBrightness != newBrightness;
+   
     
 }
 +(NSString *)md5:(NSString *)str

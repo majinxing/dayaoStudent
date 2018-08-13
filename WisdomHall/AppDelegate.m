@@ -105,7 +105,7 @@
     
     [Bugly startWithAppId:@"64f1536e43"];//用于崩溃统计
     
-
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -122,10 +122,10 @@
         
     }else{
         WorkingLoginViewController * loginVC = [[WorkingLoginViewController alloc] init];
-//        TheLoginViewController * loginVC = [[TheLoginViewController alloc] init];
+        //        TheLoginViewController * loginVC = [[TheLoginViewController alloc] init];
         self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:loginVC];
     }
-
+    
     // iOS8之后和之前应区别对待
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound categories:nil];
@@ -146,7 +146,7 @@
     }
     [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
     
-
+    
     NSString *advertisingId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
     
     // Required
@@ -175,12 +175,12 @@
         UITableView.appearance.estimatedSectionHeaderHeight = 0;
     }
     
-
-//    [self IM:application];//注意IM服务器地址
     
-//    _user = [[Appsetting sharedInstance] getUsetInfo];
+    //    [self IM:application];//注意IM服务器地址
     
-//    [IMTool IMLogin:[NSString stringWithFormat:@"%@",_user.peopleId]];
+    //    _user = [[Appsetting sharedInstance] getUsetInfo];
+    
+    //    [IMTool IMLogin:[NSString stringWithFormat:@"%@",_user.peopleId]];
     
     return YES;
 }
@@ -236,9 +236,15 @@
 
 -(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
     
-
+    //    NoticeViewController * n = [[NoticeViewController alloc] init];
+    //
+    //
+    //
+    //    n.backType = @"TabBar";
+    //
     
-        NSLog(@"%s",__func__);
+    
+    NSLog(@"%s",__func__);
     
 }
 
@@ -262,7 +268,7 @@
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
     [[IMService instance] enterBackground];
-
+    
     
     
     [[CollectionHeadView sharedInstance] onceSetNil];
@@ -274,25 +280,38 @@
         
         
         NSLog(@"Lock screen.");
+        
+        UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
+        if (![UIUtils isBlankString:user.peopleId]) {
+            
+            NSDictionary * dict = @{@"appState":@"2",@"id":[NSString stringWithFormat:@"%@",user.peopleId]};
+            [[NetworkRequest sharedInstance] POST:ChangeAppState dict:dict succeed:^(id data) {
+                NSLog(@"%@",data);
+            } failure:^(NSError *error) {
+                NSLog(@"%@",error);
+                
+            }];
+            
+        }
         // 标记一个长时间运行的后台任务将开始
-        // 通过调试，发现，iOS给了我们额外的10分钟（600s）来执行这个任务。
-        self.backgroundTaskIdentifier =[application beginBackgroundTaskWithExpirationHandler:^(void) {
-            
-            // 当应用程序留给后台的时间快要到结束时（应用程序留给后台执行的时间是有限的）， 这个Block块将被执行
-            // 我们需要在次Block块中执行一些清理工作。
-            // 如果清理工作失败了，那么将导致程序挂掉
-            
-            // 清理工作需要在主线程中用同步的方式来进行
-            
-            
-            [self endBackgroundTask];
-        }];
-        // 模拟一个Long-Running Task
-        self.myTimer =[NSTimer scheduledTimerWithTimeInterval:10
-                                                       target:self
-                                                     selector:@selector(timerMethod:)     userInfo:nil
-                                                      repeats:YES];
-        [_myTimer fire];
+        //        // 通过调试，发现，iOS给了我们额外的10分钟（600s）来执行这个任务。
+        //        self.backgroundTaskIdentifier =[application beginBackgroundTaskWithExpirationHandler:^(void) {
+        //
+        //            // 当应用程序留给后台的时间快要到结束时（应用程序留给后台执行的时间是有限的）， 这个Block块将被执行
+        //            // 我们需要在次Block块中执行一些清理工作。
+        //            // 如果清理工作失败了，那么将导致程序挂掉
+        //
+        //            // 清理工作需要在主线程中用同步的方式来进行
+        //
+        //
+        //            [self endBackgroundTask];
+        //        }];
+        //        // 模拟一个Long-Running Task
+        //        self.myTimer =[NSTimer scheduledTimerWithTimeInterval:10
+        //                                                       target:self
+        //                                                     selector:@selector(timerMethod:)     userInfo:nil
+        //                                                      repeats:YES];
+        //        [_myTimer fire];
     }else {
         NSLog(@"Home.");
         //目的是为了停止inApp的时钟
@@ -335,8 +354,9 @@
         if (backgroundTimeRemaining<=30) {
             NSDictionary * dict = @{@"appState":@"2",@"id":[NSString stringWithFormat:@"%@",user.peopleId]};
             [[NetworkRequest sharedInstance] POST:ChangeAppState dict:dict succeed:^(id data) {
-                
+                NSLog(@"%@",data);
             } failure:^(NSError *error) {
+                NSLog(@"%@",error);
                 
             }];
         }else{
@@ -352,7 +372,7 @@
     if ([UIUtils didUserPressLockButton]) {
         NSLog(@"%s",__func__);
     }
-
+    
     
 }
 
@@ -365,10 +385,11 @@
     [self refreshHost];
     
     
-    
-    
-    
     CollectionHeadView *view = [CollectionHeadView sharedInstance];
+    
+    [self.myTimer invalidate];
+    
+    self.myTimer = nil;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:InApp object:nil];
     
@@ -415,7 +436,7 @@
     NoticeViewController * n = [[NoticeViewController alloc] init];
     
     n.backType = @"TabBar";
-//    self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:n];
+    //    self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:n];
     
     completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以设置
 }
@@ -427,21 +448,21 @@
     UNNotificationRequest *request = response.notification.request; // 收到推送的请求
     UNNotificationContent *content = request.content; // 收到推送的消息内容
     
-//    NSNumber *badge = @1;  // 推送消息的角标
-//    NSString *body = content.body;    // 推送消息体
-//    UNNotificationSound *sound = content.sound;  // 推送消息的声音
-//    NSString *subtitle = content.subtitle;  // 推送消息的副标题
-//    NSString *title = content.title;  // 推送消息的标题
+    //    NSNumber *badge = @1;  // 推送消息的角标
+    //    NSString *body = content.body;    // 推送消息体
+    //    UNNotificationSound *sound = content.sound;  // 推送消息的声音
+    //    NSString *subtitle = content.subtitle;  // 推送消息的副标题
+    //    NSString *title = content.title;  // 推送消息的标题
     
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
         NSLog(@"iOS10 收到远程通知:%@", [self logDic:userInfo]);
-//        [rootViewController addNotificationCount];
+        //        [rootViewController addNotificationCount];
         
     }
     else {
         // 判断为本地通知
-//        NSLog(@"iOS10 收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
+        //        NSLog(@"iOS10 收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
     }
     
     completionHandler();  // 系统要求执行这个方法
@@ -463,7 +484,7 @@ fetchCompletionHandler:
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:strUrl message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
     
     [alertView show];
-
+    
     NSLog(@"iOS7及以上系统，收到通知:%@", [self logDic:userInfo]);
     
     if ([[UIDevice currentDevice].systemVersion floatValue]<10.0 || application.applicationState>0) {
