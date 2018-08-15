@@ -136,16 +136,7 @@
     _meetCode.text = [NSString stringWithFormat:@"邀请码：%@",classModel.sclassId];
     _joinPeopleLable.text = @"同窗好友";
     
-    if (![UIUtils isBlankString:classModel.teacherPictureId]) {
-        UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
-        
-        NSString * baseURL = user.host;
-        
-        [_teacherPicture sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",baseURL,FileDownload,classModel.teacherPictureId]] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-        
-    }else{
-        _teacherPicture.image = [UIImage imageNamed:@"course"];
-    }
+   
     if (![UIUtils isBlankString:[NSString stringWithFormat:@"%@",classModel.signStatus]]) {
         if (![[NSString stringWithFormat:@"%@",classModel.signStatus] isEqualToString:@"1"]) {
             _signCode.frame = CGRectMake(APPLICATION_WIDTH/2, CGRectGetMaxY(_meetPlace.frame)+10, 120, 80);

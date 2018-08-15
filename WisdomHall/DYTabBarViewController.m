@@ -21,7 +21,6 @@
 //#import <Hyphenate/Hyphenate.h>
 
 //#import "ConversationVC.h"
-#import "ChatHelper.h"
 
 #import "AFNetworking/AFNetworking.h"
 
@@ -69,7 +68,6 @@
 
 @interface DYTabBarViewController ()<UIAlertViewDelegate>
 @property (nonatomic,copy)NSString * url;
-@property (nonatomic,strong) ChatHelper * chat;
 @property (nonatomic,strong)UserModel *user;
 @end
 
