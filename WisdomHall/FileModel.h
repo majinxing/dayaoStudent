@@ -14,5 +14,7 @@
 @property (nonatomic,copy)NSString * fileId;
 @property (nonatomic,copy)NSString * fileCreatTime;
 @property (nonatomic,assign)BOOL isLocal;//是否存在本地
+@property (nonatomic,copy)NSString * fileSize;//文件的大小
+
 -(void)setInfoWithDict:(NSDictionary *)dict;
 @end

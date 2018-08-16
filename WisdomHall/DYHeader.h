@@ -21,7 +21,7 @@
 #define Is_Iphone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 #define Is_Iphone_X (Is_Iphone && ScreenHeight == 812.0)
 #define NaviHeight Is_Iphone_X ? 88 : 64
-#define TabbarHeight Is_Iphone_X ? 83 : 49
+#define TabbarHeight Is_Iphone_X ? 102 : 64 //102加了20 64加了15
 #define BottomHeight Is_Iphone_X ? 34 : 0
 
 #define ScrollViewW [[UIScreen mainScreen] bounds].size.width - 20

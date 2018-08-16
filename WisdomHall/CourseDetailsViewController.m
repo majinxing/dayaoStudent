@@ -376,7 +376,7 @@
     return 0;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 20;
+    return 10;
 }
 
 #pragma mark - MessageViewControllerUserDelegate

@@ -54,9 +54,9 @@
     _secondTextVIew.text = selectText;
     _voteBtn.tag = tag;
     if ([select isEqualToString:@"选中"]) {
-        _selecdImage.image = [UIImage imageNamed:@"方形选中-fill"];
+        _selecdImage.image = [UIImage imageNamed:@"Oval"];
     }else{
-        _selecdImage.image = [UIImage imageNamed:@"方形未选中"];
+        _selecdImage.image = [UIImage imageNamed:@"Oval3"];
     }
 }
 - (IBAction)voteBtnPressed:(UIButton *)btn {

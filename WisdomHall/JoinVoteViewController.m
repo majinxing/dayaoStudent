@@ -48,7 +48,7 @@
     _seeResult.layer.cornerRadius = 20;
     _seeResult.layer.borderWidth = 1;
     _seeResult.layer.borderColor = [UIColor colorWithHexString:@"#0076FD"].CGColor;
-    _seeResult.font = [UIFont fontWithName:@"PingFangSC-Regular" size:15];
+    _seeResult.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:15];
     [_seeResult setTitleColor:[UIColor colorWithRed:0/255.0 green:118/255.0 blue:253/255.0 alpha:1/1.0] forState:UIControlStateNormal];
     
     _voteSubmit.layer.masksToBounds = YES;

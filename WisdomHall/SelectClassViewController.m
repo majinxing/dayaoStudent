@@ -45,7 +45,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
     [self.view endEditing:YES];
 }
 -(void)addSeachBar{
-    _mySearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 64, APPLICATION_WIDTH, 54)];
+    _mySearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, NaviHeight, APPLICATION_WIDTH, 54)];
     _mySearchBar.backgroundColor = [UIColor clearColor];
     //去掉搜索框背景
     
@@ -92,7 +92,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
  **/
 -(void)addCollection{
     CollectionFlowLayout * flowLayout = [[CollectionFlowLayout alloc] init];
-    _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64+54,APPLICATION_WIDTH,APPLICATION_HEIGHT-54-64) collectionViewLayout:flowLayout];
+    _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, (NaviHeight)+54,APPLICATION_WIDTH,APPLICATION_HEIGHT-54-(NaviHeight)) collectionViewLayout:flowLayout];
 //    flowLayout.headerReferenceSize = CGSizeMake(0, APPLICATION_HEIGHT/4);
     self.automaticallyAdjustsScrollViewInsets = NO;
     //注册

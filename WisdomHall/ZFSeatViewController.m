@@ -209,10 +209,10 @@
     
     for (int i = 0; i<4; i++) {
         
-        UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(50+(i%2)*140, APPLICATION_HEIGHT-180+(i/2)*25, 20, 20)];
+        UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(50+(i%2)*140, APPLICATION_HEIGHT-200+(i/2)*25, 20, 20)];
         image.image = [UIImage imageNamed:aryImage[i]];
         
-        UILabel * lable = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame)+10, APPLICATION_HEIGHT-180+(i/2)*25, 65, 20)];
+        UILabel * lable = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame)+10, APPLICATION_HEIGHT-200+(i/2)*25, 65, 20)];
         lable.text = ary[i];
         lable.font = [UIFont systemFontOfSize:15];
         
@@ -225,7 +225,7 @@
     
     UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    btn.frame = CGRectMake(APPLICATION_WIDTH/2, APPLICATION_HEIGHT-64-44, APPLICATION_WIDTH/2, 44);
+    btn.frame = CGRectMake(APPLICATION_WIDTH/2, APPLICATION_HEIGHT-(TabbarHeight)-44, APPLICATION_WIDTH/2, 44);
     
     [btn setBackgroundImage:[UIImage imageNamed:@"Rectangle3"] forState:UIControlStateNormal];
     
@@ -238,7 +238,7 @@
     [self.view addSubview:btn];
     
     
-    _seatLable = [[UILabel alloc] initWithFrame:CGRectMake(0, APPLICATION_HEIGHT-64-44, APPLICATION_WIDTH/2, 44)];
+    _seatLable = [[UILabel alloc] initWithFrame:CGRectMake(0, APPLICATION_HEIGHT-(TabbarHeight)-44, APPLICATION_WIDTH/2, 44)];
     if (![UIUtils isBlankString:_seat]) {
         _seatLable.text = [NSString stringWithFormat:@"座次:%@",_seat];
     }else{

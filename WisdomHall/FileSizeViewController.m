@@ -12,6 +12,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *fileDownload;
 @property (strong, nonatomic) IBOutlet UIImageView *fileImage;
 @property (strong, nonatomic) IBOutlet UILabel *fileName;
+@property (strong, nonatomic) IBOutlet UIButton *downLoadBtn;
 
 @end
 
@@ -34,6 +35,9 @@
     
     _fileImage.image = [UIImage imageNamed:[UIUtils returnFileType:ary[1]]];
     
+    double d = [_fileModel.fileSize doubleValue]/1024;
+    
+    [_downLoadBtn setTitle:[NSString stringWithFormat:@"下载（%0.2lfK）",d] forState:UIControlStateNormal];
     // Do any additional setup after loading the view from its nib.
 }
 - (IBAction)fileDownLoadBtn:(id)sender {

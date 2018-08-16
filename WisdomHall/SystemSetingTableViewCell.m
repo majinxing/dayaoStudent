@@ -88,7 +88,7 @@
             [cell.headImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?resourceId=%@",baseURL,FileDownload,user.userHeadImageId]] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
         }
         if ([[NSString stringWithFormat:@"%@",user.identity] isEqualToString:@"1"]) {
-            cell.workNumber.text = [NSString stringWithFormat:@"工号%@",cell.user.userName];
+            cell.workNumber.text = [NSString stringWithFormat:@"工号%@",cell.user.studentId];
         }else{
             cell.workNumber.text = [NSString stringWithFormat:@"学号%@",cell.user.studentId];
         }

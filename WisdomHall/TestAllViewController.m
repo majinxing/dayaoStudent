@@ -10,8 +10,8 @@
 #import "AllTestViewController.h"
 
 @interface TestAllViewController ()<UIScrollViewDelegate>
-@property (strong, nonatomic) IBOutlet UIButton *NOTest;
-@property (strong, nonatomic) IBOutlet UIButton *HaveTest;
+@property (strong, nonatomic)  UIButton *NOTest;
+@property (strong, nonatomic)  UIButton *HaveTest;
 
 @property (nonatomic,strong)UIScrollView * btnScrollView;
 @property (nonatomic,strong)UIScrollView * textScrollView;
@@ -29,13 +29,38 @@
     [self addScrollView];
     
     self.title = @"测验";
-   
+    
+    [self addBtn];
+    
+    // Do any additional setup after loading the view from its nib.
+}
+
+-(void)addBtn{
+    _NOTest = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    _HaveTest = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    _NOTest.tag = 1;
+    
+    _HaveTest.tag = 2;
+    
+    _NOTest.backgroundColor = [UIColor whiteColor];
+    
+    _HaveTest.backgroundColor = [UIColor whiteColor];
+    
+    _NOTest.frame = CGRectMake(0, NaviHeight, APPLICATION_WIDTH/2, 50);
+    
+    _HaveTest.frame = CGRectMake(APPLICATION_WIDTH/2, NaviHeight, APPLICATION_WIDTH/2, 50);
     
     [_NOTest setTitleColor:[UIColor blackColor]
-                 forState:UIControlStateNormal];
+                  forState:UIControlStateNormal];
     
     [_NOTest setTitleColor:[UIColor colorWithHexString:@"#29a7e1" alpha:1.0f]
-                 forState:UIControlStateSelected];
+                  forState:UIControlStateSelected];
+    
+    [_NOTest setTitle:@"未测试" forState:UIControlStateNormal];
+    
+    [_HaveTest setTitle:@"已测试" forState:UIControlStateNormal];
     
     _NOTest.selected = YES;
     
@@ -44,10 +69,13 @@
     [_HaveTest addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
     
     [_HaveTest setTitleColor:[UIColor blackColor]
-                  forState:UIControlStateNormal];
+                    forState:UIControlStateNormal];
     [_HaveTest setTitleColor:[UIColor colorWithHexString:@"#29a7e1" alpha:1.0f]
-                  forState:UIControlStateSelected];
-    // Do any additional setup after loading the view from its nib.
+                    forState:UIControlStateSelected];
+    
+    [self.view addSubview:_NOTest];
+    
+    [self.view addSubview:_HaveTest];
 }
 -(void)addScrollView{
     _vcAry = [NSMutableArray arrayWithCapacity:2];
@@ -62,11 +90,11 @@
         [_vcAry addObject:vc];
     }
  
-    _textScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64+50, APPLICATION_WIDTH, APPLICATION_HEIGHT-64-50)];
+    _textScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_HaveTest.frame), APPLICATION_WIDTH, APPLICATION_HEIGHT-CGRectGetMaxY(_HaveTest.frame))];
     _textScrollView.contentOffset = CGPointMake(0, 0);
     _textScrollView.bounces= YES;
     
-    _textScrollView.contentSize = CGSizeMake(APPLICATION_WIDTH*2, APPLICATION_HEIGHT-64-50);
+    _textScrollView.contentSize = CGSizeMake(APPLICATION_WIDTH*2, APPLICATION_HEIGHT-CGRectGetMaxY(_HaveTest.frame));
     _textScrollView.pagingEnabled = YES;
     _textScrollView.delegate = self;
     if (_vcAry.count) {

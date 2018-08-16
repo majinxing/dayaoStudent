@@ -6,14 +6,11 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TestAllViewController">
             <connections>
-                <outlet property="HaveTest" destination="ugh-Rq-NtH" id="7Gp-L2-vJn"/>
-                <outlet property="NOTest" destination="vfh-l4-Z2k" id="vEf-61-yhe"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,35 +18,7 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vfh-l4-Z2k">
-                    <rect key="frame" x="0.0" y="64" width="187.5" height="50"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="R53-I6-X3Y"/>
-                    </constraints>
-                    <state key="normal" title="未测验">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
-                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ugh-Rq-NtH">
-                    <rect key="frame" x="187.5" y="64" width="187.5" height="50"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="3Jy-TS-lpn"/>
-                    </constraints>
-                    <state key="normal" title="已测验">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
-            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <constraints>
-                <constraint firstItem="vfh-l4-Z2k" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8GW-mm-XsY"/>
-                <constraint firstItem="vfh-l4-Z2k" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="1/2" id="C24-Tl-7Yf"/>
-                <constraint firstItem="vfh-l4-Z2k" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="CSl-Gr-5YK"/>
-                <constraint firstAttribute="trailing" secondItem="ugh-Rq-NtH" secondAttribute="trailing" id="Mza-G1-hD5"/>
-                <constraint firstItem="ugh-Rq-NtH" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="1/2" id="TYB-Eu-B1x"/>
-                <constraint firstItem="ugh-Rq-NtH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="er5-85-AAI"/>
-            </constraints>
             <point key="canvasLocation" x="34.5" y="53.5"/>
         </view>
     </objects>

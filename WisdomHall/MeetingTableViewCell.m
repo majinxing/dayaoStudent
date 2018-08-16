@@ -211,7 +211,7 @@
     int marginWidth = (APPLICATION_WIDTH - buttonW * columns) / (columns + 1);
     //起始XY坐标
     int oneX = marginWidth;
-    int oneY = marginHeight;
+    int oneY = 20;
     
     for (int i = 0; i < array.count; i++)
     {
