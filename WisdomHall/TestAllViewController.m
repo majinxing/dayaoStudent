@@ -26,11 +26,12 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
+    [self addBtn];
+
     [self addScrollView];
     
     self.title = @"测验";
     
-    [self addBtn];
     
     // Do any additional setup after loading the view from its nib.
 }

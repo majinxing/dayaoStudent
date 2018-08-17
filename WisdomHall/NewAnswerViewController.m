@@ -344,10 +344,12 @@
     if (_temp == 0) {
         [_OnQuestion setEnabled:NO];
         [_nextQuestion setEnabled:YES];
-    }
-    if (_temp+1 == _allQuestionAry.count) {
+    }else if (_temp+1 == _allQuestionAry.count) {
         [_OnQuestion setEnabled:YES];
         [_nextQuestion setEnabled:NO];
+    }else{
+        [_OnQuestion setEnabled:YES];
+        [_nextQuestion setEnabled:YES];
     }
     [_tableView reloadData];
     [_selectQView removeFromSuperview];

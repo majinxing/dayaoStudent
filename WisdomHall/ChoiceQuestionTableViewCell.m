@@ -309,7 +309,7 @@
 }
 -(void)changeSeventhTextColor{
     _seventhTextView.textColor = [UIColor colorWithRed:16/255.0 green:157/255.0 blue:73/255.0 alpha:1/1.0];
-;
+
 }
 -(void)addSeventhTextViewWithStr:(NSString *)str withIndexRow:(int)row{
     _seventhTextView.tag = row;

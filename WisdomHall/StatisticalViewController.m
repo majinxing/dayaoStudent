@@ -85,6 +85,9 @@
     //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     self.title = @"统计";
+    
+   
+    
 }
 
 - (void)didReceiveMemoryWarning {
