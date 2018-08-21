@@ -344,12 +344,16 @@
     if (_temp == 0) {
         [_OnQuestion setEnabled:NO];
         [_nextQuestion setEnabled:YES];
+        [_nextQuestion setTitle:@"下一题" forState:UIControlStateNormal];
+
     }else if (_temp+1 == _allQuestionAry.count) {
         [_OnQuestion setEnabled:YES];
-        [_nextQuestion setEnabled:NO];
+        [_nextQuestion setTitle:@"提交" forState:UIControlStateNormal];
     }else{
         [_OnQuestion setEnabled:YES];
         [_nextQuestion setEnabled:YES];
+        [_nextQuestion setTitle:@"下一题" forState:UIControlStateNormal];
+
     }
     [_tableView reloadData];
     [_selectQView removeFromSuperview];

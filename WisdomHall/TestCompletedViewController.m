@@ -11,12 +11,12 @@
 #import "CorrectAnswerViewController.h"
 #import "SelectQuestion.h"
 
-@interface TestCompletedViewController ()<UIScrollViewDelegate>
+@interface TestCompletedViewController ()<UIScrollViewDelegate,SelectQuestionDelecate>
 
 @property (nonatomic,strong)UIScrollView * btnScrollView;
 @property (nonatomic,strong)UIScrollView * textScrollView;
-@property (strong, nonatomic) IBOutlet UIButton *selfAnswerBtn;
-@property (strong, nonatomic) IBOutlet UIButton *correctAnswerBtn;
+@property (strong, nonatomic)  UIButton *selfAnswerBtn;
+@property (strong, nonatomic)  UIButton *correctAnswerBtn;
 @property (strong, nonatomic) IBOutlet UIButton *onQuestion;
 @property (strong, nonatomic) IBOutlet UIButton *nextQuestion;
 @property (nonatomic,strong)NSMutableArray * vcAry;
@@ -33,6 +33,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _selfAnswerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    _selfAnswerBtn.frame = CGRectMake(0, TabbarHeight, APPLICATION_WIDTH/2, 44);
+    
     [_selfAnswerBtn setTitleColor:[UIColor blackColor]
                   forState:UIControlStateNormal];
     
@@ -41,14 +45,29 @@
     
     _selfAnswerBtn.selected = YES;
     
+    _selfAnswerBtn.tag = 1;
+    
+    [_selfAnswerBtn setTitle:@"自己答案" forState:UIControlStateNormal];
+    
+    [self.view addSubview:_selfAnswerBtn];
+    
     [_selfAnswerBtn addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
     
+    _correctAnswerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+
     [_correctAnswerBtn addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
     
     [_correctAnswerBtn setTitleColor:[UIColor blackColor]
                     forState:UIControlStateNormal];
     [_correctAnswerBtn setTitleColor:[UIColor colorWithHexString:@"#29a7e1" alpha:1.0f]
                     forState:UIControlStateSelected];
+    
+    _correctAnswerBtn.frame = CGRectMake(APPLICATION_WIDTH/2, TabbarHeight, APPLICATION_WIDTH/2, 44);
+    [_correctAnswerBtn setTitle:@"正确答案" forState:UIControlStateNormal];
+    
+    _correctAnswerBtn.tag = 2;
+    
+    [self.view addSubview:_correctAnswerBtn];
     
     [self initVCArray];
     
@@ -148,7 +167,7 @@
 }
 -(void)addScrollView{
     
-    _textScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64+44, APPLICATION_WIDTH, APPLICATION_HEIGHT-64-44-44)];
+    _textScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_correctAnswerBtn.frame), APPLICATION_WIDTH, APPLICATION_HEIGHT-CGRectGetMaxY(_correctAnswerBtn.frame)-44)];
     _textScrollView.contentOffset = CGPointMake(0, 0);
     _textScrollView.bounces= YES;
     

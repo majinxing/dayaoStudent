@@ -58,7 +58,7 @@
     
    
     _textState.text = [NSString stringWithFormat:@"%@",t.statusName];
-    if (![t.statusName isEqualToString:@"进行中"]) {
+    if ([t.statusName isEqualToString:@"已完成"]) {
         if ([t.resultStatus isEqualToString:@"2"]) {
             _score.text = [NSString stringWithFormat:@"%@分",t.score];
             _score.backgroundColor = RGBA_COLOR(222, 30, 30, 1);
