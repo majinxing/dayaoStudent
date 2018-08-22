@@ -444,6 +444,15 @@
     NSMutableArray * ary = [NSMutableArray arrayWithArray:[_mySettingData objectForKey:@"peopleId_Name"]];
     return ary;
 }
+-(void)saveBananerFirstImage:(NSString *)imageUrl{
+    
+    [_mySettingData setValue:imageUrl forKey:@"bananerImage"];
+    
+    [_mySettingData synchronize];
+}
+-(NSString *)getBananerFitstImage{
+    return [_mySettingData objectForKey:@"bananerImage"];
+}
 @end
 
 

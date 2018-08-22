@@ -23,70 +23,71 @@
     return self;
 }
 -(void)addContentView{
-    NSArray * array = @[
-                        Meeting,
-                        Classroom,
-                        LostANDFound,
-                        SchoolCommunity,
-                        CampusLife,
-                        Community,
-                        SchoolRun
-                        ];
-    NSArray * imageAry = @[@"会议圆图",@"课堂圆图",@"失物圆图",@"校圈圆图",@"生活圆图",@"社团圆图",@"校办圆图"];
+    UIView * bline = [[UIView alloc] initWithFrame:CGRectMake(20, 12.5, 3, 15)];
+    bline.backgroundColor = [UIColor colorWithHexString:@"#29a7e1"];
+    [self addSubview:bline];
     
-    //水平间距
-    int marginWidth = (APPLICATION_WIDTH/columns - buttonWH) / 2;
-    //起始XY坐标
-    int oneX = marginWidth;
-    int oneY = marginHeight;
+    UILabel * important = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(bline.frame)+5, 10, 100, 20)];
+    important.text = @"重要推荐";
+    [self addSubview:important];
     
-    int xx = APPLICATION_WIDTH/columns;
+    UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(APPLICATION_WIDTH-25, 15, 15, 15)];
+    image.image = [UIImage imageNamed:@"右箭头"];
+    [self addSubview:image];
     
-    for (int i = 0; i < array.count; i++)
-    {
-        //行
-        int row = i / columns;
-        //列
-        int column = i % columns;
-        //        int x = oneX + (buttonWH + marginWidth) * column;
-        int x = oneX + xx*column;
-        int y = oneY + 80 * row;
+    UIButton * moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    moreBtn.frame = CGRectMake(CGRectGetMaxX(important.frame)+40, 0, APPLICATION_HEIGHT-CGRectGetMaxX(important.frame)-40, 40);
+    [moreBtn addTarget:self action:@selector(moreBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:moreBtn];
+    
+    UIView * hLine1 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(moreBtn.frame), APPLICATION_WIDTH, 1)];
+    hLine1.backgroundColor = [UIColor colorWithHexString:@"#f1f1f1"];
+    [self addSubview:hLine1];
+    NSArray *  ary = @[@"课堂圆图",@"课堂",@"会议圆图",@"会议"];
+    NSArray * aryTitle = @[Classroom,Meeting];
+    for (int i = 0; i<2; i++) {
+        UIImageView *classImage = [[UIImageView alloc] initWithFrame:CGRectMake(APPLICATION_WIDTH/2*i+15, CGRectGetMaxY(hLine1.frame)+10, 80, 80)];
+        classImage.image = [UIImage imageNamed:ary[i*2]];
+        [self addSubview:classImage];
         
-      
-//        ShareButton * button = [[ShareButton alloc] initWithFrame:CGRectMake(x, y, buttonWH, buttonWH) andType:array[i]];
-        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        
-        [button setBackgroundImage:[UIImage imageNamed:imageAry[i]] forState:UIControlStateNormal];
-        
-        [button setTitle:array[i] forState:UIControlStateNormal];
-        
-        [button setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
-        
-        button.frame = CGRectMake(x, y, buttonWH, buttonWH);
-        
-        button.backgroundColor = [UIColor whiteColor];
-        
-        [button addTarget:self action:@selector(shareButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-        
-//        button.backgroundColor = [UIColor colorWithHexString:@"#FAFAFA"];//RGBA_COLOR(249, 249, 249, 1);
-        button.layer.masksToBounds = YES;
-        
-        button.layer.cornerRadius = buttonWH/2;
-        
-        [self addSubview:button];
+        UILabel * nameLable = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(classImage.frame)+20, CGRectGetMaxY(hLine1.frame)+10+30, 80, 20)];
+        nameLable.text = ary[i*2+1];
+        [self addSubview:nameLable];
+        UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = CGRectMake(APPLICATION_WIDTH/2*i, CGRectGetMaxY(hLine1.frame), APPLICATION_WIDTH/2, 100);
+        [btn addTarget:self action:@selector(shareButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [btn setTitle:aryTitle[i] forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+        [self addSubview:btn];
     }
+    
+    UIView *sLine = [[UIView alloc] initWithFrame:CGRectMake(APPLICATION_WIDTH/2, CGRectGetMaxY(hLine1.frame), 1, 100)];
+    
+    sLine.backgroundColor = [UIColor colorWithHexString:@"#f1f1f1"];
+    [self addSubview:sLine];
+    
+    UIView * hLine2 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(moreBtn.frame)+100, APPLICATION_WIDTH, 1)];
+    
+    hLine2.backgroundColor = [UIColor colorWithHexString:@"#f1f1f1"];
+    
+    [self addSubview:hLine2];
 }
 -(void)shareButtonClicked:(UIButton *)btn{
     if (self.delegate&&[self.delegate respondsToSelector:@selector(shareButtonClickedDelegate:) ]) {
         [self.delegate shareButtonClickedDelegate:btn.titleLabel.text];
     }
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+-(void)moreBtnPressed:(UIButton *)btn{
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(moreBtnPressedDelegate:)]) {
+        [self.delegate moreBtnPressedDelegate:btn];
+    }
 }
-*/
+/*
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect {
+ // Drawing code
+ }
+ */
 
 @end

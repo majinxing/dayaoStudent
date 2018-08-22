@@ -7,6 +7,8 @@
 //
 
 #import "HomePageViewController.h"
+#import "CourseDetailsViewController.h"
+
 #import "DYHeader.h"
 
 #import "BananerView.h"//轮播图
@@ -30,6 +32,10 @@
 #import "JPUSHService.h"
 
 #import "CourseListALLViewController.h"
+
+#import "MoreImportViewController.h"
+
+#import "ClassModel.h"
 
 @interface HomePageViewController ()<HomeButtonViewDelegate,NewMeetingViewDelegate,CollectionHeadViewDelegate,UIScrollViewDelegate>
 @property (nonatomic,strong)UIScrollView * bottomScrollView;
@@ -65,7 +71,7 @@
     // Do any additional setup after loading the view from its nib.
 }
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [self getNewMeeting];
+    [self getClass];
     
     [_collectionHeadView getData];
     
@@ -86,11 +92,40 @@
     //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 -(void)viewWillAppear:(BOOL)animated{
-    [self getNewMeeting];
+    [self getClass];
     if (_collectionHeadView) {
         [_collectionHeadView getData];
         [_bannerView.collectionHeadView getBananerViewData];
     }
+}
+-(void)getClass{
+//    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"start",_userModel.peopleId,@"studentId",[NSString stringWithFormat:@"%@ 00:00:00",[UIUtils getTime]],@"actStartTime",@"1000",@"length",_userModel.school,@"universityId",@"2",@"type",[NSString stringWithFormat:@"%d",[UIUtils getTermId]],@"termId",@"1",@"courseType",nil];
+    
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"start",_userModel.peopleId,@"studentId",[NSString stringWithFormat:@"%@ 00:00:00",[UIUtils getTime]],@"actStartTime",@"1000",@"length",_userModel.school,@"universityId",@"1",@"type",[NSString stringWithFormat:@"%d",[UIUtils getTermId]],@"termId",@"1",@"courseType",nil];
+    
+    [[NetworkRequest sharedInstance] GET:QueryCourse dict:dict succeed:^(id data) {
+        //        NSLog(@"1");
+        NSString * str = [[data objectForKey:@"header"] objectForKey:@"message"];
+        if ([str isEqualToString:@"成功"]) {
+            NSArray * ary = [[data objectForKey:@"body"] objectForKey:@"list"];
+            if (ary.count>0) {
+                
+                ClassModel * c = [[ClassModel alloc] init];
+                
+                [c setInfoWithDict:ary[0]];
+                
+                [_meetingView addContentClassView:c];
+                
+            }else{
+                [self getNewMeeting];
+            }
+            
+        }
+    } failure:^(NSError *error) {
+        
+        
+        [UIUtils showInfoMessage:@"请求失败，请检查网络" withVC:self];
+    }];
 }
 -(void)getNewMeeting{
     _userModel = [[Appsetting sharedInstance] getUsetInfo];
@@ -139,13 +174,15 @@
     
     [_bottomScrollView addSubview:_bannerView];
     
-    _noticeView = [[NoticeView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_bannerView.frame), APPLICATION_WIDTH, 56)];
+    _noticeView = [[NoticeView alloc] init];
+    
+    _noticeView.frame =  CGRectMake(10, CGRectGetMaxY(_bannerView.frame), APPLICATION_WIDTH, 70);
 
     [_bottomScrollView addSubview:_noticeView];
     
     _collectionHeadView = [[CollectionHeadView alloc] init];
     
-    _collectionHeadView.frame = CGRectMake(10,CGRectGetMaxY(_bannerView.frame), ScrollViewW,ScrollViewH);
+    _collectionHeadView.frame = CGRectMake(90,CGRectGetMaxY(_bannerView.frame)+10, ScrollViewW-90,ScrollViewH);
     _collectionHeadView.delegate = self;
     
     [_bottomScrollView addSubview:_collectionHeadView];
@@ -181,6 +218,15 @@
 }
 
 #pragma mark NewMeetingDelegate
+
+-(void)intoClassBtnPressedDelegate:(ClassModel *)classModel{
+    self.hidesBottomBarWhenPushed = YES;
+    CourseDetailsViewController * cdetailVC = [[CourseDetailsViewController alloc] init];
+    cdetailVC.c = classModel;
+    [self.navigationController pushViewController:cdetailVC animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
+    
+}
 -(void)intoMeetingBtnPressedDelegate:(MeetingModel *)meetingModel{
     TheMeetingInfoViewController * mInfo = [[TheMeetingInfoViewController alloc] init];
     self.hidesBottomBarWhenPushed = YES;
@@ -215,6 +261,12 @@
     }else{
         [UIUtils showInfoMessage:@"正在加紧步伐开发中，敬请期待" withVC:self];
     }
+}
+-(void)moreBtnPressedDelegate:(UIButton *)btn{
+    MoreImportViewController * vc = [[MoreImportViewController alloc] init];
+    self.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
 }
 /*
 #pragma mark - Navigation

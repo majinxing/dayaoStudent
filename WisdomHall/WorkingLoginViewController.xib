@@ -91,7 +91,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KGi-J9-wnQ">
-                    <rect key="frame" x="62.5" y="471" width="250" height="44"/>
+                    <rect key="frame" x="62.5" y="481" width="250" height="44"/>
                     <color key="backgroundColor" red="0.22499465942382812" green="0.68172186613082886" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="250" id="23w-gi-H2v"/>
@@ -144,9 +144,9 @@
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ckM-CU-cah">
-                    <rect key="frame" x="40" y="386" width="80" height="40"/>
+                    <rect key="frame" x="40" y="386" width="80" height="25"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="5Y7-9e-XEE"/>
+                        <constraint firstAttribute="height" constant="25" id="5Y7-9e-XEE"/>
                         <constraint firstAttribute="width" constant="80" id="oUX-IJ-Hqf"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -169,10 +169,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uQV-hG-BP6">
-                    <rect key="frame" x="235" y="386" width="100" height="40"/>
+                    <rect key="frame" x="255" y="386" width="80" height="25"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="100" id="J3V-Se-nab"/>
-                        <constraint firstAttribute="height" constant="40" id="urr-Dc-0CD"/>
+                        <constraint firstAttribute="width" constant="80" id="J3V-Se-nab"/>
+                        <constraint firstAttribute="height" constant="25" id="urr-Dc-0CD"/>
                     </constraints>
                     <state key="normal" title="忘记密码">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -212,7 +212,7 @@
                 <constraint firstAttribute="trailing" secondItem="7nS-05-YSq" secondAttribute="trailing" constant="40" id="XOv-2Z-QdS"/>
                 <constraint firstItem="w3o-1x-LxE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="Z6I-p3-eS1"/>
                 <constraint firstAttribute="trailing" secondItem="uQV-hG-BP6" secondAttribute="trailing" constant="40" id="ZlK-H4-Qbp"/>
-                <constraint firstItem="KGi-J9-wnQ" firstAttribute="top" secondItem="uQV-hG-BP6" secondAttribute="bottom" constant="45" id="avL-im-ljW"/>
+                <constraint firstItem="KGi-J9-wnQ" firstAttribute="top" secondItem="uQV-hG-BP6" secondAttribute="bottom" constant="70" id="avL-im-ljW"/>
                 <constraint firstItem="ckM-CU-cah" firstAttribute="top" secondItem="7nS-05-YSq" secondAttribute="bottom" constant="15" id="een-9b-zck"/>
                 <constraint firstAttribute="trailing" secondItem="3Dy-oS-flA" secondAttribute="trailing" constant="40" id="h3S-ap-3YZ"/>
                 <constraint firstItem="TV1-Ue-QC5" firstAttribute="top" secondItem="tcQ-Lk-skX" secondAttribute="bottom" constant="78" id="mhr-GN-p9o"/>

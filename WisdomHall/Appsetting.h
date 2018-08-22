@@ -52,4 +52,6 @@
 -(void)delectGroupID:(NSString *)groupId;
 //删除全部缓存
 -(void)delectAllGroup;
+-(void)saveBananerFirstImage:(NSString *)imageUrl;
+-(NSString *)getBananerFitstImage;
 @end

@@ -10,6 +10,7 @@
 
 @protocol HomeButtonViewDelegate<NSObject>
 -(void)shareButtonClickedDelegate:(NSString *)str;
+-(void)moreBtnPressedDelegate:(UIButton *)btn;
 @end
 @interface HomeButtonView : UIView
 @property (nonatomic,weak)id<HomeButtonViewDelegate>delegate;

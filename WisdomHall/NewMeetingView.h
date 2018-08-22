@@ -8,14 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "MeetingModel.h"
-
+#import "ClassModel.h"
 
 @protocol NewMeetingViewDelegate<NSObject>
 -(void)intoMeetingBtnPressedDelegate:(MeetingModel *)meetingModel;
+-(void)intoClassBtnPressedDelegate:(ClassModel *)classModel;
+
 @end
 @interface NewMeetingView : UIView
 
 @property (nonatomic,weak)id<NewMeetingViewDelegate>delegate;
 
 -(void)addContentView:(MeetingModel *)meetingModel;
+-(void)addContentClassView:(ClassModel *)classModel;
+
 @end
