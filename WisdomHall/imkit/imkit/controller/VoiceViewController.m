@@ -25,6 +25,7 @@
 
 @interface VoiceViewController ()
 @property(strong, nonatomic) EaseRecordView *recordView;
+@property(nonatomic,copy)NSString * isBeCall;
 @end
 
 @implementation VoiceViewController
@@ -47,6 +48,8 @@
     db.peerUID = self.peerUID;
     self.messageDB = db;
     
+    _isBeCall = @"NO";
+    
     [super viewDidLoad];
     
     // Do any additional setup after loading the view.
@@ -68,12 +71,19 @@
     self.tableView.frame = CGRectMake(0, 0, self.tableView.frame.size.width,self.tableView.frame.size.height-10);
 
     [self setVoiceBtn];//设置抢答按钮
-    
+    self.navigationController.interactivePopGestureRecognizer.delaysTouchesBegan=NO;
+
     
     
 }
+
 -(void)setVoiceBtn{
+//    UIImageView * v = [[UIImageView alloc] initWithFrame:CGRectMake(0, APPLICATION_HEIGHT-60, APPLICATION_WIDTH, 60)];
+//    v.image = [UIImage imageNamed:@"Rectangle3"];
+//    [self.view addSubview:v];
+    
     UIButton * btn = self.chatToolbar.recordButton;//[UIButton buttonWithType:UIButtonTypeCustom];
+    self.chatToolbar.frame = CGRectMake(0, self.chatToolbar.frame.origin.y, self.chatToolbar.frame.size.width, 0);
     btn.hidden = NO;
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btn setTitle:@"按住抢答" forState:UIControlStateNormal];
@@ -86,6 +96,7 @@
     btn.frame = CGRectMake(0, APPLICATION_HEIGHT-60, APPLICATION_WIDTH, 60);
     
     [btn setBackgroundImage:[UIImage imageNamed:@"Rectangle3"] forState:UIControlStateNormal];
+//    btn.userInteractionEnabled = NO;
     [self.view addSubview:btn];
 
 }
@@ -131,6 +142,11 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden = NO; //设置隐藏
+//    self.tableView.delaysContentTouches = NO;
+//    self.tableView.canCancelContentTouches = NO;
+}
+- (UIRectEdge)preferredScreenEdgesDeferringSystemGestures {
+    return UIRectEdgeBottom;
 }
 -(void)back{
     if ([_backType isEqualToString:@"TabBar"]) {
@@ -278,6 +294,7 @@
     if (message.type == MESSAGE_AUDIO) {
         message.uploading = YES;
         [[PeerOutbox instance] uploadAudio:message];
+        [self sendcallTheRoll];
     } else if (message.type == MESSAGE_IMAGE) {
         message.uploading = YES;
         [[PeerOutbox instance] uploadImage:message];
@@ -293,7 +310,23 @@
     NSNotification* notification = [[NSNotification alloc] initWithName:LATEST_PEER_MESSAGE object:message userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
-
+-(void)sendcallTheRoll{
+    if ([self.type isEqualToString:@"1"]) {
+        if ([_isBeCall isEqualToString:@"NO"]) {
+            NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",[_dic objectForKey:@"relObjectDetailID"]],@"relDetailId",[NSString stringWithFormat:@"%@",[_dic objectForKey:@"relObjectType"]],@"relType",nil];
+            
+            [[NetworkRequest sharedInstance] POST:StudentReply dict:dict succeed:^(id data) {
+                NSString * message = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+                if ([message isEqualToString:@"成功"]) {
+                    _isBeCall = @"YES";
+                }
+            } failure:^(NSError *error) {
+                
+            }];
+        }
+       
+    }
+}
 /*
  #pragma mark - Navigation
  

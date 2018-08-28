@@ -20,6 +20,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *attention;
 
 @property (strong, nonatomic) IBOutlet UIImageView *imageH;
+@property (strong, nonatomic) IBOutlet UIView *backView;
 
 @end
 @implementation CourseCollectionViewCell
@@ -34,12 +35,13 @@
     if (self) {
         self = [[NSBundle mainBundle]loadNibNamed:@"CourseCollectionViewCell" owner:self options:nil].lastObject;
 //        self.backgroundColor = [UIColor clearColor];
-//        
+        
 //        self.layer.masksToBounds = YES;
 //        self.layer.cornerRadius = 5.f;
 //        self.layer.borderWidth = 1;
 //        self.layer.borderColor = [UIColor colorWithHexString:@"#29a7e1"].CGColor;
-        
+        _backView.layer.masksToBounds = YES;
+        _backView.layer.cornerRadius = 5;
         _classOrMeetingName.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
         
         _classOrMeetingName.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1/1.0];

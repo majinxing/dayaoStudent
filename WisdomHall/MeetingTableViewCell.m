@@ -36,6 +36,8 @@
 @property (strong, nonatomic) IBOutlet peopleListView *peopleListView;
 @property (strong, nonatomic) IBOutlet UILabel *peopleNum;
 @property (strong, nonatomic) IBOutlet UILabel *joinPeopleLable;
+@property (strong, nonatomic) IBOutlet UIView *backView;
+@property (strong, nonatomic) IBOutlet UIView *fourBackView;
 
 
 @end
@@ -82,6 +84,13 @@
     _peopleNum.layer.cornerRadius = 8;
     _peopleNum.backgroundColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1/1.0];
     _peopleNum.textColor = [UIColor whiteColor];
+    
+    _backView.layer.masksToBounds = YES;
+    _backView.layer.cornerRadius = 5;
+    
+    _fourBackView.layer.masksToBounds = YES;
+    _fourBackView.layer.cornerRadius = 5;
+
     // Initialization code
 }
 -(void)addFirstContentView:(MeetingModel *)meetModel{
@@ -111,8 +120,9 @@
     _teacherPicture.image = [UIImage imageNamed:@"meet"];
     
     if (![UIUtils isBlankString:[NSString stringWithFormat:@"%@",meetModel.signStatus]]) {
-        if (![[NSString stringWithFormat:@"%@",meetModel.signStatus] isEqualToString:@"1"]) {
-            _signCode.frame = CGRectMake(APPLICATION_WIDTH/2, 20, 80, 80);
+        if (![[NSString stringWithFormat:@"%@",meetModel.signStatus] isEqualToString:@"1"]&&![[NSString stringWithFormat:@"%@",meetModel.signStatus] isEqualToString:@"300"]) {
+
+            _signCode.frame = CGRectMake(APPLICATION_WIDTH/2, CGRectGetMaxY(_meetPlace.frame)+10, 120, 80);
             _signCode.image = [UIImage imageNamed:@"ic_sgin_success"];
             [self.contentView addSubview:_signCode];
         }
@@ -138,7 +148,7 @@
     
    
     if (![UIUtils isBlankString:[NSString stringWithFormat:@"%@",classModel.signStatus]]) {
-        if (![[NSString stringWithFormat:@"%@",classModel.signStatus] isEqualToString:@"1"]) {
+        if (![[NSString stringWithFormat:@"%@",classModel.signStatus] isEqualToString:@"1"]&&![[NSString stringWithFormat:@"%@",classModel.signStatus] isEqualToString:@"300"]) {
             _signCode.frame = CGRectMake(APPLICATION_WIDTH/2, CGRectGetMaxY(_meetPlace.frame)+10, 120, 80);
             _signCode.image = [UIImage imageNamed:@"ic_sgin_success"];
             [self.contentView addSubview:_signCode];
@@ -162,14 +172,15 @@
                          InteractionType_Data,
                          InteractionType_Vote,
                          InteractionType_Responder,
-                         InteractionType_Sit
+                         InteractionType_Sit,
+                         InteractionType_Discuss,
                          ];
     UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
     if ([[NSString stringWithFormat:@"%@",user.peopleId] isEqualToString:[NSString stringWithFormat:@"%@",meetModel.meetingHostId]]) {
         array = @[
                   InteractionType_Data,
                   InteractionType_Vote,
-                  InteractionType_Responder,
+                  InteractionType_Sit,
                   InteractionType_Discuss,
                   ];
     }
@@ -177,7 +188,7 @@
     int marginWidth = (APPLICATION_WIDTH - buttonW * columns) / (columns + 1);
     //起始XY坐标
     int oneX = marginWidth;
-    int oneY = marginHeight;
+    int oneY = 10;
     
     for (int i = 0; i < array.count; i++)
     {
@@ -211,7 +222,7 @@
     int marginWidth = (APPLICATION_WIDTH - buttonW * columns) / (columns + 1);
     //起始XY坐标
     int oneX = marginWidth;
-    int oneY = 20;
+    int oneY = 10;
     
     for (int i = 0; i < array.count; i++)
     {
@@ -243,7 +254,7 @@
             [_code setBackgroundColor:[UIColor whiteColor]];
 //        }
     }else if([[NSString stringWithFormat:@"%@",meetModel.signStatus] isEqualToString:@"2"]){
-        [_signBtn setTitle:@"签到状态：已签到" forState:UIControlStateNormal];
+        [_signBtn setTitle:@"已签到" forState:UIControlStateNormal];
         [_code setTitle:@"生成二维码" forState:UIControlStateNormal];
         [_signBtn setEnabled:YES];
         if (!isEnable) {
@@ -254,7 +265,7 @@
             [_code setBackgroundColor:[UIColor colorWithHexString:@"#29a7e1"]];
         }
     }else if ([[NSString stringWithFormat:@"%@",meetModel.signStatus] isEqualToString:@"300"]){
-        [_signBtn setTitle:@"签到状态：正在签到……" forState:UIControlStateNormal];
+        [_signBtn setTitle:@"正在签到……" forState:UIControlStateNormal];
         [_code setTitle:@"扫码签到" forState:UIControlStateNormal];
         [_signBtn setEnabled:NO];
         if (!isEnable) {
@@ -276,7 +287,7 @@
             [_code setBackgroundColor:[UIColor colorWithHexString:@"#29a7e1"]];
         }
     }else if ([[NSString stringWithFormat:@"%@",meetModel.signStatus] isEqualToString:@"3"]){
-        [_signBtn setTitle:@"签到状态：请假" forState:UIControlStateNormal];
+        [_signBtn setTitle:@"请假" forState:UIControlStateNormal];
         [_code setTitle:@"扫码签到" forState:UIControlStateNormal];
         [_signBtn setEnabled:NO];
         if (!isEnable) {
@@ -287,7 +298,7 @@
             [_code setBackgroundColor:[UIColor colorWithHexString:@"#29a7e1"]];
         }
     }else if ([[NSString stringWithFormat:@"%@",meetModel.signStatus] isEqualToString:@"4"]){
-        [_signBtn setTitle:@"签到状态：迟到" forState:UIControlStateNormal];
+        [_signBtn setTitle:@"迟到" forState:UIControlStateNormal];
         [_code setTitle:@"扫码签到" forState:UIControlStateNormal];
         [_signBtn setEnabled:NO];
         if (!isEnable) {

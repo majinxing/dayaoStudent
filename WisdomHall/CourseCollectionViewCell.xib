@@ -17,6 +17,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="348" height="162"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ReS-Uu-EAg">
+                        <rect key="frame" x="10" y="0.0" width="328" height="162"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="class" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVQ-Ru-ehT">
                         <rect key="frame" x="20" y="10" width="228" height="20"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -66,22 +70,27 @@
                 <constraint firstAttribute="trailing" secondItem="bqc-cC-k9c" secondAttribute="trailing" constant="20" id="9uY-oO-1Dn"/>
                 <constraint firstItem="RVQ-Ru-ehT" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="Bkh-kC-0gM"/>
                 <constraint firstAttribute="trailing" secondItem="mak-Qj-S9S" secondAttribute="trailing" constant="20" id="FeO-qC-9o9"/>
+                <constraint firstAttribute="trailing" secondItem="ReS-Uu-EAg" secondAttribute="trailing" constant="10" id="LyW-IM-PJ1"/>
                 <constraint firstAttribute="trailing" secondItem="RVQ-Ru-ehT" secondAttribute="trailing" constant="100" id="Oxm-kE-mQ5"/>
                 <constraint firstItem="bqc-cC-k9c" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="Q4D-GS-EDT"/>
                 <constraint firstAttribute="trailing" secondItem="jmv-bb-u3y" secondAttribute="trailing" constant="20" id="QjZ-ug-EP5"/>
                 <constraint firstItem="jmv-bb-u3y" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="WwL-yn-Izm"/>
                 <constraint firstItem="mak-Qj-S9S" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="eKe-7c-bLD"/>
+                <constraint firstItem="ReS-Uu-EAg" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="hLj-eN-997"/>
+                <constraint firstItem="ReS-Uu-EAg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="nh0-ld-pkT"/>
+                <constraint firstAttribute="bottom" secondItem="ReS-Uu-EAg" secondAttribute="bottom" id="stM-Uj-nbL"/>
                 <constraint firstItem="bqc-cC-k9c" firstAttribute="top" secondItem="mak-Qj-S9S" secondAttribute="bottom" constant="5" id="xuV-er-F2z"/>
                 <constraint firstItem="jmv-bb-u3y" firstAttribute="leading" secondItem="RVQ-Ru-ehT" secondAttribute="trailing" id="yzS-b0-qvw"/>
             </constraints>
             <size key="customSize" width="348" height="162"/>
             <connections>
                 <outlet property="attention" destination="mak-Qj-S9S" id="842-0W-TJy"/>
+                <outlet property="backView" destination="ReS-Uu-EAg" id="1qu-hR-Upg"/>
                 <outlet property="classOrMeetingName" destination="RVQ-Ru-ehT" id="BxK-eb-FTf"/>
                 <outlet property="place" destination="bqc-cC-k9c" id="3WA-YO-Yj3"/>
                 <outlet property="time" destination="jmv-bb-u3y" id="UfB-2f-2Ij"/>
             </connections>
-            <point key="canvasLocation" x="-35" y="-113"/>
+            <point key="canvasLocation" x="-42" y="-128"/>
         </collectionViewCell>
     </objects>
 </document>

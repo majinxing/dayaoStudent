@@ -269,8 +269,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
         if (_meetingModelAry.count>0) {
             
         }else{
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"没有搜索到对应的会议" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alertView show];
+            [UIUtils showInfoMessage:@"没有搜索到对应的会议" withVC:self];
         }
         [_collection reloadData];
     } failure:^(NSError *error) {

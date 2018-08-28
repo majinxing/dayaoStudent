@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *homeworkInfo;
 @property (strong, nonatomic) IBOutlet UIImageView *homeworkImage;
 @property (strong, nonatomic) IBOutlet UILabel *imageNumber;
+@property (strong, nonatomic) IBOutlet UIView *backView;
 @property (strong, nonatomic) IBOutlet UILabel *timeLabel;
 @end
 
@@ -25,6 +26,8 @@
     _homeworkImage.image = image;
     _timeLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:12];
     _timeLabel.textColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1/1.0];
+    _backView.layer.masksToBounds = YES;
+    _backView.layer.cornerRadius = 5;
     // Initialization code
 }
 -(void)addContentViewWith:(Homework *)homework{

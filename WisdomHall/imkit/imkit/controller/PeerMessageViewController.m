@@ -73,9 +73,13 @@
             }];
         }
     }
+    self.navigationController.interactivePopGestureRecognizer.delaysTouchesBegan=NO;
+
 }
 
-
+- (UIRectEdge)preferredScreenEdgesDeferringSystemGestures {
+    return UIRectEdgeBottom;
+}
 -(void)addObserver {
     [super addObserver];
     [[PeerOutbox instance] addBoxObserver:self];

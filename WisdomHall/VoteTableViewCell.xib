@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,6 +17,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="422" height="79.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cw1-Wb-ZBv">
+                        <rect key="frame" x="10" y="5" width="402" height="69.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="进行中" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14w-2H-3wW">
                         <rect key="frame" x="20" y="10" width="382" height="20"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -50,15 +54,20 @@
                     <constraint firstItem="m8l-dJ-X2f" firstAttribute="leading" secondItem="Ae1-Yr-eHQ" secondAttribute="trailing" id="3PK-cE-PUf"/>
                     <constraint firstAttribute="trailing" secondItem="m8l-dJ-X2f" secondAttribute="trailing" constant="20" id="6Uc-Xx-uwR"/>
                     <constraint firstAttribute="trailing" secondItem="14w-2H-3wW" secondAttribute="trailing" constant="20" id="Dgo-zW-M2Q"/>
+                    <constraint firstAttribute="trailing" secondItem="cw1-Wb-ZBv" secondAttribute="trailing" constant="10" id="Dq8-oG-OPV"/>
+                    <constraint firstItem="cw1-Wb-ZBv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="LvZ-aM-L2p"/>
                     <constraint firstItem="14w-2H-3wW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="NYL-fI-9q0"/>
+                    <constraint firstAttribute="bottom" secondItem="cw1-Wb-ZBv" secondAttribute="bottom" constant="5" id="Z2W-VU-OoQ"/>
                     <constraint firstItem="14w-2H-3wW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="b5X-y9-m87"/>
                     <constraint firstItem="Ae1-Yr-eHQ" firstAttribute="top" secondItem="14w-2H-3wW" secondAttribute="bottom" constant="5" id="it8-fm-P67"/>
+                    <constraint firstItem="cw1-Wb-ZBv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="jA5-Gp-7lE"/>
                     <constraint firstAttribute="trailing" secondItem="Ae1-Yr-eHQ" secondAttribute="trailing" constant="140" id="lbU-ur-7jo"/>
                     <constraint firstItem="m8l-dJ-X2f" firstAttribute="top" secondItem="14w-2H-3wW" secondAttribute="bottom" constant="5" id="rSf-fE-Zye"/>
                     <constraint firstItem="Ae1-Yr-eHQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="vHY-Om-qs9"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="backView" destination="cw1-Wb-ZBv" id="lhz-hr-ITd"/>
                 <outlet property="voteCreateTime" destination="m8l-dJ-X2f" id="nzp-9d-uFX"/>
                 <outlet property="voteState" destination="14w-2H-3wW" id="J0r-bn-3u2"/>
                 <outlet property="voteTitle" destination="Ae1-Yr-eHQ" id="DMT-dS-wdB"/>

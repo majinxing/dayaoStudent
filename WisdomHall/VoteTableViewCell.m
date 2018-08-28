@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *voteCreateTime;
 @property (strong, nonatomic) IBOutlet UILabel *voteTitle;
+@property (strong, nonatomic) IBOutlet UIView *backView;
 
 @property (assign,nonatomic) int temp;
 
@@ -41,6 +42,8 @@
     
     _voteCreateTime.font = [UIFont fontWithName:@"PingFangSC-Regular" size:12];
     _voteCreateTime.textColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1/1.0];
+    _backView.layer.masksToBounds = YES;
+    _backView.layer.cornerRadius = 5;
 }
 -(void)voteTitle:(NSString *)title withCreateTime:(NSString *)time withState:(NSString *)state withIndex:(int)n withVoteStatus:(NSString *)voteStatus{
     

@@ -17,6 +17,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *voteBtn;
 @property (strong, nonatomic) IBOutlet UIImageView *selecdImage;
 @property (strong, nonatomic) IBOutlet UILabel *voteStateLabel;
+@property (strong, nonatomic) IBOutlet UIView *fristBackView;
+@property (strong, nonatomic) IBOutlet UIView *secondBackView;
 
 @end
 @implementation JoinVoteTableViewCell
@@ -33,6 +35,11 @@
     
     _voteStateLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size:12];
     _voteStateLabel.textColor = [UIColor colorWithRed:0/255.0 green:118/255.0 blue:253/255.0 alpha:1/1.0];
+    
+    _fristBackView.layer.masksToBounds = YES;
+    _fristBackView.layer.cornerRadius = 5;
+    _secondBackView.layer.masksToBounds = YES;
+    _secondBackView.layer.cornerRadius = 5;
     // Initialization code
 }
 -(void)setTileOrdescribe:(NSString *)title withLableText:(NSString *)labelText withVoteState:(NSString *)voteStatus selfState:(NSString *)state{

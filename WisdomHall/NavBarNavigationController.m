@@ -97,6 +97,9 @@
         //        msgController.backType = @"TabBar";
         
         msgController.hidesBottomBarWhenPushed = YES;
+        
+        msgController.dic = dic;
+        
         NSArray * ary = [dic objectForKey:@"recvUsers"];
         NSString * str11 = [ary componentsJoinedByString:@","];
         
@@ -114,15 +117,6 @@
                 }
             }
         }
-        
-        
-        NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",[dic objectForKey:@"relObjectDetailID"]],@"relDetailId",[NSString stringWithFormat:@"%@",[dic objectForKey:@"relObjectType"]],@"relType",nil];
-        
-        [[NetworkRequest sharedInstance] POST:StudentReply dict:dict succeed:^(id data) {
-            
-        } failure:^(NSError *error) {
-            
-        }];
     }
 }
 #pragma mark - MessageViewControllerUserDelegate

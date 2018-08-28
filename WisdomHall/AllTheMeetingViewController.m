@@ -360,8 +360,8 @@ static NSString * cellIdentifier = @"cellIdentifier";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CourseCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor whiteColor];
-    cell.layer.borderColor = [UIColor clearColor].CGColor;
+    cell.backgroundColor = [UIColor clearColor];
+//    cell.layer.borderColor = [UIColor clearColor].CGColor;
     [cell setInfoForContentView:_meetingModelAry[indexPath.row]];
     return cell;
 }

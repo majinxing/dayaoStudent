@@ -52,7 +52,9 @@
 
 
 @property (strong, nonatomic)UserModel * user;
+
 @property (strong, nonatomic) NSMutableArray * signAry;
+
 @property (strong, nonatomic) NSMutableArray * notSignAry;
 
 @property (nonatomic,assign)NSInteger n;//签到人数
@@ -79,6 +81,11 @@
 
 @property (nonatomic,copy)NSString * laevePictureId;//请假图片id
 
+@property (nonatomic,strong)UIButton * signBtn;
+
+@property (nonatomic,strong)UIButton * codeBtn;
+
+
 @end
 
 @implementation CourseDetailsViewController
@@ -91,6 +98,9 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#f1f1f1"];
+    
     _signAry = [NSMutableArray arrayWithCapacity:1];
     
     _notSignAry = [NSMutableArray arrayWithCapacity:1];
@@ -109,24 +119,131 @@
     
     [self getData];
     
+    [self addSignBtn];
+    
+    if (![[NSString stringWithFormat:@"%@",_user.peopleId] isEqualToString:[NSString stringWithFormat:@"%@",_c.teacherId]]) {
+        [self addSignBtn];
+    }
     [self addTableView];
+    
     
     // Do any additional setup after loading the view from its nib.
 }
 
+-(void)addSignBtn{
+    _codeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _codeBtn.frame = CGRectMake(25, APPLICATION_HEIGHT-16-40, APPLICATION_WIDTH/2-50, 40);
+    _codeBtn.backgroundColor = [UIColor whiteColor];
+    _codeBtn.layer.masksToBounds = YES;
+    _codeBtn.layer.cornerRadius = 20;
+    _codeBtn.layer.borderColor = [UIColor colorWithHexString:@"#29a7e1"].CGColor;
+    _codeBtn.layer.borderWidth = 1;
+    [_codeBtn setTitle:@"扫码签到" forState:UIControlStateNormal];
+    [_codeBtn setTitleColor:[UIColor colorWithHexString:@"#29a7e1"] forState:UIControlStateNormal];
+    [self.view addSubview:_codeBtn];
+    [_codeBtn addTarget:self action:@selector(codePressedDelegate:) forControlEvents:UIControlEventTouchUpInside];
+    
+    _signBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _signBtn.frame = CGRectMake(APPLICATION_WIDTH/2+25, APPLICATION_HEIGHT-16-40, APPLICATION_WIDTH/2-50, 40);
+    _signBtn.layer.masksToBounds = YES;
+    _signBtn.layer.cornerRadius = 20;
+//    _signBtn.layer.borderColor = [UIColor colorWithHexString:@"#29a7e1"].CGColor;
+//    _signBtn.layer.borderWidth = 1;
+    [_signBtn setTitle:@"一键签到" forState:UIControlStateNormal];
+    [_signBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_signBtn setBackgroundImage:[UIImage imageNamed:@"Rectangle3"] forState:UIControlStateNormal];
+    [self.view addSubview:_signBtn];
+    [_signBtn addTarget:self action:@selector(signBtnPressedDelegate:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self changeSignBtnState:_c];
+}
+-(void)changeSignBtnState:(ClassModel *)c{
+    if ([[NSString stringWithFormat:@"%@",c.signStatus] isEqualToString:@"1"]) {
+        [_signBtn setTitle:@"一键签到" forState:UIControlStateNormal];
+        [_codeBtn setTitle:@"扫码签到" forState:UIControlStateNormal];
+        [_signBtn setEnabled:YES];
+        
+        [_codeBtn setEnabled:YES];
+      
+    }else if([[NSString stringWithFormat:@"%@",c.signStatus] isEqualToString:@"2"]){
+        [_signBtn setTitle:@"已签到" forState:UIControlStateNormal];
+        [_codeBtn setTitle:@"生成二维码" forState:UIControlStateNormal];
+        [_signBtn setBackgroundColor:[UIColor grayColor]];
+        
+        [_signBtn setEnabled:NO];
+      
+        [_codeBtn setEnabled:YES];
+        //            [_codeBtn setBackgroundColor:[UIColor colorWithHexString:@"#29a7e1"]];
+        //        }
+    }else if ([[NSString stringWithFormat:@"%@",c.signStatus] isEqualToString:@"300"]){
+        [_signBtn setTitle:@"正在签到，请不要退出界面" forState:UIControlStateNormal];
+        [_codeBtn setTitle:@"扫码签到" forState:UIControlStateNormal];
+        
+        [_signBtn setEnabled:NO];
+        
+        [_codeBtn setEnabled:YES];
+        
+    }else if ([[NSString stringWithFormat:@"%@",c.signStatus] isEqualToString:@"400"]){
+        [_signBtn setTitle:@"连接数据流量后再次点击" forState:UIControlStateNormal];
+        [_codeBtn setTitle:@"扫码签到" forState:UIControlStateNormal];
+        [_signBtn setEnabled:YES];
+    
+        [_codeBtn setEnabled:YES];
+       
+    }else if ([[NSString stringWithFormat:@"%@",c.signStatus] isEqualToString:@"3"]){
+        [_signBtn setTitle:@"请假" forState:UIControlStateNormal];
+        [_codeBtn setTitle:@"生成二维码" forState:UIControlStateNormal];
+        [_signBtn setEnabled:NO];
+        [_signBtn setBackgroundColor:[UIColor grayColor]];
+        
+        
+        [_codeBtn setEnabled:NO];
+        [_codeBtn setBackgroundColor:[UIColor grayColor]];
+     
+    }else if ([[NSString stringWithFormat:@"%@",c.signStatus] isEqualToString:@"4"]){
+        [_signBtn setTitle:@"迟到" forState:UIControlStateNormal];
+        [_signBtn setBackgroundColor:[UIColor grayColor]];
+        
+        [_codeBtn setTitle:@"生成二维码" forState:UIControlStateNormal];
+        [_signBtn setEnabled:NO];
+        
+        [_codeBtn setEnabled:YES];
+      
+    }else if ([[NSString stringWithFormat:@"%@",c.signStatus] isEqualToString:@"5"]){
+        [_signBtn setTitle:@"早退" forState:UIControlStateNormal];
+        [_signBtn setBackgroundColor:[UIColor grayColor]];
+        
+        [_codeBtn setTitle:@"生成二维码" forState:UIControlStateNormal];
+        [_signBtn setEnabled:NO];
+       
+        [_codeBtn setEnabled:YES];
+        
+    }else{
+        [_signBtn setTitle:@"一键签到" forState:UIControlStateNormal];
+        [_codeBtn setTitle:@"生成二维码" forState:UIControlStateNormal];
+        [_signBtn setEnabled:YES];
+        
+        [_codeBtn setEnabled:YES];
+      
+    }
+}
 -(void)addTableView{
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, APPLICATION_WIDTH, APPLICATION_HEIGHT-64) style:UITableViewStylePlain];
+    int n = 0;
+    if (_codeBtn.frame.size.height) {
+        n= _codeBtn.frame.size.height+16;
+    }
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, APPLICATION_WIDTH, APPLICATION_HEIGHT-64-n) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+    _tableView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_tableView];
 }
 -(void)viewDidAppear:(BOOL)animated{
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:2];
-    
-    
-    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:2];
+//
+//
+//    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 -(void)getData{
     NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_c.sclassId,@"id",_c.courseDetailId,@"courseDetailId", nil];
@@ -322,7 +439,7 @@
 }
 #pragma mark UITableViewdelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 2;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 1;
@@ -360,6 +477,7 @@
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.delegate = self;
+    cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -369,7 +487,7 @@
     if (indexPath.section==0) {
         return 260;
     }else if (indexPath.section==1){
-        return 220;
+        return ((APPLICATION_WIDTH - 120 * 3) / 4+60)*3+20;
     }else if (indexPath.section==2){
         return 60;
     }
@@ -378,7 +496,11 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 10;
 }
-
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView * b = [[UIView alloc] init];
+    b.backgroundColor = [UIColor colorWithHexString:@"#f1f1f1"];
+    return b;
+}
 #pragma mark - MessageViewControllerUserDelegate
 //从本地获取用户信息, IUser的name字段为空时，显示identifier字段
 - (IUser*)getUser:(int64_t)uid {
@@ -644,8 +766,6 @@
 }
 -(void)signBtnPressedDelegate:(UIButton *)btn{
     [self showHudInView:self.view hint:NSLocalizedString(@"正在加载数据", @"Load data...")];
-
-
     if (![UIUtils validateWithStartTime:_c.signStartTime withExpireTime:nil]) {
         if (![[NSString stringWithFormat:@"%@",_c.signStatus] isEqualToString:@"1"]) {
             [UIUtils showInfoMessage:@"已签到" withVC:self];
@@ -734,7 +854,8 @@
 }
 -(void)signSendIng{
     _c.signStatus = @"300";
-    [_tableView reloadData];
+    [self changeSignBtnState:_c];
+    
 }
 -(void)sendSignInfo{
     NSString *idfv = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
@@ -763,8 +884,8 @@
         
         [self hideHud];
         
-        [_tableView reloadData];
-        
+        [self changeSignBtnState:_c];
+
     } failure:^(NSError *error) {
         
         NSString * str = [NSString stringWithFormat:@"签到失败请重新签到，请保证数据流量的连接后再次点击"];
@@ -788,8 +909,8 @@
         
         _c.signStatus = @"400";
         
-        [_tableView reloadData];
-        
+        [self changeSignBtnState:_c];
+
     }];
 }
 

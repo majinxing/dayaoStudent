@@ -36,6 +36,8 @@
     if (self) {
         CGRect frame = CGRectMake(2, 0, 40, 40);
         self.headView = [[UIImageView alloc] initWithFrame:frame];
+        self.headView.layer.masksToBounds = YES;
+        self.headView.layer.cornerRadius = self.headView.frame.size.width/2;
         [self.contentView addSubview:self.headView];
         
         self.msgSendErrorBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];

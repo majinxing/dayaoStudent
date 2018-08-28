@@ -11,6 +11,9 @@
 #import "ClassRoomModel.h"
 #import "UserModel.h"
 @interface UIUtils : NSObject
+
++(id)shareInstance;
+
 +(void)addNavigationWithView:(UIView *)view withTitle:(NSString *)str;
 //判断电话号码是否正确
 +(BOOL)testCellPhoneNumber:(NSString *)mobileNum;

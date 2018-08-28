@@ -45,10 +45,13 @@
     
     
     self.tableView.frame = CGRectMake(0, 64, APPLICATION_WIDTH, APPLICATION_HEIGHT-64- [EaseChatToolbar defaultHeight]);
-    
+    self.navigationController.interactivePopGestureRecognizer.delaysTouchesBegan=NO;
+
 //    self.navigationItem.title = [UIUtils getGroupName:str1];
 }
-
+- (UIRectEdge)preferredScreenEdgesDeferringSystemGestures {
+    return UIRectEdgeBottom;
+}
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden = YES; //设置隐藏
 //    [self setNavigationTitle];

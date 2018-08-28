@@ -22,4 +22,5 @@
 @property(nonatomic, copy) NSString *peerAvatar;
 @property(nonatomic, copy) NSString *backType;
 @property(nonatomic, copy) NSString *type;
+@property(nonatomic, copy) NSDictionary * dic;
 @end

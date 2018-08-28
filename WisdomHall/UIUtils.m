@@ -28,7 +28,7 @@
 @interface UIUtils()
 
 @property (nonatomic,strong)FMDatabase * db;
-
+@property (nonatomic,strong)NSTimer * showTimer;
 @end
 @implementation UIUtils
 +(void)addNavigationWithView:(UIView *)view withTitle:(NSString *)str{
@@ -44,6 +44,14 @@
     //    line.backgroundColor=[UIColor colorWithHexString:@"#e5e5e5"];
     //    [view addSubview:line];
     //    [view addSubview:title];
+}
++(id)shareInstance{
+    static dispatch_once_t onceToken;
+    static UIUtils *obj = nil;
+    dispatch_once(&onceToken, ^{
+        obj = [[UIUtils alloc] init];
+    });
+    return obj;
 }
 /**
  *  获取当地日期
@@ -950,7 +958,7 @@
     
     //    ChatHelper * c = [ChatHelper shareHelper];
     
-    UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
+//    UserModel * user = [[Appsetting sharedInstance] getUsetInfo];
     
     for (int i = 0; i<seatAry.count; i++) {
         
@@ -968,19 +976,33 @@
     //过时
     //    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Title" message:@"message" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"ok", nil];
     //    [alert show];
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"提示"
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
                                                                    message:str
                                                             preferredStyle:UIAlertControllerStyleAlert];
+//    alert.view.backgroundColor = [UIColor clearColor];
+//    alert.color
+//    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault
+//                                                         handler:^(UIAlertAction * action) {
+//                                                             //响应事件
+//                                                         }];
     
+//    [alert addAction:cancelAction];
     
-    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault
-                                                         handler:^(UIAlertAction * action) {
-                                                             //响应事件
-                                                         }];
+         
     
-    [alert addAction:cancelAction];
     
     [vc presentViewController:alert animated:YES completion:nil];
+    
+    [NSTimer scheduledTimerWithTimeInterval:1.5 target:[UIUtils shareInstance] selector:@selector(hideUIAlter:) userInfo:alert repeats:NO];
+    
+}
+
+-(void)hideUIAlter:(NSTimer *)timer{
+    UIAlertController *alert = [timer userInfo];
+    
+    [alert dismissViewControllerAnimated:YES completion:nil];
+    
+    alert = nil;
 }
 //时间戳化时间
 +(NSString *)getTheTimeStamp:(NSString *)time{

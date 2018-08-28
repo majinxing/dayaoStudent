@@ -43,8 +43,15 @@
         
         [self.contentView addSubview:self.nameLabel];
         
+        
+        
         frame = CGRectMake(2, 0, 40, 40);
         self.headView = [[UIImageView alloc] initWithFrame:frame];
+        
+        self.headView.layer.masksToBounds = YES;
+        
+        self.headView.layer.cornerRadius = self.headView.frame.size.height/2;
+        
         [self.contentView addSubview:self.headView];
         
         self.containerView = [[UIView alloc] init];
