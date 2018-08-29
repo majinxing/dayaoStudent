@@ -30,12 +30,12 @@
 #define VIEW_WIDTH(aView)        ((aView).frame.size.width)
 
 @interface WorkingLoginViewController ()<BindPhoneDelegate,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
-@property (strong, nonatomic) IBOutlet UITextField *workNumber;
-@property (strong, nonatomic) IBOutlet UITextField *password;
-@property (strong, nonatomic) IBOutlet UIButton *selectSchoolBtn;
-@property (strong, nonatomic) IBOutlet UIImageView *selectImage;
-@property (strong, nonatomic) IBOutlet UIButton *registerBtn;
-@property (strong, nonatomic) IBOutlet UIButton *loginBtn;
+@property (strong, nonatomic)  UITextField *workNumber;
+@property (strong, nonatomic)  UITextField *password;
+@property (strong, nonatomic)  UIButton *selectSchoolBtn;
+@property (strong, nonatomic)  UIImageView *selectImage;
+@property (strong, nonatomic)  UIButton *registerBtn;
+@property (strong, nonatomic)  UIButton *loginBtn;
 
 @property (nonatomic,strong)BindPhone * bindPhone;
 @property (nonatomic,copy)NSString * phone;
@@ -45,8 +45,15 @@
 @property (nonatomic,strong) NSMutableArray * titleAry;//列表数组
 @property (nonatomic,assign)CGFloat rowHeight;
 @property (nonatomic,assign) BOOL selectSchoolBtnStatus;
+@property (strong, nonatomic)  NSLayoutConstraint *titleLabelTop;
 @property (nonatomic,strong) SchoolModel * userSchool;
 @property (nonatomic,strong) UserModel * user;
+@property (nonatomic,assign)CGFloat h ;
+@property (strong, nonatomic)  UIView *titleBackView;
+@property (strong, nonatomic)  UIView *btnBackView;
+@property (nonatomic,strong)UILabel *titleLabel;
+@property (nonatomic,assign)CGFloat titleh ;
+
 @end
 
 @implementation WorkingLoginViewController
@@ -54,6 +61,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self addContentView];
     
     _titleAry = [NSMutableArray arrayWithCapacity:1];
 
@@ -80,13 +89,146 @@
         [_selectSchoolBtn setTitle:@"请选择" forState:UIControlStateNormal];
 
     }
-    _password.textColor = [UIColor whiteColor];
+
 
     [self setTableView];
     
     [_registerBtn setHidden:YES];
+    
+    [self keyboardNotification];
     // Do any additional setup after loading the view from its nib.
 }
+-(void)addContentView{
+    _titleBackView  = [[UIView alloc] initWithFrame:CGRectMake(30, 115, APPLICATION_WIDTH-60, 80)];
+    _titleBackView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:_titleBackView];
+    
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, APPLICATION_WIDTH-60, 80)];
+    _titleLabel.text = @"欢迎来到\n律动学生版";
+    _titleLabel.font = [UIFont systemFontOfSize:30];
+    _titleLabel.textColor = [UIColor whiteColor];
+    _titleLabel.numberOfLines = 0;
+    [_titleBackView addSubview:_titleLabel];
+    
+    _btnBackView = [[UIView alloc] initWithFrame:CGRectMake(30, 115+100, APPLICATION_WIDTH-60, 300)];
+    
+    _btnBackView.backgroundColor = [UIColor clearColor];
+    
+    [self.view addSubview:_btnBackView];
+    
+    NSArray * ary = @[@"学     校",@"学     号",@"密     码"];
+    for (int i= 0; i<3; i++) {
+        UILabel * a = [[UILabel alloc] initWithFrame:CGRectMake(0, 13+47*i, 70, 20)];
+        a.textColor = [UIColor whiteColor];
+        a.font = [UIFont systemFontOfSize:15];
+        a.text = ary[i];
+        
+        [_btnBackView addSubview:a];
+        UIView * line = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(a.frame)+13, _btnBackView.frame.size.width, 1)];
+        line.backgroundColor = [UIColor whiteColor];
+        [_btnBackView addSubview:line];
+    }
+    _selectSchoolBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    _selectSchoolBtn.frame = CGRectMake(70, 13, _btnBackView.frame.size.width-70, 30);
+    _selectSchoolBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    _selectSchoolBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
+    _selectSchoolBtn.backgroundColor = [UIColor clearColor];
+    
+    [_selectSchoolBtn addTarget:self action:@selector(selectBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [_btnBackView addSubview:_selectSchoolBtn];
+    
+    _workNumber = [[UITextField alloc] initWithFrame:CGRectMake(70, CGRectGetMaxY(_selectSchoolBtn.frame)+12, _btnBackView.frame.size.width-70, 30)];
+    _workNumber.textColor = [UIColor whiteColor];
+    _workNumber.font = [UIFont systemFontOfSize:15];
+    
+    [_btnBackView addSubview:_workNumber];
+    
+    _password = [[UITextField alloc] initWithFrame:CGRectMake(70, CGRectGetMaxY(_workNumber.frame)+14, _btnBackView.frame.size.width-70, 30)];
+    _password.textColor = [UIColor whiteColor];
+    _password.font = [UIFont systemFontOfSize:15];
+    
+    [_btnBackView addSubview:_password];
+    
+    _registerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _registerBtn.frame = CGRectMake(0, CGRectGetMaxY(_password.frame)+13+1+20, 70, 20);
+    _registerBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [_registerBtn setTitle:@"注册" forState:UIControlStateNormal];
+    [_registerBtn addTarget:self action:@selector(registerBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [_btnBackView addSubview:_registerBtn];
+    
+    UIButton * forget = [UIButton buttonWithType:UIButtonTypeCustom];
+    forget.frame = CGRectMake(_btnBackView.frame.size.width-70, CGRectGetMaxY(_password.frame)+13+1+20, 70, 20);
+    forget.titleLabel.font = [UIFont systemFontOfSize:15];
+    [forget setTitle:@"忘记密码" forState:UIControlStateNormal];
+    [forget addTarget:self action:@selector(forgetPassword:) forControlEvents:UIControlEventTouchUpInside];
+    [_btnBackView addSubview:forget];
+    
+    _loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _loginBtn.frame = CGRectMake(60, CGRectGetMaxY(forget.frame)+40, _btnBackView.frame.size.width-120, 40);
+    _loginBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [_loginBtn setBackgroundImage:[UIImage imageNamed:@"Rectangle3"] forState:UIControlStateNormal];
+    [_loginBtn setTitle:@"登录" forState:UIControlStateNormal];
+    [_loginBtn addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
+    [_btnBackView addSubview:_loginBtn];
+    
+    _h = _titleBackView.frame.origin.y;
+    
+    _titleh = _btnBackView.frame.origin.y;
+    
+}
+/**
+ * 键盘监听
+ **/
+-(void)keyboardNotification{
+    //监听键盘出现和消失
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+}
+#pragma mark 键盘出现
+-(void)keyboardWillShow:(NSNotification *)note
+{
+    [UIView animateWithDuration:1.5 animations:^{
+        
+        CGRect keyBoardRect=[note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+        
+        CGFloat hh = CGRectGetMaxY(_btnBackView.frame);
+        
+        hh = APPLICATION_HEIGHT - hh;
+        
+        hh = keyBoardRect.size.height -hh;
+        
+        self.titleBackView.frame = CGRectMake(self.titleBackView.frame.origin.x, -self.titleBackView.frame.size.height, self.titleBackView.frame.size.width, self.titleBackView.frame.size.height);
+        
+        self.btnBackView.frame = CGRectMake(30, _btnBackView.frame.origin.y-hh, self.btnBackView.frame.size.width, _btnBackView.frame.size.height);
+        
+    }completion:^(BOOL finished) {
+        
+        
+    }];
+    
+}
+#pragma mark 键盘消失
+-(void)keyboardWillHide:(NSNotification *)note
+{
+//    CGRect keyBoardRect=[note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    [UIView animateWithDuration:1.5 animations:^{
+        
+        
+        self.titleBackView.frame = CGRectMake(self.titleBackView.frame.origin.x, _h, self.titleBackView.frame.size.width, self.titleBackView.frame.size.height);
+        
+        self.btnBackView.frame = CGRectMake(30, _titleh, self.btnBackView.frame.size.width, _btnBackView.frame.size.height);
+        
+    }completion:^(BOOL finished) {
+        
+        
+    }];
+    [self hideDropDown];
+}
+
 -(void)setTableView{
 
     _listView = [[UIView alloc] init];
@@ -230,7 +372,7 @@
 }
 
 - (IBAction)selectBtnPressed:(UIButton *)sender {
-    [self.view addSubview:_listView]; // 将下拉视图添加到控件的俯视图上
+    [_btnBackView addSubview:_listView]; // 将下拉视图添加到控件的俯视图上
 
     if(_selectSchoolBtnStatus == NO) {
         if (_titleAry.count>0) {
@@ -269,7 +411,8 @@
     //[_listView.superview bringSubviewToFront:_listView]; // 将下拉列表置于最上层
     
     
-    
+    _listView.frame = CGRectMake(VIEW_X(self.selectSchoolBtn), CGRectGetMaxY(self.selectSchoolBtn.frame), VIEW_WIDTH(self.selectSchoolBtn), 0);
+
     [UIView animateWithDuration:AnimateTime animations:^{
         
         _selectImage.transform = CGAffineTransformMakeRotation(M_PI);
@@ -281,12 +424,9 @@
        
     }];
     
-    
-    
     _selectSchoolBtnStatus = YES;
 }
 - (void)hideDropDown{  // 隐藏下拉列表
-    
     
     [UIView animateWithDuration:AnimateTime animations:^{
         

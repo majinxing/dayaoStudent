@@ -60,7 +60,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="参加者请准时到达，带上纸笔以及笔记本电脑，准备好教研有关资料" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vrs-g7-bzp">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="参与会议者请准时到达，带上纸笔以及笔记本电脑，准备好教研有关资料" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vrs-g7-bzp">
                         <rect key="frame" x="20" y="50" width="327" height="44"/>
                         <color key="backgroundColor" red="0.98423093557357788" green="0.98436850309371948" blue="0.98418766260147095" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>

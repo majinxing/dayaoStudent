@@ -54,7 +54,7 @@
     important.text = @"重要推荐";
     [_bottomScrollView addSubview:important];
     
-    NSArray * ary = @[@"课堂",@"会议",@"校园生活",@"社团",@"校办",@"失物",@"校圈"];
+    NSArray * ary = @[@"课堂",@"会议",@"生活",@"社团",@"校办",@"失物",@"校圈"];
     
     NSArray * aryImageName = @[@"课堂圆图",@"会议圆图",@"生活圆图",@"社团圆图",@"校办圆图",@"失物圆图",@"校圈圆图"];
     
@@ -114,6 +114,7 @@
         
     }else if ([ str isEqualToString:@"会议"]){
         AllTheMeetingViewController * s = [[AllTheMeetingViewController alloc] init];
+        self.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:s animated:YES];
         
     }    else{

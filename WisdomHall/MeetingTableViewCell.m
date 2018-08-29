@@ -145,7 +145,8 @@
     _meetHost.text = [NSString stringWithFormat:@"老师：%@",classModel.teacherName];
     _meetCode.text = [NSString stringWithFormat:@"邀请码：%@",classModel.sclassId];
     _joinPeopleLable.text = @"同窗好友";
-    
+    _meetAttention.text = @"请准时到达并签到，带上笔纸等有关材料";
+
    
     if (![UIUtils isBlankString:[NSString stringWithFormat:@"%@",classModel.signStatus]]) {
         if (![[NSString stringWithFormat:@"%@",classModel.signStatus] isEqualToString:@"1"]&&![[NSString stringWithFormat:@"%@",classModel.signStatus] isEqualToString:@"300"]) {

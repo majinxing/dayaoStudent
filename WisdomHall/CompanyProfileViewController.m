@@ -17,36 +17,42 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#fafafa"];
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    // 定义一个可变属性字符串对象
-   // NSMutableAttributedString * str = [[NSMutableAttributedString alloc]initWithString:@"湖南大姚科技有限公司是一家致力于科技改变生活的高新技术研发与销售公司，集高科技创意产品设计、研发与推广的创新创业公司。\n联系我们\n通讯地址：长沙市高新开发区芯城科技园，邮编410000\n服务邮箱：hunandayaokeji@163.com\n我们将随时为您献上真诚的服务。\n网站网址:"];
-    NSMutableAttributedString *atbs =[[NSMutableAttributedString alloc] initWithString: @"湖南简拓科技有限公司是一家致力于科技改变生活的高新技术研发与销售公司，集高科技创意产品设计、研发与推广的创新创业公司。\n\n联系我们\n\n通讯地址：长沙市高新开发区芯城科技园\n\n邮编：410000\n\n服务邮箱：jiantuokeji@163.com\n\n我们将随时为您献上真诚的服务。\n\n网站网址：www.jiantuokeji.com"];
-    
-    [atbs addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, atbs.length)];
-    
-    [atbs addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(atbs.length-17,17)];
-    
-    [atbs addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(atbs.length-63,24)];
-
-    [atbs addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(atbs.length-76,6)];
-    
-//    self.textView.attributedText= atbs;
-//    
-//    self.textView.delegate=self;
-//    
-//    self.textView.editable=NO;
-    
-    _aboutCompany.attributedText = [atbs copy];
-    _aboutCompany.editable = NO;
-    _aboutCompany.delegate = self;
-    _aboutCompany.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = RGBA_COLOR(249, 249, 249, 1);
+    [self addContentView];
     //       [atbs addAttribute: NSLinkAttributeNamevalue:@"www.baidu.com" range: range];
     
         // Do any additional setup after loading the view from its nib.
 }
-
+-(void)addContentView{
+    UIView * whiteBackView  = [[UIView alloc] initWithFrame:CGRectMake(10, NaviHeight+10, APPLICATION_WIDTH-20, APPLICATION_HEIGHT-100-80)];
+    whiteBackView.layer.masksToBounds = YES;
+    whiteBackView.layer.cornerRadius = 5;
+    [self.view addSubview:whiteBackView];
+    UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 200, 20)];
+    name.text = @"湖南简拓科技有限公司";
+    name.font = [UIFont systemFontOfSize:16];
+    [whiteBackView addSubview:name];
+    
+    UIView * b = [[UIView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(name.frame)+20, whiteBackView.frame.size.width-20, 100)];
+    b.backgroundColor = [UIColor colorWithHexString:@"#f1f1f1"];
+    [whiteBackView addSubview:b];
+    
+    UILabel * attention = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(name.frame)+20, whiteBackView.frame.size.width-30, 100)];
+    attention.backgroundColor = [UIColor clearColor];
+    attention.text = @"湖南简拓科技有限公司是一家致力于科技改变生活的高新技术研发与销售公司，集高科技创意产品设计、研发与推广的创新创业公司。";
+    attention.font = [UIFont systemFontOfSize:13];
+    attention.numberOfLines = 0;
+    attention.alpha = 0.7;
+    [whiteBackView addSubview:attention];
+    NSArray * ary = @[@"地址：长沙市高新开发区芯城科技园",@"邮编：410000",@"邮箱：jiantuokeji@163.com",@"网址：http://www.jiantuokeji.com"];
+    
+    for (int i = 0; i<ary.count; i++) {
+        UILabel * l = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(attention.frame)+20+40*i, whiteBackView.frame.size.width-20, 20)];
+        l.text = ary[i];
+        l.font = [UIFont systemFontOfSize:14];
+        [whiteBackView addSubview:l];
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
