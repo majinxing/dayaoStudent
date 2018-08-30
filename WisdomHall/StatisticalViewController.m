@@ -172,7 +172,7 @@
     }
     
     cell.delegate = self;
-    
+    cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

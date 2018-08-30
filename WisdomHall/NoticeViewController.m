@@ -29,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _noticeAry = [NSMutableArray arrayWithCapacity:1];
-    
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#f1f1f1"];
     [self addTableView];
     
     [self setNavigationTitle];
@@ -49,6 +49,8 @@
     _tableView.dataSource = self;
     _tableView.estimatedRowHeight = 80;
     _tableView.rowHeight = UITableViewAutomaticDimension;
+    _tableView.backgroundColor = [UIColor clearColor];
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
     __weak NoticeViewController * weakSelf = self;
     [_tableView addHeaderWithCallback:^{

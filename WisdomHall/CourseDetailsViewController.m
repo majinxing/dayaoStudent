@@ -168,8 +168,9 @@
     }else if([[NSString stringWithFormat:@"%@",c.signStatus] isEqualToString:@"2"]){
         [_signBtn setTitle:@"已签到" forState:UIControlStateNormal];
         [_codeBtn setTitle:@"生成二维码" forState:UIControlStateNormal];
-        [_signBtn setBackgroundColor:[UIColor grayColor]];
-        
+        _signBtn.backgroundColor = [UIColor grayColor];
+        [_signBtn setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+
         [_signBtn setEnabled:NO];
       
         [_codeBtn setEnabled:YES];
@@ -194,16 +195,18 @@
         [_signBtn setTitle:@"请假" forState:UIControlStateNormal];
         [_codeBtn setTitle:@"生成二维码" forState:UIControlStateNormal];
         [_signBtn setEnabled:NO];
-        [_signBtn setBackgroundColor:[UIColor grayColor]];
-        
-        
+        _signBtn.backgroundColor = [UIColor grayColor];
+
+        [_signBtn setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+
         [_codeBtn setEnabled:NO];
         [_codeBtn setBackgroundColor:[UIColor grayColor]];
      
     }else if ([[NSString stringWithFormat:@"%@",c.signStatus] isEqualToString:@"4"]){
         [_signBtn setTitle:@"迟到" forState:UIControlStateNormal];
-        [_signBtn setBackgroundColor:[UIColor grayColor]];
-        
+        _signBtn.backgroundColor = [UIColor grayColor];
+        [_signBtn setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+
         [_codeBtn setTitle:@"生成二维码" forState:UIControlStateNormal];
         [_signBtn setEnabled:NO];
         
@@ -211,8 +214,9 @@
       
     }else if ([[NSString stringWithFormat:@"%@",c.signStatus] isEqualToString:@"5"]){
         [_signBtn setTitle:@"早退" forState:UIControlStateNormal];
-        [_signBtn setBackgroundColor:[UIColor grayColor]];
-        
+        _signBtn.backgroundColor = [UIColor grayColor];
+        [_signBtn setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+
         [_codeBtn setTitle:@"生成二维码" forState:UIControlStateNormal];
         [_signBtn setEnabled:NO];
        

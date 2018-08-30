@@ -130,22 +130,24 @@
     }
     _selectSchoolBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    _selectSchoolBtn.frame = CGRectMake(70, 13, _btnBackView.frame.size.width-70, 30);
+    _selectSchoolBtn.frame = CGRectMake(100, 9, _btnBackView.frame.size.width-130, 30);
     _selectSchoolBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    _selectSchoolBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
+    _selectSchoolBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    
+//    _selectSchoolBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
     _selectSchoolBtn.backgroundColor = [UIColor clearColor];
     
     [_selectSchoolBtn addTarget:self action:@selector(selectBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     [_btnBackView addSubview:_selectSchoolBtn];
     
-    _workNumber = [[UITextField alloc] initWithFrame:CGRectMake(70, CGRectGetMaxY(_selectSchoolBtn.frame)+12, _btnBackView.frame.size.width-70, 30)];
+    _workNumber = [[UITextField alloc] initWithFrame:CGRectMake(100, CGRectGetMaxY(_selectSchoolBtn.frame)+14, _btnBackView.frame.size.width-70, 30)];
     _workNumber.textColor = [UIColor whiteColor];
     _workNumber.font = [UIFont systemFontOfSize:15];
     
     [_btnBackView addSubview:_workNumber];
     
-    _password = [[UITextField alloc] initWithFrame:CGRectMake(70, CGRectGetMaxY(_workNumber.frame)+14, _btnBackView.frame.size.width-70, 30)];
+    _password = [[UITextField alloc] initWithFrame:CGRectMake(100, CGRectGetMaxY(_workNumber.frame)+17, _btnBackView.frame.size.width-70, 30)];
     _password.textColor = [UIColor whiteColor];
     _password.font = [UIFont systemFontOfSize:15];
     
@@ -232,13 +234,13 @@
 -(void)setTableView{
 
     _listView = [[UIView alloc] init];
-    _listView.frame = CGRectMake(VIEW_X(self.selectSchoolBtn), CGRectGetMaxY(self.selectSchoolBtn.frame), VIEW_WIDTH(self.selectSchoolBtn), 0);
+    _listView.frame = CGRectMake(VIEW_X(self.selectSchoolBtn)-30, CGRectGetMaxY(self.selectSchoolBtn.frame), VIEW_WIDTH(self.selectSchoolBtn)-60, 0);
     _listView.clipsToBounds = YES;
     _listView.layer.masksToBounds = NO;
     _listView.layer.borderColor = [UIColor lightTextColor].CGColor;
     _listView.layer.borderWidth = 0.5f;
-    
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, VIEW_WIDTH(_listView), VIEW_HEIGHT(_listView)) style:UITableViewStylePlain];
+    _listView.backgroundColor = [UIColor clearColor];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(30, 0, VIEW_WIDTH(_listView)-60, VIEW_HEIGHT(_listView)) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

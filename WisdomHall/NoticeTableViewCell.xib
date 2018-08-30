@@ -18,6 +18,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="460" height="181.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vt2-HO-KGl">
+                        <rect key="frame" x="10" y="5" width="440" height="171.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  通知" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kYN-Xf-HeA">
                         <rect key="frame" x="20" y="18" width="200" height="20"/>
                         <constraints>
@@ -67,20 +71,25 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="IRB-pu-iAK" secondAttribute="trailing" constant="20" id="6D5-gw-NIb"/>
+                    <constraint firstItem="vt2-HO-KGl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="79i-IX-iCm"/>
                     <constraint firstAttribute="trailing" secondItem="MB2-JG-ww3" secondAttribute="trailing" constant="20" id="89X-F0-zS6"/>
                     <constraint firstItem="IRB-pu-iAK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="DUe-UN-n9k"/>
                     <constraint firstItem="kYN-Xf-HeA" firstAttribute="top" secondItem="kbu-pT-G69" secondAttribute="bottom" constant="2" id="Dqe-pV-jv3"/>
                     <constraint firstItem="MB2-JG-ww3" firstAttribute="top" secondItem="kYN-Xf-HeA" secondAttribute="top" id="ESi-bf-tUn"/>
                     <constraint firstItem="kbu-pT-G69" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="Mka-JK-YSH"/>
+                    <constraint firstAttribute="trailing" secondItem="vt2-HO-KGl" secondAttribute="trailing" constant="10" id="PJC-eA-4eq"/>
                     <constraint firstItem="uFr-mR-Xpd" firstAttribute="leading" secondItem="kbu-pT-G69" secondAttribute="trailing" id="SiA-bq-8Ly"/>
                     <constraint firstItem="kbu-pT-G69" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="dVY-ev-9Mi"/>
                     <constraint firstItem="kYN-Xf-HeA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="eOC-74-aY1"/>
+                    <constraint firstItem="vt2-HO-KGl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="eOZ-Iu-isa"/>
+                    <constraint firstAttribute="bottom" secondItem="vt2-HO-KGl" secondAttribute="bottom" constant="5" id="eTc-Xg-Gcs"/>
                     <constraint firstItem="uFr-mR-Xpd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="kZw-YP-y09"/>
                     <constraint firstAttribute="bottom" secondItem="IRB-pu-iAK" secondAttribute="bottom" constant="10" id="oSZ-b4-aZD"/>
                     <constraint firstItem="IRB-pu-iAK" firstAttribute="top" secondItem="kYN-Xf-HeA" secondAttribute="bottom" constant="10" id="roR-kM-7Mo"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="backView" destination="vt2-HO-KGl" id="qMs-zu-NHi"/>
                 <outlet property="noteContent" destination="IRB-pu-iAK" id="WSC-1H-hb3"/>
                 <outlet property="noticeName" destination="kYN-Xf-HeA" id="cZW-Xt-H8i"/>
                 <outlet property="noticeTime" destination="MB2-JG-ww3" id="Y4N-Ix-eXH"/>

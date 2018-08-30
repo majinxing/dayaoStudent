@@ -76,7 +76,7 @@
     
     _meetingAttention.font = [UIFont fontWithName:@"PingFangSC-Regular" size:12];
     
-    _meetingAttention.text = @"参与会议者请准时到达，带上纸笔以及笔记本电脑，准备好教研有关资料。";
+    _meetingAttention.text = @"请准时到达并签到，带上笔纸等有关资料";
     
     _meetingAttention.numberOfLines = 0;
     

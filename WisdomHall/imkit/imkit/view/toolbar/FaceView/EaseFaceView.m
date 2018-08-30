@@ -61,10 +61,11 @@
     [self addSubview:_bottomScrollView];
     [self _setupButtonScrollView];
     
-    UIButton *sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *sendButton = [UIButton buttonWithType:UIButtonTypeSystem];
     sendButton.frame = CGRectMake((kButtomNum-1)*CGRectGetWidth(_facialView.frame)/kButtomNum, CGRectGetMaxY(_facialView.frame), CGRectGetWidth(_facialView.frame)/kButtomNum, CGRectGetHeight(_bottomScrollView.frame));
     [sendButton setBackgroundColor:[UIColor colorWithRed:30 / 255.0 green:167 / 255.0 blue:252 / 255.0 alpha:1.0]];
     [sendButton setTitle:NSLocalizedString(@"发送", @"发送") forState:UIControlStateNormal];
+    [sendButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [sendButton addTarget:self action:@selector(sendFace) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:sendButton];
 }

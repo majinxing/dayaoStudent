@@ -177,8 +177,10 @@
         
     }else{
         if (str1.length>6) {
-            [str1 deleteCharactersInRange:NSMakeRange(0, 5)];
-            
+            NSArray * a = [str1 componentsSeparatedByString:@":"];
+            if (a.count>0) {
+                str1 = a[1];
+            }
             self.namelabel.text = [UIUtils getGPeopleName:str1];
             
             NSString * strId = [UIUtils getGPeoplePictureId:str1];

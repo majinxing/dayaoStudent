@@ -26,7 +26,7 @@
                         <constraint firstAttribute="height" constant="60" id="zQ8-e6-5xl"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="律动学生版  1.0.0.26" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FYP-WH-OWk">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="律动学生版  2.1.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FYP-WH-OWk">
                     <rect key="frame" x="87" y="160" width="200" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="200" id="J0T-zw-YeN"/>

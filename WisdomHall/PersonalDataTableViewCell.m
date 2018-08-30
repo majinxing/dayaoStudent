@@ -43,7 +43,8 @@
     
     _textFilePh.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
     _textFilePh.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1/1.0];
-    
+    _headImage.layer.masksToBounds = YES;
+    _headImage.layer.cornerRadius = 5;
     // Initialization code
 }
 + (instancetype)tempTableViewCellWith:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath {

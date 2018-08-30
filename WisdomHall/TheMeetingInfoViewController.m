@@ -31,6 +31,7 @@
 #import "PhotoPromptBox.h"
 #import "AlterView.h"
 #import "VoiceViewController.h"
+#import "MessageListViewController.h"
 
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 
@@ -126,7 +127,8 @@
         [_signBtn setTitle:@"已签到" forState:UIControlStateNormal];
         [_codeBtn setTitle:@"生成二维码" forState:UIControlStateNormal];
         [_signBtn setBackgroundColor:[UIColor grayColor]];
-        
+        [_signBtn setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+
         [_signBtn setEnabled:NO];
         
         [_codeBtn setEnabled:YES];
@@ -152,7 +154,8 @@
         [_codeBtn setTitle:@"生成二维码" forState:UIControlStateNormal];
         [_signBtn setEnabled:NO];
         [_signBtn setBackgroundColor:[UIColor grayColor]];
-        
+        [_signBtn setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+
         
         [_codeBtn setEnabled:NO];
         [_codeBtn setBackgroundColor:[UIColor grayColor]];
@@ -160,7 +163,8 @@
     }else if ([[NSString stringWithFormat:@"%@",m.signStatus] isEqualToString:@"4"]){
         [_signBtn setTitle:@"迟到" forState:UIControlStateNormal];
         [_signBtn setBackgroundColor:[UIColor grayColor]];
-        
+        [_signBtn setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+
         [_codeBtn setTitle:@"生成二维码" forState:UIControlStateNormal];
         [_signBtn setEnabled:NO];
         
@@ -169,7 +173,8 @@
     }else if ([[NSString stringWithFormat:@"%@",m.signStatus] isEqualToString:@"5"]){
         [_signBtn setTitle:@"早退" forState:UIControlStateNormal];
         [_signBtn setBackgroundColor:[UIColor grayColor]];
-        
+        [_signBtn setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+
         [_codeBtn setTitle:@"生成二维码" forState:UIControlStateNormal];
         [_signBtn setEnabled:NO];
         
@@ -475,7 +480,11 @@
         self.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController: d animated:YES];
     }else if ([platform isEqualToString:InteractionType_Discuss]){
-        
+        MessageListViewController * d = [[MessageListViewController alloc] init];
+        self.hidesBottomBarWhenPushed = YES;
+        d.type = @"enableCreate";
+        d.peopleAry = [NSMutableArray arrayWithArray:_meetingModel.signAry];
+        [self.navigationController pushViewController:d animated:YES];
     }else if([platform isEqualToString:InteractionType_Sit]){
         if (![UIUtils isBlankString:_seatModel.seatTable]) {
             ZFSeatViewController * z = [[ZFSeatViewController alloc] init];

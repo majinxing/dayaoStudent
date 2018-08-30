@@ -37,7 +37,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#f1f1f1"];
     
     _codeLable.font = [UIFont fontWithName:@"PingFangSC-Semibold" size:15];
     
@@ -75,6 +75,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
     _collection.allowsMultipleSelection = YES;
     _collection.showsVerticalScrollIndicator = NO;
     _collection.showsHorizontalScrollIndicator = NO;
+    _collection.backgroundColor = [UIColor clearColor];
     //取消滑动的滚动条
     _collection.decelerationRate = UIScrollViewDecelerationRateNormal;
     _collection.backgroundColor = [UIColor clearColor];
@@ -184,6 +185,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
     if (indexPath.row<_classModelAry.count) {
         [cell setClassInfoForContentView:_classModelAry[indexPath.row]];
     }
+    cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
 #pragma mark UICollectionViewDelegate

@@ -34,16 +34,22 @@
     [super viewDidLoad];
     [self setNavigationTitle];
     
-    _tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, APPLICATION_WIDTH, APPLICATION_HEIGHT-64-44) style:UITableViewStylePlain];
-    _tableview.delegate = self;
-    _tableview.dataSource = self;
-    _tableview.separatorStyle = NO;
-    [self.view addSubview:_tableview];
+    self.view.backgroundColor = RGBA_COLOR(249, 249, 249, 1);
+    
+    [self addTableview];
     
 //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 
 //    [self getWANIPAddress];
     // Do any additional setup after loading the view from its nib.
+}
+-(void)addTableview{
+    _tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, APPLICATION_WIDTH, APPLICATION_HEIGHT-64-44) style:UITableViewStylePlain];
+    _tableview.delegate = self;
+    _tableview.dataSource = self;
+    _tableview.separatorStyle = NO;
+    _tableview.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:_tableview];
 }
 /**
  *  显示navigation的标题
@@ -122,6 +128,7 @@
     if (indexPath.section != 1) {
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    cell.backgroundColor = [UIColor clearColor];//RGBA_COLOR(255, 255, 255, 1);
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

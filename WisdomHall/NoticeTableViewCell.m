@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *unread;
 @property (strong, nonatomic) IBOutlet UILabel *receipt;
 
+@property (strong, nonatomic) IBOutlet UIView *backView;
 
 @end
 @implementation NoticeTableViewCell
@@ -26,6 +27,8 @@
     [super awakeFromNib];
     [_unread setHidden:YES];
     [_receipt setTextColor:[UIColor colorWithHexString:@"#29a7e1"]];
+    _backView.layer.masksToBounds = YES;
+    _backView.layer.cornerRadius = 5;
     // Initialization code
 }
 

@@ -41,7 +41,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
     [super viewDidLoad];
     _searchBtn.layer.masksToBounds = YES;
     _searchBtn.layer.cornerRadius = 22;
-    
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#f1f1f1"];
     _meetingModelAry = [NSMutableArray arrayWithCapacity:12];
     
     _userModel = [[Appsetting sharedInstance] getUsetInfo];
@@ -271,7 +271,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
 {
     CourseCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    cell.backgroundColor = [UIColor whiteColor];
+    cell.backgroundColor = [UIColor clearColor];
     
     if (indexPath.row<_meetingModelAry.count) {
         [cell setInfoForContentView:_meetingModelAry[indexPath.row]];

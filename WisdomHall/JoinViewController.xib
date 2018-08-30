@@ -23,6 +23,13 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S8r-mA-ygk">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="234"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="234" id="AXJ-gM-9qD"/>
+                    </constraints>
+                </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请输入邀请码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Id-vz-qAa">
                     <rect key="frame" x="20" y="40" width="200" height="21"/>
                     <constraints>
@@ -61,13 +68,17 @@
             <constraints>
                 <constraint firstItem="7td-7a-fM3" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="1xs-Mk-J5J"/>
                 <constraint firstItem="I8e-cQ-fuK" firstAttribute="top" secondItem="7td-7a-fM3" secondAttribute="bottom" constant="20" id="3Ah-oy-Sac"/>
+                <constraint firstItem="S8r-mA-ygk" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="5rD-nX-gt4"/>
                 <constraint firstItem="1Id-vz-qAa" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="Oat-mL-xKQ"/>
+                <constraint firstItem="S8r-mA-ygk" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="PBJ-oy-WTL"/>
+                <constraint firstItem="S8r-mA-ygk" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="WTf-p6-DIE"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="7td-7a-fM3" secondAttribute="trailing" constant="20" id="YeP-x5-i85"/>
                 <constraint firstItem="I8e-cQ-fuK" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="Ywx-Vy-KVo"/>
                 <constraint firstItem="1Id-vz-qAa" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="20" id="vus-WO-vox"/>
                 <constraint firstItem="7td-7a-fM3" firstAttribute="top" secondItem="1Id-vz-qAa" secondAttribute="bottom" constant="11" id="y13-Ym-Jmw"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="34.5" y="53.5"/>
         </view>
     </objects>
     <resources>

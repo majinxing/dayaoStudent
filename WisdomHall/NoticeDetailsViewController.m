@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UITextView *noticeInfo;
 @property (strong, nonatomic) IBOutlet UIImageView *revetImage;
 @property (strong, nonatomic) IBOutlet UILabel *timeLabel;
+@property (strong, nonatomic) IBOutlet UIView *backView;
 @property (nonatomic,copy) void (^actionBlock)(NSString *);
 @end
 
@@ -40,6 +41,9 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = RGBA_COLOR(249, 249, 249, 1);
+    _backView.layer.masksToBounds = YES;
+    _backView.layer.cornerRadius = 5;
     [self addContentView];
     [self sendRevert];
     [self setNavigationTitle];

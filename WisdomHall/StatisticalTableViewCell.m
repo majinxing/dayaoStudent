@@ -17,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *classImage;
 @property (strong, nonatomic) IBOutlet UIButton *departmentBtn;
 @property (strong, nonatomic) IBOutlet UIButton *classbtn;
+@property (strong, nonatomic) IBOutlet UIView *firstBackView;
 
 @end
 @implementation StatisticalTableViewCell
@@ -25,7 +26,8 @@
     [super awakeFromNib];
     _selectBtn.layer.masksToBounds = YES;
     _selectBtn.layer.cornerRadius = 20;
-    
+    _firstBackView.layer.masksToBounds = YES;
+    _firstBackView.layer.cornerRadius = 5;
 //    _selectBtn.backgroundColor = [[ThemeTool shareInstance] getThemeColor];
     // Initialization code
 }

@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NoticeDetailsViewController">
             <connections>
+                <outlet property="backView" destination="520-uS-mbN" id="jmo-3P-wHu"/>
                 <outlet property="noticeInfo" destination="pEp-Iq-Mtg" id="lax-AC-Dj8"/>
                 <outlet property="noticeTitle" destination="CQW-uH-93Y" id="yz7-Mb-rve"/>
                 <outlet property="revetImage" destination="7uj-qL-EP4" id="F86-Ww-K3K"/>
@@ -23,6 +24,10 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="520-uS-mbN">
+                    <rect key="frame" x="10" y="80" width="355" height="537"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CQW-uH-93Y">
                     <rect key="frame" x="20" y="90" width="335" height="30"/>
                     <constraints>
@@ -61,12 +66,16 @@
             <constraints>
                 <constraint firstItem="7uj-qL-EP4" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="979-fn-TlK"/>
                 <constraint firstItem="CQW-uH-93Y" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="90" id="9dy-Aj-8fU"/>
+                <constraint firstAttribute="bottom" secondItem="520-uS-mbN" secondAttribute="bottom" constant="50" id="BZe-gb-jMv"/>
                 <constraint firstAttribute="bottom" secondItem="7uj-qL-EP4" secondAttribute="bottom" constant="115" id="FbZ-fX-w3x"/>
                 <constraint firstAttribute="trailing" secondItem="CQW-uH-93Y" secondAttribute="trailing" constant="20" id="HVa-Ya-cRf"/>
                 <constraint firstAttribute="trailing" secondItem="pEp-Iq-Mtg" secondAttribute="trailing" constant="19" id="LCT-CF-NX7"/>
                 <constraint firstItem="CQW-uH-93Y" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="MCb-NY-guO"/>
                 <constraint firstAttribute="bottom" secondItem="pEp-Iq-Mtg" secondAttribute="bottom" constant="60" id="XPU-ii-TOR"/>
+                <constraint firstAttribute="trailing" secondItem="520-uS-mbN" secondAttribute="trailing" constant="10" id="Ycp-Xa-N0I"/>
+                <constraint firstItem="520-uS-mbN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="ZEU-Ux-PqY"/>
                 <constraint firstItem="Ibr-RD-taj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="d3o-cJ-adz"/>
+                <constraint firstItem="520-uS-mbN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="grs-of-ypb"/>
                 <constraint firstItem="pEp-Iq-Mtg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="19" id="hke-7P-xFi"/>
                 <constraint firstItem="pEp-Iq-Mtg" firstAttribute="top" secondItem="CQW-uH-93Y" secondAttribute="bottom" constant="11" id="mhA-63-TpQ"/>
                 <constraint firstAttribute="trailing" secondItem="Ibr-RD-taj" secondAttribute="trailing" constant="29" id="vMj-Nw-z80"/>

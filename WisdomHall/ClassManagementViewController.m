@@ -38,7 +38,7 @@
  *  显示navigation的标题
  **/
 -(void)setNavigationTitle{
-//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     self.title = @"群组成员";
     //
@@ -46,30 +46,50 @@
     self.navigationItem.rightBarButtonItem = selection;
 }
 -(void)outGroup{
-    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_groupId,@"id", nil];
-    [[NetworkRequest sharedInstance] POST:OutGroup dict:dict succeed:^(id data) {
-        NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
-        if ([str isEqualToString:@"成功"]) {
-            
-            [[Appsetting sharedInstance] delectGroupID:_groupId];
-            
-            NSArray *vcArray = self.navigationController.viewControllers;
-            
-            for(UIViewController *vc in vcArray)
-            {
-                if ([vc isKindOfClass:[MessageIMViewController class]])
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否退出群组" message:nil preferredStyle:  UIAlertControllerStyleActionSheet];
+    //分别按顺序放入每个按钮；
+    [alert addAction:[UIAlertAction actionWithTitle:@"退出" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //响应事件
+        NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:_groupId,@"id", nil];
+        [[NetworkRequest sharedInstance] POST:OutGroup dict:dict succeed:^(id data) {
+            NSString * str = [NSString stringWithFormat:@"%@",[[data objectForKey:@"header"] objectForKey:@"message"]];
+            if ([str isEqualToString:@"成功"]) {
+                
+                [[Appsetting sharedInstance] delectGroupID:_groupId];
+                
+                NSArray *vcArray = self.navigationController.viewControllers;
+                
+                for(UIViewController *vc in vcArray)
                 {
-                    [self.navigationController popToViewController:vc animated:YES];
+                    if ([vc isKindOfClass:[MessageIMViewController class]])
+                    {
+                        [self.navigationController popToViewController:vc animated:YES];
+                    }
                 }
+                
             }
+            [UIUtils showInfoMessage:str withVC:self];
             
-        }
-        [UIUtils showInfoMessage:str withVC:self];
+            
+        } failure:^(NSError *error) {
+            [UIUtils showInfoMessage:@"退群失败，请检查网络" withVC:self];
+        }];
+    }]];
+    
 
-        
-    } failure:^(NSError *error) {
-        [UIUtils showInfoMessage:@"退群失败，请检查网络" withVC:self];
-    }];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        //点击按钮的响应事件；
+    }]];
+    
+    //弹出提示框；
+    [self presentViewController:alert animated:true completion:nil];
+    
+    
+
+  
+    
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -102,13 +122,13 @@
     return 10;
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

@@ -27,6 +27,7 @@
     UIView * whiteBackView  = [[UIView alloc] initWithFrame:CGRectMake(10, NaviHeight+10, APPLICATION_WIDTH-20, APPLICATION_HEIGHT-100-80)];
     whiteBackView.layer.masksToBounds = YES;
     whiteBackView.layer.cornerRadius = 5;
+    whiteBackView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:whiteBackView];
     UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 200, 20)];
     name.text = @"湖南简拓科技有限公司";
